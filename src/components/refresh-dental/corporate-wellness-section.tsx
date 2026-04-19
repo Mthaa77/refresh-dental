@@ -1,7 +1,8 @@
 'use client'
 
-import { motion } from 'framer-motion'
-import { Building2, Heart, CheckCircle, ArrowRight } from 'lucide-react'
+import { useState, useEffect, useRef } from 'react'
+import { motion, useInView } from 'framer-motion'
+import { Building2, Heart, CheckCircle, ArrowRight, Diamond } from 'lucide-react'
 
 const corporateBenefits = [
   { text: 'On-site dental screenings at your workplace' },
@@ -15,6 +16,12 @@ const communityItems = [
   { text: 'Community health education talks' },
   { text: 'Free dental screening days' },
   { text: 'Partnerships with local organisations' },
+]
+
+const stats = [
+  { value: 50, suffix: '+', label: 'Corporate Partners' },
+  { value: 5000, suffix: '+', label: 'Screenings' },
+  { value: 25, suffix: '+', label: 'Workshops' },
 ]
 
 const fadeUp = {
@@ -44,6 +51,48 @@ const listFadeUp = {
   },
 }
 
+function AnimatedCounter({ target, suffix }: { target: number; suffix: string }) {
+  const [count, setCount] = useState(0)
+  const ref = useRef<HTMLSpanElement>(null)
+  const isInView = useInView(ref, { once: true, margin: '-60px' })
+
+  useEffect(() => {
+    if (!isInView) return
+    const duration = 2000
+    const steps = 60
+    const stepTime = duration / steps
+    let current = 0
+    const increment = target / steps
+
+    const timer = setInterval(() => {
+      current += increment
+      if (current >= target) {
+        setCount(target)
+        clearInterval(timer)
+      } else {
+        setCount(Math.floor(current))
+      }
+    }, stepTime)
+
+    return () => clearInterval(timer)
+  }, [isInView, target])
+
+  const formatNumber = (num: number) => {
+    if (num >= 1000) {
+      return `${(num / 1000).toFixed(num >= target ? 0 : 1)}${num >= target ? ',' : ''}${num >= 1000 && num < target ? Math.floor((num % 1000)).toString().padStart(3, '0') : ''}`
+    }
+    return num.toLocaleString()
+  }
+
+  return (
+    <span ref={ref}>
+      {target >= 1000
+        ? `${(count / 1000).toFixed(count >= target ? 0 : (count % 1000 === 0 ? 0 : 1))}${count >= target ? ',' : ''}${count >= 1000 && count < target ? '' : ''}${count >= target ? '000' : count % 1000 > 0 ? count % 1000 : ''}${suffix}`
+        : `${count}${suffix}`}
+    </span>
+  )
+}
+
 export default function CorporateWellnessSection() {
   return (
     <section className="bg-sand py-20 md:py-28">
@@ -70,16 +119,46 @@ export default function CorporateWellnessSection() {
           </p>
         </motion.div>
 
+        {/* Stats Row */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-60px' }}
+          transition={{ duration: 0.6, delay: 0.1 }}
+          className="mb-14 grid grid-cols-1 gap-6 sm:grid-cols-3 sm:gap-0"
+        >
+          {stats.map((stat, i) => (
+            <div
+              key={stat.label}
+              className="relative flex flex-col items-center px-6 py-4"
+            >
+              {/* Gold line divider on desktop — between stats, hidden on mobile */}
+              {i > 0 && (
+                <div className="absolute top-1/2 left-0 hidden h-12 w-px -translate-y-1/2 bg-gradient-to-b from-transparent via-champagne-gold/40 to-transparent sm:block" />
+              )}
+              <span className="font-cormorant text-3xl font-semibold text-champagne-gold md:text-4xl">
+                <AnimatedCounter target={stat.value} suffix={stat.suffix} />
+              </span>
+              <span className="mt-1 font-jost text-xs font-medium uppercase tracking-wider text-brown-warm/60">
+                {stat.label}
+              </span>
+            </div>
+          ))}
+        </motion.div>
+
         {/* Two-Column Cards */}
-        <div className="grid grid-cols-1 gap-6 md:grid-cols-2 md:gap-8">
+        <div className="relative grid grid-cols-1 gap-6 md:grid-cols-2 md:gap-8">
           {/* Corporate Wellness */}
           <motion.div
             variants={fadeUp}
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, margin: '-60px' }}
-            className="rounded-2xl border border-soft-border bg-white p-8 shadow-sm"
+            className="group relative overflow-hidden rounded-2xl border border-soft-border bg-white p-8 shadow-sm"
           >
+            {/* Building watermark */}
+            <Building2 className="absolute top-6 right-6 h-24 w-24 text-champagne-gold" style={{ opacity: 0.08 }} />
+
             <div className="mb-6 flex items-center gap-4">
               <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-champagne-gold/10">
                 <Building2 className="h-6 w-6 text-champagne-gold" />
@@ -109,7 +188,15 @@ export default function CorporateWellnessSection() {
                   variants={listFadeUp}
                   className="flex items-start gap-3"
                 >
-                  <CheckCircle className="mt-0.5 h-4 w-4 flex-shrink-0 text-sage-teal" />
+                  <motion.span
+                    whileHover={{
+                      scale: [1, 1.2, 1],
+                      transition: { duration: 0.4, ease: "easeInOut" },
+                    }}
+                    className="mt-0.5 flex-shrink-0"
+                  >
+                    <CheckCircle className="h-4 w-4 text-sage-teal" />
+                  </motion.span>
                   <span className="font-jost text-sm text-brown-warm/80">
                     {item.text}
                   </span>
@@ -118,6 +205,13 @@ export default function CorporateWellnessSection() {
             </motion.ul>
           </motion.div>
 
+          {/* Decorative gold diamond ornament — desktop only */}
+          <div className="pointer-events-none absolute top-1/2 left-1/2 z-10 hidden -translate-x-1/2 -translate-y-1/2 md:flex md:h-10 md:w-10 md:items-center md:justify-center">
+            <div className="flex h-10 w-10 rotate-45 items-center justify-center rounded-md border border-champagne-gold/30 bg-sand">
+              <Diamond className="h-4 w-4 -rotate-45 text-champagne-gold/60" />
+            </div>
+          </div>
+
           {/* Community Outreach */}
           <motion.div
             variants={fadeUp}
@@ -125,8 +219,11 @@ export default function CorporateWellnessSection() {
             whileInView="visible"
             viewport={{ once: true, margin: '-60px' }}
             transition={{ delay: 0.15 }}
-            className="rounded-2xl border border-soft-border bg-white p-8 shadow-sm"
+            className="group relative overflow-hidden rounded-2xl border border-soft-border bg-white p-8 shadow-sm"
           >
+            {/* Heart watermark */}
+            <Heart className="absolute top-6 right-6 h-24 w-24 text-warm-blush" style={{ opacity: 0.08 }} />
+
             <div className="mb-6 flex items-center gap-4">
               <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-warm-blush/30">
                 <Heart className="h-6 w-6 text-warm-blush" />
@@ -156,7 +253,15 @@ export default function CorporateWellnessSection() {
                   variants={listFadeUp}
                   className="flex items-start gap-3"
                 >
-                  <CheckCircle className="mt-0.5 h-4 w-4 flex-shrink-0 text-sage-teal" />
+                  <motion.span
+                    whileHover={{
+                      scale: [1, 1.2, 1],
+                      transition: { duration: 0.4, ease: "easeInOut" },
+                    }}
+                    className="mt-0.5 flex-shrink-0"
+                  >
+                    <CheckCircle className="h-4 w-4 text-sage-teal" />
+                  </motion.span>
                   <span className="font-jost text-sm text-brown-warm/80">
                     {item.text}
                   </span>

@@ -1,22 +1,28 @@
 'use client'
 
 import { useState, useEffect, useRef, useCallback } from 'react'
-import { motion } from 'framer-motion'
-import { Star, ChevronLeft, ChevronRight } from 'lucide-react'
+import { motion, AnimatePresence } from 'framer-motion'
+import { Star, ChevronLeft, ChevronRight, BadgeCheck } from 'lucide-react'
 
 const testimonials = [
   {
     name: "Phillimon Utla",
+    initials: "PU",
+    avatarColor: "bg-sage-teal",
     rating: 5,
     text: "Had a great experience with Dr. Lebo! The team was super friendly and made me feel really comfortable. Dr. Lebo explained everything clearly and didn't rush through anything. The clinic was clean and modern, which I appreciated. Overall, a really positive visit — I'd definitely recommend them to anyone looking for a good dentist!",
   },
   {
     name: "Shaun Kleynhans",
+    initials: "SK",
+    avatarColor: "bg-champagne-gold",
     rating: 5,
     text: "Had my appointment with Dr Lebogang and she and her staff were truly amazing, was very thoughtful and explained everything in detail pertaining to my procedure. Her kindness and gentle way of carrying out her procedure was excellent. Definitely my go-to dentist from this day forward.",
   },
   {
     name: "Adaani Frost",
+    initials: "AF",
+    avatarColor: "bg-warm-blush",
     rating: 5,
     text: "Dr. Malunga made herself available for a dental emergency within minutes of our call. She was fast, efficient, courteous, her facility and staff were immaculate and professional. Refresh Dental is close to the airport... We recommend her and her facility highly.",
   },
@@ -161,35 +167,83 @@ export default function Testimonials() {
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true, margin: "-60px" }}
-              className={`w-[350px] shrink-0 snap-center rounded-2xl bg-white p-8 shadow-sm transition-all duration-300 ${
+              className={`relative w-[350px] shrink-0 snap-center overflow-hidden rounded-2xl bg-white p-8 shadow-sm transition-all duration-300 ${
                 activeIndex === i
                   ? "border-l-4 border-sage-teal shadow-md"
                   : "border-l-4 border-transparent hover:shadow-md"
               }`}
+              style={
+                activeIndex === i
+                  ? { boxShadow: '0 8px 32px -4px rgba(201, 169, 110, 0.15)' }
+                  : undefined
+              }
             >
-              {/* Stars */}
-              <div className="mb-5 flex gap-0.5">
+              {/* Gold gradient top accent line — animates width on hover */}
+              <motion.div
+                className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-champagne-gold via-gold-light to-champagne-gold origin-left"
+                initial={{ scaleX: 0 }}
+                whileHover={{ scaleX: 1 }}
+                transition={{ duration: 0.5, ease: [0.25, 0.46, 0.45, 0.94] }}
+                style={{ scaleX: activeIndex === i ? 1 : undefined }}
+              />
+
+              {/* Large decorative quote mark */}
+              <span className="absolute top-4 left-6 font-cormorant text-6xl leading-none text-champagne-gold select-none" style={{ opacity: 0.15 }}>
+                &ldquo;
+              </span>
+
+              {/* Stars with pulse animation */}
+              <div className="relative z-10 mb-5 flex gap-0.5">
                 {Array.from({ length: t.rating }).map((_, si) => (
-                  <Star
+                  <motion.div
                     key={si}
-                    className="h-4 w-4 fill-champagne-gold text-champagne-gold"
-                  />
+                    animate={{
+                      scale: [1, 1.15, 1],
+                    }}
+                    transition={{
+                      duration: 2,
+                      repeat: Infinity,
+                      delay: si * 0.3,
+                      ease: "easeInOut",
+                    }}
+                  >
+                    <Star
+                      className="h-4 w-4 fill-champagne-gold text-champagne-gold"
+                    />
+                  </motion.div>
                 ))}
               </div>
 
               {/* Review Text */}
-              <p className="font-jost text-sm font-light italic leading-relaxed text-brown-warm/80">
+              <p className="relative z-10 font-jost text-sm font-light italic leading-relaxed text-brown-warm/80">
                 &ldquo;{t.text}&rdquo;
               </p>
 
-              {/* Bottom: Name + Badge */}
-              <div className="mt-6 flex items-center justify-between">
-                <span className="font-jost text-sm font-medium text-espresso">
-                  {t.name}
-                </span>
-                <span className="rounded-full bg-sage-teal/8 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-wider text-sage-teal">
-                  Google Review
-                </span>
+              {/* Bottom: Avatar + Name + Badges */}
+              <div className="relative z-10 mt-6 flex items-center justify-between">
+                <div className="flex items-center gap-3">
+                  {/* Avatar with initials */}
+                  <div
+                    className={`flex h-9 w-9 items-center justify-center rounded-full ${t.avatarColor} text-white font-cormorant text-sm font-semibold shadow-sm`}
+                  >
+                    {t.initials}
+                  </div>
+                  <span className="font-jost text-sm font-medium text-espresso">
+                    {t.name}
+                  </span>
+                </div>
+                <div className="flex items-center gap-2">
+                  {/* Verified Patient badge */}
+                  <span className="inline-flex items-center gap-1 rounded-full bg-champagne-gold/8 px-2 py-0.5">
+                    <BadgeCheck className="h-3 w-3 text-sage-teal" strokeWidth={2.5} />
+                    <span className="font-jost text-[9px] font-semibold uppercase tracking-wider text-sage-teal">
+                      Verified
+                    </span>
+                  </span>
+                  <span className="rounded-full bg-sage-teal/8 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-wider text-sage-teal">
+                    Google Review
+                  </span>
+                </div>
               </div>
             </motion.div>
           ))}

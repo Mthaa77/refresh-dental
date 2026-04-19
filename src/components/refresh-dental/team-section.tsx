@@ -1,7 +1,7 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { Shield, ArrowRight } from 'lucide-react'
+import { Shield, ArrowRight, Sparkles, CircleDot } from 'lucide-react'
 
 const teamMembers = [
   {
@@ -10,6 +10,7 @@ const teamMembers = [
     bio: 'Specializing in preventive care and oral health education',
     initials: 'TM',
     color: 'bg-sage-teal',
+    specialties: ['Preventive Care', 'Periodontal Therapy', 'Teeth Cleaning'],
   },
   {
     name: 'Sarah van der Merwe',
@@ -17,6 +18,7 @@ const teamMembers = [
     bio: 'Certified dental assistant with 8 years of experience',
     initials: 'SM',
     color: 'bg-warm-blush',
+    specialties: ['Chairside Assistance', 'Infection Control', 'Patient Comfort'],
   },
   {
     name: 'David Nkosi',
@@ -24,6 +26,7 @@ const teamMembers = [
     bio: 'Ensuring a seamless and welcoming patient experience',
     initials: 'DN',
     color: 'bg-champagne-gold/80',
+    specialties: ['Appointment Scheduling', 'Insurance Claims', 'Patient Relations'],
   },
 ]
 
@@ -99,23 +102,41 @@ export default function TeamSection() {
               </div>
 
               {/* Content */}
-              <div className="flex flex-1 flex-col justify-center p-6 md:p-8">
-                <span className="mb-2 inline-block text-xs font-semibold uppercase tracking-[0.15em] text-champagne-gold">
+              <div className="relative flex flex-1 flex-col justify-center p-6 md:p-8">
+                {/* Gradient overlay on hover */}
+                <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-champagne-gold/3 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+
+                <span className="relative mb-2 inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-[0.15em] text-champagne-gold">
                   Principal Dentist &amp; Founder
+                  {/* Animated sparkle icon */}
+                  <motion.span
+                    animate={{
+                      rotate: [0, 15, -15, 10, -10, 0],
+                      scale: [1, 1.2, 1, 1.15, 1],
+                    }}
+                    transition={{
+                      duration: 3,
+                      repeat: Infinity,
+                      ease: "easeInOut",
+                    }}
+                    className="inline-block"
+                  >
+                    <Sparkles className="h-3.5 w-3.5 text-champagne-gold" />
+                  </motion.span>
                 </span>
-                <h3 className="font-dm-serif text-xl md:text-2xl text-espresso mb-1">
+                <h3 className="relative font-dm-serif text-xl md:text-2xl text-espresso mb-1">
                   Dr. Lebogang Malunga
                 </h3>
-                <p className="font-jost text-xs text-brown-warm/60 mb-4">
+                <p className="relative font-jost text-xs text-brown-warm/60 mb-4">
                   BDS, PDD
                 </p>
-                <p className="font-jost text-sm font-light leading-relaxed text-brown-warm/70 mb-6">
+                <p className="relative font-jost text-sm font-light leading-relaxed text-brown-warm/70 mb-6">
                   Dr. Lebo is passionate about delivering exceptional dental care
                   with a gentle, patient-first approach. With expertise spanning
                   cosmetic dentistry, dental implants, and facial aesthetics, she
                   is committed to helping every patient achieve their best smile.
                 </p>
-                <div className="flex items-center gap-2">
+                <div className="relative flex items-center gap-2">
                   <div className="flex h-8 w-8 items-center justify-center rounded-full bg-sage-teal/10">
                     <Shield className="h-4 w-4 text-sage-teal" />
                   </div>
@@ -137,14 +158,22 @@ export default function TeamSection() {
                 boxShadow: '0 16px 40px -10px rgba(201, 169, 110, 0.15)',
                 transition: { duration: 0.35 },
               }}
-              className="group rounded-2xl border border-soft-border bg-white p-6 transition-colors duration-300 hover:border-champagne-gold/30"
+              className="group relative overflow-hidden rounded-2xl border border-soft-border bg-white p-6 transition-colors duration-300 hover:border-champagne-gold/40"
             >
-              {/* Initials Avatar */}
-              <div className="mb-5 flex items-center gap-4">
-                <div
-                  className={`flex h-14 w-14 items-center justify-center rounded-full ${member.color} text-white font-cormorant text-xl font-semibold shadow-sm`}
-                >
-                  {member.initials}
+              {/* Gradient overlay on hover */}
+              <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-champagne-gold/3 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+
+              {/* Initials Avatar with animated gold ring on hover */}
+              <div className="relative mb-5 flex items-center gap-4">
+                <div className="relative">
+                  {/* Gold ring — pulses on hover */}
+                  <div className="absolute -inset-1.5 rounded-full border-2 border-champagne-gold/0 transition-all duration-700 ease-out group-hover:border-champagne-gold/40 group-hover:scale-110" />
+                  <div className="absolute -inset-3 rounded-full border border-champagne-gold/0 transition-all duration-1000 ease-out delay-100 group-hover:border-champagne-gold/15 group-hover:scale-115" />
+                  <div
+                    className={`relative flex h-14 w-14 items-center justify-center rounded-full ${member.color} text-white font-cormorant text-xl font-semibold shadow-sm`}
+                  >
+                    {member.initials}
+                  </div>
                 </div>
                 <div>
                   <h3 className="font-dm-serif text-lg text-espresso leading-snug">
@@ -157,9 +186,30 @@ export default function TeamSection() {
               </div>
 
               {/* Bio */}
-              <p className="font-jost text-sm font-light leading-relaxed text-brown-warm/70">
+              <p className="relative font-jost text-sm font-light leading-relaxed text-brown-warm/70">
                 {member.bio}
               </p>
+
+              {/* Specialties — reveals on card hover with smooth max-height transition */}
+              <div className="grid transition-all duration-500 ease-out group-hover:grid-rows-[1fr]" style={{ gridTemplateRows: '0fr' }}>
+                <div className="overflow-hidden">
+                  <div className="mt-4 border-t border-soft-border pt-4">
+                    <p className="mb-2 font-jost text-[10px] font-semibold uppercase tracking-[0.15em] text-champagne-gold">
+                      Specialties
+                    </p>
+                    <ul className="space-y-1.5">
+                      {member.specialties.map((specialty) => (
+                        <li key={specialty} className="flex items-center gap-2">
+                          <CircleDot className="h-2.5 w-2.5 flex-shrink-0 text-champagne-gold/60" />
+                          <span className="font-jost text-xs text-brown-warm/70">
+                            {specialty}
+                          </span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
+              </div>
 
               {/* Gold accent line at bottom */}
               <div className="mt-5 h-[1px] w-10 bg-champagne-gold/40 transition-all duration-500 group-hover:w-full group-hover:bg-champagne-gold" />
@@ -177,10 +227,10 @@ export default function TeamSection() {
         >
           <a
             href="#contact"
-            className="group inline-flex items-center gap-2 font-jost text-sm text-brown-warm/70 transition-colors duration-300 hover:text-champagne-gold"
+            className="group/link inline-flex items-center gap-2 font-jost text-sm text-brown-warm/70 transition-colors duration-300 hover:text-champagne-gold"
           >
             Interested in joining our team?
-            <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
+            <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover/link:translate-x-1" />
           </a>
         </motion.div>
       </div>

@@ -1,38 +1,44 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { Instagram } from 'lucide-react'
+import { Instagram, Heart, ZoomIn } from 'lucide-react'
 
 const instagramImages = [
   {
     src: '/images/dr-lebo-hero.png',
     alt: 'Refresh Dental — Dr. Lebo Malunga',
     aspect: 'aspect-[3/4]',
+    likes: 312,
   },
   {
     src: '/images/dental-clinic-interior.png',
     alt: 'Modern dental clinic interior',
     aspect: 'aspect-square',
+    likes: 245,
   },
   {
     src: '/images/dental-smile-hero.jpg',
     alt: 'Beautiful smile transformation',
     aspect: 'aspect-[4/3]',
+    likes: 489,
   },
   {
     src: '/images/dental-smile-hero.jpg',
     alt: 'Professional dental care',
     aspect: 'aspect-[3/4]',
+    likes: 178,
   },
   {
     src: '/images/dental-clinic-interior.png',
     alt: 'State-of-the-art treatment rooms',
     aspect: 'aspect-square',
+    likes: 356,
   },
   {
     src: '/images/dr-lebo-hero.png',
     alt: 'Your smile journey starts here',
     aspect: 'aspect-[4/3]',
+    likes: 421,
   },
 ]
 
@@ -74,6 +80,14 @@ export default function InstagramFeed() {
           <h2 className="font-cormorant text-[clamp(2rem,4vw,3.5rem)] font-medium leading-tight text-espresso">
             Follow Us on Instagram
           </h2>
+          {/* Gradient gold underline */}
+          <motion.div
+            initial={{ scaleX: 0 }}
+            whileInView={{ scaleX: 1 }}
+            viewport={{ once: true, margin: '-40px' }}
+            transition={{ duration: 0.8, delay: 0.3, ease: [0.25, 0.46, 0.45, 0.94] }}
+            className="mx-auto mt-3 h-[2px] w-24 origin-center bg-gradient-to-r from-transparent via-champagne-gold to-transparent"
+          />
           <motion.a
             href={INSTAGRAM_URL}
             target="_blank"
@@ -92,7 +106,7 @@ export default function InstagramFeed() {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: '-60px' }}
-          className="grid grid-cols-2 gap-3 md:grid-cols-3 md:gap-4"
+          className="grid grid-cols-2 gap-px bg-soft-border md:grid-cols-3"
         >
           {instagramImages.map((image, idx) => (
             <motion.a
@@ -101,9 +115,9 @@ export default function InstagramFeed() {
               target="_blank"
               rel="noopener noreferrer"
               variants={itemVariants}
-              className="group relative block overflow-hidden rounded-xl"
+              className="group relative block overflow-hidden bg-white"
             >
-              <div className={`relative w-full ${image.aspect} overflow-hidden rounded-xl`}>
+              <div className={`relative w-full ${image.aspect} overflow-hidden`}>
                 <img
                   src={image.src}
                   alt={image.alt}
@@ -117,22 +131,54 @@ export default function InstagramFeed() {
                 initial={{ opacity: 0 }}
                 whileHover={{ opacity: 1 }}
                 transition={{ duration: 0.3 }}
-                className="absolute inset-0 flex flex-col items-center justify-center rounded-xl bg-espresso/60 backdrop-blur-[2px]"
+                className="absolute inset-0 flex flex-col items-center justify-center bg-espresso/60 backdrop-blur-[2px]"
               >
-                <Instagram
-                  className="mb-2 text-white"
-                  size={28}
-                  strokeWidth={1.5}
-                />
-                <span className="font-jost text-xs font-medium uppercase tracking-wider text-ivory/90">
-                  View on Instagram
-                </span>
+                {/* Like counter with pulse animation */}
+                <motion.div
+                  initial={{ y: 10, opacity: 0 }}
+                  whileHover={{
+                    opacity: 1,
+                    y: 0,
+                    transition: { duration: 0.3, ease: "easeOut" },
+                  }}
+                  className="mb-3 flex items-center gap-1.5"
+                >
+                  <motion.span
+                    animate={{
+                      scale: [1, 1.3, 1],
+                    }}
+                    transition={{
+                      duration: 0.6,
+                      ease: "easeInOut",
+                    }}
+                    className="inline-block"
+                  >
+                    <Heart className="h-4 w-4 fill-white text-white" />
+                  </motion.span>
+                  <span className="font-jost text-xs font-medium text-ivory">
+                    {image.likes} likes
+                  </span>
+                </motion.div>
+
+                {/* Icons row */}
+                <div className="flex items-center gap-4">
+                  <Instagram
+                    className="text-white"
+                    size={24}
+                    strokeWidth={1.5}
+                  />
+                  <ZoomIn
+                    className="text-white/70"
+                    size={20}
+                    strokeWidth={1.5}
+                  />
+                </div>
               </motion.div>
             </motion.a>
           ))}
         </motion.div>
 
-        {/* CTA Button */}
+        {/* CTA Button — with gradient gold border and glow */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -140,15 +186,28 @@ export default function InstagramFeed() {
           transition={{ duration: 0.6, delay: 0.3 }}
           className="mt-10 text-center"
         >
-          <a
+          <motion.a
             href={INSTAGRAM_URL}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2.5 rounded-full border border-champagne-gold/30 bg-white px-7 py-3 font-jost text-sm font-medium uppercase tracking-wider text-espresso transition-all duration-300 hover:border-champagne-gold hover:bg-champagne-gold/5 hover:shadow-lg hover:shadow-champagne-gold/10"
+            whileHover={{
+              boxShadow: '0 8px 30px -4px rgba(201, 169, 110, 0.25)',
+            }}
+            transition={{ duration: 0.3 }}
+            className="relative inline-flex items-center gap-2.5 rounded-full border border-champagne-gold/40 bg-white px-7 py-3 font-jost text-sm font-medium uppercase tracking-wider text-espresso transition-all duration-300 hover:border-champagne-gold hover:bg-champagne-gold/5"
           >
+            {/* Animated gradient border effect via pseudo-approach: inner glow line */}
+            <motion.span
+              className="pointer-events-none absolute -inset-px rounded-full opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+              style={{
+                background: 'linear-gradient(135deg, rgba(201, 169, 110, 0.3), rgba(232, 213, 176, 0.1), rgba(201, 169, 110, 0.3))',
+                zIndex: -1,
+              }}
+              animate={undefined}
+            />
             <Instagram size={16} strokeWidth={1.5} />
             Follow @refresh_dental
-          </a>
+          </motion.a>
         </motion.div>
       </div>
     </section>

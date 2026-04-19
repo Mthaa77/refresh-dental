@@ -55,16 +55,17 @@ const badgeVariants = {
   },
 };
 
-// Floating gold particles
-const particles = Array.from({ length: 8 }, (_, i) => ({
-  id: i,
-  size: Math.random() * 20 + 8,
-  x: Math.random() * 100,
-  y: Math.random() * 100,
-  duration: Math.random() * 8 + 10,
-  delay: Math.random() * 4,
-  opacity: Math.random() * 0.15 + 0.05,
-}));
+// Floating gold particles (deterministic values to avoid hydration mismatch)
+const particles = [
+  { id: 0, size: 18, x: 12, y: 25, duration: 14, delay: 0.5, opacity: 0.08 },
+  { id: 1, size: 24, x: 78, y: 15, duration: 16, delay: 1.2, opacity: 0.06 },
+  { id: 2, size: 10, x: 45, y: 60, duration: 11, delay: 2.8, opacity: 0.12 },
+  { id: 3, size: 28, x: 88, y: 72, duration: 18, delay: 0.8, opacity: 0.05 },
+  { id: 4, size: 14, x: 22, y: 80, duration: 13, delay: 3.5, opacity: 0.10 },
+  { id: 5, size: 20, x: 65, y: 40, duration: 15, delay: 1.8, opacity: 0.07 },
+  { id: 6, size: 12, x: 35, y: 10, duration: 12, delay: 2.2, opacity: 0.14 },
+  { id: 7, size: 16, x: 92, y: 50, duration: 17, delay: 3.0, opacity: 0.09 },
+];
 
 export default function Hero() {
   const words = ['Your', 'Smile,', 'Refreshed.', 'Revived.'];

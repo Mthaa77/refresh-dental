@@ -25,9 +25,12 @@ import InstagramFeed from '@/components/refresh-dental/instagram-feed'
 import ContactSection from '@/components/refresh-dental/contact-section'
 import NewsletterCta from '@/components/refresh-dental/newsletter-cta'
 import Footer from '@/components/refresh-dental/footer'
+import VideoTestimonial from '@/components/refresh-dental/video-testimonial'
 import WhatsAppButton from '@/components/refresh-dental/whatsapp-button'
 import CookieConsent from '@/components/refresh-dental/cookie-consent'
 import ScrollToTop from '@/components/refresh-dental/scroll-to-top'
+import AppointmentQuickBook from '@/components/refresh-dental/appointment-quick-book'
+import AccessibilityPanel from '@/components/refresh-dental/theme-toggle'
 
 const LoadingScreen = dynamic(
   () => import('@/components/refresh-dental/loading-screen'),
@@ -54,6 +57,7 @@ export default function Home() {
         <ServicesGrid />
         <ParallaxStatement />
         <Testimonials />
+        <VideoTestimonial />
         <BeforeAfterSection />
         <PaymentSection />
         <FAQSection />
@@ -66,6 +70,8 @@ export default function Home() {
       <Footer />
       <WhatsAppButton />
       <ScrollToTop />
+      <AppointmentQuickBook />
+      <AccessibilityPanel />
       <CookieConsent />
     </>
   )
