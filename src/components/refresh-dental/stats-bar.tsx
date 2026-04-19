@@ -9,41 +9,48 @@ interface StatItemProps {
   label: string;
   delay: number;
   isInView: boolean;
+  index: number;
+  total: number;
 }
 
 function AnimatedCounter({
   value,
   suffix,
   isInView,
+  onComplete,
 }: {
   value: number;
   suffix: string;
   isInView: boolean;
+  onComplete: () => void;
 }) {
   const [count, setCount] = useState(0);
+  const startTimeRef = useRef<number | null>(null);
 
   useEffect(() => {
     if (!isInView) return;
 
-    let startTime: number | null = null;
-    const duration = 2000;
+    startTimeRef.current = null;
 
-    const animate = (timestamp: number) => {
-      if (!startTime) startTime = timestamp;
-      const progress = Math.min((timestamp - startTime) / duration, 1);
-      // Ease out cubic
+    const tick = (timestamp: number) => {
+      const start = startTimeRef.current ?? timestamp;
+      startTimeRef.current = start;
+
+      const duration = 2000;
+      const progress = Math.min((timestamp - start) / duration, 1);
       const eased = 1 - Math.pow(1 - progress, 3);
       setCount(Math.floor(eased * value));
 
       if (progress < 1) {
-        requestAnimationFrame(animate);
+        requestAnimationFrame(tick);
       } else {
         setCount(value);
+        onComplete();
       }
     };
 
-    requestAnimationFrame(animate);
-  }, [isInView, value]);
+    requestAnimationFrame(tick);
+  }, [isInView, value, onComplete]);
 
   return (
     <span>
@@ -53,7 +60,21 @@ function AnimatedCounter({
   );
 }
 
-function StatItem({ value, suffix, label, delay, isInView }: StatItemProps) {
+function DiamondIcon() {
+  return (
+    <svg
+      viewBox="0 0 16 16"
+      className="h-3 w-3 text-champagne-gold/60 mx-auto mb-2"
+      fill="currentColor"
+    >
+      <path d="M8 0L10 6L8 16L6 6Z" />
+    </svg>
+  );
+}
+
+function StatItem({ value, suffix, label, delay, isInView, index, total }: StatItemProps) {
+  const [countingDone, setCountingDone] = useState(false);
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
@@ -63,14 +84,36 @@ function StatItem({ value, suffix, label, delay, isInView }: StatItemProps) {
         delay,
         ease: [0.25, 0.4, 0.25, 1],
       }}
-      className="text-center"
+      className="text-center relative"
     >
-      <div className="font-cormorant text-4xl md:text-5xl text-[#E8D5B0] mb-2">
-        <AnimatedCounter value={value} suffix={suffix} isInView={isInView} />
+      {/* Diamond icon above number */}
+      <DiamondIcon />
+
+      <div className="font-cormorant text-4xl md:text-5xl text-[#E8D5B0] mb-2 relative">
+        <AnimatedCounter
+          value={value}
+          suffix={suffix}
+          isInView={isInView}
+          onComplete={() => setCountingDone(true)}
+        />
+        {/* Pulsing glow when counting finishes */}
+        {countingDone && (
+          <motion.div
+            initial={{ opacity: 0.8, scale: 0.9 }}
+            animate={{ opacity: 0, scale: 1.4 }}
+            transition={{ duration: 1.2, ease: 'easeOut' }}
+            className="absolute inset-0 rounded-full bg-champagne-gold/20 blur-xl -z-10"
+          />
+        )}
       </div>
       <div className="font-jost uppercase tracking-wider text-xs text-[#FDFAF6]/60">
         {label}
       </div>
+
+      {/* Vertical golden separator between stats on desktop */}
+      {index < total - 1 && (
+        <div className="hidden md:block absolute -right-6 lg:-right-7 top-1/2 -translate-y-1/2 h-10 w-px bg-gradient-to-b from-transparent via-champagne-gold/40 to-transparent" />
+      )}
     </motion.div>
   );
 }
@@ -89,11 +132,17 @@ export default function StatsBar() {
   return (
     <section
       ref={ref}
-      className="bg-espresso py-12 px-4"
+      className="relative bg-espresso py-12 px-4 overflow-hidden"
       aria-label="Practice statistics"
     >
-      <div className="max-w-6xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12">
-        {stats.map((stat) => (
+      {/* Subtle gradient texture overlay */}
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute inset-0 bg-gradient-to-r from-champagne-gold/[0.03] via-transparent to-champagne-gold/[0.03]" />
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-champagne-gold/[0.02] to-transparent" />
+      </div>
+
+      <div className="relative max-w-6xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-16">
+        {stats.map((stat, index) => (
           <StatItem
             key={stat.label}
             value={stat.value}
@@ -101,6 +150,8 @@ export default function StatsBar() {
             label={stat.label}
             delay={stat.delay}
             isInView={isInView}
+            index={index}
+            total={stats.length}
           />
         ))}
       </div>

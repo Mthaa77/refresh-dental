@@ -9,6 +9,7 @@ import {
   AlertCircle,
 } from 'lucide-react'
 import ContactForm from './contact-form'
+import TradingHours from './trading-hours'
 
 export default function ContactSection() {
   return (
@@ -56,6 +57,9 @@ export default function ContactSection() {
                 title="Refresh Dental Location"
               />
             </motion.div>
+
+            {/* Trading Hours Widget */}
+            <TradingHours />
 
             {/* Contact Info Cards */}
             <motion.div

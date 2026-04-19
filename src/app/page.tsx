@@ -1,18 +1,22 @@
 'use client'
 
 import dynamic from 'next/dynamic'
+import ScrollProgress from '@/components/refresh-dental/scroll-progress'
 import Navigation from '@/components/refresh-dental/navigation'
 import Hero from '@/components/refresh-dental/hero'
 import StatsBar from '@/components/refresh-dental/stats-bar'
 import AboutSection from '@/components/refresh-dental/about-section'
 import GallerySection from '@/components/refresh-dental/gallery-section'
+import TeamSection from '@/components/refresh-dental/team-section'
 import ValuesSection from '@/components/refresh-dental/values-section'
 import ServicesGrid from '@/components/refresh-dental/services-grid'
 import ParallaxStatement from '@/components/refresh-dental/parallax-statement'
 import Testimonials from '@/components/refresh-dental/testimonials'
+import BeforeAfterSection from '@/components/refresh-dental/before-after-section'
 import PaymentSection from '@/components/refresh-dental/payment-section'
 import FAQSection from '@/components/refresh-dental/faq-section'
 import CorporateWellnessSection from '@/components/refresh-dental/corporate-wellness-section'
+import DentalTipsSection from '@/components/refresh-dental/dental-tips-section'
 import ContactSection from '@/components/refresh-dental/contact-section'
 import NewsletterCta from '@/components/refresh-dental/newsletter-cta'
 import Footer from '@/components/refresh-dental/footer'
@@ -28,19 +32,23 @@ export default function Home() {
   return (
     <>
       <LoadingScreen />
+      <ScrollProgress />
       <Navigation />
       <main className="min-h-screen">
         <Hero />
         <StatsBar />
         <AboutSection />
+        <TeamSection />
         <GallerySection />
         <ValuesSection />
         <ServicesGrid />
         <ParallaxStatement />
         <Testimonials />
+        <BeforeAfterSection />
         <PaymentSection />
         <FAQSection />
         <CorporateWellnessSection />
+        <DentalTipsSection />
         <ContactSection />
         <NewsletterCta />
       </main>
