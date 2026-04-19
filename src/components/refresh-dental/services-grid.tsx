@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import { motion } from 'framer-motion'
 import { Clock, ArrowRight } from 'lucide-react'
+import ServiceDetailDrawer from './service-detail-drawer'
 
 const services = [
   { name: "Dental Implants", duration: "1 hr 30 min", category: "Specialised", desc: "Permanent, natural-looking tooth replacement solutions", span: "col-span-2 row-span-2" },
@@ -41,6 +42,7 @@ const cardVariants = {
 
 export default function ServicesGrid() {
   const [activeCategory, setActiveCategory] = useState("All")
+  const [selectedService, setSelectedService] = useState<string | null>(null)
 
   const filteredServices =
     activeCategory === "All"
@@ -48,6 +50,7 @@ export default function ServicesGrid() {
       : services.filter((s) => s.category === activeCategory)
 
   return (
+    <>
     <section id="services" className="bg-sand py-20 md:py-28">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {/* Header */}
@@ -110,6 +113,7 @@ export default function ServicesGrid() {
                 key={service.name}
                 variants={cardVariants}
                 layout
+                onClick={() => setSelectedService(service.name)}
                 className={`${service.span} group cursor-pointer overflow-hidden rounded-2xl border border-soft-border bg-white transition-all duration-300 ${
                   isLarge
                     ? "relative min-h-[280px] sm:min-h-[320px] md:min-h-[360px]"
@@ -185,5 +189,11 @@ export default function ServicesGrid() {
         </motion.div>
       </div>
     </section>
+    <ServiceDetailDrawer
+      serviceKey={selectedService}
+      isOpen={!!selectedService}
+      onClose={() => setSelectedService(null)}
+    />
+    </>
   )
 }
