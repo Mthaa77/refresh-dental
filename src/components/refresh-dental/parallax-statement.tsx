@@ -30,7 +30,7 @@ export default function ParallaxStatement() {
           className="absolute inset-0 bg-cover bg-center bg-no-repeat"
           style={{
             backgroundImage:
-              'url("https://static.wixstatic.com/media/a78f12_7fc7c9e18d7f40a2800bafc5b7912798~mv2.jpeg")',
+              'url("/images/dental-clinic-interior.png")',
           }}
         />
       </motion.div>

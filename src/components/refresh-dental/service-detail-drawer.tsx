@@ -142,6 +142,255 @@ const servicesData: Record<string, Service> = {
     ],
     who: 'Ideal for adults and teens with mild to moderate alignment issues who want a discreet orthodontic solution.',
   },
+  'Dental Consultation': {
+    name: 'Dental Consultation',
+    duration: '30 min',
+    category: 'General',
+    desc: 'Comprehensive oral health assessment',
+    longDesc:
+      'A thorough dental consultation is the foundation of great oral health. Dr. Malunga performs a complete examination of your teeth, gums, and soft tissues, using digital X-rays and visual assessment to create a personalised care plan tailored to your needs.',
+    benefits: [
+      'Complete oral health assessment',
+      'Digital X-rays for accurate diagnosis',
+      'Personalised treatment planning',
+      'Early detection of potential issues',
+    ],
+    steps: [
+      'Medical history review and symptom discussion',
+      'Comprehensive examination of teeth and gums',
+      'Digital X-rays and diagnostic imaging',
+      'Treatment plan presentation and discussion',
+    ],
+    faqs: [
+      {
+        q: 'How often should I have a dental consultation?',
+        a: 'We recommend a check-up every 6 months, though some patients may benefit from more frequent visits depending on their oral health needs.',
+      },
+      {
+        q: 'What should I bring to my first consultation?',
+        a: 'Please bring your ID, medical aid card, a list of current medications, and any previous dental records or X-rays you may have.',
+      },
+    ],
+    who: 'Everyone — routine consultations are essential for maintaining optimal oral health and catching problems early.',
+  },
+  'Scaling and Polishing': {
+    name: 'Scaling and Polishing',
+    duration: '30 min',
+    category: 'General',
+    desc: 'Deep clean for optimal oral hygiene',
+    longDesc:
+      'Professional scaling and polishing removes plaque and tartar build-up that regular brushing cannot reach. This deep cleaning treatment leaves your teeth feeling incredibly smooth and fresh while protecting against gum disease and tooth decay.',
+    benefits: [
+      'Removes stubborn tartar build-up',
+      'Prevents gum disease and gingivitis',
+      'Leaves teeth feeling smooth and fresh',
+      'Reduces risk of tooth decay',
+    ],
+    steps: [
+      'Initial assessment of gum health',
+      'Ultrasonic scaling to remove tartar',
+      'Hand scaling for detailed cleaning',
+      'Professional polishing and fluoride treatment',
+    ],
+    faqs: [
+      {
+        q: 'Does scaling hurt?',
+        a: 'Most patients experience minimal discomfort. If you have sensitive gums or teeth, we can apply a numbing gel to keep you comfortable throughout.',
+      },
+      {
+        q: 'How often should I have scaling done?',
+        a: 'We recommend professional scaling every 6 months, though patients with gum disease may need it every 3-4 months.',
+      },
+    ],
+    who: 'Recommended for everyone as part of a routine preventive care programme — the cornerstone of healthy teeth and gums.',
+  },
+  'Restorations': {
+    name: 'Restorations',
+    duration: '30 min',
+    category: 'General',
+    desc: 'Tooth-coloured fillings and restorative care',
+    longDesc:
+      'Our tooth-coloured restorations seamlessly repair cavities and damaged teeth using composite resin that matches your natural tooth colour. Dr. Malunga uses minimally invasive techniques to preserve as much healthy tooth structure as possible.',
+    benefits: [
+      'Natural-looking tooth-coloured material',
+      'Minimally invasive procedure',
+      'Strengthens weakened teeth',
+      'Long-lasting durable results',
+    ],
+    steps: [
+      'Assessment of decay or damage',
+      'Gentle removal of compromised tooth structure',
+      'Application of tooth-coloured composite resin',
+      'Shaping, polishing, and bite adjustment',
+    ],
+    faqs: [
+      {
+        q: 'How long do composite fillings last?',
+        a: 'With proper care, composite fillings typically last 5-10 years. Their longevity depends on the location of the filling and your oral hygiene habits.',
+      },
+      {
+        q: 'Are tooth-coloured fillings as strong as metal ones?',
+        a: 'Modern composite resins are extremely durable and suitable for most restorations. For very large cavities, we may recommend a crown for added strength.',
+      },
+    ],
+    who: 'Anyone with cavities, chipped, or damaged teeth who wants a natural-looking, long-lasting repair.',
+  },
+  'Root Canal Therapy': {
+    name: 'Root Canal Therapy',
+    duration: '1 hr 30 min',
+    category: 'Specialised',
+    desc: 'Pain-free advanced endodontic treatment',
+    longDesc:
+      'Root canal therapy saves teeth that would otherwise need extraction. Dr. Malunga uses advanced rotary instruments and modern techniques to clean and seal the infected root canal, relieving pain while preserving your natural tooth for years to come.',
+    benefits: [
+      'Saves natural tooth from extraction',
+      'Eliminates infection and pain',
+      'Prevents spread of bacterial infection',
+      'Restores full chewing function',
+    ],
+    steps: [
+      'Digital X-ray and pulp vitality testing',
+      'Local anaesthesia and rubber dam placement',
+      'Infected pulp removal and canal cleaning',
+      'Canal shaping and disinfection',
+      'Root canal filling and sealing',
+    ],
+    faqs: [
+      {
+        q: 'Is root canal treatment painful?',
+        a: 'Modern root canal therapy is performed under effective local anaesthesia and is generally no more uncomfortable than having a filling. Most patients report significant pain relief after treatment.',
+      },
+      {
+        q: 'How many visits does it take?',
+        a: 'Most root canal treatments can be completed in a single visit of approximately 1 hour 30 minutes. Complex cases may require a second appointment.',
+      },
+    ],
+    who: 'Patients experiencing severe tooth pain, sensitivity to temperature, or those diagnosed with an infected or inflamed tooth pulp.',
+  },
+  'Wisdom Teeth Removal': {
+    name: 'Wisdom Teeth Removal',
+    duration: '1 hr',
+    category: 'Specialised',
+    desc: 'Safe and comfortable extraction',
+    longDesc:
+      'Wisdom teeth that are impacted, decayed, or causing crowding can lead to significant discomfort and oral health complications. Dr. Malunga performs safe, efficient extractions using gentle techniques to minimise recovery time and ensure your comfort.',
+    benefits: [
+      'Prevents crowding and misalignment',
+      'Eliminates pain and recurring infections',
+      'Reduces risk of cysts and tumours',
+      'Simplifies long-term oral hygiene',
+    ],
+    steps: [
+      'Panoramic X-ray and treatment planning',
+      'Administration of local anaesthesia',
+      'Precise extraction using specialised instruments',
+      'Post-operative care instructions and follow-up',
+    ],
+    faqs: [
+      {
+        q: 'What is the recovery time?',
+        a: 'Most patients recover fully within 5-7 days. You may experience mild swelling and discomfort for the first 2-3 days, which is easily managed with prescribed medication.',
+      },
+      {
+        q: 'Do all wisdom teeth need to be removed?',
+        a: 'Not always. If your wisdom teeth are fully erupted, properly aligned, and healthy, they may not require removal. Dr. Malunga will assess your specific situation.',
+      },
+    ],
+    who: 'Young adults and patients with problematic wisdom teeth causing pain, crowding, or recurring infections.',
+  },
+  'Dental Prosthesis': {
+    name: 'Dental Prosthesis',
+    duration: '30 min',
+    category: 'Specialised',
+    desc: 'Custom-crafted dentures for natural function',
+    longDesc:
+      'Custom dentures restore your smile and chewing function when multiple teeth are missing. Dr. Malunga crafts each prosthesis with precision to ensure a comfortable fit, natural appearance, and restored confidence in your daily life.',
+    benefits: [
+      'Restores complete smile and facial structure',
+      'Improves chewing and speaking ability',
+      'Custom-crafted for comfort and fit',
+      'Removable for easy cleaning',
+    ],
+    steps: [
+      'Comprehensive oral assessment and impressions',
+      'Bite registration and aesthetic try-in',
+      'Prosthesis fabrication by dental laboratory',
+      'Fitting, adjustments, and oral hygiene guidance',
+    ],
+    faqs: [
+      {
+        q: 'How long do dentures last?',
+        a: 'With proper care, quality dentures last 5-8 years. Over time, your gums and bone structure change, so periodic relining or replacement may be needed.',
+      },
+      {
+        q: 'Will dentures look natural?',
+        a: 'Absolutely. Modern dentures are crafted with high-quality teeth and gum-coloured bases that closely mimic natural appearance. Dr. Malunga pays careful attention to shade, shape, and arrangement.',
+      },
+    ],
+    who: 'Patients with multiple missing teeth seeking a reliable, removable solution to restore their smile and function.',
+  },
+  'Crowns and Veneers': {
+    name: 'Crowns and Veneers',
+    duration: '1 hr',
+    category: 'Cosmetic',
+    desc: 'Premium restorations for a flawless finish',
+    longDesc:
+      'Crowns and veneers are transformative cosmetic restorations that correct chips, severe discolouration, misshapen teeth, and gaps. Using premium ceramic materials, Dr. Malunga creates restorations that blend seamlessly with your natural teeth for a stunning, durable result.',
+    benefits: [
+      'Dramatic smile transformation',
+      'Natural-looking ceramic materials',
+      'Corrects multiple aesthetic concerns',
+      'Long-lasting and stain-resistant',
+    ],
+    steps: [
+      'Smile design consultation and digital planning',
+      'Tooth preparation and precise impressions',
+      'Temporary restoration placement',
+      'Custom ceramic crown or veneer bonding',
+    ],
+    faqs: [
+      {
+        q: 'What is the difference between a crown and a veneer?',
+        a: 'A crown covers the entire tooth and is ideal for heavily damaged teeth, while a veneer is a thin shell bonded to the front surface, perfect for cosmetic improvements on otherwise healthy teeth.',
+      },
+      {
+        q: 'How long do crowns and veneers last?',
+        a: 'With proper care, ceramic crowns and veneers can last 10-15 years or longer. Regular check-ups and good oral hygiene are essential for longevity.',
+      },
+    ],
+    who: 'Anyone seeking to correct chipped, discoloured, misaligned, or worn teeth for a picture-perfect smile.',
+  },
+  'Fixed Dental Prosthesis': {
+    name: 'Fixed Dental Prosthesis',
+    duration: '1 hr 30 min',
+    category: 'Specialised',
+    desc: 'Permanent bridges and fixed prosthetic solutions',
+    longDesc:
+      'A fixed dental prosthesis (bridge) permanently replaces one or more missing teeth by anchoring custom crowns to adjacent healthy teeth. This non-removable solution restores both function and aesthetics, giving you the confidence of a complete smile without the hassle of dentures.',
+    benefits: [
+      'Permanent, non-removable solution',
+      'Restores full biting and chewing function',
+      'Prevents neighbouring teeth from shifting',
+      'Natural appearance with custom shading',
+    ],
+    steps: [
+      'Assessment and bridge design planning',
+      'Preparation of abutment teeth and impressions',
+      'Temporary bridge placement',
+      'Custom bridge fitting, adjustment, and cementation',
+    ],
+    faqs: [
+      {
+        q: 'How is a bridge different from an implant?',
+        a: 'A bridge uses adjacent teeth as support, while an implant is anchored directly in the jawbone. Both are excellent options — Dr. Malunga will recommend the best solution based on your specific case.',
+      },
+      {
+        q: 'How long does a fixed bridge last?',
+        a: 'A well-maintained fixed bridge typically lasts 10-15 years. Good oral hygiene and regular dental visits significantly extend its lifespan.',
+      },
+    ],
+    who: 'Patients with one or more missing teeth who want a permanent, stable restoration that looks and feels natural.',
+  },
 }
 
 // Default data for services without full detail

@@ -155,7 +155,7 @@ export default function Hero() {
             className="absolute inset-0"
           >
             <img
-              src="https://static.wixstatic.com/media/a78f12_53141acea4c54f4da9028c40f2b7323d~mv2.jpeg"
+              src="/images/dr-lebo-hero.png"
               alt="Dr. Lebogang Malunga — Refresh Dental"
               className="absolute inset-0 w-full h-full object-cover object-top"
             />

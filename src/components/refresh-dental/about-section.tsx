@@ -54,7 +54,7 @@ export default function AboutSection() {
             className="relative w-full lg:w-[45%] aspect-[3/4] rounded-2xl overflow-hidden flex-shrink-0 lg:-ml-12 xl:-ml-20"
           >
             <img
-              src="https://static.wixstatic.com/media/a78f12_7fc7c9e18d7f40a2800bafc5b7912798~mv2.jpeg"
+              src="/images/dr-lebo-hero.png"
               alt="Dr. Lebogang Malunga — Principal Dentist at Refresh Dental"
               className="absolute inset-0 w-full h-full object-cover object-center"
             />
