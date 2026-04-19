@@ -3,8 +3,7 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
-const LOGO_URL =
-  'https://static.wixstatic.com/media/a78f12_d8df1e87d3a1425a86b2e603d0ede665~mv2.jpg';
+const LOGO_URL = '/images/refresh-dental-logo.jpg';
 
 const SESSION_KEY = 'refresh-dental-loading-seen';
 
@@ -143,7 +142,7 @@ export default function LoadingScreen() {
               alt="Refresh Dental"
               width={100}
               height={100}
-              className="h-24 w-24 rounded-full object-cover sm:h-[100px] sm:w-[100px]"
+              className="h-28 w-28 rounded-full object-cover ring-2 ring-champagne-gold/30 ring-offset-2 ring-offset-espresso sm:h-32 sm:w-32"
               initial={{ opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.1, ease: 'easeOut' }}

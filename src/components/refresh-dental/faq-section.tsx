@@ -119,9 +119,14 @@ export default function FAQSection() {
           <h2 className="font-cormorant text-4xl md:text-5xl lg:text-6xl section-heading text-shadow-espresso gold-gradient-text">
             Frequently Asked Questions
           </h2>
-          <p className="mx-auto mt-4 max-w-lg font-jost text-sm leading-relaxed text-brown-warm/70">
-            Everything you need to know about your visit — clear answers to put your mind at ease.
-          </p>
+          <motion.p
+            initial={{ opacity: 0, y: 15 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="font-jost text-base md:text-lg text-brown-warm/70 max-w-2xl mx-auto text-center leading-relaxed mt-4 mb-12"
+          >
+            Got questions? We&rsquo;ve got answers. If you don&rsquo;t find what you&rsquo;re looking for, our friendly team is just a phone call away.
+          </motion.p>
         </motion.div>
 
         {/* Search/Filter Input */}

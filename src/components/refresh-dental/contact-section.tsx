@@ -108,10 +108,14 @@ export default function ContactSection() {
           <h2 className="relative section-heading text-4xl md:text-5xl lg:text-6xl gold-gradient-text text-shadow-espresso">
             Contact Us
           </h2>
-          <p className="section-subheading relative mx-auto mt-4 max-w-lg">
-            Ready to start your journey to a refreshed smile? Reach out today
-            and let our caring team guide you every step of the way.
-          </p>
+          <motion.p
+            initial={{ opacity: 0, y: 15 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="font-jost text-base md:text-lg text-brown-warm/70 max-w-2xl mx-auto text-center leading-relaxed mt-4 mb-12"
+          >
+            Ready to take the first step towards your dream smile? We&rsquo;d love to hear from you. Walk-ins welcome, appointments preferred.
+          </motion.p>
         </motion.div>
 
         {/* Main Grid */}

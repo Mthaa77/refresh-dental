@@ -41,7 +41,7 @@ export const metadata: Metadata = {
   ],
   authors: [{ name: "Refresh Dental" }],
   icons: {
-    icon: "https://static.wixstatic.com/media/a78f12_d8df1e87d3a1425a86b2e603d0ede665~mv2.jpg",
+    icon: "/images/refresh-dental-logo.jpg",
   },
   openGraph: {
     title: "Refresh Dental — Premium Dental Care in Centurion",

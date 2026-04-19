@@ -125,9 +125,14 @@ export default function Testimonials() {
           <h2 className="font-cormorant text-4xl md:text-5xl lg:text-6xl section-heading text-shadow-espresso gold-gradient-text">
             What Our Patients Say
           </h2>
-          <p className="mx-auto mt-4 max-w-xl font-jost text-sm leading-relaxed text-brown-warm/70">
-            Real stories from real patients — discover why our community rates us 5 stars across the board.
-          </p>
+          <motion.p
+            initial={{ opacity: 0, y: 15 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="font-jost text-base md:text-lg text-brown-warm/70 max-w-2xl mx-auto text-center leading-relaxed mt-4 mb-12"
+          >
+            Don&rsquo;t just take our word for it — hear directly from the patients whose lives we&rsquo;ve touched and smiles we&rsquo;ve transformed.
+          </motion.p>
         </motion.div>
 
         {/* Navigation Arrows */}

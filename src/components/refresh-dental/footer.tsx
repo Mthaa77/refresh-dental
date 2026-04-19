@@ -64,9 +64,9 @@ export default function Footer() {
         <div className="space-y-4">
           <div className="flex items-center gap-3">
             <img
-              src="https://static.wixstatic.com/media/a78f12_d8df1e87d3a1425a86b2e603d0ede665~mv2.jpg"
+              src="/images/refresh-dental-logo.jpg"
               alt="Refresh Dental Logo"
-              className="w-10 h-10 rounded object-cover"
+              className="w-12 h-12 rounded-full object-cover ring-1 ring-champagne-gold/20"
               width={40}
               height={40}
             />

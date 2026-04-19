@@ -76,10 +76,14 @@ export default function ServicesGrid() {
           >
             Everything Your Smile Needs
           </h2>
-          <p className="mx-auto mt-4 max-w-xl font-jost text-sm leading-relaxed text-brown-warm/70">
-            From routine check-ups to advanced cosmetic procedures — world-class care all under
-            one roof.
-          </p>
+          <motion.p
+            initial={{ opacity: 0, y: 15 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="font-jost text-base md:text-lg text-brown-warm/70 max-w-2xl mx-auto text-center leading-relaxed mt-4 mb-12"
+          >
+            From routine check-ups to complete smile makeovers — every treatment is delivered with precision, care, and a commitment to exceeding your expectations.
+          </motion.p>
         </motion.div>
 
         {/* Category Filter Tabs */}

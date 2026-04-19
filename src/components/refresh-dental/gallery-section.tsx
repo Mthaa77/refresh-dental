@@ -117,10 +117,14 @@ export default function GallerySection() {
           <h2 className="section-heading text-4xl md:text-5xl lg:text-6xl gold-gradient-text text-shadow-espresso">
             Step Inside Refresh Dental
           </h2>
-          <p className="section-subheading mx-auto mt-4 max-w-xl">
-            Take a peek at our beautifully designed clinic — where modern elegance
-            meets clinical excellence, and every detail is crafted for your comfort.
-          </p>
+          <motion.p
+            initial={{ opacity: 0, y: 15 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="font-jost text-base md:text-lg text-brown-warm/70 max-w-2xl mx-auto text-center leading-relaxed mt-4 mb-12"
+          >
+            Step inside our warm, modern practice — designed to make every visit feel like an escape, not an appointment.
+          </motion.p>
           {/* Photo count badge */}
           <motion.div
             initial={{ opacity: 0, scale: 0.8 }}

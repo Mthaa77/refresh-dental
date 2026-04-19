@@ -119,10 +119,10 @@ function StatItem({ value, suffix, label, delay, isInView, index, total }: StatI
 }
 
 const stats = [
-  { value: 500, suffix: '+', label: 'Smiles Transformed', delay: 0 },
-  { value: 12, suffix: '', label: 'Premium Services', delay: 0.15 },
-  { value: 3, suffix: '', label: 'Clinic Locations', delay: 0.3 },
-  { value: 5, suffix: '★', label: 'Perfect Rating', delay: 0.45 },
+  { value: 500, suffix: '+', label: 'Happy Smiles', delay: 0 },
+  { value: 12, suffix: '', label: 'Specialised Treatments', delay: 0.15 },
+  { value: 3, suffix: '', label: 'Convenient Locations', delay: 0.3 },
+  { value: 5, suffix: '★', label: 'Google 5★ Rating', delay: 0.45 },
 ];
 
 export default function StatsBar() {
@@ -137,7 +137,7 @@ export default function StatsBar() {
     >
       {/* Section title */}
       <h3 className="text-center text-lg sm:text-xl font-cormorant font-light text-[#E8D5B0] mb-10 text-shadow-gold tracking-wider">
-        Proven Excellence in Every Smile
+        The Numbers Behind Confident Smiles
       </h3>
       {/* Subtle gradient texture overlay */}
       <div className="absolute inset-0 pointer-events-none">

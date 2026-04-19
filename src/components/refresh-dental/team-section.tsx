@@ -70,10 +70,14 @@ export default function TeamSection() {
           <h2 className="section-heading text-4xl md:text-5xl lg:text-6xl gold-gradient-text text-shadow-espresso">
             The People Behind Your Smile
           </h2>
-          <p className="section-subheading mx-auto mt-4 max-w-xl">
-            Meet the heart of Refresh Dental — a passionate team united by one mission:
-            to make every patient feel truly seen, heard, and cared for.
-          </p>
+          <motion.p
+            initial={{ opacity: 0, y: 15 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="font-jost text-base md:text-lg text-brown-warm/70 max-w-2xl mx-auto text-center leading-relaxed mt-4 mb-12"
+          >
+            A dedicated team of professionals who share one mission — helping you achieve the smile you&rsquo;ve always dreamed of, in an environment that feels like home.
+          </motion.p>
         </motion.div>
 
         {/* Team Grid */}

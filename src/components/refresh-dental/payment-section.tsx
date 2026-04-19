@@ -79,10 +79,14 @@ export default function PaymentSection() {
           <h2 className="section-heading text-4xl md:text-5xl lg:text-6xl gold-gradient-text text-shadow-espresso">
             Affordable Dental Care
           </h2>
-          <p className="section-subheading mx-auto mt-4 max-w-xl">
-            Your smile shouldn't come with financial stress. We accept all major
-            medical aids and offer flexible, interest-free payment plans through Athena.
-          </p>
+          <motion.p
+            initial={{ opacity: 0, y: 15 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="font-jost text-base md:text-lg text-brown-warm/70 max-w-2xl mx-auto text-center leading-relaxed mt-4 mb-12"
+          >
+            Premium dental care shouldn&rsquo;t break the bank. We work with all major medical aids and offer flexible payment options so nothing stands between you and your best smile.
+          </motion.p>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-start">
         {/* Left Column — Medical Aid */}

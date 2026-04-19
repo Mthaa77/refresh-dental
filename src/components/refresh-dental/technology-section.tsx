@@ -228,10 +228,14 @@ export default function TechnologySection() {
               </svg>
             </motion.div>
           </div>
-          <p className="section-subheading mx-auto mt-4 max-w-xl">
-            We invest in the latest dental technology so you can enjoy faster, more precise,
-            and virtually pain-free treatments — every single visit.
-          </p>
+          <motion.p
+            initial={{ opacity: 0, y: 15 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="font-jost text-base md:text-lg text-brown-warm/70 max-w-2xl mx-auto text-center leading-relaxed mt-4 mb-12"
+          >
+            We invest in the latest dental technology so you benefit from faster, more comfortable, and more precise treatments — because you deserve nothing but the best.
+          </motion.p>
         </motion.div>
 
         {/* Technology Grid */}

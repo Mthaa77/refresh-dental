@@ -198,11 +198,14 @@ export default function CorporateWellnessSection() {
           <h2 className="section-heading text-4xl md:text-5xl lg:text-6xl gold-gradient-text text-shadow-espresso">
             Corporate Wellness &amp; Outreach
           </h2>
-          <p className="section-subheading mx-auto mt-4 max-w-2xl">
-            At Refresh Dental, we believe every smile matters — whether it's in our clinic or across
-            your organisation. We bring world-class dental care directly to workplaces and communities
-            throughout Gauteng, because healthy teams build thriving businesses.
-          </p>
+          <motion.p
+            initial={{ opacity: 0, y: 15 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="font-jost text-base md:text-lg text-brown-warm/70 max-w-2xl mx-auto text-center leading-relaxed mt-4 mb-12"
+          >
+            Elevate your team&rsquo;s wellbeing with on-site dental care that reduces absenteeism, boosts morale, and shows your people you genuinely care.
+          </motion.p>
         </motion.div>
 
         {/* Stats Row */}

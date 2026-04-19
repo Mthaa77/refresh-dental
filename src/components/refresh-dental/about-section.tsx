@@ -115,6 +115,10 @@ export default function AboutSection() {
               Meet Your Dentist
             </motion.span>
 
+            <motion.p className="font-jost text-base text-brown-warm/70 max-w-md leading-relaxed mb-6">
+              Transforming lives through exceptional dental care — one smile at a time.
+            </motion.p>
+
             {/* Animated gold accent line */}
             <motion.div
               style={{ width: accentLineWidth }}
@@ -170,7 +174,7 @@ export default function AboutSection() {
             {/* Bio Paragraph */}
             <motion.div variants={textItemVariants}>
               <p className="font-jost font-light text-[#5C4E3D] leading-relaxed mb-4 max-w-lg">
-                Dr. Lebogang Malunga founded Refresh Dental with a bold vision — to transform dental care from a clinical necessity into an experience that celebrates each patient&rsquo;s unique journey.
+                Dr. Lebogang Malunga founded Refresh Dental with a bold vision — to transform dental care from a clinical necessity into a life-changing experience that celebrates each patient&rsquo;s unique journey to confidence.
               </p>
 
               {/* Expandable read more section */}
@@ -235,7 +239,7 @@ export default function AboutSection() {
                 href="#contact"
                 className="inline-flex items-center gap-2 border-2 border-sage-teal text-sage-teal hover:bg-sage-teal hover:text-white font-jost font-medium text-sm tracking-wider uppercase rounded-full px-8 py-3 transition-all duration-300 shadow-gold"
               >
-                Meet the Team Behind Your Smile
+                Book Your Consultation
                 <ArrowRight className="w-4 h-4" />
               </a>
             </motion.div>
