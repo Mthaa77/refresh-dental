@@ -10,7 +10,7 @@ const indicators = [
     number: '5.0',
     numberSuffix: '★',
     title: '5.0 Star Rating',
-    description: 'Rated 5.0/5 on Google Reviews',
+    description: 'Rated 5.0/5 on Google Reviews — perfect scores across the board from our valued patients',
     accentText: 'text-champagne-gold',
     borderColor: 'border-champagne-gold/20',
     iconBg: 'bg-champagne-gold/15',
@@ -23,7 +23,7 @@ const indicators = [
     number: '500',
     numberSuffix: '+',
     title: 'Happy Patients',
-    description: 'And counting — join our growing family',
+    description: 'And counting — join our growing family of patients who trust us with their smiles',
     accentText: 'text-sage-teal',
     borderColor: 'border-sage-teal/15',
     iconBg: 'bg-sage-teal/10',
@@ -36,7 +36,7 @@ const indicators = [
     number: '10',
     numberSuffix: '+',
     title: 'Years Experience',
-    description: 'A decade of excellence in dental care',
+    description: 'A decade of clinical excellence, continuously advancing the art and science of dentistry',
     accentText: 'text-champagne-gold',
     borderColor: 'border-champagne-gold/20',
     iconBg: 'bg-champagne-gold/15',
@@ -49,7 +49,7 @@ const indicators = [
     number: 'HPCSA',
     numberSuffix: '',
     title: 'Registered',
-    description: 'Fully registered and compliant',
+    description: 'Fully registered, compliant, and committed to the highest standards of professional care',
     accentText: 'text-sage-teal',
     borderColor: 'border-sage-teal/15',
     iconBg: 'bg-sage-teal/10',
@@ -155,7 +155,7 @@ function TrustCard({ item }: { item: (typeof indicators)[number] }) {
         y: -4,
         transition: { duration: 0.3 },
       }}
-      className={`group relative rounded-2xl border ${item.borderColor} bg-white p-5 md:p-6 text-center transition-colors duration-300`}
+      className={`group relative rounded-2xl border ${item.borderColor} bg-white p-5 md:p-6 text-center transition-colors duration-300 shadow-premium hover-lift hover:shadow-gold`}
     >
       {/* Pulsing accent glow */}
       <motion.div
@@ -209,7 +209,7 @@ function TrustCard({ item }: { item: (typeof indicators)[number] }) {
       <SpringNumber
         target={item.number}
         suffix={item.numberSuffix}
-        className={`font-cormorant text-3xl md:text-4xl font-medium mb-1 ${item.accentText}`}
+        className={`font-cormorant text-4xl md:text-5xl font-medium mb-1 text-shadow-gold-strong ${item.accentText}`}
       />
 
       {/* Title */}
@@ -248,7 +248,7 @@ export default function TrustIndicators() {
           <span className="mb-3 inline-block text-xs font-semibold uppercase tracking-[0.2em] text-champagne-gold">
             Trust & Credibility
           </span>
-          <h2 className="font-cormorant text-[clamp(1.75rem,3.5vw,3rem)] font-medium leading-tight text-espresso">
+          <h2 className="font-cormorant text-4xl md:text-5xl lg:text-6xl section-heading text-shadow-espresso gold-gradient-text">
             Trusted by Centurion Families
           </h2>
           {/* "Our Promise" subtitle */}

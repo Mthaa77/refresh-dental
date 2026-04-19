@@ -5,29 +5,29 @@ import { motion, useInView } from 'framer-motion'
 import { Building2, Heart, CheckCircle, ArrowRight, Diamond } from 'lucide-react'
 
 const corporateBenefits = [
-  { text: 'On-site dental screenings at your workplace' },
-  { text: 'Custom wellness plans tailored to your team' },
-  { text: 'Employee oral health education workshops' },
-  { text: 'Reduced absenteeism through preventive care' },
+  { text: 'On-site dental screenings — we come to you, saving your team valuable time' },
+  { text: 'Custom wellness plans designed around your company\'s unique needs and budget' },
+  { text: 'Engaging oral health workshops that educate and motivate your employees' },
+  { text: 'Proven reduction in dental-related absenteeism and healthcare costs' },
 ]
 
 const communityItems = [
-  { text: 'School dental health programmes' },
-  { text: 'Community health education talks' },
-  { text: 'Free dental screening days' },
-  { text: 'Partnerships with local organisations' },
+  { text: 'School dental health programmes that make oral care exciting for kids' },
+  { text: 'Community health education talks at churches, community centres, and events' },
+  { text: 'Free dental screening days open to all community members' },
+  { text: 'Strategic partnerships with local organisations for lasting impact' },
 ]
 
 const corporateBack = {
   title: 'Why Corporate Wellness?',
-  description: 'Invest in your team\'s health and productivity. Our corporate programmes are designed to fit your company\'s unique needs with flexible scheduling and customised care plans.',
+  description: 'Invest in your team\'s greatest asset — their health. Our corporate programmes deliver measurable ROI through reduced sick days, higher productivity, and a workforce that feels genuinely valued. Flexible scheduling ensures zero disruption to your operations.',
   stat: '40%',
   statLabel: 'Reduction in dental-related absenteeism',
 }
 
 const communityBack = {
   title: 'Our Impact',
-  description: 'We\'re committed to making quality dental care accessible to all communities across Gauteng. Our outreach programmes have touched thousands of lives.',
+  description: 'We\'re on a mission to make quality dental care accessible to everyone, not just those who can afford it. Our outreach programmes have touched thousands of lives across Gauteng — one smile at a time.',
   stat: '2,000+',
   statLabel: 'Community members served annually',
 }
@@ -138,7 +138,7 @@ function FlipCard({
         <motion.div
           animate={{ rotateY: isFlipped ? 180 : 0 }}
           transition={{ duration: 0.6, ease: [0.25, 0.46, 0.45, 0.94] }}
-          className="relative w-full rounded-2xl border border-soft-border bg-white p-8 shadow-sm overflow-hidden"
+          className="relative w-full rounded-2xl border border-soft-border bg-white p-8 shadow-elevated overflow-hidden shadow-inner-gold"
           style={{ backfaceVisibility: 'hidden' }}
         >
           {frontContent}
@@ -146,7 +146,7 @@ function FlipCard({
         <motion.div
           animate={{ rotateY: isFlipped ? 0 : -180 }}
           transition={{ duration: 0.6, ease: [0.25, 0.46, 0.45, 0.94] }}
-          className="absolute inset-0 rounded-2xl border border-champagne-gold/30 bg-gradient-to-br from-champagne-gold/5 to-gold-light/5 p-8 shadow-sm overflow-hidden"
+          className="absolute inset-0 rounded-2xl border border-champagne-gold/30 bg-gradient-to-br from-champagne-gold/5 to-gold-light/5 p-8 shadow-elevated overflow-hidden shadow-inner-gold"
           style={{ backfaceVisibility: 'hidden', transform: 'rotateY(180deg)' }}
         >
           {backContent}
@@ -195,14 +195,13 @@ export default function CorporateWellnessSection() {
           <span className="mb-4 inline-block text-xs font-semibold uppercase tracking-[0.2em] text-champagne-gold">
             Community Impact
           </span>
-          <h2 className="font-cormorant text-[clamp(2rem,4vw,3.5rem)] font-medium leading-tight text-espresso">
+          <h2 className="section-heading text-4xl md:text-5xl lg:text-6xl gold-gradient-text text-shadow-espresso">
             Corporate Wellness &amp; Outreach
           </h2>
-          <p className="mx-auto mt-4 max-w-2xl font-jost text-sm leading-relaxed text-brown-warm/70">
-            At Refresh Dental, we believe oral health extends beyond the clinic.
-            Through our corporate wellness programmes and community outreach
-            initiatives, we bring quality dental care to workplaces and
-            underserved communities across Gauteng.
+          <p className="section-subheading mx-auto mt-4 max-w-2xl">
+            At Refresh Dental, we believe every smile matters — whether it's in our clinic or across
+            your organisation. We bring world-class dental care directly to workplaces and communities
+            throughout Gauteng, because healthy teams build thriving businesses.
           </p>
         </motion.div>
 
@@ -256,10 +255,9 @@ export default function CorporateWellnessSection() {
                 </div>
 
                 <p className="mb-6 font-jost text-sm font-light leading-relaxed text-brown-warm/80">
-                  We partner with businesses of all sizes to deliver on-site dental
-                  screenings, customised employee wellness plans, and engaging oral
-                  health education sessions. A healthier team is a more productive
-                  team — and it starts with a healthy smile.
+                  We partner with forward-thinking businesses of all sizes to deliver on-site dental
+                  screenings, customised employee wellness plans, and engaging oral health education sessions.
+                  A healthier team is a more productive, happier team — and it starts with a healthy smile.
                 </p>
 
                 <motion.ul
@@ -351,10 +349,9 @@ export default function CorporateWellnessSection() {
                 </div>
 
                 <p className="mb-6 font-jost text-sm font-light leading-relaxed text-brown-warm/80">
-                  Giving back is at the heart of what we do. Through school dental
-                  health programmes, free screening days, and partnerships with local
-                  organisations, we extend quality dental care to communities that
-                  need it most across Gauteng.
+                  Giving back is at the heart of everything we do. Through school dental
+                  health programmes, free community screening days, and meaningful partnerships
+                  with local organisations, we extend quality dental care to those who need it most.
                 </p>
 
                 <motion.ul
@@ -432,7 +429,7 @@ export default function CorporateWellnessSection() {
           </p>
           <a
             href="#contact"
-            className="group inline-flex items-center gap-2 rounded-full border-2 border-champagne-gold bg-champagne-gold px-8 py-3.5 font-jost text-sm font-semibold uppercase tracking-widest text-white transition-all duration-300 hover:bg-champagne-gold/90 hover:shadow-lg"
+            className="group inline-flex items-center gap-2 rounded-full border-2 border-champagne-gold bg-champagne-gold px-8 py-3.5 font-jost text-sm font-semibold uppercase tracking-widest text-white shadow-gold transition-all duration-300 hover:bg-champagne-gold/90"
           >
             Contact Dr. Malunga
             <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />

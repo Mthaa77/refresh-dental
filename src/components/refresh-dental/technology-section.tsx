@@ -8,37 +8,37 @@ const technologies = [
   {
     icon: Monitor,
     title: 'Digital X-Rays',
-    description: 'Low-radiation digital imaging for accurate diagnostics',
+    description: 'Captures detailed images with up to 90% less radiation than traditional X-rays, keeping you safer while we see more.',
     fact: '90% less radiation than traditional film X-rays',
   },
   {
     icon: Box,
     title: '3D Imaging',
-    description: 'Advanced cone beam CT for detailed treatment planning',
+    description: 'Creates a complete 3D model of your jaw and teeth in under a minute, enabling precision planning for implants and complex procedures.',
     fact: 'Creates a complete 3D model of your jaw in under a minute',
   },
   {
     icon: Zap,
     title: 'Laser Dentistry',
-    description: 'Minimally invasive procedures with faster healing',
+    description: 'Often eliminates the need for anaesthesia and stitches — less pain, faster healing, and a more comfortable experience overall.',
     fact: 'Often eliminates the need for anaesthesia and stitches',
   },
   {
     icon: Camera,
     title: 'Intraoral Scanner',
-    description: 'Digital impressions for a comfortable experience',
+    description: 'Replaces uncomfortable traditional dental impressions with a quick, painless digital scan — no more messy putty.',
     fact: 'Replaces uncomfortable traditional dental impressions',
   },
   {
     icon: ShieldCheck,
     title: 'Sterilization Center',
-    description: 'Hospital-grade sterilization for your safety',
+    description: 'Every instrument is sterilised to hospital-grade standards, giving you complete confidence in our commitment to your safety.',
     fact: 'Hospital-grade sterilization for maximum patient safety',
   },
   {
     icon: Settings,
     title: 'Modern Equipment',
-    description: 'State-of-the-art chairs and delivery systems',
+    description: 'From ultra-comfortable chairs to precision delivery systems, every detail is chosen to enhance your treatment experience.',
     fact: 'Investing in the latest technology for superior results',
   },
 ]
@@ -73,7 +73,7 @@ function TechnologyCard({ tech, idx }: { tech: (typeof technologies)[number]; id
       onMouseLeave={() => setIsHovered(false)}
     >
       <motion.div
-        className="relative rounded-2xl border border-champagne-gold/10 bg-white p-6 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-lg"
+        className="relative rounded-2xl border border-champagne-gold/10 bg-white p-6 shadow-premium hover-lift hover:shadow-gold transition-all duration-300 hover:-translate-y-1"
         style={{
           boxShadow: isHovered
             ? '0 0 0 1px rgba(201, 169, 110, 0.3), 0 12px 40px -8px rgba(201, 169, 110, 0.12)'
@@ -113,7 +113,7 @@ function TechnologyCard({ tech, idx }: { tech: (typeof technologies)[number]; id
         </div>
 
         {/* Content */}
-        <h3 className="mb-2 font-dm-serif text-lg text-espresso">
+        <h3 className="mb-2 font-dm-serif text-xl text-espresso text-shadow-espresso">
           {tech.title}
         </h3>
         <p className="font-jost text-sm leading-relaxed text-brown-warm/60">
@@ -212,7 +212,7 @@ export default function TechnologySection() {
                 <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z" />
               </svg>
             </motion.div>
-            <h2 className="font-cormorant text-[clamp(2rem,4vw,3.5rem)] font-medium leading-tight text-espresso">
+            <h2 className="section-heading text-4xl md:text-5xl lg:text-6xl gold-gradient-text text-shadow-espresso">
               Advanced Technology, Gentle Care
             </h2>
             {/* Animated chip icon on right */}
@@ -228,9 +228,9 @@ export default function TechnologySection() {
               </svg>
             </motion.div>
           </div>
-          <p className="mx-auto mt-4 max-w-xl font-jost text-sm leading-relaxed text-brown-warm/70">
-            We invest in the latest dental technology to ensure precise, comfortable,
-            and efficient treatments.
+          <p className="section-subheading mx-auto mt-4 max-w-xl">
+            We invest in the latest dental technology so you can enjoy faster, more precise,
+            and virtually pain-free treatments — every single visit.
           </p>
         </motion.div>
 

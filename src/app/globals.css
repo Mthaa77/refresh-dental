@@ -137,12 +137,172 @@
   background-size: 256px 256px;
 }
 
+/* ============================================
+   ULTRA PREMIUM TYPOGRAPHY SYSTEM
+   ============================================ */
+
 /* Premium gold gradient text */
 .gold-gradient-text {
   background: linear-gradient(135deg, #C9A96E 0%, #E8D5B0 50%, #C9A96E 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+}
+
+/* Sage-teal gradient text */
+.teal-gradient-text {
+  background: linear-gradient(135deg, #3D7D6E 0%, #8FBFB5 50%, #3D7D6E 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Espresso-to-gold gradient text for dark sections */
+.luxury-gradient-text {
+  background: linear-gradient(135deg, #1A1510 0%, #C9A96E 40%, #E8D5B0 60%, #C9A96E 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Hero mega gradient — gold to sage teal */
+.hero-gradient-text {
+  background: linear-gradient(135deg, #C9A96E 0%, #E8D5B0 30%, #3D7D6E 70%, #8FBFB5 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Animated shimmer gradient text */
+@keyframes shimmer-text {
+  0% { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+
+.shimmer-text {
+  background: linear-gradient(
+    90deg,
+    #C9A96E 0%,
+    #E8D5B0 25%,
+    #FFFFFF 50%,
+    #E8D5B0 75%,
+    #C9A96E 100%
+  );
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: shimmer-text 4s linear infinite;
+}
+
+/* ============================================
+   TEXT SHADOW SYSTEM
+   ============================================ */
+
+/* Subtle gold glow shadow */
+.text-shadow-gold {
+  text-shadow: 0 0 20px rgba(201, 169, 110, 0.3),
+               0 0 40px rgba(201, 169, 110, 0.1);
+}
+
+/* Strong gold glow shadow */
+.text-shadow-gold-strong {
+  text-shadow: 0 0 30px rgba(201, 169, 110, 0.5),
+               0 0 60px rgba(201, 169, 110, 0.2),
+               0 2px 4px rgba(26, 21, 16, 0.3);
+}
+
+/* Sage teal glow shadow */
+.text-shadow-teal {
+  text-shadow: 0 0 20px rgba(61, 125, 110, 0.3),
+               0 0 40px rgba(61, 125, 110, 0.1);
+}
+
+/* Espresso drop shadow for contrast on light bg */
+.text-shadow-espresso {
+  text-shadow: 0 2px 4px rgba(26, 21, 16, 0.15),
+               0 4px 12px rgba(26, 21, 16, 0.08);
+}
+
+/* Ivory glow for dark sections */
+.text-shadow-ivory {
+  text-shadow: 0 0 20px rgba(253, 250, 246, 0.3),
+               0 0 40px rgba(253, 250, 246, 0.1);
+}
+
+/* Combined luxury shadow (gold + depth) */
+.text-shadow-luxury {
+  text-shadow: 0 2px 8px rgba(26, 21, 16, 0.2),
+               0 0 30px rgba(201, 169, 110, 0.25),
+               0 0 60px rgba(201, 169, 110, 0.08);
+}
+
+/* ============================================
+   BOX SHADOW SYSTEM
+   ============================================ */
+
+/* Premium card shadow */
+.shadow-premium {
+  box-shadow: 0 4px 24px rgba(26, 21, 16, 0.06),
+              0 1px 3px rgba(26, 21, 16, 0.04),
+              0 0 0 1px rgba(201, 169, 110, 0.05);
+}
+
+/* Elevated card shadow */
+.shadow-elevated {
+  box-shadow: 0 8px 40px rgba(26, 21, 16, 0.08),
+              0 2px 8px rgba(26, 21, 16, 0.04),
+              0 0 0 1px rgba(201, 169, 110, 0.08);
+}
+
+/* Gold glow shadow */
+.shadow-gold {
+  box-shadow: 0 4px 20px rgba(201, 169, 110, 0.15),
+              0 0 40px rgba(201, 169, 110, 0.05);
+}
+
+/* Gold glow strong */
+.shadow-gold-strong {
+  box-shadow: 0 8px 32px rgba(201, 169, 110, 0.25),
+              0 0 60px rgba(201, 169, 110, 0.1),
+              0 0 0 1px rgba(201, 169, 110, 0.1);
+}
+
+/* Sage teal glow shadow */
+.shadow-teal {
+  box-shadow: 0 4px 20px rgba(61, 125, 110, 0.15),
+              0 0 40px rgba(61, 125, 110, 0.05);
+}
+
+/* Inner gold highlight (top edge light) */
+.shadow-inner-gold {
+  box-shadow: inset 0 1px 0 rgba(201, 169, 110, 0.2),
+              inset 0 -1px 0 rgba(26, 21, 16, 0.05);
+}
+
+/* ============================================
+   ANIMATED BACKGROUNDS & EFFECTS
+   ============================================ */
+
+@keyframes gradient-shift {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+/* Animated gradient background */
+.gradient-animate {
+  background-size: 200% 200%;
+  animation: gradient-shift 8s ease infinite;
+}
+
+/* Gold pulse glow animation */
+@keyframes gold-pulse {
+  0%, 100% { box-shadow: 0 0 20px rgba(201, 169, 110, 0.15); }
+  50% { box-shadow: 0 0 40px rgba(201, 169, 110, 0.3), 0 0 60px rgba(201, 169, 110, 0.1); }
+}
+
+.gold-pulse {
+  animation: gold-pulse 3s ease-in-out infinite;
 }
 
 /* Selection color */
@@ -158,4 +318,65 @@
 }
 .scrollbar-hide::-webkit-scrollbar {
   display: none;
+}
+
+/* ============================================
+   SECTION HEADING STANDARD STYLES
+   ============================================ */
+
+.section-heading {
+  font-family: var(--font-cormorant);
+  font-weight: 300;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+}
+
+.section-subheading {
+  font-family: var(--font-dm-serif);
+  color: #5C4E3D;
+  line-height: 1.4;
+}
+
+/* ============================================
+   GLASS MORPHISM UTILITIES
+   ============================================ */
+
+.glass-card {
+  background: rgba(255, 255, 255, 0.65);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  box-shadow: 0 8px 32px rgba(26, 21, 16, 0.06);
+}
+
+.glass-card-dark {
+  background: rgba(26, 21, 16, 0.65);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(201, 169, 110, 0.15);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+}
+
+/* ============================================
+   HOVER TRANSITIONS
+   ============================================ */
+
+.hover-lift {
+  transition: transform 0.4s cubic-bezier(0.25, 0.4, 0.25, 1),
+              box-shadow 0.4s cubic-bezier(0.25, 0.4, 0.25, 1);
+}
+
+.hover-lift:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 40px rgba(26, 21, 16, 0.1),
+              0 4px 12px rgba(26, 21, 16, 0.06);
+}
+
+.hover-glow {
+  transition: box-shadow 0.4s cubic-bezier(0.25, 0.4, 0.25, 1);
+}
+
+.hover-glow:hover {
+  box-shadow: 0 0 30px rgba(201, 169, 110, 0.2),
+              0 0 60px rgba(201, 169, 110, 0.05);
 }

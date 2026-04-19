@@ -8,7 +8,7 @@ const teamMembers = [
   {
     name: 'Thandi Mokoena',
     role: 'Dental Hygienist',
-    bio: 'Specializing in preventive care and oral health education',
+    bio: 'With over a decade of experience in preventive care, Thandi transforms routine hygiene visits into deeply restorative experiences that patients actually look forward to.',
     initials: 'TM',
     color: 'bg-sage-teal',
     specialties: ['Preventive Care', 'Periodontal Therapy', 'Teeth Cleaning'],
@@ -17,7 +17,7 @@ const teamMembers = [
   {
     name: 'Sarah van der Merwe',
     role: 'Dental Assistant',
-    bio: 'Certified dental assistant with 8 years of experience',
+    bio: 'Sarah brings warmth and precision to every procedure, ensuring patients feel safe, informed, and genuinely cared for throughout their visit.',
     initials: 'SM',
     color: 'bg-warm-blush',
     specialties: ['Chairside Assistance', 'Infection Control', 'Patient Comfort'],
@@ -26,7 +26,7 @@ const teamMembers = [
   {
     name: 'David Nkosi',
     role: 'Practice Manager',
-    bio: 'Ensuring a seamless and welcoming patient experience',
+    bio: 'David goes above and beyond to make every interaction effortless — from scheduling to follow-ups, your comfort is always his priority.',
     initials: 'DN',
     color: 'bg-champagne-gold/80',
     specialties: ['Appointment Scheduling', 'Insurance Claims', 'Patient Relations'],
@@ -67,12 +67,12 @@ export default function TeamSection() {
           <span className="mb-4 inline-block text-xs font-semibold uppercase tracking-[0.2em] text-champagne-gold">
             Our Team
           </span>
-          <h2 className="font-cormorant text-[clamp(2rem,4vw,3.5rem)] font-medium leading-tight text-espresso">
+          <h2 className="section-heading text-4xl md:text-5xl lg:text-6xl gold-gradient-text text-shadow-espresso">
             The People Behind Your Smile
           </h2>
-          <p className="mx-auto mt-4 max-w-xl font-jost text-sm leading-relaxed text-brown-warm/70">
-            A dedicated team of professionals committed to delivering
-            exceptional dental care with warmth and expertise.
+          <p className="section-subheading mx-auto mt-4 max-w-xl">
+            Meet the heart of Refresh Dental — a passionate team united by one mission:
+            to make every patient feel truly seen, heard, and cared for.
           </p>
         </motion.div>
 
@@ -99,7 +99,7 @@ export default function TeamSection() {
                 : '0 4px 12px -2px rgba(0, 0, 0, 0.06)',
             }}
             transition={{ duration: 2, repeat: hoveredCard === 'dr-lebo' ? Infinity : 0, ease: 'easeInOut' }}
-            className="group sm:col-span-2 rounded-2xl border border-soft-border bg-white overflow-hidden transition-colors duration-300 hover:border-champagne-gold/40"
+            className="group sm:col-span-2 rounded-2xl border border-soft-border bg-white overflow-hidden shadow-elevated transition-colors duration-300 hover:border-champagne-gold/40 shadow-inner-gold"
           >
             <div className="flex flex-col md:flex-row">
               {/* Portrait */}
@@ -137,7 +137,7 @@ export default function TeamSection() {
                     <Sparkles className="h-3.5 w-3.5 text-champagne-gold" />
                   </motion.span>
                 </span>
-                <h3 className="relative font-dm-serif text-xl md:text-2xl text-espresso mb-1">
+                <h3 className="relative font-dm-serif text-xl md:text-2xl text-espresso text-shadow-espresso mb-1">
                   Dr. Lebogang Malunga
                 </h3>
                 <span className="relative inline-block mb-2 font-jost text-xs font-medium text-sage-teal">
@@ -147,10 +147,10 @@ export default function TeamSection() {
                   BDS, PDD
                 </p>
                 <p className="relative font-jost text-sm font-light leading-relaxed text-brown-warm/70 mb-6">
-                  Dr. Lebo is passionate about delivering exceptional dental care
-                  with a gentle, patient-first approach. With expertise spanning
-                  cosmetic dentistry, dental implants, and facial aesthetics, she
-                  is committed to helping every patient achieve their best smile.
+                  Dr. Lebo doesn't just transform smiles — she transforms lives. With expertise
+                  spanning cosmetic dentistry, dental implants, and facial aesthetics, she combines
+                  clinical precision with genuine compassion. Every treatment plan is crafted
+                  uniquely for you, because your smile deserves nothing less than extraordinary.
                 </p>
                 <div className="relative flex items-center gap-2">
                   <div className="flex h-8 w-8 items-center justify-center rounded-full bg-sage-teal/10">
@@ -205,7 +205,7 @@ export default function TeamSection() {
                   : '0 2px 8px -2px rgba(0, 0, 0, 0.05)',
               }}
               transition={{ duration: 2, repeat: hoveredCard === member.name ? Infinity : 0, ease: 'easeInOut', delay: i * 0.1 }}
-              className="group relative overflow-hidden rounded-2xl border border-soft-border bg-white p-6 transition-colors duration-300 hover:border-champagne-gold/40"
+              className="group relative overflow-hidden rounded-2xl border border-soft-border bg-white p-6 shadow-elevated transition-colors duration-300 hover:border-champagne-gold/40 shadow-inner-gold"
             >
               {/* Gradient overlay on hover */}
               <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-champagne-gold/3 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
@@ -223,7 +223,7 @@ export default function TeamSection() {
                   </div>
                 </div>
                 <div>
-                  <h3 className="font-dm-serif text-lg text-espresso leading-snug">
+                  <h3 className="font-dm-serif text-lg text-espresso text-shadow-espresso leading-snug">
                     {member.name}
                   </h3>
                   <p className="font-jost text-xs font-medium uppercase tracking-wider text-champagne-gold">
@@ -289,7 +289,7 @@ export default function TeamSection() {
         >
           <a
             href="#contact"
-            className="group/link inline-flex items-center gap-2 font-jost text-sm text-brown-warm/70 transition-colors duration-300 hover:text-champagne-gold"
+            className="group/link inline-flex items-center gap-2 font-jost text-sm text-brown-warm/70 shadow-gold rounded-full px-6 py-2.5 transition-all duration-300 hover:text-champagne-gold"
           >
             Interested in joining our team?
             <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover/link:translate-x-1" />

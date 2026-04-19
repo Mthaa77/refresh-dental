@@ -161,7 +161,7 @@ export default function NewsletterCTA() {
         </svg>
       </motion.div>
 
-      <div className="relative max-w-3xl mx-auto px-6 text-center space-y-8">
+      <div className="relative max-w-3xl mx-auto px-6 text-center space-y-8 shadow-gold-strong rounded-3xl py-16 md:py-20">
         {/* Headline with decorative gold frame */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -183,20 +183,15 @@ export default function NewsletterCTA() {
 
             {/* Gold gradient heading */}
             <h2
-              className="font-cormorant text-[clamp(2rem,5vw,4rem)] italic leading-tight relative"
-              style={{
-                background: 'linear-gradient(135deg, #C9A96E 0%, #E8D5B0 40%, #C9A96E 70%, #E8D5B0 100%)',
-                WebkitBackgroundClip: 'text',
-                WebkitTextFillColor: 'transparent',
-                backgroundClip: 'text',
-              }}
+              className="shimmer-text font-cormorant text-4xl md:text-5xl lg:text-6xl font-medium italic leading-tight relative text-shadow-ivory"
             >
               Ready for your
               <br />
               Refreshed Smile?
             </h2>
-            <p className="text-ivory/60 text-lg max-w-md mx-auto mt-2">
-              Book your consultation today. No commitment, no pressure.
+            <p className="text-ivory/70 text-lg max-w-md mx-auto mt-3 font-jost leading-relaxed">
+              Take the first step towards the smile you've always dreamed of.
+              Book your consultation today — no pressure, no obligation, just expert care.
             </p>
           </div>
         </motion.div>
@@ -211,7 +206,7 @@ export default function NewsletterCTA() {
         >
           <a
             href="#contact"
-            className="inline-flex items-center gap-2 bg-champagne-gold text-espresso font-semibold rounded-full px-8 py-3.5 hover:bg-gold-light transition-colors shadow-lg shadow-champagne-gold/20"
+            className="inline-flex items-center gap-2 bg-champagne-gold text-espresso font-semibold rounded-full px-10 py-4 text-base shadow-gold hover:bg-gold-light transition-colors"
           >
             Book Online
             <ArrowRight className="w-4 h-4" />
@@ -238,7 +233,7 @@ export default function NewsletterCTA() {
         >
           <p className="text-ivory/50 text-sm max-w-md mx-auto flex items-center justify-center gap-1.5">
             <Sparkles className="w-3.5 h-3.5 text-champagne-gold/60" />
-            Stay connected — subscribe for oral health tips and exclusive offers.
+            Join 500+ patients who receive exclusive oral health tips, special offers, and early access to new treatments.
           </p>
           <form
             onSubmit={handleSubmit}
@@ -261,7 +256,7 @@ export default function NewsletterCTA() {
             {/* Glass morphism button with press animation */}
             <motion.button
               type="submit"
-              className="relative bg-champagne-gold/90 backdrop-blur-sm text-espresso font-semibold rounded-full px-6 py-3 text-sm transition-colors duration-300 shrink-0 shadow-lg shadow-champagne-gold/15 hover:shadow-champagne-gold/25"
+              className="relative bg-champagne-gold/90 backdrop-blur-sm text-espresso font-semibold rounded-full px-8 py-3.5 text-sm transition-colors duration-300 shrink-0 shadow-gold hover:shadow-champagne-gold/25"
               whileTap={{ scale: 0.88 }}
               whileHover={{ scale: 1.03 }}
               animate={submitted ? { scale: [1, 1.08, 0.95, 1.03, 1] } : {}}

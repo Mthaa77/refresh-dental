@@ -972,3 +972,82 @@ Stage Summary:
 - All images use native <img> tags (no next/image)
 - No blue or indigo colors used
 - Clean ESLint (0 errors), clean compilation
+
+---
+Task ID: 20-a
+Agent: fullstack-developer
+Task: Ultra premium hero section redesign + navbar close button fix
+
+Work Log:
+- Completely rewrote hero.tsx with ultra premium design:
+  - Massive gradient heading using `text-[clamp(4rem,10vw,9rem)]` (up from clamp(3.5rem,8vw,7rem))
+  - "Refreshed." and "Revived." now use `hero-gradient-text` class (gold-to-sage-teal gradient) with `text-shadow-luxury` for depth
+  - Added blur-in entrance animation (filter: blur(6px) → blur(0px)) on word stagger for cinematic reveal
+  - Enhanced particles: expanded from 8 to 14 deterministic particles with varied sizes (6-28px), positions, and opacities
+  - Added 3 large ambient "orbs" for luxury atmosphere:
+    1. Gold orb: 420px, top-left, 4% opacity, 16s drift cycle
+    2. Sage-teal orb: 360px, center-right, 3.5% opacity, 20s drift cycle
+    3. Warm-blush orb (#E8C4B8): 300px, top-center, 3% opacity, 18s drift cycle
+    - All orbs use blur-3xl for soft, ambient glow effect
+  - Improved copywriting with two-line subheading:
+    - Line 1: "Experience world-class dentistry crafted around your comfort."
+    - Line 2 (smaller, muted): "Where artistry meets science for smiles that inspire confidence."
+    - Separate animation variants for staggered reveal (0.9s and 1.05s delays)
+  - Dual premium CTA buttons:
+    - Primary: "Book Your Transformation →" with `bg-gradient-to-r from-champagne-gold to-gold-light`, `shadow-gold` class, shimmer overlay (wider sweep animation), whileHover scale 1.05 with gold glow box-shadow
+    - Secondary: "Explore Our Services" with sage-teal outline border, hover fills with sage-teal bg
+  - Trust badges row: 4 inline glass-card pills with staggered reveal (1.3s-1.5s delays)
+    - Star icon: "5.0 Rating" (champagne-gold accent)
+    - Shield icon: "Medical Aids" (sage-teal accent)
+    - Award icon: "10+ Years" (champagne-gold accent)
+    - CheckCircle icon: "Interest-Free" (sage-teal accent)
+    - Each: backdrop-blur-sm, bg-white/60, border-white/40, rounded-full
+  - Enhanced floating info card with `glass-card` class, `shadow-elevated`, gold gradient top border (2px), larger icon circles (w-9 h-9) with subtle border
+  - Image section: added `shadow-elevated` on image container, rounded-2xl corners, gold gradient border frame overlay, image itself has rounded-2xl
+  - Replaced old 2 glow circles with the 3-orb system (larger, more atmospheric)
+  - Decorative label line upgraded to h-[1.5px] w-28 with via-gold-light gradient stop
+- Fixed navigation.tsx mobile close button:
+  - Added dedicated close button inside mobile overlay at top-right (absolute top-6 right-6, z-[60])
+  - Close button: w-12 h-12 rounded-full, bg-champagne-gold/15, border border-champagne-gold/30, backdrop-blur-sm, hover:bg-champagne-gold/25
+  - X icon: h-6 w-6 text-gold-light for high visibility against dark espresso overlay
+  - Proper aria-label="Close menu" for accessibility
+  - Existing hamburger X in header remains as fallback
+- All changes pass ESLint with zero errors
+- Dev server compiles cleanly
+
+Stage Summary:
+- Hero section completely redesigned with ultra premium aesthetic
+- Much larger typography, gradient text effects, blur-in animations
+- 3 ambient orbs create luxury atmosphere (gold, sage-teal, warm-blush)
+- 14 particles total (6 new additions)
+- New persuasive copywriting with two-line subheading
+- Premium dual CTA with gradient, shimmer, and glow effects
+- Trust badges row with glass-morphism pills
+- Enhanced info card with glass-card utility class and gold top border
+- Image container with shadow-elevated and gold gradient frame
+- Mobile navigation now has visible, styled close button in overlay
+- Clean ESLint (0 errors), clean compilation
+
+---
+Task ID: 20-b
+Agent: fullstack-developer
+Task: Upgrade 8 components with enhanced typography, gradient text, shadow effects, and persuasive copywriting
+
+Work Log:
+- Upgraded stats-bar.tsx: Added section title, text-shadow-gold-strong on numbers, shadow-premium + hover-lift on cards, improved copy
+- Upgraded about-section.tsx: Larger heading with gold-gradient-text, shadow-elevated container, new CTA text, improved bio copy, hover-lift on credentials
+- Upgraded values-section.tsx: Larger heading, shadow-premium + hover-lift + shadow-inner-gold on cards, rewrote all 6 descriptions
+- Upgraded services-grid.tsx: Larger heading, font-dm-serif card titles, shadow-premium + hover-lift, "Book This Service" CTA, shadow-gold on buttons
+- Upgraded testimonials.tsx: Larger heading, shadow-elevated cards, bigger stars (h-5), larger review text, section subtitle added
+- Upgraded treatment-process.tsx: Larger heading, shadow-premium + hover-lift on steps, bigger gradient step numbers, rewrote descriptions
+- Upgraded trust-indicators.tsx: Larger heading, bigger numbers with text-shadow-gold-strong, shadow-premium + hover-lift, rewritten descriptions
+- Upgraded faq-section.tsx: Larger heading, shadow-premium on items, bigger question text, rewrote all 8 FAQ answers
+- Fixed pre-existing parsing errors in team-section.tsx (missing commas)
+
+Stage Summary:
+- 8 components upgraded with premium typography, gradient text, shadow effects, and improved copywriting
+- All new CSS utility classes utilized (gold-gradient-text, text-shadow-gold-strong, shadow-premium, hover-lift, etc.)
+- Consistent heading sizing across all sections: text-4xl md:text-5xl lg:text-6xl
+- Copywriting upgraded to be more persuasive, benefit-focused, and patient-centric
+- Pre-existing bugs fixed in team-section.tsx
+- Clean ESLint (0 errors), clean compilation

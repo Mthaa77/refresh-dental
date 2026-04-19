@@ -56,10 +56,10 @@ export default function Footer() {
   return (
     <footer className="bg-espresso relative">
       {/* Gold gradient line at top of footer */}
-      <div className="h-[2px] w-full bg-gradient-to-r from-transparent via-champagne-gold to-transparent" />
+      <div className="h-[2px] w-full bg-gradient-to-r from-transparent via-champagne-gold to-transparent shadow-elevated" />
 
       {/* Main Footer */}
-      <div className="max-w-6xl mx-auto px-6 py-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
+      <div className="max-w-6xl mx-auto px-6 py-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 shadow-inner-gold rounded-t-2xl">
         {/* Column 1 — Brand */}
         <div className="space-y-4">
           <div className="flex items-center gap-3">
@@ -70,7 +70,7 @@ export default function Footer() {
               width={40}
               height={40}
             />
-            <span className="font-cormorant text-xl text-ivory">
+            <span className="font-cormorant text-2xl gold-gradient-text">
               Refresh Dental
             </span>
           </div>
@@ -92,7 +92,7 @@ export default function Footer() {
                   boxShadow: '0 0 16px rgba(201, 169, 110, 0.5)',
                 }}
                 transition={{ duration: 0.25 }}
-                className="flex items-center justify-center w-9 h-9 rounded-full border border-ivory/15 text-ivory/50 hover:text-champagne-gold hover:border-champagne-gold/40 transition-colors"
+                className="flex items-center justify-center w-9 h-9 rounded-full border border-ivory/15 text-ivory/50 hover:text-champagne-gold hover:border-champagne-gold/40 shadow-premium hover-lift transition-all duration-300"
               >
                 <social.icon className="w-4 h-4" />
               </motion.a>
@@ -108,7 +108,7 @@ export default function Footer() {
               <li key={link.label}>
                 <a
                   href={link.href}
-                  className="text-ivory/60 hover:text-champagne-gold transition-colors text-sm"
+                  className="text-ivory/60 hover:text-champagne-gold transition-colors text-[15px]"
                 >
                   {link.label}
                 </a>
@@ -123,7 +123,7 @@ export default function Footer() {
           <ul className="space-y-2.5">
             {services.map((service) => (
               <li key={service}>
-                <span className="text-ivory/60 text-sm">{service}</span>
+                <span className="text-ivory/60 text-[15px]">{service}</span>
               </li>
             ))}
           </ul>
@@ -135,13 +135,13 @@ export default function Footer() {
           <ul className="space-y-3">
             <li className="flex items-start gap-2.5">
               <MapPin className="w-4 h-4 text-champagne-gold mt-0.5 shrink-0" />
-              <span className="text-ivory/60 text-sm">
+              <span className="text-ivory/60 text-[15px]">
                 153 River Road, Centurion
               </span>
             </li>
             <li className="flex items-start gap-2.5">
               <Phone className="w-4 h-4 text-champagne-gold mt-0.5 shrink-0" />
-              <span className="text-ivory/60 text-sm">
+              <span className="text-ivory/60 text-[15px]">
                 061 416 4649 / 012 883 3636
               </span>
             </li>
@@ -149,7 +149,7 @@ export default function Footer() {
               <Mail className="w-4 h-4 text-champagne-gold mt-0.5 shrink-0" />
               <a
                 href="mailto:admin@refreshdental.co.za"
-                className="text-ivory/60 hover:text-champagne-gold transition-colors text-sm"
+                className="text-ivory/60 hover:text-champagne-gold transition-colors text-[15px]"
               >
                 admin@refreshdental.co.za
               </a>
@@ -158,7 +158,7 @@ export default function Footer() {
               <Mail className="w-4 h-4 text-champagne-gold mt-0.5 shrink-0" />
               <a
                 href="mailto:drlebo@refreshdental.co.za"
-                className="text-ivory/60 hover:text-champagne-gold transition-colors text-sm"
+                className="text-ivory/60 hover:text-champagne-gold transition-colors text-[15px]"
               >
                 drlebo@refreshdental.co.za
               </a>

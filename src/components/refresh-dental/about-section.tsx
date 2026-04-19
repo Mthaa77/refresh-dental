@@ -105,7 +105,7 @@ export default function AboutSection() {
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, margin: '-80px' }}
-            className="w-full lg:w-[55%] lg:py-8"
+            className="w-full lg:w-[55%] lg:py-8 shadow-elevated rounded-3xl p-6 md:p-10"
           >
             {/* Gold label */}
             <motion.span
@@ -124,7 +124,7 @@ export default function AboutSection() {
             {/* H2 Name */}
             <motion.h2
               variants={textItemVariants}
-              className="font-cormorant font-light text-espresso text-[clamp(2rem,4vw,3.5rem)] leading-tight mb-6"
+              className="font-cormorant font-light text-4xl md:text-5xl lg:text-6xl leading-tight mb-6 gold-gradient-text text-shadow-espresso"
             >
               Dr. Lebogang Malunga
             </motion.h2>
@@ -142,7 +142,7 @@ export default function AboutSection() {
                   custom={i}
                   variants={credentialVariants}
                   title={cred.desc}
-                  className="inline-flex items-center gap-1.5 bg-champagne-gold/10 border border-champagne-gold/25 text-champagne-gold rounded-full px-3.5 py-1 font-jost text-xs tracking-wider uppercase cursor-default"
+                  className="inline-flex items-center gap-1.5 bg-champagne-gold/10 border border-champagne-gold/25 text-champagne-gold rounded-full px-3.5 py-1 font-jost text-xs tracking-wider uppercase cursor-default hover-lift"
                 >
                   <span className="font-semibold">{cred.label}</span>
                   <span className="hidden sm:inline text-champagne-gold/60 text-[10px]">{cred.desc}</span>
@@ -159,13 +159,18 @@ export default function AboutSection() {
               — it changes your life.&rdquo;
             </motion.blockquote>
 
+            {/* Subtitle */}
+            <motion.p
+              variants={textItemVariants}
+              className="text-lg md:text-xl section-subheading mb-6"
+            >
+              Founder & Principal Dentist, Refresh Dental
+            </motion.p>
+
             {/* Bio Paragraph */}
             <motion.div variants={textItemVariants}>
               <p className="font-jost font-light text-[#5C4E3D] leading-relaxed mb-4 max-w-lg">
-                Dr. Lebogang Malunga is the dedicated founder and principal dentist
-                at Refresh Dental. Driven by a passion for aesthetics and holistic
-                well-being, Dr. Malunga is committed to transforming smiles while
-                prioritising overall health.
+                Dr. Lebogang Malunga founded Refresh Dental with a bold vision — to transform dental care from a clinical necessity into an experience that celebrates each patient&rsquo;s unique journey.
               </p>
 
               {/* Expandable read more section */}
@@ -179,12 +184,7 @@ export default function AboutSection() {
                 className="overflow-hidden"
               >
                 <p className="font-jost font-light text-[#5C4E3D] leading-relaxed mb-4 max-w-lg">
-                  With a Bachelor of Dental Surgery (BDS) and a Postgraduate Diploma in
-                  Dentistry (PDD), Dr. Malunga combines rigorous academic training with
-                  years of hands-on clinical experience. She is registered with the Health
-                  Professions Council of South Africa (HPCSA) and continuously pursues
-                  advanced education in cosmetic dentistry, facial aesthetics, and
-                  minimally invasive techniques.
+                  With over a decade of expertise in cosmetic and restorative dentistry, Dr. Malunga combines artistry with cutting-edge science to deliver results that go beyond expectations.
                 </p>
                 <p className="font-jost font-light text-[#5C4E3D] leading-relaxed mb-4 max-w-lg">
                   Beyond the clinic, Dr. Malunga is deeply invested in the Centurion
@@ -233,9 +233,9 @@ export default function AboutSection() {
             <motion.div variants={textItemVariants} className="mb-8">
               <a
                 href="#contact"
-                className="inline-flex items-center gap-2 border-2 border-sage-teal text-sage-teal hover:bg-sage-teal hover:text-white font-jost font-medium text-sm tracking-wider uppercase rounded-full px-8 py-3 transition-all duration-300"
+                className="inline-flex items-center gap-2 border-2 border-sage-teal text-sage-teal hover:bg-sage-teal hover:text-white font-jost font-medium text-sm tracking-wider uppercase rounded-full px-8 py-3 transition-all duration-300 shadow-gold"
               >
-                Book Your Consultation
+                Meet the Team Behind Your Smile
                 <ArrowRight className="w-4 h-4" />
               </a>
             </motion.div>

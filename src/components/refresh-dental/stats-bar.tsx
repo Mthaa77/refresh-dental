@@ -84,12 +84,12 @@ function StatItem({ value, suffix, label, delay, isInView, index, total }: StatI
         delay,
         ease: [0.25, 0.4, 0.25, 1],
       }}
-      className="text-center relative"
+      className="text-center relative shadow-premium rounded-2xl p-4 md:p-5 hover-lift"
     >
       {/* Diamond icon above number */}
       <DiamondIcon />
 
-      <div className="font-cormorant text-4xl md:text-5xl text-[#E8D5B0] mb-2 relative">
+      <div className="font-cormorant text-4xl md:text-5xl text-[#E8D5B0] mb-2 relative text-shadow-gold-strong">
         <AnimatedCounter
           value={value}
           suffix={suffix}
@@ -119,10 +119,10 @@ function StatItem({ value, suffix, label, delay, isInView, index, total }: StatI
 }
 
 const stats = [
-  { value: 500, suffix: '+', label: 'Smiles Refreshed', delay: 0 },
-  { value: 12, suffix: '', label: 'Services Available', delay: 0.15 },
-  { value: 3, suffix: '', label: 'Locations History', delay: 0.3 },
-  { value: 5, suffix: '★', label: 'Google Rating', delay: 0.45 },
+  { value: 500, suffix: '+', label: 'Smiles Transformed', delay: 0 },
+  { value: 12, suffix: '', label: 'Premium Services', delay: 0.15 },
+  { value: 3, suffix: '', label: 'Clinic Locations', delay: 0.3 },
+  { value: 5, suffix: '★', label: 'Perfect Rating', delay: 0.45 },
 ];
 
 export default function StatsBar() {
@@ -135,6 +135,10 @@ export default function StatsBar() {
       className="relative bg-espresso py-12 px-4 overflow-hidden"
       aria-label="Practice statistics"
     >
+      {/* Section title */}
+      <h3 className="text-center text-lg sm:text-xl font-cormorant font-light text-[#E8D5B0] mb-10 text-shadow-gold tracking-wider">
+        Proven Excellence in Every Smile
+      </h3>
       {/* Subtle gradient texture overlay */}
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute inset-0 bg-gradient-to-r from-champagne-gold/[0.03] via-transparent to-champagne-gold/[0.03]" />

@@ -101,12 +101,12 @@ export default function ParallaxStatement() {
         </motion.span>
 
         {/* Quote Text with double-line frame */}
-        <div className="relative px-6 py-5 md:px-10 md:py-7">
+        <div className="relative px-6 py-5 md:px-10 md:py-7 shadow-gold-strong rounded-xl">
           {/* Double border frame */}
           <div className="absolute inset-0 rounded-xl border border-champagne-gold/20 pointer-events-none" />
           <div className="absolute inset-[5px] rounded-lg border border-champagne-gold/10 pointer-events-none" />
 
-          <blockquote className="relative font-cormorant text-[clamp(1.75rem,4.5vw,3.5rem)] font-light italic leading-snug text-ivory md:leading-tight">
+          <blockquote className="relative font-cormorant text-3xl md:text-4xl lg:text-5xl font-light italic leading-snug text-ivory text-shadow-ivory md:leading-tight">
             <span className="block">One refreshed smile</span>
             <span className="block mt-1">at a time.</span>
           </blockquote>
@@ -119,12 +119,7 @@ export default function ParallaxStatement() {
         />
 
         {/* Attribution with gold gradient */}
-        <p className="mt-6 font-jost text-sm font-light tracking-wide" style={{
-          background: 'linear-gradient(90deg, #C9A96E, #E8D5B0, #C9A96E)',
-          WebkitBackgroundClip: 'text',
-          WebkitTextFillColor: 'transparent',
-          backgroundClip: 'text',
-        }}>
+        <p className="mt-6 font-jost text-sm font-light tracking-wide gold-gradient-text">
           — Dr. Lebogang Malunga
         </p>
 

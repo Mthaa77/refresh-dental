@@ -72,12 +72,12 @@ export default function ServicesGrid() {
             What We Offer
           </span>
           <h2
-            className="font-cormorant text-[clamp(2rem,4vw,3.5rem)] font-medium leading-tight text-espresso"
+            className="font-cormorant text-4xl md:text-5xl lg:text-6xl section-heading text-shadow-espresso gold-gradient-text"
           >
             Everything Your Smile Needs
           </h2>
           <p className="mx-auto mt-4 max-w-xl font-jost text-sm leading-relaxed text-brown-warm/70">
-            From routine check-ups to advanced cosmetic procedures — all under
+            From routine check-ups to advanced cosmetic procedures — world-class care all under
             one roof.
           </p>
         </motion.div>
@@ -121,7 +121,7 @@ export default function ServicesGrid() {
                 variants={cardVariants}
                 layout
                 onClick={() => setSelectedService(service.name)}
-                className={`${service.span} group cursor-pointer overflow-hidden rounded-2xl border border-soft-border bg-white transition-all duration-300 ${
+                className={`${service.span} group cursor-pointer overflow-hidden rounded-2xl border border-soft-border bg-white transition-all duration-300 shadow-premium hover-lift hover:shadow-gold ${
                   isLarge
                     ? "relative min-h-[280px] sm:min-h-[320px] md:min-h-[360px]"
                     : "min-h-[160px] md:min-h-[180px]"
@@ -186,7 +186,7 @@ export default function ServicesGrid() {
 
                     {/* Service Name */}
                     <h3
-                      className={`font-cormorant text-xl font-semibold leading-snug text-espresso ${
+                      className={`font-dm-serif text-xl md:text-2xl leading-snug text-espresso text-shadow-espresso ${
                         isLarge ? "text-2xl md:text-3xl lg:text-4xl" : ""
                       }`}
                     >
@@ -202,7 +202,7 @@ export default function ServicesGrid() {
                   {/* Book CTA */}
                   <div className="mt-auto flex items-center gap-1.5 pt-4">
                     <span className="font-jost text-xs font-semibold uppercase tracking-[0.15em] text-champagne-gold transition-all duration-300 group-hover:tracking-[0.2em]">
-                      Book
+                      Book This Service
                     </span>
                     <motion.span
                       className="inline-flex"
@@ -226,7 +226,7 @@ export default function ServicesGrid() {
           transition={{ duration: 0.5, delay: 0.3 }}
           className="mt-14 flex justify-center"
         >
-          <button className="group inline-flex items-center gap-2 rounded-full border-2 border-champagne-gold px-8 py-3 font-jost text-sm font-semibold uppercase tracking-widest text-champagne-gold transition-all duration-300 hover:bg-champagne-gold hover:text-white hover:shadow-lg">
+          <button className="group inline-flex items-center gap-2 rounded-full border-2 border-champagne-gold px-8 py-3 font-jost text-sm font-semibold uppercase tracking-widest text-champagne-gold transition-all duration-300 hover:bg-champagne-gold hover:text-white hover:shadow-lg shadow-gold">
             View All Services
             <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
           </button>

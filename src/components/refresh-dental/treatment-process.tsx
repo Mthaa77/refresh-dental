@@ -10,7 +10,7 @@ const steps = [
     icon: Calendar,
     title: 'Book Your Visit',
     description:
-      "Schedule your appointment online, by phone, or WhatsApp. We'll find a time that works for you.",
+      "Schedule your appointment in seconds — online, by phone, or WhatsApp. We'll find the perfect time that fits your life, not the other way around.",
     duration: '~15 min',
   },
   {
@@ -18,7 +18,7 @@ const steps = [
     icon: Stethoscope,
     title: 'Meet Dr. Malunga',
     description:
-      'Your first consultation includes a thorough examination and personalised treatment plan.',
+      'Experience a thorough, unhurried consultation where we truly listen to your concerns and assess your oral health with cutting-edge precision.',
     duration: '~30 min',
   },
   {
@@ -26,7 +26,7 @@ const steps = [
     icon: ClipboardList,
     title: 'Custom Treatment Plan',
     description:
-      "We'll discuss your options, costs, and timeline — no surprises, no pressure.",
+      "Receive a clear, personalised roadmap with full transparency on options, costs, and timelines — empowered to make the best decision for your smile.",
     duration: '~20 min',
   },
   {
@@ -34,7 +34,7 @@ const steps = [
     icon: Heart,
     title: 'Expert Care',
     description:
-      'Experience gentle, precise dental care using the latest technology and techniques.',
+      'Relax in our capable hands as Dr. Malunga delivers gentle, meticulous treatment using the latest technology — comfortable, precise, and transformative.',
     duration: '~60 min',
   },
   {
@@ -42,7 +42,7 @@ const steps = [
     icon: PartyPopper,
     title: 'Enjoy Your Smile',
     description:
-      'Walk out with the confidence of a refreshed, revitalised smile.',
+      'Walk out with a renewed sense of confidence and a smile that lights up every room — results designed to last a lifetime.',
     duration: 'Lifetime',
   },
 ]
@@ -87,7 +87,7 @@ function StepCard({
   }
 
   return (
-    <div className="relative flex flex-col items-center text-center">
+    <div className="relative flex flex-col items-center text-center shadow-premium rounded-2xl p-5 hover-lift">
       {/* Step content */}
       <motion.div
         variants={stepVariants}
@@ -120,7 +120,7 @@ function StepCard({
           {/* Number badge with bounce */}
           <motion.button
             onClick={handleBounce}
-            className="absolute -top-1 -right-1 flex h-7 w-7 items-center justify-center rounded-full bg-champagne-gold text-xs font-bold text-espresso font-jost shadow-md cursor-pointer border-0 outline-none"
+            className="absolute -top-1 -right-1 flex h-8 w-8 items-center justify-center rounded-full bg-champagne-gold text-sm font-bold text-espresso font-jost shadow-md cursor-pointer border-0 outline-none shadow-gold gold-gradient-text"
             animate={bouncing ? {
               y: [0, -12, -4, -8, 0],
               scale: [1, 1.15, 0.95, 1.05, 1],
@@ -265,7 +265,7 @@ function MobileTimeline() {
               {/* Content */}
               <div className="pt-1">
                 <div className="flex items-center gap-2 mb-1.5">
-                  <span className="flex h-5 w-5 items-center justify-center rounded-full bg-champagne-gold text-[10px] font-bold text-espresso font-jost">
+                  <span className="flex h-5 w-5 items-center justify-center rounded-full bg-champagne-gold text-[10px] font-bold text-espresso font-jost gold-gradient-text shadow-gold">
                     {step.number}
                   </span>
                   <h3 className="font-dm-serif text-base text-espresso">
@@ -372,11 +372,11 @@ export default function TreatmentProcess() {
           <span className="mb-4 inline-block text-xs font-semibold uppercase tracking-[0.2em] text-champagne-gold">
             How It Works
           </span>
-          <h2 className="font-cormorant text-[clamp(2rem,4vw,3.5rem)] font-medium leading-tight text-espresso">
+          <h2 className="font-cormorant text-4xl md:text-5xl lg:text-6xl section-heading text-shadow-espresso gold-gradient-text">
             Your Journey to a Refreshed Smile
           </h2>
           <p className="mx-auto mt-4 max-w-xl font-jost text-sm leading-relaxed text-brown-warm/70">
-            From consultation to confident smile — we&rsquo;re with you every step
+            From your very first consultation to a confident, lasting smile — we&rsquo;re with you at every step of the way.
           </p>
         </motion.div>
 

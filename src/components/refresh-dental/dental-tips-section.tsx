@@ -8,7 +8,7 @@ const tips = [
     icon: Sparkles,
     title: 'The Art of Brushing',
     description:
-      'Proper brushing technique is the foundation of oral health. Use a soft-bristled brush at a 45-degree angle for two minutes, twice daily.',
+      'Angle your soft-bristled brush at 45° to your gums and use gentle, circular motions. Spend a full two minutes — morning and night — and don\'t forget to brush your tongue for fresher breath.',
     accent: 'bg-champagne-gold/10 text-champagne-gold',
     readTime: '2 min read',
   },
@@ -16,7 +16,7 @@ const tips = [
     icon: Heart,
     title: 'Flossing Matters',
     description:
-      'Flossing removes plaque from areas your brush can\'t reach. Make it a daily habit for healthier gums and fresher breath.',
+      'Flossing reaches the 40% of your tooth surfaces that brushing simply cannot. Make it a daily habit — your gums will thank you, and your breath will stay noticeably fresher.',
     accent: 'bg-warm-blush/20 text-warm-blush',
     readTime: '2 min read',
   },
@@ -24,7 +24,7 @@ const tips = [
     icon: UtensilsCrossed,
     title: 'Diet & Your Teeth',
     description:
-      'Limit sugary snacks and acidic drinks. Calcium-rich foods and crunchy vegetables naturally strengthen your enamel.',
+      'Swap sugary snacks for calcium-rich cheese, crunchy apples, and leafy greens. These natural foods neutralise acids, strengthen enamel, and stimulate saliva production.',
     accent: 'bg-sage-teal/10 text-sage-teal',
     readTime: '3 min read',
   },
@@ -32,7 +32,7 @@ const tips = [
     icon: Calendar,
     title: 'Regular Check-ups',
     description:
-      'Visit your dentist every 6 months for professional cleaning and early detection of potential issues.',
+      'Six-month check-ups catch problems early — often before you feel any discomfort. Professional cleanings also remove tartar buildup that brushing alone cannot address.',
     accent: 'bg-champagne-gold/10 text-champagne-gold',
     readTime: '2 min read',
   },
@@ -40,7 +40,7 @@ const tips = [
     icon: Shield,
     title: 'Teeth Whitening Safety',
     description:
-      'Always consult your dentist before whitening. Professional treatments are safer and more effective than over-the-counter options.',
+      'Always consult Dr. Malunga before whitening. Professional treatments deliver stunning results safely, while over-the-counter kits risk enamel damage and uneven results.',
     accent: 'bg-sage-teal/10 text-sage-teal',
     readTime: '3 min read',
   },
@@ -48,7 +48,7 @@ const tips = [
     icon: Smile,
     title: 'Kids Dental Care',
     description:
-      'Start dental visits by age 1. Make brushing fun with flavored toothpaste and positive reinforcement.',
+      'Start dental visits by age one and make brushing an adventure, not a chore. Use flavoured toothpaste, reward charts, and lead by example — your child will love their smile.',
     accent: 'bg-warm-blush/20 text-warm-blush',
     readTime: '2 min read',
   },
@@ -85,11 +85,12 @@ export default function DentalTipsSection() {
           <span className="mb-4 inline-block text-xs font-semibold uppercase tracking-[0.2em] text-champagne-gold">
             Expert Advice
           </span>
-          <h2 className="font-cormorant text-[clamp(2rem,4vw,3.5rem)] font-medium leading-tight text-espresso">
+          <h2 className="section-heading text-4xl md:text-5xl lg:text-6xl gold-gradient-text text-shadow-espresso">
             Dental Care Tips
           </h2>
-          <p className="mx-auto mt-4 max-w-xl font-jost text-sm leading-relaxed text-brown-warm/70">
-            Expert advice from Dr. Malunga for a healthier smile.
+          <p className="section-subheading mx-auto mt-4 max-w-xl">
+            Practical, expert-backed advice from Dr. Malunga to help you build
+            a radiant smile and maintain lifelong oral health.
           </p>
         </motion.div>
 
@@ -110,7 +111,7 @@ export default function DentalTipsSection() {
                 boxShadow: '0 12px 36px -8px rgba(201, 169, 110, 0.14)',
                 transition: { duration: 0.3 },
               }}
-              className="group relative overflow-hidden rounded-2xl border border-soft-border bg-white p-6 transition-colors duration-300 hover:border-champagne-gold/40"
+              className="group relative overflow-hidden rounded-2xl border border-soft-border bg-white p-6 shadow-premium hover-lift hover:shadow-gold transition-colors duration-300 hover:border-champagne-gold/40"
             >
               {/* Subtle ivory dots pattern overlay — 2% opacity */}
               <div
@@ -166,7 +167,7 @@ export default function DentalTipsSection() {
               </motion.div>
 
               {/* Title */}
-              <h3 className="font-dm-serif text-lg text-espresso mb-1">
+              <h3 className="font-dm-serif text-xl text-espresso text-shadow-espresso mb-1">
                 {tip.title}
               </h3>
 
@@ -223,7 +224,7 @@ export default function DentalTipsSection() {
         >
           <a
             href="#contact"
-            className="group/btn relative inline-flex items-center gap-2 overflow-hidden rounded-full border-2 border-champagne-gold bg-transparent px-8 py-3.5 font-jost text-sm font-semibold uppercase tracking-widest text-champagne-gold transition-all duration-300 hover:bg-champagne-gold hover:text-white hover:shadow-lg"
+            className="group/btn relative inline-flex items-center gap-2 overflow-hidden rounded-full border-2 border-champagne-gold bg-transparent px-8 py-3.5 font-jost text-sm font-semibold uppercase tracking-widest text-champagne-gold shadow-gold transition-all duration-300 hover:bg-champagne-gold hover:text-white"
           >
             {/* Shimmer overlay */}
             <motion.span

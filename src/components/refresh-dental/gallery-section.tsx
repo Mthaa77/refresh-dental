@@ -114,13 +114,12 @@ export default function GallerySection() {
           <span className="mb-4 inline-block text-xs font-semibold uppercase tracking-[0.2em] text-champagne-gold">
             Our Practice
           </span>
-          <h2 className="font-cormorant text-[clamp(2rem,4vw,3.5rem)] font-medium leading-tight text-espresso">
+          <h2 className="section-heading text-4xl md:text-5xl lg:text-6xl gold-gradient-text text-shadow-espresso">
             Step Inside Refresh Dental
           </h2>
-          <p className="mx-auto mt-4 max-w-xl font-jost text-sm leading-relaxed text-brown-warm/70">
-            Discover our warm, modern clinic where cutting-edge technology meets
-            compassionate care. Every detail has been designed with your comfort in
-            mind.
+          <p className="section-subheading mx-auto mt-4 max-w-xl">
+            Take a peek at our beautifully designed clinic — where modern elegance
+            meets clinical excellence, and every detail is crafted for your comfort.
           </p>
           {/* Photo count badge */}
           <motion.div
@@ -160,7 +159,7 @@ export default function GallerySection() {
               <motion.div
                 key={idx}
                 variants={itemVariants}
-                className={`group relative cursor-pointer overflow-hidden rounded-2xl shadow-sm ${image.span}`}
+                className={`group relative cursor-pointer overflow-hidden rounded-2xl shadow-premium hover:shadow-elevated hover-lift transition-shadow duration-300 ${image.span}`}
                 onClick={() => handleImageClick(idx)}
                 whileHover={{ rotate: -1 }}
                 transition={{ type: 'spring', stiffness: 300, damping: 25 }}
@@ -171,7 +170,7 @@ export default function GallerySection() {
                   <img
                     src={image.src}
                     alt={image.alt}
-                    className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.02]"
+                    className="absolute inset-0 h-full w-full object-cover transition-all duration-700 ease-out group-hover:scale-[1.05] group-hover:brightness-110"
                     loading="lazy"
                   />
                 </div>

@@ -252,6 +252,15 @@ export default function Navigation() {
             animate="visible"
             exit="exit"
           >
+            {/* Dedicated Close Button — inside overlay */}
+            <button
+              onClick={() => setMobileOpen(false)}
+              className="absolute top-6 right-6 z-[60] w-12 h-12 rounded-full bg-champagne-gold/15 border border-champagne-gold/30 flex items-center justify-center backdrop-blur-sm hover:bg-champagne-gold/25 transition-colors duration-300"
+              aria-label="Close menu"
+            >
+              <X className="h-6 w-6 text-gold-light" />
+            </button>
+
             {/* Nav Links */}
             <motion.ul
               className="flex flex-col items-center gap-6"

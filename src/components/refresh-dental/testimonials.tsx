@@ -122,9 +122,12 @@ export default function Testimonials() {
           <span className="mb-4 inline-block text-xs font-semibold uppercase tracking-[0.2em] text-champagne-gold">
             Patient Stories
           </span>
-          <h2 className="font-cormorant text-[clamp(2rem,4vw,3rem)] font-medium leading-tight text-espresso">
+          <h2 className="font-cormorant text-4xl md:text-5xl lg:text-6xl section-heading text-shadow-espresso gold-gradient-text">
             What Our Patients Say
           </h2>
+          <p className="mx-auto mt-4 max-w-xl font-jost text-sm leading-relaxed text-brown-warm/70">
+            Real stories from real patients — discover why our community rates us 5 stars across the board.
+          </p>
         </motion.div>
 
         {/* Navigation Arrows */}
@@ -167,7 +170,7 @@ export default function Testimonials() {
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true, margin: "-60px" }}
-              className={`relative w-[350px] shrink-0 snap-center overflow-hidden rounded-2xl bg-white p-8 shadow-sm transition-all duration-300 ${
+              className={`relative w-[350px] shrink-0 snap-center overflow-hidden rounded-2xl bg-white p-8 shadow-elevated transition-all duration-300 hover-lift ${
                 activeIndex === i
                   ? "border-l-4 border-sage-teal shadow-md"
                   : "border-l-4 border-transparent hover:shadow-md"
@@ -192,8 +195,8 @@ export default function Testimonials() {
                 &ldquo;
               </span>
 
-              {/* Stars with pulse animation */}
-              <div className="relative z-10 mb-5 flex gap-0.5">
+              {/* Stars with pulse animation — bigger and more prominent */}
+              <div className="relative z-10 mb-5 flex gap-1">
                 {Array.from({ length: t.rating }).map((_, si) => (
                   <motion.div
                     key={si}
@@ -208,14 +211,14 @@ export default function Testimonials() {
                     }}
                   >
                     <Star
-                      className="h-4 w-4 fill-champagne-gold text-champagne-gold"
+                      className="h-5 w-5 fill-champagne-gold text-champagne-gold"
                     />
                   </motion.div>
                 ))}
               </div>
 
               {/* Review Text */}
-              <p className="relative z-10 font-jost text-sm font-light italic leading-relaxed text-brown-warm/80">
+              <p className="relative z-10 font-jost text-[15px] font-light italic leading-relaxed text-brown-warm/80">
                 &ldquo;{t.text}&rdquo;
               </p>
 
