@@ -95,10 +95,12 @@ function FlipCard({
   frontContent,
   backContent,
   delay,
+  accent = 'blue',
 }: {
   frontContent: React.ReactNode
   backContent: React.ReactNode
   delay: number
+  accent?: 'blue' | 'red'
 }) {
   const [isFlipped, setIsFlipped] = useState(false)
   const cardRef = useRef<HTMLDivElement>(null)
@@ -138,7 +140,7 @@ function FlipCard({
         <motion.div
           animate={{ rotateY: isFlipped ? 180 : 0 }}
           transition={{ duration: 0.6, ease: [0.25, 0.46, 0.45, 0.94] }}
-          className="relative w-full rounded-2xl border border-soft-border bg-white p-8 shadow-elevated overflow-hidden shadow-inner-gold"
+          className={`relative w-full rounded-2xl border border-soft-border bg-card p-8 shadow-elevated overflow-hidden shadow-inner-gold ${accent === 'blue' ? 'blue-accent-border' : 'red-accent-border'}`}
           style={{ backfaceVisibility: 'hidden' }}
         >
           {frontContent}
@@ -311,7 +313,7 @@ export default function CorporateWellnessSection() {
                   <p className="font-jost text-sm font-light leading-relaxed text-brown-muted mb-6">
                     {corporateBack.description}
                   </p>
-                  <div className="bg-white/60 rounded-xl px-6 py-4 border border-champagne-gold/10">
+                  <div className="bg-card/60 rounded-xl px-6 py-4 border border-champagne-gold/10">
                     <span className="block font-cormorant text-3xl font-semibold text-champagne-gold">
                       {corporateBack.stat}
                     </span>
@@ -334,6 +336,7 @@ export default function CorporateWellnessSection() {
           {/* Community Outreach — Flip Card */}
           <FlipCard
             delay={0.25}
+            accent="red"
             frontContent={
               <>
                 {/* Heart watermark */}
@@ -405,7 +408,7 @@ export default function CorporateWellnessSection() {
                   <p className="font-jost text-sm font-light leading-relaxed text-brown-muted mb-6">
                     {communityBack.description}
                   </p>
-                  <div className="bg-white/60 rounded-xl px-6 py-4 border border-warm-blush/10">
+                  <div className="bg-card/60 rounded-xl px-6 py-4 border border-warm-blush/10">
                     <span className="block font-cormorant text-3xl font-semibold text-warm-blush">
                       {communityBack.stat}
                     </span>
@@ -432,7 +435,7 @@ export default function CorporateWellnessSection() {
           </p>
           <a
             href="#contact"
-            className="group inline-flex items-center gap-2 rounded-full border-2 border-champagne-gold bg-champagne-gold px-8 py-3.5 font-jost text-sm font-semibold uppercase tracking-widest text-white shadow-gold transition-all duration-300 hover:bg-champagne-gold/90"
+            className="group inline-flex items-center gap-2 rounded-full chrome-gold-bg px-8 py-3.5 font-jost text-sm font-semibold uppercase tracking-widest text-white shadow-gold transition-all duration-300 hover:shadow-gold-strong"
           >
             Contact Dr. Malunga
             <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />

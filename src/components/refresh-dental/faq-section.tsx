@@ -144,7 +144,7 @@ export default function FAQSection() {
               placeholder="Search questions..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full rounded-xl border border-soft-border bg-white py-3 pl-11 pr-4 font-jost text-sm text-espresso placeholder:text-sand-muted/60 outline-none transition-all focus:border-champagne-gold focus:ring-2 focus:ring-champagne-gold/10"
+              className="w-full rounded-xl border border-soft-border bg-card py-3 pl-11 pr-4 font-jost text-sm text-espresso placeholder:text-sand-muted/60 outline-none transition-all focus:border-champagne-gold focus:ring-2 focus:ring-champagne-gold/10"
             />
             {searchQuery && (
               <motion.span
@@ -189,7 +189,7 @@ export default function FAQSection() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: '-40px' }}
               transition={{ duration: 0.4, delay: i * 0.05 }}
-              className="overflow-hidden rounded-2xl border border-soft-border bg-white transition-all duration-300 relative shadow-premium hover:shadow-gold"
+              className="overflow-hidden rounded-2xl border border-soft-border bg-card transition-all duration-300 relative shadow-premium hover-glow hover:border-champagne-gold/30"
               style={{
                 boxShadow:
                   openIndex === i
@@ -219,8 +219,8 @@ export default function FAQSection() {
                   <motion.span
                     className="flex-shrink-0 flex items-center justify-center w-7 h-7 rounded-full text-[11px] font-jost font-semibold transition-all duration-300"
                     animate={{
-                      backgroundColor: openIndex === i ? categoryColors[faq.category] : `${categoryColors[faq.category]}1A`,
-                      color: openIndex === i ? '#FFFFFF' : categoryColors[faq.category],
+                      backgroundColor: openIndex === i ? (i % 2 === 0 ? '#B89830' : '#3B6FA0') : (i % 2 === 0 ? 'rgba(184, 152, 48, 0.1)' : 'rgba(59, 111, 160, 0.1)'),
+                      color: openIndex === i ? '#FFFFFF' : (i % 2 === 0 ? '#B89830' : '#3B6FA0'),
                     }}
                     transition={{ duration: 0.3 }}
                   >
@@ -250,7 +250,7 @@ export default function FAQSection() {
                     }}
                     className="overflow-hidden"
                   >
-                    <div className="px-6 pb-6 pt-0 pl-[3.25rem]">
+                    <div className="px-6 pb-6 pt-0 pl-[3.25rem] blue-tint rounded-b-2xl">
                       <div className="h-px bg-soft-border mb-4" />
                       <p className="font-jost text-sm font-light leading-relaxed text-brown-muted">
                         {faq.answer}
@@ -342,7 +342,7 @@ export default function FAQSection() {
           <motion.div
             whileHover={{ y: -2 }}
             transition={{ duration: 0.2 }}
-            className="relative overflow-hidden rounded-2xl border border-champagne-gold/20 bg-gradient-to-br from-champagne-gold/5 via-white to-gold-light/5 p-8 text-center"
+            className="relative overflow-hidden rounded-2xl border border-champagne-gold/20 bg-gradient-to-br from-champagne-gold/5 via-card to-gold-light/5 p-8 text-center"
           >
             {/* Decorative corner accents */}
             <svg className="absolute top-3 left-3 pointer-events-none" width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">

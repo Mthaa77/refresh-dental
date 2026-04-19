@@ -169,7 +169,7 @@ function StoryCard({
       custom={index}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
-      className="relative overflow-hidden rounded-2xl bg-white p-6"
+      className="relative overflow-hidden rounded-2xl bg-card p-6 shadow-premium hover-glow"
       animate={{
         y: isHovered ? -6 : 0,
         boxShadow: isHovered
@@ -178,9 +178,13 @@ function StoryCard({
       }}
       transition={{ duration: 0.35, ease: [0.25, 0.46, 0.45, 0.94] }}
     >
-      {/* Gold gradient top border */}
+      {/* Top border accent — alternate blue/red */}
       <motion.div
-        className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-champagne-gold via-gold-light to-champagne-gold"
+        className={`absolute top-0 left-0 right-0 h-[3px] rounded-t-2xl ${
+          index === 0 ? 'bg-gradient-to-r from-accent-blue via-accent-blue/40 to-transparent' :
+          index === 1 ? 'bg-gradient-to-r from-accent-red via-accent-red/40 to-transparent' :
+          'bg-gradient-to-r from-champagne-gold via-champagne-gold/40 to-transparent'
+        }`}
         initial={{ scaleX: 0 }}
         whileInView={{ scaleX: 1 }}
         viewport={{ once: true }}
@@ -253,7 +257,7 @@ function StoryCard({
               }}
             >
               <Star
-                className="h-4 w-4 fill-champagne-gold text-champagne-gold"
+                className="h-4 w-4 fill-gold-pale text-gold-pale"
               />
             </motion.div>
           ))}

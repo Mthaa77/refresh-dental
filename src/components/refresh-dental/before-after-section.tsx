@@ -159,7 +159,7 @@ function ComparisonSlider({ item, cardIndex }: { item: ComparisonItem; cardIndex
 
   return (
     <motion.div
-      className="group relative overflow-hidden rounded-2xl bg-white shadow-elevated hover-lift"
+      className="group relative overflow-hidden rounded-2xl bg-card shadow-elevated hover-lift"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
@@ -251,7 +251,7 @@ function ComparisonSlider({ item, cardIndex }: { item: ComparisonItem; cardIndex
           <div className="absolute inset-0 flex items-center justify-center">
             <div className="text-center">
               <span className="text-4xl opacity-60">{item.beforeIcon}</span>
-              <div className="mt-2 font-cormorant text-lg font-medium text-espresso/30">
+              <div className="mt-2 font-cormorant text-lg font-medium text-brown-muted/70">
                 Before
               </div>
             </div>
@@ -291,7 +291,7 @@ function ComparisonSlider({ item, cardIndex }: { item: ComparisonItem; cardIndex
             }}
             transition={{ duration: 0.3 }}
           >
-            <div className="flex h-10 w-10 items-center justify-center rounded-full border-2 border-white bg-champagne-gold shadow-lg">
+            <div className="flex h-10 w-10 items-center justify-center rounded-full border-2 border-white chrome-gold-bg shadow-lg">
               <div className="flex gap-[3px]">
                 <svg
                   width="8"
@@ -354,14 +354,14 @@ function ComparisonSlider({ item, cardIndex }: { item: ComparisonItem; cardIndex
 
         {/* Before Label — premium typography */}
         <div className="pointer-events-none absolute top-4 left-4 z-20">
-          <span className="rounded-full bg-espresso/70 px-3.5 py-1.5 font-dm-serif text-[11px] font-semibold uppercase tracking-widest text-white/90 backdrop-blur-sm border border-white/10">
+          <span className="rounded-full bg-espresso/70 px-3.5 py-1.5 font-dm-serif text-[11px] font-semibold uppercase tracking-widest text-brown-muted backdrop-blur-sm border border-white/10">
             Before
           </span>
           <div className="mx-auto mt-1.5 h-px w-6 bg-gradient-to-r from-espresso/40 to-transparent" />
         </div>
         {/* After Label — premium typography */}
         <div className="pointer-events-none absolute top-4 right-4 z-20">
-          <span className="rounded-full bg-champagne-gold/90 px-3.5 py-1.5 font-dm-serif text-[11px] font-semibold uppercase tracking-widest text-white backdrop-blur-sm border border-champagne-gold-light/30">
+          <span className="rounded-full bg-champagne-gold/90 px-3.5 py-1.5 font-dm-serif text-[11px] font-semibold uppercase tracking-widest text-white backdrop-blur-sm border border-gold-light/30 gold-gradient-text">
             After
           </span>
           <div className="mx-auto mt-1.5 h-px w-6 bg-gradient-to-l from-champagne-gold/40 to-transparent" />

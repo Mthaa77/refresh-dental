@@ -104,7 +104,7 @@ export default function InstagramFeed() {
           <span className="mb-4 inline-block text-xs font-semibold uppercase tracking-[0.2em] text-champagne-gold">
             Connect With Us
           </span>
-          <h2 className="font-cormorant text-[clamp(2rem,4vw,3.5rem)] font-medium leading-tight text-espresso">
+          <h2 className="font-cormorant text-[clamp(2rem,4vw,3.5rem)] font-medium leading-tight text-espresso gold-gradient-text text-shadow-gold">
             Follow Us on Instagram
           </h2>
           {/* Gradient gold underline */}
@@ -139,7 +139,7 @@ export default function InstagramFeed() {
             <motion.div
               key={idx}
               variants={itemVariants}
-              className="group relative block overflow-hidden bg-white"
+              className="group relative block overflow-hidden bg-card"
               onMouseEnter={() => {}}
             >
               <div className={`relative w-full ${image.aspect} overflow-hidden`}>
@@ -216,7 +216,7 @@ export default function InstagramFeed() {
                 initial={{ opacity: 0 }}
                 whileHover={{ opacity: 1 }}
                 transition={{ duration: 0.3 }}
-                className="absolute inset-0 z-[10] flex flex-col items-center justify-center bg-espresso/60 backdrop-blur-[2px]"
+                className="absolute inset-0 z-[10] flex flex-col items-center justify-center bg-espresso/70 backdrop-blur-[2px]"
               >
                 {/* Like and comment counters */}
                 <div className="mb-4 flex items-center gap-5">
@@ -306,7 +306,7 @@ export default function InstagramFeed() {
               boxShadow: '0 8px 30px -4px rgba(184, 152, 48, 0.25)',
             }}
             transition={{ duration: 0.3 }}
-            className="relative inline-flex items-center gap-2.5 rounded-full border border-champagne-gold/40 bg-white px-7 py-3 font-jost text-sm font-medium uppercase tracking-wider text-espresso transition-all duration-300 hover:border-champagne-gold hover:bg-champagne-gold/5"
+            className="relative inline-flex items-center gap-2.5 rounded-full border border-champagne-gold/40 chrome-gold-bg px-7 py-3 font-jost text-sm font-semibold uppercase tracking-wider text-white transition-all duration-300 hover:shadow-gold"
           >
             <Instagram size={16} strokeWidth={1.5} />
             Follow @refresh_dental

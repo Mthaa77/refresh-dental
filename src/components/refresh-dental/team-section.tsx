@@ -103,7 +103,7 @@ export default function TeamSection() {
                 : '0 4px 12px -2px rgba(0, 0, 0, 0.06)',
             }}
             transition={{ duration: 2, repeat: hoveredCard === 'dr-lebo' ? Infinity : 0, ease: 'easeInOut' }}
-            className="group sm:col-span-2 rounded-2xl border border-soft-border bg-white overflow-hidden shadow-elevated transition-colors duration-300 hover:border-champagne-gold/40 shadow-inner-gold"
+            className="group sm:col-span-2 rounded-2xl border border-soft-border bg-card overflow-hidden shadow-elevated transition-colors duration-300 hover:border-champagne-gold/40 shadow-inner-gold"
           >
             <div className="flex flex-col md:flex-row">
               {/* Portrait */}
@@ -119,7 +119,7 @@ export default function TeamSection() {
               </div>
 
               {/* Content */}
-              <div className="relative flex flex-1 flex-col justify-center p-6 md:p-8">
+              <div className="relative flex flex-1 flex-col justify-center p-6 md:p-8 blue-tint">
                 {/* Gradient overlay on hover */}
                 <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-champagne-gold/3 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
 
@@ -209,7 +209,7 @@ export default function TeamSection() {
                   : '0 2px 8px -2px rgba(0, 0, 0, 0.05)',
               }}
               transition={{ duration: 2, repeat: hoveredCard === member.name ? Infinity : 0, ease: 'easeInOut', delay: i * 0.1 }}
-              className="group relative overflow-hidden rounded-2xl border border-soft-border bg-white p-6 shadow-elevated transition-colors duration-300 hover:border-champagne-gold/40 shadow-inner-gold"
+              className="group relative overflow-hidden rounded-2xl border border-soft-border bg-card p-6 shadow-elevated transition-colors duration-300 hover:border-champagne-gold/40 shadow-inner-gold"
             >
               {/* Gradient overlay on hover */}
               <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-champagne-gold/3 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
@@ -265,6 +265,13 @@ export default function TeamSection() {
               {/* Gold accent line at bottom */}
               <div className="mt-5 h-[1px] w-10 bg-champagne-gold/40 transition-all duration-500 group-hover:w-full group-hover:bg-champagne-gold" />
 
+              {/* Top border accent — alternating colors per member */}
+              <div className={`absolute top-0 left-0 right-0 h-[3px] rounded-t-2xl ${
+                i === 0 ? 'bg-gradient-to-r from-accent-blue/60 via-accent-blue/30 to-transparent' :
+                i === 1 ? 'bg-gradient-to-r from-accent-red/60 via-accent-red/30 to-transparent' :
+                'bg-gradient-to-r from-champagne-gold/60 via-champagne-gold/30 to-transparent'
+              }`} />
+
               {/* LinkedIn icon — slides in from bottom on hover */}
               <motion.div
                 className="absolute bottom-3 right-3"
@@ -275,8 +282,16 @@ export default function TeamSection() {
                 }}
                 transition={{ duration: 0.35, ease: 'easeOut' }}
               >
-                <div className="flex h-7 w-7 items-center justify-center rounded-full bg-sage-teal/10 transition-colors hover:bg-sage-teal/20">
-                  <Linkedin className="h-3.5 w-3.5 text-sage-teal" />
+                <div className={`flex h-7 w-7 items-center justify-center rounded-full transition-colors ${
+                  i === 0 ? 'bg-accent-blue/10 hover:bg-accent-blue/20' :
+                  i === 1 ? 'bg-accent-red/10 hover:bg-accent-red/20' :
+                  'bg-sage-teal/10 hover:bg-sage-teal/20'
+                }`}>
+                  <Linkedin className={`h-3.5 w-3.5 ${
+                    i === 0 ? 'text-accent-blue' :
+                    i === 1 ? 'text-accent-red' :
+                    'text-sage-teal'
+                  }`} />
                 </div>
               </motion.div>
             </motion.div>

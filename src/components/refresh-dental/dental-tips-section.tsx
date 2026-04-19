@@ -17,7 +17,7 @@ const tips = [
     title: 'Flossing Matters',
     description:
       'Flossing reaches the 40% of your tooth surfaces that brushing simply cannot. Make it a daily habit — your gums will thank you, and your breath will stay noticeably fresher.',
-    accent: 'bg-warm-blush/20 text-warm-blush',
+    accent: 'bg-accent-blue/10 text-accent-blue',
     readTime: '2 min read',
   },
   {
@@ -25,7 +25,7 @@ const tips = [
     title: 'Diet & Your Teeth',
     description:
       'Swap sugary snacks for calcium-rich cheese, crunchy apples, and leafy greens. These natural foods neutralise acids, strengthen enamel, and stimulate saliva production.',
-    accent: 'bg-sage-teal/10 text-sage-teal',
+    accent: 'bg-accent-red/10 text-accent-red',
     readTime: '3 min read',
   },
   {
@@ -41,7 +41,7 @@ const tips = [
     title: 'Teeth Whitening Safety',
     description:
       'Always consult Dr. Malunga before whitening. Professional treatments deliver stunning results safely, while over-the-counter kits risk enamel damage and uneven results.',
-    accent: 'bg-sage-teal/10 text-sage-teal',
+    accent: 'bg-accent-blue/10 text-accent-blue',
     readTime: '3 min read',
   },
   {
@@ -49,7 +49,7 @@ const tips = [
     title: 'Kids Dental Care',
     description:
       'Start dental visits by age one and make brushing an adventure, not a chore. Use flavoured toothpaste, reward charts, and lead by example — your child will love their smile.',
-    accent: 'bg-warm-blush/20 text-warm-blush',
+    accent: 'bg-accent-red/10 text-accent-red',
     readTime: '2 min read',
   },
 ]
@@ -115,7 +115,7 @@ export default function DentalTipsSection() {
                 boxShadow: '0 12px 36px -8px rgba(184, 152, 48, 0.14)',
                 transition: { duration: 0.3 },
               }}
-              className="group relative overflow-hidden rounded-2xl border border-soft-border bg-white p-6 shadow-premium hover-lift hover:shadow-gold transition-colors duration-300 hover:border-champagne-gold/40"
+              className="group relative overflow-hidden rounded-2xl border border-soft-border bg-card p-6 shadow-premium hover-lift hover-glow transition-colors duration-300 hover:border-champagne-gold/40"
             >
               {/* Subtle ivory dots pattern overlay — 2% opacity */}
               <div

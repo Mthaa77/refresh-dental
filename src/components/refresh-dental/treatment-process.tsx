@@ -87,7 +87,7 @@ function StepCard({
   }
 
   return (
-    <div className="relative flex flex-col items-center text-center shadow-premium rounded-2xl p-5 hover-lift">
+    <div className="relative flex flex-col items-center text-center shadow-premium rounded-2xl p-5 hover-lift bg-card">
       {/* Step content */}
       <motion.div
         variants={stepVariants}
@@ -111,16 +111,16 @@ function StepCard({
             style={{ margin: '-4px' }}
           />
           {/* Outer gold ring */}
-          <div className="flex h-20 w-20 items-center justify-center rounded-full border-2 border-champagne-gold/40 bg-ivory">
+          <div className="flex h-20 w-20 items-center justify-center rounded-full border-2 border-champagne-gold/40 bg-ivory blue-tint">
             {/* Inner circle */}
-            <div className="flex h-16 w-16 items-center justify-center rounded-full bg-white shadow-sm">
+            <div className="flex h-16 w-16 items-center justify-center rounded-full bg-card shadow-sm">
               <Icon className="h-7 w-7 text-sage-teal" strokeWidth={1.5} />
             </div>
           </div>
           {/* Number badge with bounce */}
           <motion.button
             onClick={handleBounce}
-            className="absolute -top-1 -right-1 flex h-8 w-8 items-center justify-center rounded-full bg-champagne-gold text-sm font-bold text-espresso font-jost shadow-md cursor-pointer border-0 outline-none shadow-gold gold-gradient-text"
+            className="absolute -top-1 -right-1 flex h-8 w-8 items-center justify-center rounded-full chrome-gold-bg text-sm font-bold text-white font-jost shadow-md cursor-pointer border-0 outline-none shadow-gold"
             animate={bouncing ? {
               y: [0, -12, -4, -8, 0],
               scale: [1, 1.15, 0.95, 1.05, 1],
@@ -167,7 +167,7 @@ function StepCard({
           variants={lineVariants}
           className="hidden lg:block absolute top-10 left-[calc(50%+48px)] w-[calc(100%-96px)] origin-left"
         >
-          <div className="h-px bg-gradient-to-r from-champagne-gold/60 via-champagne-gold/30 to-champagne-gold/60" />
+          <div className="h-px bg-gradient-to-r from-accent-blue/60 via-champagne-gold/30 to-accent-blue/60" />
         </motion.div>
       )}
     </div>
@@ -203,7 +203,7 @@ function MobileTimeline() {
       {/* Vertical connecting line with scroll-driven animation */}
       <div className="absolute left-[18px] top-5 bottom-5 w-px origin-top">
         <motion.div
-          className="h-full w-full bg-gradient-to-b from-champagne-gold/60 via-champagne-gold/30 to-champagne-gold/60"
+          className="h-full w-full bg-gradient-to-b from-accent-blue/60 via-champagne-gold/30 to-accent-blue/60"
           style={{ scaleY: lineScale }}
         />
       </div>
@@ -257,7 +257,7 @@ function MobileTimeline() {
                     delay: step.number * 0.3,
                   }}
                 />
-                <div className="flex h-6 w-6 items-center justify-center rounded-full bg-white">
+                <div className="flex h-6 w-6 items-center justify-center rounded-full bg-card">
                   <Icon className="h-3.5 w-3.5 text-sage-teal" strokeWidth={1.5} />
                 </div>
               </div>
@@ -265,7 +265,7 @@ function MobileTimeline() {
               {/* Content */}
               <div className="pt-1">
                 <div className="flex items-center gap-2 mb-1.5">
-                  <span className="flex h-5 w-5 items-center justify-center rounded-full bg-champagne-gold text-[10px] font-bold text-espresso font-jost gold-gradient-text shadow-gold">
+                  <span className="flex h-5 w-5 items-center justify-center rounded-full chrome-gold-bg text-[10px] font-bold text-white font-jost shadow-gold">
                     {step.number}
                   </span>
                   <h3 className="font-dm-serif text-base text-espresso">

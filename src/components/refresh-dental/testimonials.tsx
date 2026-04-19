@@ -119,9 +119,13 @@ export default function Testimonials() {
           transition={{ duration: 0.6 }}
           className="mb-14 text-center"
         >
-          <span className="mb-4 inline-block text-xs font-semibold uppercase tracking-[0.2em] text-champagne-gold">
-            Patient Stories
-          </span>
+          <div className="flex items-center justify-center gap-3 mb-4">
+            <span className="h-1.5 w-1.5 rounded-full bg-accent-blue" />
+            <span className="text-xs font-semibold uppercase tracking-[0.2em] text-champagne-gold">
+              Patient Stories
+            </span>
+            <span className="h-1.5 w-1.5 rounded-full bg-accent-blue" />
+          </div>
           <h2 className="font-cormorant text-4xl md:text-5xl lg:text-6xl section-heading text-shadow-espresso gold-gradient-text">
             What Our Patients Say
           </h2>
@@ -139,14 +143,14 @@ export default function Testimonials() {
         <div className="mb-6 flex items-center justify-end gap-2">
           <button
             onClick={scrollPrev}
-            className="flex h-10 w-10 items-center justify-center rounded-full border border-soft-border bg-white text-sand-muted transition-all duration-200 hover:border-champagne-gold hover:text-champagne-gold"
+            className="flex h-10 w-10 items-center justify-center rounded-full border border-soft-border bg-card text-sand-muted transition-all duration-200 hover:border-champagne-gold hover:text-champagne-gold"
             aria-label="Previous testimonial"
           >
             <ChevronLeft className="h-4 w-4" />
           </button>
           <button
             onClick={scrollNext}
-            className="flex h-10 w-10 items-center justify-center rounded-full border border-soft-border bg-white text-sand-muted transition-all duration-200 hover:border-champagne-gold hover:text-champagne-gold"
+            className="flex h-10 w-10 items-center justify-center rounded-full border border-soft-border bg-card text-sand-muted transition-all duration-200 hover:border-champagne-gold hover:text-champagne-gold"
             aria-label="Next testimonial"
           >
             <ChevronRight className="h-4 w-4" />
@@ -175,7 +179,7 @@ export default function Testimonials() {
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true, margin: "-60px" }}
-              className={`relative w-[350px] shrink-0 snap-center overflow-hidden rounded-2xl bg-white p-8 shadow-elevated transition-all duration-300 hover-lift ${
+              className={`relative w-[350px] shrink-0 snap-center overflow-hidden rounded-2xl bg-card p-8 shadow-premium transition-all duration-300 hover-lift hover-glow ${
                 activeIndex === i
                   ? "border-l-4 border-sage-teal shadow-md"
                   : "border-l-4 border-transparent hover:shadow-md"
@@ -216,7 +220,7 @@ export default function Testimonials() {
                     }}
                   >
                     <Star
-                      className="h-5 w-5 fill-champagne-gold text-champagne-gold"
+                      className="h-5 w-5 fill-gold-pale text-gold-pale"
                     />
                   </motion.div>
                 ))}

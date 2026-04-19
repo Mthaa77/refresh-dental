@@ -37,6 +37,8 @@ import AppointmentQuickBook from '@/components/refresh-dental/appointment-quick-
 import AccessibilityPanel from '@/components/refresh-dental/theme-toggle'
 import PageSectionsNav from '@/components/refresh-dental/page-sections-nav'
 import SmileAssessment from '@/components/refresh-dental/smile-assessment'
+import SmileScoreCalculator from '@/components/refresh-dental/smile-score-calculator'
+import DentalCostEstimator from '@/components/refresh-dental/dental-cost-estimator'
 import ReferFriend from '@/components/refresh-dental/refer-friend'
 import PatientStories from '@/components/refresh-dental/patient-stories'
 import AwardsCertifications from '@/components/refresh-dental/awards-certifications'
@@ -92,6 +94,7 @@ export default function Home() {
         <EmergencyDental />
         <PaymentSection />
         <InsurancePartners />
+        <DentalCostEstimator />
         <SeasonalPromo />
         <FAQSection />
         <ReferFriend />
@@ -99,6 +102,7 @@ export default function Home() {
         <GuaranteeSection />
         <DentalTipsSection />
         <SmileAssessment />
+        <SmileScoreCalculator />
         <InstagramFeed />
         <AwardsCertifications />
         <LoyaltyRewards />
