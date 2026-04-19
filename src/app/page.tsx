@@ -17,7 +17,10 @@ import ServicesGrid from '@/components/refresh-dental/services-grid'
 import ParallaxStatement from '@/components/refresh-dental/parallax-statement'
 import Testimonials from '@/components/refresh-dental/testimonials'
 import BeforeAfterSection from '@/components/refresh-dental/before-after-section'
+import EmergencyDental from '@/components/refresh-dental/emergency-dental'
 import PaymentSection from '@/components/refresh-dental/payment-section'
+import InsurancePartners from '@/components/refresh-dental/insurance-partners'
+import SeasonalPromo from '@/components/refresh-dental/seasonal-promo'
 import FAQSection from '@/components/refresh-dental/faq-section'
 import CorporateWellnessSection from '@/components/refresh-dental/corporate-wellness-section'
 import DentalTipsSection from '@/components/refresh-dental/dental-tips-section'
@@ -63,7 +66,10 @@ export default function Home() {
         <Testimonials />
         <VideoTestimonial />
         <BeforeAfterSection />
+        <EmergencyDental />
         <PaymentSection />
+        <InsurancePartners />
+        <SeasonalPromo />
         <FAQSection />
         <ReferFriend />
         <CorporateWellnessSection />

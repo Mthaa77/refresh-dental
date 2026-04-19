@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useRef } from 'react'
 import { motion, AnimatePresence, useInView } from 'framer-motion'
-import { ArrowRight, ArrowLeft, RotateCcw, Sparkles, Calendar, Zap, Heart, Smile } from 'lucide-react'
+import { ArrowRight, ArrowLeft, RotateCcw, Sparkles, Calendar, Zap, Heart, Smile, Check } from 'lucide-react'
 
 interface Question {
   id: number
@@ -36,6 +36,7 @@ interface TreatmentResult {
   title: string
   description: string
   icon: React.ElementType
+  benefits: string[]
 }
 
 function getRecommendation(answers: string[]): TreatmentResult {
@@ -49,30 +50,35 @@ function getRecommendation(answers: string[]): TreatmentResult {
       description:
         'Our professional teeth whitening treatment uses advanced whitening systems supervised by Dr. Malunga. Most patients see brilliant results in just one session — a safe, effective way to restore your smile\'s natural radiance.',
       icon: Sparkles,
+      benefits: ['Up to 8 shades brighter', 'Single session results', 'Enamel-safe formula'],
     },
     'Missing Teeth': {
       title: 'Dental Implants',
       description:
         'Dental implants are the gold standard for replacing missing teeth. Our implant solutions look, feel, and function like natural teeth. With proper care, they can last a lifetime — giving you complete confidence in your smile.',
       icon: Zap,
+      benefits: ['Lifetime durability', 'Natural appearance', 'Preserves jaw bone'],
     },
     'Crooked Teeth': {
       title: 'Clear Aligners (Slimming Wires)',
       description:
         'Our virtually invisible clear aligners gradually straighten your teeth without metal braces. They\'re removable, comfortable, and perfect for adults and teens who want a discreet path to a perfectly aligned smile.',
       icon: Smile,
+      benefits: ['Virtually invisible', 'Removable design', '12-18 month treatment'],
     },
     'Gum Problems': {
       title: 'Periodontal Care',
       description:
         'Healthy gums are the foundation of a beautiful smile. Our comprehensive gum care programme includes deep cleaning, periodontal therapy, and personalised maintenance plans to restore and protect your gum health.',
       icon: Heart,
+      benefits: ['Deep cleaning therapy', 'Personalised plans', 'Prevents tooth loss'],
     },
     'General Checkup': {
       title: 'Comprehensive Dental Consultation',
       description:
         'Start your journey with a thorough 30-minute assessment. Dr. Malunga will evaluate your oral health, address any concerns, and create a personalised treatment plan tailored to your unique needs and goals.',
       icon: Calendar,
+      benefits: ['30-minute assessment', 'Full oral evaluation', 'Personalised plan'],
     },
   }
 
@@ -85,6 +91,7 @@ function getRecommendation(answers: string[]): TreatmentResult {
       description:
         'For faster results, we offer accelerated clear aligner treatment with targeted protocols. Combined with professional monitoring, this approach can deliver visible improvements in a shorter timeframe.',
       icon: Zap,
+      benefits: ['Faster treatment time', 'Professional monitoring', 'Targeted protocols'],
     }
   }
 
@@ -95,11 +102,40 @@ function getRecommendation(answers: string[]): TreatmentResult {
       description:
         'Our custom dental prostheses offer a reliable and cost-effective solution for replacing missing teeth. Crafted with precision and care, they restore both function and aesthetics to your smile.',
       icon: Smile,
+      benefits: ['Cost-effective solution', 'Custom crafted', 'Natural aesthetics'],
     }
   }
 
   return base
 }
+
+// Confetti / sparkle burst particles
+const confettiParticles = [
+  { x: '15%', y: '20%', size: 8, color: '#C9A96E', delay: 0, duration: 1.2, yEnd: -40 },
+  { x: '80%', y: '15%', size: 6, color: '#E8D5B0', delay: 0.05, duration: 1.0, yEnd: -35 },
+  { x: '50%', y: '10%', size: 7, color: '#3D7D6E', delay: 0.1, duration: 1.4, yEnd: -45 },
+  { x: '25%', y: '25%', size: 5, color: '#C9A96E', delay: 0.15, duration: 1.1, yEnd: -30 },
+  { x: '70%', y: '18%', size: 6, color: '#FDFAF6', delay: 0.08, duration: 1.3, yEnd: -38 },
+  { x: '40%', y: '22%', size: 5, color: '#C9A96E', delay: 0.12, duration: 1.0, yEnd: -32 },
+  { x: '60%', y: '12%', size: 7, color: '#E8D5B0', delay: 0.03, duration: 1.5, yEnd: -42 },
+  { x: '35%', y: '28%', size: 4, color: '#3D7D6E', delay: 0.18, duration: 1.2, yEnd: -28 },
+  { x: '55%', y: '16%', size: 6, color: '#FDFAF6', delay: 0.07, duration: 1.1, yEnd: -36 },
+  { x: '85%', y: '24%', size: 5, color: '#C9A96E', delay: 0.14, duration: 1.3, yEnd: -34 },
+  { x: '10%', y: '30%', size: 4, color: '#E8D5B0', delay: 0.2, duration: 1.0, yEnd: -26 },
+  { x: '75%', y: '20%', size: 6, color: '#C9A96E', delay: 0.06, duration: 1.4, yEnd: -40 },
+]
+
+const confettiBurst = (p: { delay: number; duration: number; yEnd: number }) => ({
+  opacity: [0, 1, 1, 0],
+  scale: [0, 1.2, 0.8, 0],
+  y: [0, p.yEnd * 0.3, p.yEnd * 0.7, p.yEnd],
+  rotate: [0, 90, 200, 360],
+  transition: {
+    duration: p.duration,
+    delay: p.delay,
+    ease: 'easeOut',
+  },
+})
 
 const slideVariants = {
   enter: (direction: number) => ({
@@ -145,11 +181,30 @@ const resultVariants = {
   },
 }
 
+// Tooth SVG watermark
+function ToothWatermark() {
+  return (
+    <svg
+      viewBox="0 0 100 120"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      className="h-64 w-64 md:h-80 md:w-80"
+      style={{ opacity: 0.02 }}
+    >
+      <path
+        d="M50 10C35 10 22 18 18 32C14 46 18 62 22 78C24 88 26 95 30 100C32 103 35 102 37 98C40 92 43 82 50 82C57 82 60 92 63 98C65 102 68 103 70 100C74 95 76 88 78 78C82 62 86 46 82 32C78 18 65 10 50 10Z"
+        fill="#C9A96E"
+      />
+    </svg>
+  )
+}
+
 export default function SmileAssessment() {
   const [currentStep, setCurrentStep] = useState(0)
   const [answers, setAnswers] = useState<string[]>([])
   const [direction, setDirection] = useState(0)
   const [showResult, setShowResult] = useState(false)
+  const [showConfetti, setShowConfetti] = useState(false)
   const sectionRef = useRef<HTMLElement>(null)
   const isInView = useInView(sectionRef, { once: true, margin: '-80px' })
   const [headerVisible, setHeaderVisible] = useState(false)
@@ -171,6 +226,8 @@ export default function SmileAssessment() {
       setTimeout(() => setCurrentStep(currentStep + 1), 150)
     } else {
       setShowResult(true)
+      setShowConfetti(true)
+      setTimeout(() => setShowConfetti(false), 2000)
     }
   }
 
@@ -186,6 +243,7 @@ export default function SmileAssessment() {
     setAnswers([])
     setDirection(0)
     setShowResult(false)
+    setShowConfetti(false)
   }
 
   const result = answers.length === 3 ? getRecommendation(answers) : null
@@ -193,8 +251,18 @@ export default function SmileAssessment() {
   const CurrentIcon = questions[currentStep].icon
 
   return (
-    <section id="smile-assessment" ref={sectionRef} className="bg-sand py-20 md:py-28">
-      <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+    <section id="smile-assessment" ref={sectionRef} className="relative overflow-hidden bg-sand py-20 md:py-28">
+      {/* Tooth watermark background */}
+      <div className="pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
+        <motion.div
+          animate={{ rotate: 360 }}
+          transition={{ duration: 120, repeat: Infinity, ease: 'linear' }}
+        >
+          <ToothWatermark />
+        </motion.div>
+      </div>
+
+      <div className="relative mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <motion.div
           initial="hidden"
@@ -218,8 +286,31 @@ export default function SmileAssessment() {
           initial={{ opacity: 0, y: 30 }}
           animate={headerVisible ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6, delay: 0.2, ease: [0.25, 0.46, 0.45, 0.94] }}
-          className="overflow-hidden rounded-3xl border border-soft-border bg-white shadow-sm"
+          className="relative overflow-hidden rounded-3xl border border-soft-border bg-white shadow-sm"
         >
+          {/* Confetti / sparkle burst overlay */}
+          <AnimatePresence>
+            {showConfetti && (
+              <div className="pointer-events-none absolute inset-0 z-50">
+                {confettiParticles.map((p, i) => (
+                  <motion.div
+                    key={i}
+                    className="absolute rounded-full"
+                    style={{
+                      left: p.x,
+                      top: p.y,
+                      width: p.size,
+                      height: p.size,
+                      backgroundColor: p.color,
+                    }}
+                    initial={{ opacity: 0, scale: 0, y: 0 }}
+                    animate={confettiBurst(p)}
+                  />
+                ))}
+              </div>
+            )}
+          </AnimatePresence>
+
           {!showResult ? (
             <div className="p-6 md:p-10">
               {/* Progress Bar */}
@@ -255,8 +346,23 @@ export default function SmileAssessment() {
                   exit="exit"
                 >
                   <div className="mb-8 flex items-center gap-3">
-                    <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-champagne-gold/10">
-                      <CurrentIcon className="h-5 w-5 text-champagne-gold" />
+                    {/* Step number with pulsing glow */}
+                    <div className="relative">
+                      <motion.div
+                        className="absolute inset-0 rounded-xl bg-champagne-gold/20 blur-md"
+                        animate={{
+                          opacity: [0.3, 0.6, 0.3],
+                          scale: [0.9, 1.1, 0.9],
+                        }}
+                        transition={{
+                          duration: 2,
+                          repeat: Infinity,
+                          ease: 'easeInOut',
+                        }}
+                      />
+                      <div className="relative flex h-10 w-10 items-center justify-center rounded-xl bg-champagne-gold/10">
+                        <CurrentIcon className="h-5 w-5 text-champagne-gold" />
+                      </div>
                     </div>
                     <h3 className="font-dm-serif text-xl text-espresso md:text-2xl">
                       {questions[currentStep].question}
@@ -283,7 +389,7 @@ export default function SmileAssessment() {
                           }}
                           whileTap={{ scale: 0.98 }}
                           onClick={() => handleSelect(option)}
-                          className={`flex w-full items-center justify-between rounded-2xl border-2 px-5 py-4 text-left transition-colors duration-300 md:px-6 md:py-5 ${
+                          className={`relative flex w-full items-center justify-between overflow-hidden rounded-2xl border-2 px-5 py-4 text-left transition-colors duration-300 md:px-6 md:py-5 ${
                             isSelected
                               ? 'border-champagne-gold bg-champagne-gold/5'
                               : 'border-soft-border bg-white hover:border-champagne-gold/30 hover:bg-champagne-gold/[0.02]'
@@ -297,10 +403,20 @@ export default function SmileAssessment() {
                               scale: isSelected ? 1 : 0,
                               opacity: isSelected ? 1 : 0,
                             }}
-                            transition={{ duration: 0.25 }}
+                            transition={{
+                              duration: 0.3,
+                              type: 'spring',
+                              stiffness: 300,
+                              damping: 15,
+                            }}
                             className="flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-full bg-champagne-gold"
                           >
-                            <Sparkles className="h-3 w-3 text-white" />
+                            <motion.div
+                              animate={isSelected ? { scale: [0, 1.3, 1], rotate: [0, 10, 0] } : {}}
+                              transition={{ duration: 0.35 }}
+                            >
+                              <Check className="h-3 w-3 text-white" />
+                            </motion.div>
                           </motion.span>
                         </motion.button>
                       )
@@ -324,13 +440,25 @@ export default function SmileAssessment() {
               )}
             </div>
           ) : result ? (
-            /* Result Card */
+            /* Result Card with gold gradient border */
             <motion.div
               variants={resultVariants}
               initial="hidden"
               animate="visible"
-              className="p-6 md:p-10"
+              className="relative p-6 md:p-10"
             >
+              {/* Gold gradient border */}
+              <div
+                className="pointer-events-none absolute inset-0 rounded-3xl"
+                style={{
+                  padding: '2px',
+                  background: 'linear-gradient(135deg, #C9A96E 0%, #E8D5B0 30%, #C9A96E 60%, #3D7D6E 100%)',
+                  WebkitMask: 'linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)',
+                  WebkitMaskComposite: 'xor',
+                  maskComposite: 'exclude',
+                }}
+              />
+
               <div className="mb-8 text-center">
                 <motion.div
                   initial={{ scale: 0 }}
@@ -358,11 +486,39 @@ export default function SmileAssessment() {
                 {result.description}
               </motion.p>
 
-              {/* Answers Summary */}
+              {/* Animated treatment benefit icons */}
               <motion.div
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.5, duration: 0.5 }}
+                className="mb-8 flex flex-wrap items-center justify-center gap-3"
+              >
+                {result.benefits.map((benefit, i) => (
+                  <motion.div
+                    key={benefit}
+                    initial={{ opacity: 0, scale: 0.8, y: 8 }}
+                    animate={{ opacity: 1, scale: 1, y: 0 }}
+                    transition={{
+                      delay: 0.55 + i * 0.1,
+                      type: 'spring',
+                      stiffness: 200,
+                      damping: 15,
+                    }}
+                    className="flex items-center gap-1.5 rounded-full border border-champagne-gold/20 bg-champagne-gold/5 px-3 py-1.5"
+                  >
+                    <Sparkles className="h-3 w-3 text-champagne-gold" />
+                    <span className="font-jost text-xs font-medium text-champagne-gold">
+                      {benefit}
+                    </span>
+                  </motion.div>
+                ))}
+              </motion.div>
+
+              {/* Answers Summary */}
+              <motion.div
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.65, duration: 0.5 }}
                 className="mb-8 rounded-2xl border border-soft-border bg-sand/50 p-4"
               >
                 <span className="mb-3 block font-jost text-[10px] font-semibold uppercase tracking-wider text-brown-warm/40">
@@ -389,7 +545,7 @@ export default function SmileAssessment() {
               <motion.div
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.65, duration: 0.5 }}
+                transition={{ delay: 0.8, duration: 0.5 }}
                 className="flex flex-col items-center gap-3 sm:flex-row sm:justify-center"
               >
                 <a

@@ -1,8 +1,8 @@
 'use client'
 
-import { useRef } from 'react'
+import { useRef, useState } from 'react'
 import { motion, useInView } from 'framer-motion'
-import { Gift, Heart, Users, MessageCircle, Mail } from 'lucide-react'
+import { Gift, Heart, Users, MessageCircle, Mail, Copy, Check } from 'lucide-react'
 
 const benefits = [
   {
@@ -38,13 +38,25 @@ const sparkleParticles = [
   { x: '20%', y: '90%', size: 4, delay: 1.0, duration: 4.1 },
 ]
 
+// Extra sparkle particles around the decorative SVG
+const svgSparkles = [
+  { x: '38%', y: '18%', size: 4, delay: 0.2, duration: 3.2 },
+  { x: '62%', y: '15%', size: 3, delay: 0.6, duration: 3.8 },
+  { x: '32%', y: '78%', size: 5, delay: 1.0, duration: 4.0 },
+  { x: '68%', y: '82%', size: 4, delay: 1.4, duration: 3.5 },
+  { x: '28%', y: '48%', size: 3, delay: 0.9, duration: 4.3 },
+  { x: '72%', y: '52%', size: 4, delay: 0.4, duration: 3.9 },
+]
+
+const REFERRAL_CODE = 'REFRESH-FRIEND'
+
 const shareMessage = encodeURIComponent(
-  "I've been loving my experience at Refresh Dental in Centurion! They're offering 20% off your first consultation. Book yours today: https://refreshdental.co.za"
+  "I've been loving my experience at Refresh Dental in Centurion! They're offering 20% off your first consultation. Use code REFRESH-FRIEND. Book yours today: https://refreshdental.co.za"
 )
 
 const emailSubject = encodeURIComponent('You\'re Invited to Refresh Dental — 20% Off!')
 const emailBody = encodeURIComponent(
-  "Hi there!\n\nI've been loving my experience at Refresh Dental in Centurion. As a special offer, you can get 20% off your first consultation!\n\nBook your appointment today and discover the difference premium dental care makes.\n\nWarm regards"
+  "Hi there!\n\nI've been loving my experience at Refresh Dental in Centurion. As a special offer, you can get 20% off your first consultation using code: REFRESH-FRIEND\n\nBook your appointment today and discover the difference premium dental care makes.\n\nWarm regards"
 )
 
 const headerVariants = {
@@ -88,12 +100,108 @@ const sparkleFloat = {
   }),
 }
 
+const svgSparkleFloat = {
+  hidden: { opacity: 0, scale: 0 },
+  visible: (i: number) => ({
+    opacity: [0, 0.8, 0.3, 0.8, 0],
+    scale: [0, 1, 0.5, 1, 0],
+    y: [0, -8, -4, -12, -6],
+    transition: {
+      duration: svgSparkles[i].duration,
+      delay: svgSparkles[i].delay,
+      repeat: Infinity,
+      repeatDelay: 1.5,
+      ease: 'easeInOut',
+    },
+  }),
+}
+
+function BenefitCard({ benefit, isInView }: { benefit: typeof benefits[number]; isInView: boolean }) {
+  const BenefitIcon = benefit.icon
+  const [isHovered, setIsHovered] = useState(false)
+
+  return (
+    <motion.div
+      variants={cardVariants}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+      className="relative overflow-hidden rounded-2xl p-5 backdrop-blur-sm transition-colors duration-300"
+      animate={{
+        backgroundColor: isHovered ? 'rgba(253, 250, 246, 0.12)' : 'rgba(253, 250, 246, 0.05)',
+      }}
+    >
+      {/* Animated gradient border on hover */}
+      <motion.div
+        className="pointer-events-none absolute inset-0 rounded-2xl"
+        animate={{ opacity: isHovered ? 1 : 0 }}
+        transition={{ duration: 0.4 }}
+        style={{
+          padding: '1px',
+          background: 'linear-gradient(135deg, rgba(201,169,110,0.6) 0%, rgba(232,213,176,0.3) 50%, rgba(201,169,110,0.6) 100%)',
+          WebkitMask: 'linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)',
+          WebkitMaskComposite: 'xor',
+          maskComposite: 'exclude',
+        }}
+      />
+      <div className="flex items-start gap-4">
+        <div className="flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-xl bg-champagne-gold/20">
+          <BenefitIcon className="h-5 w-5 text-champagne-gold" />
+        </div>
+        <div>
+          <h3 className="font-dm-serif text-base text-ivory">
+            {benefit.title}
+          </h3>
+          <p className="mt-0.5 font-jost text-sm font-light leading-relaxed text-ivory/60">
+            {benefit.description}
+          </p>
+        </div>
+      </div>
+    </motion.div>
+  )
+}
+
 export default function ReferFriend() {
   const sectionRef = useRef<HTMLElement>(null)
   const isInView = useInView(sectionRef, { once: true, margin: '-60px' })
+  const [copied, setCopied] = useState(false)
+  const [rippleActive, setRippleActive] = useState<string | null>(null)
+
+  const copyCode = () => {
+    navigator.clipboard.writeText(REFERRAL_CODE).then(() => {
+      setCopied(true)
+      setTimeout(() => setCopied(false), 2000)
+    })
+  }
+
+  const triggerRipple = (id: string) => {
+    setRippleActive(id)
+    setTimeout(() => setRippleActive(null), 600)
+  }
 
   return (
-    <section id="refer-friend" ref={sectionRef} className="bg-sage-teal py-20 md:py-28">
+    <section id="refer-friend" ref={sectionRef} className="relative overflow-hidden bg-sage-teal py-20 md:py-28">
+      {/* Decorative corner ornaments (gold L-shaped brackets) */}
+      <div className="pointer-events-none absolute left-6 top-6 z-10 hidden md:block">
+        <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+          <path d="M0 24V0H6V18H24V24H0Z" fill="#C9A96E" fillOpacity="0.3" />
+        </svg>
+      </div>
+      <div className="pointer-events-none absolute right-6 top-6 z-10 hidden md:block">
+        <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+          <path d="M32 24V0H26V18H8V24H32Z" fill="#C9A96E" fillOpacity="0.3" />
+        </svg>
+      </div>
+      <div className="pointer-events-none absolute bottom-6 left-6 z-10 hidden md:block">
+        <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+          <path d="M0 8V32H6V14H24V8H0Z" fill="#C9A96E" fillOpacity="0.3" />
+        </svg>
+      </div>
+      <div className="pointer-events-none absolute bottom-6 right-6 z-10 hidden md:block">
+        <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+          <path d="M32 8V32H26V14H8V8H32Z" fill="#C9A96E" fillOpacity="0.3" />
+        </svg>
+      </div>
+
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 items-center gap-12 md:grid-cols-2 md:gap-16">
           {/* Left Column — Content */}
@@ -102,9 +210,25 @@ export default function ReferFriend() {
             animate={isInView ? 'visible' : 'hidden'}
             variants={headerVariants}
           >
-            <span className="mb-4 inline-block text-xs font-semibold uppercase tracking-[0.2em] text-teal-light">
-              Share the Love
-            </span>
+            <div className="flex items-center gap-3">
+              <span className="mb-0 inline-block text-xs font-semibold uppercase tracking-[0.2em] text-teal-light">
+                Share the Love
+              </span>
+              {/* Floating gift box icon */}
+              <motion.div
+                animate={{
+                  y: [0, -5, 0],
+                  rotate: [0, 5, -5, 0],
+                }}
+                transition={{
+                  duration: 2.5,
+                  repeat: Infinity,
+                  ease: 'easeInOut',
+                }}
+              >
+                <Gift className="h-5 w-5 text-champagne-gold" />
+              </motion.div>
+            </div>
             <h2 className="font-cormorant text-[clamp(2rem,4vw,3.5rem)] font-medium leading-tight text-ivory">
               Share Your Smile Journey
             </h2>
@@ -113,6 +237,49 @@ export default function ReferFriend() {
               healthier, more confident smiles in our community.
             </p>
 
+            {/* Referral Code Display */}
+            <motion.div
+              initial={{ opacity: 0, y: 16 }}
+              animate={isInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ delay: 0.3, duration: 0.5 }}
+              className="mt-8"
+            >
+              <span className="mb-2 block font-jost text-[10px] font-semibold uppercase tracking-wider text-ivory/40">
+                Your Referral Code
+              </span>
+              <div className="flex items-center gap-2">
+                <div className="flex h-11 flex-1 items-center rounded-xl border border-champagne-gold/30 bg-ivory/5 px-4 backdrop-blur-sm">
+                  <span className="flex-1 font-jost text-sm font-semibold tracking-[0.15em] text-champagne-gold">
+                    {REFERRAL_CODE}
+                  </span>
+                </div>
+                <motion.button
+                  whileTap={{ scale: 0.92 }}
+                  onClick={copyCode}
+                  className="relative flex h-11 w-11 items-center justify-center rounded-xl bg-champagne-gold/20 text-champagne-gold transition-colors duration-300 hover:bg-champagne-gold/30"
+                  aria-label="Copy referral code"
+                >
+                  {copied ? (
+                    <motion.div
+                      initial={{ scale: 0 }}
+                      animate={{ scale: 1 }}
+                      transition={{ type: 'spring', stiffness: 300, damping: 15 }}
+                    >
+                      <Check className="h-5 w-5" />
+                    </motion.div>
+                  ) : (
+                    <motion.div
+                      initial={{ scale: 0 }}
+                      animate={{ scale: 1 }}
+                      transition={{ type: 'spring', stiffness: 300, damping: 15 }}
+                    >
+                      <Copy className="h-5 w-5" />
+                    </motion.div>
+                  )}
+                </motion.button>
+              </div>
+            </motion.div>
+
             {/* Benefit Cards */}
             <motion.div
               variants={staggerContainer}
@@ -120,33 +287,9 @@ export default function ReferFriend() {
               animate={isInView ? 'visible' : 'hidden'}
               className="mt-10 space-y-4"
             >
-              {benefits.map((benefit) => {
-                const BenefitIcon = benefit.icon
-                return (
-                  <motion.div
-                    key={benefit.title}
-                    variants={cardVariants}
-                    whileHover={{
-                      y: -4,
-                      boxShadow: '0 8px 24px -4px rgba(253, 250, 246, 0.12)',
-                      transition: { duration: 0.3 },
-                    }}
-                    className="flex items-start gap-4 rounded-2xl border border-ivory/10 bg-ivory/5 p-5 backdrop-blur-sm transition-colors duration-300 hover:bg-ivory/10"
-                  >
-                    <div className="flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-xl bg-champagne-gold/20">
-                      <BenefitIcon className="h-5 w-5 text-champagne-gold" />
-                    </div>
-                    <div>
-                      <h3 className="font-dm-serif text-base text-ivory">
-                        {benefit.title}
-                      </h3>
-                      <p className="mt-0.5 font-jost text-sm font-light leading-relaxed text-ivory/60">
-                        {benefit.description}
-                      </p>
-                    </div>
-                  </motion.div>
-                )
-              })}
+              {benefits.map((benefit) => (
+                <BenefitCard key={benefit.title} benefit={benefit} isInView={isInView} />
+              ))}
             </motion.div>
 
             {/* Share Buttons */}
@@ -156,22 +299,44 @@ export default function ReferFriend() {
               transition={{ delay: 0.6, duration: 0.5 }}
               className="mt-10 flex flex-col gap-3 sm:flex-row"
             >
-              <a
+              <motion.a
                 href={`https://wa.me/?text=${shareMessage}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group inline-flex items-center justify-center gap-2 rounded-full bg-[#25D366] px-6 py-3 font-jost text-sm font-semibold tracking-wide text-white transition-all duration-300 hover:bg-[#1ebe57] hover:shadow-lg"
+                whileHover={{ scale: 1.03 }}
+                whileTap={{ scale: 0.97 }}
+                onClick={() => triggerRipple('whatsapp')}
+                className="group relative inline-flex items-center justify-center gap-2 overflow-hidden rounded-full bg-[#25D366] px-6 py-3 font-jost text-sm font-semibold tracking-wide text-white transition-all duration-300 hover:bg-[#1ebe57] hover:shadow-lg"
               >
-                <MessageCircle className="h-4 w-4" />
-                Share via WhatsApp
-              </a>
-              <a
+                {rippleActive === 'whatsapp' && (
+                  <motion.span
+                    className="absolute inset-0 rounded-full bg-white/20"
+                    initial={{ scale: 0, opacity: 1 }}
+                    animate={{ scale: 2.5, opacity: 0 }}
+                    transition={{ duration: 0.6 }}
+                  />
+                )}
+                <MessageCircle className="relative h-4 w-4" />
+                <span className="relative">Share via WhatsApp</span>
+              </motion.a>
+              <motion.a
                 href={`mailto:?subject=${emailSubject}&body=${emailBody}`}
-                className="group inline-flex items-center justify-center gap-2 rounded-full border-2 border-ivory/20 bg-ivory/5 px-6 py-3 font-jost text-sm font-semibold tracking-wide text-ivory transition-all duration-300 hover:border-ivory/40 hover:bg-ivory/10"
+                whileHover={{ scale: 1.03 }}
+                whileTap={{ scale: 0.97 }}
+                onClick={() => triggerRipple('email')}
+                className="group relative inline-flex items-center justify-center gap-2 overflow-hidden rounded-full border-2 border-ivory/20 bg-ivory/5 px-6 py-3 font-jost text-sm font-semibold tracking-wide text-ivory transition-all duration-300 hover:border-ivory/40 hover:bg-ivory/10"
               >
-                <Mail className="h-4 w-4" />
-                Share via Email
-              </a>
+                {rippleActive === 'email' && (
+                  <motion.span
+                    className="absolute inset-0 rounded-full bg-ivory/15"
+                    initial={{ scale: 0, opacity: 1 }}
+                    animate={{ scale: 2.5, opacity: 0 }}
+                    transition={{ duration: 0.6 }}
+                  />
+                )}
+                <Mail className="relative h-4 w-4" />
+                <span className="relative">Share via Email</span>
+              </motion.a>
             </motion.div>
           </motion.div>
 
@@ -204,6 +369,24 @@ export default function ReferFriend() {
                   initial="hidden"
                   animate="visible"
                   className="absolute rounded-full bg-ivory"
+                  style={{
+                    left: p.x,
+                    top: p.y,
+                    width: p.size,
+                    height: p.size,
+                  }}
+                />
+              ))}
+
+              {/* Additional sparkle particles around SVG */}
+              {svgSparkles.map((p, i) => (
+                <motion.div
+                  key={`svg-${i}`}
+                  custom={i}
+                  variants={svgSparkleFloat}
+                  initial="hidden"
+                  animate="visible"
+                  className="absolute rounded-full bg-ivory/80"
                   style={{
                     left: p.x,
                     top: p.y,

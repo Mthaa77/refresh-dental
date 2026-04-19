@@ -6,6 +6,7 @@ import { motion } from 'framer-motion'
 interface ComparisonItem {
   title: string
   description: string
+  treatmentLink: string
   beforeGradient: string
   afterGradient: string
   beforeOverlay: string
@@ -18,6 +19,7 @@ const comparisons: ComparisonItem[] = [
   {
     title: 'Teeth Whitening',
     description: 'Professional-grade whitening for a radiant, confident smile',
+    treatmentLink: '#services',
     beforeGradient: 'from-stone-300 via-stone-400 to-amber-200/60',
     afterGradient: 'from-white via-amber-50 to-yellow-50',
     beforeOverlay: 'bg-stone-400/30',
@@ -28,6 +30,7 @@ const comparisons: ComparisonItem[] = [
   {
     title: 'Dental Veneers',
     description: 'Flawless porcelain veneers for a perfect, natural look',
+    treatmentLink: '#services',
     beforeGradient: 'from-stone-200 via-warm-blush/40 to-stone-300',
     afterGradient: 'from-white via-pink-50/30 to-white',
     beforeOverlay: 'bg-stone-300/25',
@@ -38,6 +41,7 @@ const comparisons: ComparisonItem[] = [
   {
     title: 'Complete Smile Makeover',
     description: 'Full-mouth transformation with comprehensive cosmetic care',
+    treatmentLink: '#services',
     beforeGradient: 'from-stone-300 via-stone-400/80 to-amber-100/40',
     afterGradient: 'from-white via-champagne-gold/5 to-yellow-50/60',
     beforeOverlay: 'bg-espresso/20',
@@ -46,6 +50,51 @@ const comparisons: ComparisonItem[] = [
     afterIcon: '🌟',
   },
 ]
+
+// Deterministic floating particle positions per card
+const cardParticles = [
+  [
+    { x: '20%', y: '25%', size: 5, delay: 0, duration: 3.5 },
+    { x: '70%', y: '70%', size: 4, delay: 0.7, duration: 4.2 },
+    { x: '45%', y: '15%', size: 3, delay: 1.4, duration: 3.8 },
+  ],
+  [
+    { x: '75%', y: '20%', size: 4, delay: 0.3, duration: 4.0 },
+    { x: '30%', y: '65%', size: 5, delay: 1.0, duration: 3.6 },
+    { x: '55%', y: '80%', size: 3, delay: 1.8, duration: 4.5 },
+  ],
+  [
+    { x: '25%', y: '75%', size: 5, delay: 0.5, duration: 3.9 },
+    { x: '65%', y: '30%', size: 4, delay: 1.2, duration: 4.3 },
+    { x: '40%', y: '50%', size: 3, delay: 0.9, duration: 3.7 },
+  ],
+]
+
+const shimmerVariants = {
+  hidden: { x: '-100%' },
+  visible: {
+    x: '200%',
+    transition: {
+      duration: 2.5,
+      ease: 'easeInOut',
+      repeat: Infinity,
+      repeatDelay: 3,
+    },
+  },
+}
+
+const particleFloat = (p: { delay: number; duration: number }) => ({
+  opacity: [0, 0.6, 0.2, 0.6, 0],
+  scale: [0, 1, 0.5, 1, 0],
+  y: [0, -10, -5, -15, -8],
+  transition: {
+    duration: p.duration,
+    delay: p.delay,
+    repeat: Infinity,
+    repeatDelay: 2,
+    ease: 'easeInOut',
+  },
+})
 
 const containerVariants = {
   hidden: {},
@@ -63,8 +112,9 @@ const cardVariants = {
   },
 }
 
-function ComparisonSlider({ item }: { item: ComparisonItem }) {
+function ComparisonSlider({ item, cardIndex }: { item: ComparisonItem; cardIndex: number }) {
   const [sliderPosition, setSliderPosition] = useState(50)
+  const [isHovered, setIsHovered] = useState(false)
   const containerRef = useRef<HTMLDivElement>(null)
   const isDragging = useRef(false)
 
@@ -98,8 +148,44 @@ function ComparisonSlider({ item }: { item: ComparisonItem }) {
     [handleMove]
   )
 
+  const particles = cardParticles[cardIndex] || cardParticles[0]
+
   return (
-    <div className="group overflow-hidden rounded-2xl border border-soft-border bg-white shadow-sm transition-shadow duration-300 hover:shadow-md">
+    <motion.div
+      className="group relative overflow-hidden rounded-2xl bg-white shadow-sm"
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+      animate={{
+        boxShadow: isHovered
+          ? '0 8px 32px -4px rgba(201, 169, 110, 0.25)'
+          : '0 1px 3px 0 rgba(0, 0, 0, 0.06)',
+      }}
+      transition={{ duration: 0.3 }}
+    >
+      {/* Gradient border on hover */}
+      <motion.div
+        className="pointer-events-none absolute inset-0 rounded-2xl"
+        animate={{
+          opacity: isHovered ? 1 : 0,
+        }}
+        transition={{ duration: 0.4 }}
+        style={{
+          padding: '2px',
+          background: isHovered
+            ? 'linear-gradient(135deg, #C9A96E 0%, #E8D5B0 50%, #C9A96E 100%)'
+            : 'transparent',
+          WebkitMask: 'linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)',
+          WebkitMaskComposite: 'xor',
+          maskComposite: 'exclude',
+        }}
+      />
+
+      {/* Corner decorative gold dots */}
+      <span className="absolute left-3 top-3 z-30 h-1.5 w-1.5 rounded-full bg-champagne-gold/60 transition-opacity duration-300 group-hover:opacity-100" />
+      <span className="absolute right-3 top-3 z-30 h-1.5 w-1.5 rounded-full bg-champagne-gold/60 transition-opacity duration-300 group-hover:opacity-100" />
+      <span className="absolute bottom-3 left-3 z-30 h-1.5 w-1.5 rounded-full bg-champagne-gold/60 transition-opacity duration-300 group-hover:opacity-100" />
+      <span className="absolute bottom-3 right-3 z-30 h-1.5 w-1.5 rounded-full bg-champagne-gold/60 transition-opacity duration-300 group-hover:opacity-100" />
+
       {/* Slider Container */}
       <div
         ref={containerRef}
@@ -131,6 +217,19 @@ function ComparisonSlider({ item }: { item: ComparisonItem }) {
           {/* Bright accent circles */}
           <div className="absolute top-4 right-4 h-16 w-16 rounded-full bg-champagne-gold/10" />
           <div className="absolute bottom-6 right-8 h-8 w-8 rounded-full bg-sage-teal/10" />
+
+          {/* "After" watermark text */}
+          <div className="pointer-events-none absolute bottom-3 right-4 z-10 font-cormorant text-6xl font-bold leading-none text-champagne-gold/[0.06]">
+            After
+          </div>
+
+          {/* Gold shimmer sweep across After side */}
+          <motion.div
+            className="absolute inset-y-0 z-10 w-1/3 bg-gradient-to-r from-transparent via-champagne-gold/[0.08] to-transparent pointer-events-none"
+            variants={shimmerVariants}
+            initial="hidden"
+            animate="visible"
+          />
         </div>
 
         {/* Before (Clipped) */}
@@ -153,48 +252,73 @@ function ComparisonSlider({ item }: { item: ComparisonItem }) {
           {/* Dark accent circles */}
           <div className="absolute top-6 left-6 h-12 w-12 rounded-full bg-espresso/8" />
           <div className="absolute bottom-4 left-10 h-6 w-6 rounded-full bg-stone-400/20" />
+
+          {/* "Before" watermark text */}
+          <div className="pointer-events-none absolute bottom-3 left-4 z-10 font-cormorant text-6xl font-bold leading-none text-espresso/[0.05]">
+            Before
+          </div>
         </div>
+
+        {/* Floating sparkle / tooth particles */}
+        {particles.map((p, i) => (
+          <motion.div
+            key={i}
+            className="pointer-events-none absolute z-20 rounded-full bg-champagne-gold/50"
+            style={{ left: p.x, top: p.y, width: p.size, height: p.size }}
+            animate={particleFloat(p)}
+          />
+        ))}
 
         {/* Slider Handle */}
         <div
           className="absolute top-0 bottom-0 z-10 w-0.5 bg-champagne-gold shadow-lg"
           style={{ left: `${sliderPosition}%`, transform: 'translateX(-50%)' }}
         >
-          {/* Center knob */}
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex h-10 w-10 items-center justify-center rounded-full border-2 border-white bg-champagne-gold shadow-lg">
-            <div className="flex gap-[3px]">
-              <svg
-                width="8"
-                height="12"
-                viewBox="0 0 8 12"
-                fill="none"
-                className="text-white"
-              >
-                <path
-                  d="M6 2L2 6L6 10"
-                  stroke="currentColor"
-                  strokeWidth="1.5"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
-              <svg
-                width="8"
-                height="12"
-                viewBox="0 0 8 12"
-                fill="none"
-                className="text-white"
-              >
-                <path
-                  d="M2 2L6 6L2 10"
-                  stroke="currentColor"
-                  strokeWidth="1.5"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
+          {/* Center knob with animated glow ring */}
+          <motion.div
+            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
+            animate={{
+              boxShadow: isHovered
+                ? '0 0 0 6px rgba(201, 169, 110, 0.3), 0 0 20px rgba(201, 169, 110, 0.4)'
+                : '0 0 0 3px rgba(201, 169, 110, 0.15), 0 0 12px rgba(201, 169, 110, 0.2)',
+            }}
+            transition={{ duration: 0.3 }}
+          >
+            <div className="flex h-10 w-10 items-center justify-center rounded-full border-2 border-white bg-champagne-gold shadow-lg">
+              <div className="flex gap-[3px]">
+                <svg
+                  width="8"
+                  height="12"
+                  viewBox="0 0 8 12"
+                  fill="none"
+                  className="text-white"
+                >
+                  <path
+                    d="M6 2L2 6L6 10"
+                    stroke="currentColor"
+                    strokeWidth="1.5"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
+                <svg
+                  width="8"
+                  height="12"
+                  viewBox="0 0 8 12"
+                  fill="none"
+                  className="text-white"
+                >
+                  <path
+                    d="M2 2L6 6L2 10"
+                    stroke="currentColor"
+                    strokeWidth="1.5"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
+              </div>
             </div>
-          </div>
+          </motion.div>
         </div>
 
         {/* Before / After Labels */}
@@ -206,16 +330,37 @@ function ComparisonSlider({ item }: { item: ComparisonItem }) {
         </div>
       </div>
 
-      {/* Card Footer */}
-      <div className="p-5">
-        <h3 className="font-dm-serif text-lg text-espresso mb-1">
-          {item.title}
-        </h3>
-        <p className="font-jost text-xs font-light leading-relaxed text-brown-warm/60">
-          {item.description}
-        </p>
+      {/* Card Footer with gold accent line */}
+      <div className="relative">
+        {/* Gold accent line at top of footer */}
+        <motion.div
+          className="h-px bg-gradient-to-r from-transparent via-champagne-gold/60 to-transparent"
+          animate={{
+            opacity: isHovered ? 1 : 0.4,
+          }}
+          transition={{ duration: 0.3 }}
+        />
+        <div className="p-5">
+          <h3 className="font-dm-serif text-lg text-espresso mb-1">
+            {item.title}
+          </h3>
+          <p className="font-jost text-xs font-light leading-relaxed text-brown-warm/60">
+            {item.description}
+          </p>
+          <motion.a
+            href={item.treatmentLink}
+            className="mt-3 inline-flex items-center gap-1.5 font-jost text-xs font-medium uppercase tracking-wider text-champagne-gold"
+            whileHover={{ x: 3 }}
+            transition={{ duration: 0.2 }}
+          >
+            View Treatment
+            <svg width="12" height="12" viewBox="0 0 12 12" fill="none" className="text-champagne-gold">
+              <path d="M3 6H9M9 6L6.5 3.5M9 6L6.5 8.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+          </motion.a>
+        </div>
       </div>
-    </div>
+    </motion.div>
   )
 }
 
@@ -251,9 +396,9 @@ export default function BeforeAfterSection() {
           viewport={{ once: true, margin: '-60px' }}
           className="grid grid-cols-1 gap-6 md:grid-cols-3"
         >
-          {comparisons.map((item) => (
+          {comparisons.map((item, index) => (
             <motion.div key={item.title} variants={cardVariants}>
-              <ComparisonSlider item={item} />
+              <ComparisonSlider item={item} cardIndex={index} />
             </motion.div>
           ))}
         </motion.div>
