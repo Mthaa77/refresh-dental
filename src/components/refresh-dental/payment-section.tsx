@@ -1,17 +1,76 @@
 'use client'
 
-import { useState } from 'react'
-import { motion } from 'framer-motion'
-import { Shield, CreditCard, ArrowRight } from 'lucide-react'
+import { useState, useEffect, useRef } from 'react'
+import { motion, useSpring, useTransform } from 'framer-motion'
+import { Shield, CreditCard, ArrowRight, Diamond } from 'lucide-react'
 
 const medicalAids = ['Discovery', 'Momentum', 'Bonitas', 'All Schemes']
+
+/* ── Animated Number ── */
+function AnimatedNumber({ value }: { value: number }) {
+  const spring = useSpring(0, { stiffness: 100, damping: 30, mass: 1 })
+  const display = useTransform(spring, (v) => Math.round(v))
+
+  useEffect(() => {
+    spring.set(value)
+  }, [spring, value])
+
+  // We need to subscribe to the motion value to re-render
+  const [displayVal, setDisplayVal] = useState(value)
+  useEffect(() => {
+    const unsubscribe = display.on('change', (v) => setDisplayVal(v))
+    return unsubscribe
+  }, [display])
+
+  return <>{displayVal}</>
+}
+
+/* ── Gold Diamond Divider ── */
+function GoldDivider() {
+  return (
+    <motion.div
+      initial={{ opacity: 0, scaleY: 0 }}
+      whileInView={{ opacity: 1, scaleY: 1 }}
+      viewport={{ once: true, margin: '-50px' }}
+      transition={{ duration: 0.6, ease: 'easeOut' }}
+      className="hidden md:flex flex-col items-center justify-center mx-auto w-px self-stretch py-4"
+    >
+      <div className="h-full w-px bg-gradient-to-b from-transparent via-champagne-gold/40 to-transparent" />
+      <motion.div
+        className="absolute my-auto"
+        animate={{ rotate: 360 }}
+        transition={{ duration: 8, repeat: Infinity, ease: 'linear' }}
+      >
+        <Diamond className="h-4 w-4 text-champagne-gold/60" />
+      </motion.div>
+    </motion.div>
+  )
+}
 
 export default function PaymentSection() {
   const [cost, setCost] = useState<number>(5000)
   const [instalmentOption, setInstalmentOption] = useState<'3' | '6'>('6')
+  const [glowing, setGlowing] = useState(false)
+  const glowTimer = useRef<ReturnType<typeof setTimeout> | null>(null)
 
   const instalments = instalmentOption === '3' ? 4 : 7
-  const monthlyPayment = ((cost * 1.06) / instalments).toFixed(0)
+  const monthlyPayment = Math.round((cost * 1.06) / instalments)
+
+  const handleCostChange = (val: number) => {
+    setCost(val)
+    // Trigger glow effect
+    setGlowing(true)
+    if (glowTimer.current) clearTimeout(glowTimer.current)
+    glowTimer.current = setTimeout(() => setGlowing(false), 800)
+  }
+
+  const handleInstalmentChange = (option: '3' | '6') => {
+    setInstalmentOption(option)
+    // Trigger glow effect
+    setGlowing(true)
+    if (glowTimer.current) clearTimeout(glowTimer.current)
+    glowTimer.current = setTimeout(() => setGlowing(false), 800)
+  }
 
   return (
     <section id="financing" className="bg-sand py-24">
@@ -39,15 +98,20 @@ export default function PaymentSection() {
 
           <div className="flex flex-wrap gap-2 pt-2">
             {medicalAids.map((aid) => (
-              <span
+              <motion.span
                 key={aid}
-                className="bg-sage-teal/10 text-sage-teal rounded-full px-3 py-1 text-sm font-medium"
+                whileHover={{ scale: 1.08, y: -2 }}
+                transition={{ type: 'spring', stiffness: 400, damping: 15 }}
+                className="bg-sage-teal/10 text-sage-teal rounded-full px-3 py-1 text-sm font-medium cursor-default"
               >
                 {aid}
-              </span>
+              </motion.span>
             ))}
           </div>
         </motion.div>
+
+        {/* Gold Divider (desktop only) */}
+        <GoldDivider />
 
         {/* Right Column — Athena Finance Calculator */}
         <motion.div
@@ -57,8 +121,17 @@ export default function PaymentSection() {
           transition={{ duration: 0.6, ease: 'easeOut' }}
           className="bg-ivory rounded-3xl p-8 shadow-sm border border-soft-border space-y-6"
         >
-          <div className="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-champagne-gold/10 mb-2">
-            <CreditCard className="w-7 h-7 text-champagne-gold" />
+          <div className="flex items-center gap-3 mb-2">
+            <div className="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-champagne-gold/10">
+              <CreditCard className="w-7 h-7 text-champagne-gold" />
+            </div>
+            {/* Decorative tooth/diamond icon */}
+            <motion.div
+              animate={{ rotate: [0, 5, -5, 0], scale: [1, 1.05, 1] }}
+              transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
+            >
+              <Diamond className="h-5 w-5 text-champagne-gold/40" />
+            </motion.div>
           </div>
 
           <h3 className="font-dm-serif text-2xl text-espresso">
@@ -84,7 +157,7 @@ export default function PaymentSection() {
                 <input
                   type="number"
                   value={cost || ''}
-                  onChange={(e) => setCost(Number(e.target.value) || 0)}
+                  onChange={(e) => handleCostChange(Number(e.target.value) || 0)}
                   className="w-full bg-transparent border-b-2 border-champagne-gold focus:border-champagne-gold outline-none text-espresso font-semibold text-2xl pl-8 pb-2 transition-colors"
                   placeholder="5000"
                   min={0}
@@ -99,7 +172,7 @@ export default function PaymentSection() {
               </label>
               <div className="flex gap-3">
                 <button
-                  onClick={() => setInstalmentOption('3')}
+                  onClick={() => handleInstalmentChange('3')}
                   className={`rounded-full px-5 py-2 text-sm font-medium transition-all ${
                     instalmentOption === '3'
                       ? 'bg-espresso text-ivory shadow-sm'
@@ -109,7 +182,7 @@ export default function PaymentSection() {
                   3 months
                 </button>
                 <button
-                  onClick={() => setInstalmentOption('6')}
+                  onClick={() => handleInstalmentChange('6')}
                   className={`rounded-full px-5 py-2 text-sm font-medium transition-all ${
                     instalmentOption === '6'
                       ? 'bg-espresso text-ivory shadow-sm'
@@ -121,19 +194,27 @@ export default function PaymentSection() {
               </div>
             </div>
 
-            {/* Result */}
-            <div className="bg-sand/60 rounded-2xl p-6 text-center space-y-1">
+            {/* Result with glow animation */}
+            <motion.div
+              className="bg-sand/60 rounded-2xl p-6 text-center space-y-1"
+              animate={{
+                boxShadow: glowing
+                  ? '0 0 20px rgba(201, 169, 110, 0.3), 0 0 40px rgba(201, 169, 110, 0.15)'
+                  : '0 0 0px rgba(201, 169, 110, 0)',
+              }}
+              transition={{ duration: 0.4, ease: 'easeOut' }}
+            >
               <p className="text-sm text-sand-muted uppercase tracking-wider">
                 Your monthly payment
               </p>
               <p className="text-4xl font-dm-serif text-champagne-gold">
-                R{monthlyPayment}
+                R<span className="inline-block"><AnimatedNumber value={monthlyPayment} /></span>
                 <span className="text-lg text-sand-muted">/month</span>
               </p>
               <p className="text-xs text-sand-muted mt-2">
                 {instalments} instalments · includes 6% processing fee
               </p>
-            </div>
+            </motion.div>
           </div>
 
           <a

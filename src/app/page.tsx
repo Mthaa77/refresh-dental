@@ -10,6 +10,7 @@ import TreatmentProcess from '@/components/refresh-dental/treatment-process'
 import TrustIndicators from '@/components/refresh-dental/trust-indicators'
 import AboutSection from '@/components/refresh-dental/about-section'
 import GallerySection from '@/components/refresh-dental/gallery-section'
+import TechnologySection from '@/components/refresh-dental/technology-section'
 import TeamSection from '@/components/refresh-dental/team-section'
 import ValuesSection from '@/components/refresh-dental/values-section'
 import ServicesGrid from '@/components/refresh-dental/services-grid'
@@ -20,10 +21,12 @@ import PaymentSection from '@/components/refresh-dental/payment-section'
 import FAQSection from '@/components/refresh-dental/faq-section'
 import CorporateWellnessSection from '@/components/refresh-dental/corporate-wellness-section'
 import DentalTipsSection from '@/components/refresh-dental/dental-tips-section'
+import InstagramFeed from '@/components/refresh-dental/instagram-feed'
 import ContactSection from '@/components/refresh-dental/contact-section'
 import NewsletterCta from '@/components/refresh-dental/newsletter-cta'
 import Footer from '@/components/refresh-dental/footer'
 import WhatsAppButton from '@/components/refresh-dental/whatsapp-button'
+import CookieConsent from '@/components/refresh-dental/cookie-consent'
 import ScrollToTop from '@/components/refresh-dental/scroll-to-top'
 
 const LoadingScreen = dynamic(
@@ -46,6 +49,7 @@ export default function Home() {
         <AboutSection />
         <TeamSection />
         <GallerySection />
+        <TechnologySection />
         <ValuesSection />
         <ServicesGrid />
         <ParallaxStatement />
@@ -55,12 +59,14 @@ export default function Home() {
         <FAQSection />
         <CorporateWellnessSection />
         <DentalTipsSection />
+        <InstagramFeed />
         <ContactSection />
         <NewsletterCta />
       </main>
       <Footer />
       <WhatsAppButton />
       <ScrollToTop />
+      <CookieConsent />
     </>
   )
 }

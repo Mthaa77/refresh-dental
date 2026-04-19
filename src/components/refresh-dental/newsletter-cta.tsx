@@ -1,8 +1,8 @@
 'use client'
 
 import { useState, useMemo } from 'react'
-import { motion } from 'framer-motion'
-import { ArrowRight, Phone, Sparkles } from 'lucide-react'
+import { motion, AnimatePresence } from 'framer-motion'
+import { ArrowRight, Phone, Sparkles, Check } from 'lucide-react'
 
 /* ── Floating Sparkle Particles ── */
 function SparkleParticles() {
@@ -107,9 +107,32 @@ function SmileIcon() {
 
 export default function NewsletterCTA() {
   const [email, setEmail] = useState('')
+  const [submitted, setSubmitted] = useState(false)
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault()
+    if (email.trim()) {
+      setSubmitted(true)
+      setEmail('')
+      setTimeout(() => setSubmitted(false), 2500)
+    }
+  }
 
   return (
-    <section className="relative bg-espresso py-24 overflow-hidden">
+    <section className="relative py-24 overflow-hidden">
+      {/* Animated gradient background (espresso → deep brown) */}
+      <motion.div
+        className="absolute inset-0"
+        animate={{
+          background: [
+            'linear-gradient(135deg, #1A1510 0%, #2C1E14 50%, #1A1510 100%)',
+            'linear-gradient(135deg, #2C1E14 0%, #1A1510 50%, #2C1E14 100%)',
+            'linear-gradient(135deg, #1A1510 0%, #2C1E14 50%, #1A1510 100%)',
+          ],
+        }}
+        transition={{ duration: 12, repeat: Infinity, ease: 'easeInOut' }}
+      />
+
       {/* Background glow */}
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-champagne-gold/5 rounded-full blur-3xl" />
@@ -117,6 +140,25 @@ export default function NewsletterCTA() {
 
       {/* Floating sparkle particles */}
       <SparkleParticles />
+
+      {/* Large decorative SVG tooth/smile watermark */}
+      <motion.div
+        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none"
+        animate={{ rotate: [0, 360] }}
+        transition={{ duration: 120, repeat: Infinity, ease: 'linear' }}
+      >
+        <svg
+          viewBox="0 0 48 48"
+          className="w-[300px] h-[300px] md:w-[400px] md:h-[400px] text-champagne-gold/[0.02]"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M24 4C18 4 14 8 14 14C14 18 16 20 14 30C13 35 12 40 16 42C18 43 20 40 22 36C23 34 23 34 24 34C25 34 25 34 26 36C28 40 30 43 32 42C36 40 35 35 34 30C32 20 34 18 34 14C34 8 30 4 24 4Z"
+            fill="currentColor"
+          />
+        </svg>
+      </motion.div>
 
       <div className="relative max-w-3xl mx-auto px-6 text-center space-y-8">
         {/* Headline with decorative gold frame */}
@@ -138,7 +180,16 @@ export default function NewsletterCTA() {
             <div className="absolute -bottom-3 -left-3 h-4 w-4 border-b-2 border-l-2 border-champagne-gold/40 rounded-bl-lg" />
             <div className="absolute -bottom-3 -right-3 h-4 w-4 border-b-2 border-r-2 border-champagne-gold/40 rounded-br-lg" />
 
-            <h2 className="font-cormorant text-[clamp(2rem,5vw,4rem)] text-ivory italic leading-tight relative">
+            {/* Gold gradient heading */}
+            <h2
+              className="font-cormorant text-[clamp(2rem,5vw,4rem)] italic leading-tight relative"
+              style={{
+                background: 'linear-gradient(135deg, #C9A96E 0%, #E8D5B0 40%, #C9A96E 70%, #E8D5B0 100%)',
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+                backgroundClip: 'text',
+              }}
+            >
               Ready for your
               <br />
               Refreshed Smile?
@@ -189,10 +240,7 @@ export default function NewsletterCTA() {
             Stay connected — subscribe for oral health tips and exclusive offers.
           </p>
           <form
-            onSubmit={(e) => {
-              e.preventDefault()
-              setEmail('')
-            }}
+            onSubmit={handleSubmit}
             className="flex items-center gap-3 max-w-md mx-auto"
           >
             {/* Glass morphism input */}
@@ -204,19 +252,50 @@ export default function NewsletterCTA() {
                 placeholder="Enter your email"
                 className="w-full bg-white/[0.06] backdrop-blur-md border border-white/[0.12] focus:border-champagne-gold/60 outline-none text-ivory placeholder:text-ivory/25 rounded-full px-5 py-3 text-sm transition-all duration-300 focus:bg-white/[0.1] focus:shadow-[0_0_20px_rgba(201,169,110,0.1)]"
                 required
+                disabled={submitted}
               />
               {/* Inner glass highlight */}
               <div className="absolute inset-0 rounded-full bg-gradient-to-b from-white/[0.04] to-transparent pointer-events-none" />
             </div>
-            {/* Glass morphism button */}
-            <button
+            {/* Glass morphism button with press animation */}
+            <motion.button
               type="submit"
-              className="relative bg-champagne-gold/90 backdrop-blur-sm text-espresso font-semibold rounded-full px-6 py-3 text-sm hover:bg-champagne-gold transition-all duration-300 shrink-0 shadow-lg shadow-champagne-gold/15 hover:shadow-champagne-gold/25 hover:scale-[1.03] active:scale-[0.98]"
+              className="relative bg-champagne-gold/90 backdrop-blur-sm text-espresso font-semibold rounded-full px-6 py-3 text-sm transition-colors duration-300 shrink-0 shadow-lg shadow-champagne-gold/15 hover:shadow-champagne-gold/25"
+              whileTap={{ scale: 0.88 }}
+              whileHover={{ scale: 1.03 }}
+              animate={submitted ? { scale: [1, 1.08, 0.95, 1.03, 1] } : {}}
+              transition={{ type: 'spring', stiffness: 400, damping: 12 }}
+              disabled={submitted}
             >
               {/* Inner highlight */}
               <span className="absolute inset-0 rounded-full bg-gradient-to-b from-white/20 to-transparent pointer-events-none" />
-              <span className="relative">Subscribe</span>
-            </button>
+              <span className="relative inline-flex items-center gap-1.5">
+                <AnimatePresence mode="wait">
+                  {submitted ? (
+                    <motion.span
+                      key="check"
+                      initial={{ scale: 0, opacity: 0 }}
+                      animate={{ scale: 1, opacity: 1 }}
+                      exit={{ scale: 0, opacity: 0 }}
+                      transition={{ duration: 0.3, type: 'spring' }}
+                      className="inline-flex items-center gap-1.5"
+                    >
+                      <Check className="w-4 h-4" />
+                      Done!
+                    </motion.span>
+                  ) : (
+                    <motion.span
+                      key="subscribe"
+                      initial={{ scale: 1, opacity: 1 }}
+                      exit={{ scale: 0, opacity: 0 }}
+                      transition={{ duration: 0.2 }}
+                    >
+                      Subscribe
+                    </motion.span>
+                  )}
+                </AnimatePresence>
+              </span>
+            </motion.button>
           </form>
         </motion.div>
       </div>

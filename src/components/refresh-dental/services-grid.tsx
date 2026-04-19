@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import { motion } from 'framer-motion'
-import { Clock, ArrowRight } from 'lucide-react'
+import { Clock, ArrowRight, Heart, Sparkles, Shield, Star } from 'lucide-react'
 import ServiceDetailDrawer from './service-detail-drawer'
 
 const services = [
@@ -19,6 +19,13 @@ const services = [
   { name: "Crowns and Veneers", duration: "1 hr", category: "Cosmetic", desc: "Premium restorations for a flawless finish", span: "" },
   { name: "Fixed Dental Prosthesis", duration: "1 hr 30 min", category: "Specialised", desc: "Permanent bridges and fixed prosthetic solutions", span: "" },
 ]
+
+const categoryIcons: Record<string, React.ElementType> = {
+  General: Heart,
+  Cosmetic: Sparkles,
+  Specialised: Shield,
+  Aesthetics: Star,
+}
 
 const categories = ["All", "General", "Cosmetic", "Specialised", "Aesthetics"]
 
@@ -132,6 +139,37 @@ export default function ServicesGrid() {
                   <div className="absolute inset-0 bg-gradient-to-br from-champagne-gold/5 via-sand/40 to-warm-blush/20 pointer-events-none" />
                 )}
 
+                {/* Animated gradient border overlay on hover */}
+                <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" style={{
+                  background: 'linear-gradient(135deg, rgba(201,169,110,0.15), transparent 40%, transparent 60%, rgba(201,169,110,0.15))',
+                  borderRadius: 'inherit',
+                  mask: 'linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)',
+                  WebkitMask: 'linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)',
+                  maskComposite: 'exclude',
+                  WebkitMaskComposite: 'xor',
+                  padding: '2px',
+                }} />
+
+                {/* Large watermark icon in top-right */}
+                {categoryIcons[service.category] && (() => {
+                  const Icon = categoryIcons[service.category]
+                  const iconSize = isLarge ? 'h-12 w-12' : 'h-8 w-8'
+                  return (
+                    <motion.div
+                      className={`absolute top-3 right-3 md:top-4 md:right-4 pointer-events-none ${iconSize}`}
+                      animate={{ rotate: [0, 360] }}
+                      transition={{ rotate: { duration: 40, repeat: Infinity, ease: 'linear' } }}
+                    >
+                      <motion.div
+                        whileHover={{ scale: 1.1 }}
+                        transition={{ duration: 0.4 }}
+                      >
+                        <Icon className="h-full w-full text-champagne-gold/[0.08] transition-colors duration-500 group-hover:text-champagne-gold/[0.18]" />
+                      </motion.div>
+                    </motion.div>
+                  )
+                })()}
+
                 <div className="relative flex h-full flex-col justify-between p-5 md:p-6">
                   {/* Top */}
                   <div>
@@ -163,10 +201,16 @@ export default function ServicesGrid() {
 
                   {/* Book CTA */}
                   <div className="mt-auto flex items-center gap-1.5 pt-4">
-                    <span className="font-jost text-xs font-medium uppercase tracking-wider text-champagne-gold transition-colors duration-200 group-hover:text-champagne-gold/80">
+                    <span className="font-jost text-xs font-semibold uppercase tracking-[0.15em] text-champagne-gold transition-all duration-300 group-hover:tracking-[0.2em]">
                       Book
                     </span>
-                    <ArrowRight className="h-3.5 w-3.5 text-champagne-gold transition-transform duration-300 group-hover:translate-x-1" />
+                    <motion.span
+                      className="inline-flex"
+                      whileHover={{ x: 4 }}
+                      transition={{ duration: 0.3, ease: 'easeOut' }}
+                    >
+                      <ArrowRight className="h-3.5 w-3.5 text-champagne-gold transition-transform duration-300 group-hover:translate-x-1.5" />
+                    </motion.span>
                   </div>
                 </div>
               </motion.div>

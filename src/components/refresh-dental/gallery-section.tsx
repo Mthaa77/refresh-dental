@@ -1,6 +1,8 @@
 'use client'
 
+import { useState } from 'react'
 import { motion } from 'framer-motion'
+import ImageLightbox from './image-lightbox'
 
 const galleryImages = [
   {
@@ -66,6 +68,19 @@ const itemVariants = {
 }
 
 export default function GallerySection() {
+  const [lightboxOpen, setLightboxOpen] = useState(false)
+  const [lightboxIndex, setLightboxIndex] = useState(0)
+
+  const handleImageClick = (index: number) => {
+    setLightboxIndex(index)
+    setLightboxOpen(true)
+  }
+
+  const lightboxImages = galleryImages.map((img) => ({
+    src: img.src,
+    alt: img.alt,
+  }))
+
   return (
     <section className="bg-ivory py-20 md:py-28">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -103,6 +118,7 @@ export default function GallerySection() {
               key={idx}
               variants={itemVariants}
               className={`group relative cursor-pointer overflow-hidden rounded-2xl shadow-sm ${image.span}`}
+              onClick={() => handleImageClick(idx)}
             >
               <div
                 className={`relative h-full w-full ${image.aspect} overflow-hidden rounded-2xl`}
@@ -141,6 +157,15 @@ export default function GallerySection() {
           ))}
         </motion.div>
       </div>
+
+      {/* Lightbox */}
+      <ImageLightbox
+        isOpen={lightboxOpen}
+        onClose={() => setLightboxOpen(false)}
+        images={lightboxImages}
+        currentIndex={lightboxIndex}
+        onNavigate={setLightboxIndex}
+      />
     </section>
   )
 }

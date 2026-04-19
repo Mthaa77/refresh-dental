@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, useRef } from 'react';
 import { motion, AnimatePresence, useScroll, useMotionValueEvent } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
 
@@ -18,11 +18,37 @@ const NAV_LINKS = [
 export default function Navigation() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [activeSection, setActiveSection] = useState('home');
   const { scrollY } = useScroll();
+  const observerRef = useRef<IntersectionObserver | null>(null);
 
   useMotionValueEvent(scrollY, 'change', (latest) => {
     setScrolled(latest > 40);
   });
+
+  // Track which section is currently in viewport
+  useEffect(() => {
+    const sectionIds = NAV_LINKS.map((l) => l.href.replace('#', ''));
+
+    observerRef.current = new IntersectionObserver(
+      (entries) => {
+        const visible = entries.filter((e) => e.isIntersecting);
+        if (visible.length > 0) {
+          // Pick the one with the highest intersection ratio
+          visible.sort((a, b) => b.intersectionRatio - a.intersectionRatio);
+          setActiveSection(visible[0].target.id);
+        }
+      },
+      { rootMargin: '-20% 0px -60% 0px', threshold: [0, 0.25, 0.5, 0.75, 1] },
+    );
+
+    sectionIds.forEach((id) => {
+      const el = document.getElementById(id);
+      if (el) observerRef.current?.observe(el);
+    });
+
+    return () => observerRef.current?.disconnect();
+  }, []);
 
   // Lock body scroll when mobile menu is open
   useEffect(() => {
@@ -130,18 +156,40 @@ export default function Navigation() {
 
           {/* Desktop Nav Links */}
           <ul className="hidden items-center gap-8 md:flex">
-            {NAV_LINKS.map((link) => (
-              <li key={link.href}>
-                <a
-                  href={link.href}
-                  onClick={(e) => handleNavClick(e, link.href)}
-                  className="font-jost text-sm font-medium tracking-wide transition-colors duration-300 hover:text-champagne-gold"
-                  style={{ color: scrolled ? '#1A1510' : '#FDFAF6' }}
-                >
-                  {link.label}
-                </a>
-              </li>
-            ))}
+            {NAV_LINKS.map((link) => {
+              const sectionId = link.href.replace('#', '');
+              const isActive = activeSection === sectionId;
+              return (
+                <li key={link.href} className="relative">
+                  <a
+                    href={link.href}
+                    onClick={(e) => handleNavClick(e, link.href)}
+                    className="relative font-jost text-sm font-medium tracking-wide transition-colors duration-300 hover:text-champagne-gold"
+                    style={{ color: isActive ? '#C9A96E' : scrolled ? '#1A1510' : '#FDFAF6' }}
+                  >
+                    {link.label}
+                    {/* Gold underline animation */}
+                    <motion.span
+                      className="absolute -bottom-1 left-0 h-[2px] bg-gradient-to-r from-champagne-gold to-gold-light"
+                      initial={false}
+                      animate={{ width: isActive ? '100%' : '0%' }}
+                      transition={{ duration: 0.35, ease: [0.25, 0.46, 0.45, 0.94] }}
+                    />
+                    {/* Small dot indicator */}
+                    <motion.span
+                      className="absolute -bottom-[6px] left-1/2 h-[4px] w-[4px] rounded-full bg-champagne-gold"
+                      initial={false}
+                      animate={{
+                        opacity: isActive ? 1 : 0,
+                        scale: isActive ? 1 : 0,
+                      }}
+                      transition={{ duration: 0.3, ease: 'easeOut' }}
+                      style={{ marginLeft: -2 }}
+                    />
+                  </a>
+                </li>
+              );
+            })}
           </ul>
 
           {/* Desktop CTA + Mobile Hamburger */}
@@ -212,17 +260,36 @@ export default function Navigation() {
               animate="visible"
               exit="exit"
             >
-              {NAV_LINKS.map((link) => (
-                <motion.li key={link.href} variants={mobileLinkVariants}>
-                  <a
-                    href={link.href}
-                    onClick={(e) => handleNavClick(e, link.href)}
-                    className="font-jost text-3xl font-medium tracking-wide text-champagne-gold transition-colors duration-300 hover:text-gold-light"
-                  >
-                    {link.label}
-                  </a>
-                </motion.li>
-              ))}
+              {NAV_LINKS.map((link) => {
+                const sectionId = link.href.replace('#', '');
+                const isActive = activeSection === sectionId;
+                return (
+                  <motion.li key={link.href} variants={mobileLinkVariants}>
+                    <a
+                      href={link.href}
+                      onClick={(e) => handleNavClick(e, link.href)}
+                      className={`relative block font-jost text-3xl font-medium tracking-wide transition-colors duration-300 hover:text-gold-light pl-4 ${
+                        isActive
+                          ? 'text-gold-light'
+                          : 'text-champagne-gold'
+                      }`}
+                    >
+                      {/* Gold left border indicator for active link */}
+                      <motion.span
+                        className="absolute left-0 top-0 h-full w-[3px] rounded-full bg-gradient-to-b from-champagne-gold to-gold-light"
+                        initial={false}
+                        animate={{
+                          scaleY: isActive ? 1 : 0,
+                          opacity: isActive ? 1 : 0,
+                        }}
+                        transition={{ duration: 0.3, ease: 'easeOut' }}
+                        style={{ originY: 0.5 }}
+                      />
+                      {link.label}
+                    </a>
+                  </motion.li>
+                );
+              })}
               <motion.li variants={mobileLinkVariants}>
                 <motion.a
                   href="#contact"
