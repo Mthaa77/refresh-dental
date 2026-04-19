@@ -37,6 +37,9 @@ import AccessibilityPanel from '@/components/refresh-dental/theme-toggle'
 import PageSectionsNav from '@/components/refresh-dental/page-sections-nav'
 import SmileAssessment from '@/components/refresh-dental/smile-assessment'
 import ReferFriend from '@/components/refresh-dental/refer-friend'
+import PatientStories from '@/components/refresh-dental/patient-stories'
+import AwardsCertifications from '@/components/refresh-dental/awards-certifications'
+import LoyaltyRewards from '@/components/refresh-dental/loyalty-rewards'
 
 const LoadingScreen = dynamic(
   () => import('@/components/refresh-dental/loading-screen'),
@@ -65,6 +68,7 @@ export default function Home() {
         <ParallaxStatement />
         <Testimonials />
         <VideoTestimonial />
+        <PatientStories />
         <BeforeAfterSection />
         <EmergencyDental />
         <PaymentSection />
@@ -76,6 +80,8 @@ export default function Home() {
         <DentalTipsSection />
         <SmileAssessment />
         <InstagramFeed />
+        <AwardsCertifications />
+        <LoyaltyRewards />
         <ContactSection />
         <NewsletterCta />
       </main>

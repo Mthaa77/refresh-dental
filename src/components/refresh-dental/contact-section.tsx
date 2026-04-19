@@ -1,6 +1,7 @@
 'use client'
 
-import { motion } from 'framer-motion'
+import { useState } from 'react'
+import { motion, useScroll, useTransform } from 'framer-motion'
 import {
   MapPin,
   Phone,
@@ -8,11 +9,16 @@ import {
   ArrowRight,
   AlertCircle,
   Diamond,
+  Navigation,
 } from 'lucide-react'
 import ContactForm from './contact-form'
 import TradingHours from './trading-hours'
 
 export default function ContactSection() {
+  const [hoveredCard, setHoveredCard] = useState<string | null>(null)
+  const { scrollYProgress } = useScroll({ offset: ['start 0.8', 'end 0.5'] })
+  const pathProgress = useTransform(scrollYProgress, [0, 1], [0, 1])
+
   return (
     <section id="contact" className="bg-ivory py-20 md:py-28">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -22,11 +28,50 @@ export default function ContactSection() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: '-80px' }}
           transition={{ duration: 0.6 }}
-          className="mb-16 text-center"
+          className="relative mb-16 text-center"
         >
+          {/* Animated golden ring behind title */}
+          <motion.div
+            className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none"
+            animate={{
+              scale: [1, 1.1, 1],
+              opacity: [0.2, 0.4, 0.2],
+            }}
+            transition={{
+              duration: 4,
+              repeat: Infinity,
+              ease: 'easeInOut',
+            }}
+            aria-hidden="true"
+          >
+            <svg width="320" height="120" viewBox="0 0 320 120" className="text-champagne-gold opacity-30">
+              <ellipse
+                cx="160"
+                cy="60"
+                rx="155"
+                ry="55"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="1.5"
+              />
+            </svg>
+          </motion.div>
+
+          {/* Floating compass/map-pin icon — top-right corner */}
+          <motion.div
+            className="absolute right-4 top-0 hidden lg:block"
+            animate={{ y: [0, -6, 0], rotate: [0, 5, -5, 0] }}
+            transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
+            aria-hidden="true"
+          >
+            <div className="flex h-10 w-10 items-center justify-center rounded-full bg-champagne-gold/10">
+              <Navigation className="h-5 w-5 text-champagne-gold" />
+            </div>
+          </motion.div>
+
           {/* Animated gold diamond icon */}
           <motion.div
-            className="mx-auto mb-4 flex items-center justify-center w-10 h-10 rounded-full bg-champagne-gold/10"
+            className="relative mx-auto mb-4 flex items-center justify-center w-10 h-10 rounded-full bg-champagne-gold/10"
             animate={{
               scale: [1, 1.1, 1],
               rotate: [0, 10, -10, 0],
@@ -39,13 +84,13 @@ export default function ContactSection() {
           >
             <Diamond className="w-5 h-5 text-champagne-gold" />
           </motion.div>
-          <span className="mb-4 inline-block text-xs font-semibold uppercase tracking-[0.2em] text-champagne-gold">
+          <span className="relative mb-4 inline-block text-xs font-semibold uppercase tracking-[0.2em] text-champagne-gold">
             Get in Touch
           </span>
-          <h2 className="font-cormorant text-[clamp(2rem,4vw,3.5rem)] font-medium leading-tight text-espresso">
+          <h2 className="relative font-cormorant text-[clamp(2rem,4vw,3.5rem)] font-medium leading-tight text-espresso">
             Contact Us
           </h2>
-          <p className="mx-auto mt-4 max-w-lg font-jost text-sm leading-relaxed text-brown-warm/70">
+          <p className="relative mx-auto mt-4 max-w-lg font-jost text-sm leading-relaxed text-brown-warm/70">
             Ready to start your journey to a refreshed smile? Reach out and we&apos;ll take it from there.
           </p>
         </motion.div>
@@ -77,16 +122,48 @@ export default function ContactSection() {
             {/* Trading Hours Widget */}
             <TradingHours />
 
-            {/* Contact Info Cards */}
+            {/* Contact Info Cards with animated dotted path */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: '-80px' }}
               transition={{ duration: 0.5, delay: 0.1 }}
-              className="space-y-4"
+              className="relative space-y-4"
             >
+              {/* Animated dotted path line connecting the cards */}
+              <svg
+                className="absolute left-5 top-14 bottom-14 w-px hidden lg:block pointer-events-none"
+                style={{ height: 'calc(100% - 112px)' }}
+                aria-hidden="true"
+              >
+                <motion.line
+                  x1="0.5"
+                  y1="0"
+                  x2="0.5"
+                  y2="100%"
+                  stroke="#C9A96E"
+                  strokeWidth="1"
+                  strokeDasharray="4 6"
+                  style={{ pathLength: pathProgress, strokeOpacity: 0.3 }}
+                />
+              </svg>
+
               {/* Address */}
-              <div className="flex items-start gap-4 rounded-xl bg-white p-4 border border-soft-border">
+              <motion.div
+                className="flex items-start gap-4 rounded-xl bg-white p-4 border border-soft-border transition-all duration-300 cursor-default"
+                onMouseEnter={() => setHoveredCard('address')}
+                onMouseLeave={() => setHoveredCard(null)}
+                whileHover={{ y: -2 }}
+                style={
+                  hoveredCard === 'address'
+                    ? {
+                        backgroundColor: 'rgba(255,255,255,0.6)',
+                        backdropFilter: 'blur(16px)',
+                        WebkitBackdropFilter: 'blur(16px)',
+                      }
+                    : {}
+                }
+              >
                 <div className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full bg-champagne-gold/10">
                   <MapPin className="h-5 w-5 text-champagne-gold" />
                 </div>
@@ -98,10 +175,24 @@ export default function ContactSection() {
                     Pretoria 0157
                   </p>
                 </div>
-              </div>
+              </motion.div>
 
               {/* Phone */}
-              <div className="flex items-start gap-4 rounded-xl bg-white p-4 border border-soft-border">
+              <motion.div
+                className="flex items-start gap-4 rounded-xl bg-white p-4 border border-soft-border transition-all duration-300 cursor-default"
+                onMouseEnter={() => setHoveredCard('phone')}
+                onMouseLeave={() => setHoveredCard(null)}
+                whileHover={{ y: -2 }}
+                style={
+                  hoveredCard === 'phone'
+                    ? {
+                        backgroundColor: 'rgba(255,255,255,0.6)',
+                        backdropFilter: 'blur(16px)',
+                        WebkitBackdropFilter: 'blur(16px)',
+                      }
+                    : {}
+                }
+              >
                 <div className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full bg-sage-teal/10">
                   <Phone className="h-5 w-5 text-sage-teal" />
                 </div>
@@ -114,10 +205,24 @@ export default function ContactSection() {
                     061 416 4649
                   </a>
                 </div>
-              </div>
+              </motion.div>
 
               {/* Email */}
-              <div className="flex items-start gap-4 rounded-xl bg-white p-4 border border-soft-border">
+              <motion.div
+                className="flex items-start gap-4 rounded-xl bg-white p-4 border border-soft-border transition-all duration-300 cursor-default"
+                onMouseEnter={() => setHoveredCard('email')}
+                onMouseLeave={() => setHoveredCard(null)}
+                whileHover={{ y: -2 }}
+                style={
+                  hoveredCard === 'email'
+                    ? {
+                        backgroundColor: 'rgba(255,255,255,0.6)',
+                        backdropFilter: 'blur(16px)',
+                        WebkitBackdropFilter: 'blur(16px)',
+                      }
+                    : {}
+                }
+              >
                 <div className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full bg-warm-blush/20">
                   <Mail className="h-5 w-5 text-warm-blush" />
                 </div>
@@ -130,7 +235,7 @@ export default function ContactSection() {
                     drlebo@refreshdental.co.za
                   </a>
                 </div>
-              </div>
+              </motion.div>
             </motion.div>
 
             {/* WhatsApp Button with pulsing ring */}
@@ -231,11 +336,46 @@ export default function ContactSection() {
             transition={{ duration: 0.6, delay: 0.1 }}
             className="lg:col-span-3"
           >
-            <div className="rounded-2xl border border-soft-border bg-white p-6 md:p-8 shadow-sm">
-              <h3 className="font-dm-serif text-xl text-espresso mb-6">
+            <div className="relative overflow-hidden rounded-2xl border border-soft-border bg-white p-6 md:p-8 shadow-sm">
+              {/* Paper texture overlay (SVG noise, mix-blend-overlay, 2% opacity) */}
+              <svg
+                className="absolute inset-0 w-full h-full pointer-events-none z-[1]"
+                aria-hidden="true"
+                style={{ mixBlendMode: 'overlay', opacity: 0.02 }}
+              >
+                <filter id="noise-filter-contact">
+                  <feTurbulence
+                    type="fractalNoise"
+                    baseFrequency="0.65"
+                    numOctaves="3"
+                    stitchTiles="stitch"
+                  />
+                  <feColorMatrix type="saturate" values="0" />
+                </filter>
+                <rect width="100%" height="100%" filter="url(#noise-filter-contact)" />
+              </svg>
+
+              <h3 className="relative font-dm-serif text-xl text-espresso mb-6">
                 Send Us a Message
               </h3>
-              <ContactForm />
+              <div className="relative">
+                <ContactForm />
+              </div>
+
+              {/* Tooth icon watermark — bottom-right corner */}
+              <motion.div
+                className="absolute bottom-4 right-4 z-0 pointer-events-none"
+                animate={{ rotate: [0, 360] }}
+                transition={{ duration: 30, repeat: Infinity, ease: 'linear' }}
+                aria-hidden="true"
+              >
+                <svg width="40" height="40" viewBox="0 0 40 40" className="opacity-[0.03]">
+                  <path
+                    d="M20 2C15 2 11 5 10 9C8.5 14 9 18 11 22C12.5 25 13 28 13 32C13 35 14.5 38 16 38C17.5 38 18 36 19 33C19.5 31.5 20 30 20 30C20 30 20.5 31.5 21 33C22 36 22.5 38 24 38C25.5 38 27 35 27 32C27 28 27.5 25 29 22C31 18 31.5 14 30 9C29 5 25 2 20 2Z"
+                    fill="#C9A96E"
+                  />
+                </svg>
+              </motion.div>
             </div>
           </motion.div>
         </div>

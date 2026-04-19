@@ -173,11 +173,28 @@ export default function SeasonalPromo() {
               >
                 {offer.tabLabel}
               </span>
-              {/* Active indicator */}
+              {/* Decorative ribbon badge on active tab */}
+              <AnimatePresence>
+                {activeTab === index && (
+                  <motion.span
+                    initial={{ scale: 0, opacity: 0 }}
+                    animate={{ scale: 1, opacity: 1 }}
+                    exit={{ scale: 0, opacity: 0 }}
+                    transition={{ type: 'spring', stiffness: 400, damping: 20 }}
+                    className="absolute -top-2.5 left-1/2 -translate-x-1/2 rounded-full bg-champagne-gold px-2.5 py-0.5 font-jost text-[9px] font-bold uppercase tracking-wider text-espresso shadow-md z-20 whitespace-nowrap"
+                  >
+                    {offer.badge}
+                  </motion.span>
+                )}
+              </AnimatePresence>
+              {/* Active indicator with glow transition */}
               {activeTab === index && (
                 <motion.div
                   className="absolute bottom-0 left-0 right-0 h-0.5"
-                  style={{ backgroundColor: '#C9A96E' }}
+                  style={{
+                    backgroundColor: '#C9A96E',
+                    boxShadow: '0 0 8px rgba(201, 169, 110, 0.4)',
+                  }}
                   layoutId="promo-tab-indicator"
                   transition={{ type: 'spring', stiffness: 400, damping: 30 }}
                 />
@@ -196,24 +213,79 @@ export default function SeasonalPromo() {
               initial="enter"
               animate="center"
               exit="exit"
-              className="grid grid-cols-1 items-center gap-8 rounded-3xl border border-champagne-gold/15 bg-white p-6 shadow-sm sm:p-8 md:grid-cols-2 md:gap-12"
+              className="relative grid grid-cols-1 items-center gap-8 rounded-3xl border border-champagne-gold/15 bg-white p-6 shadow-sm sm:p-8 md:grid-cols-2 md:gap-12 overflow-hidden"
             >
+              {/* Diagonal stripe pattern background (ivory lines, 2% opacity) */}
+              <div
+                className="absolute inset-0 pointer-events-none z-0"
+                aria-hidden="true"
+                style={{
+                  backgroundImage: `repeating-linear-gradient(
+                    -45deg,
+                    transparent,
+                    transparent 18px,
+                    rgba(253, 250, 246, 0.02) 18px,
+                    rgba(253, 250, 246, 0.02) 20px
+                  )`,
+                }}
+              />
+
               {/* Left — Icon & Title */}
-              <div className="space-y-5 text-center md:text-left">
+              <div className="relative z-10 space-y-5 text-center md:text-left">
                 <div className="mx-auto flex h-20 w-20 items-center justify-center rounded-2xl bg-champagne-gold/10 text-champagne-gold md:mx-0">
                   {activeOffer.icon}
                 </div>
-                <h3 className="font-dm-serif text-2xl text-espresso">
-                  {activeOffer.title}
-                </h3>
+                <div className="flex items-center justify-center md:justify-start gap-2">
+                  <h3 className="font-dm-serif text-2xl text-espresso">
+                    {activeOffer.title}
+                  </h3>
+                  {/* Limited Time urgency badge with pulsing dot */}
+                  <motion.span
+                    className="inline-flex items-center gap-1.5 rounded-full border border-champagne-gold/30 bg-champagne-gold/5 px-2.5 py-0.5 font-jost text-[10px] font-semibold uppercase tracking-wider text-champagne-gold"
+                    initial={{ opacity: 0, scale: 0.8 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{ duration: 0.4 }}
+                  >
+                    <motion.span
+                      className="inline-block h-1.5 w-1.5 rounded-full bg-champagne-gold"
+                      animate={{ opacity: [1, 0.3, 1], scale: [1, 0.8, 1] }}
+                      transition={{ duration: 1.5, repeat: Infinity, ease: 'easeInOut' }}
+                    />
+                    Limited Time
+                  </motion.span>
+                </div>
                 <p className="font-jost text-sm leading-relaxed text-brown-warm/70">
                   {activeOffer.description}
                 </p>
-                {/* Price */}
+                {/* Price with animated gold sparkles */}
                 <div className="flex items-baseline gap-3 justify-center md:justify-start">
+                  {/* Sparkle left of price */}
+                  <motion.svg
+                    width="14"
+                    height="14"
+                    viewBox="0 0 14 14"
+                    className="text-champagne-gold flex-shrink-0"
+                    aria-hidden="true"
+                    animate={{ opacity: [0.4, 1, 0.4], scale: [0.8, 1.1, 0.8] }}
+                    transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
+                  >
+                    <path d="M7 0L8.5 5.5L14 7L8.5 8.5L7 14L5.5 8.5L0 7L5.5 5.5Z" fill="currentColor" />
+                  </motion.svg>
                   <span className="font-cormorant text-4xl font-semibold text-champagne-gold">
                     {activeOffer.price}
                   </span>
+                  {/* Sparkle right of price */}
+                  <motion.svg
+                    width="10"
+                    height="10"
+                    viewBox="0 0 14 14"
+                    className="text-champagne-gold flex-shrink-0"
+                    aria-hidden="true"
+                    animate={{ opacity: [0.3, 0.9, 0.3], scale: [0.7, 1, 0.7] }}
+                    transition={{ duration: 2.5, repeat: Infinity, ease: 'easeInOut', delay: 0.8 }}
+                  >
+                    <path d="M7 0L8.5 5.5L14 7L8.5 8.5L7 14L5.5 8.5L0 7L5.5 5.5Z" fill="currentColor" />
+                  </motion.svg>
                   {activeOffer.originalPrice && (
                     <span className="font-jost text-base text-brown-warm/40 line-through">
                       {activeOffer.originalPrice}
@@ -230,8 +302,8 @@ export default function SeasonalPromo() {
                 </div>
               </div>
 
-              {/* Right — Features */}
-              <div className="space-y-3">
+              {/* Right — Features with animated check marks */}
+              <div className="relative z-10 space-y-3">
                 {activeOffer.features.map((feature, i) => (
                   <motion.div
                     key={feature}
@@ -240,8 +312,40 @@ export default function SeasonalPromo() {
                     transition={{ duration: 0.3, delay: i * 0.06 }}
                     className="flex items-center gap-3"
                   >
+                    {/* Animated check mark with stroke-dashoffset */}
                     <div className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-sage-teal/10">
-                      <Check className="h-3.5 w-3.5 text-sage-teal" />
+                      <svg
+                        width="14"
+                        height="14"
+                        viewBox="0 0 14 14"
+                        className="text-sage-teal"
+                        aria-hidden="true"
+                      >
+                        <motion.circle
+                          cx="7"
+                          cy="7"
+                          r="6"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth="1"
+                          strokeDasharray="38"
+                          initial={{ strokeDashoffset: 38 }}
+                          animate={{ strokeDashoffset: 0 }}
+                          transition={{ duration: 0.4, delay: i * 0.06 + 0.1, ease: 'easeOut' }}
+                        />
+                        <motion.path
+                          d="M4 7L6.5 9.5L10 5"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth="1.5"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeDasharray="14"
+                          initial={{ strokeDashoffset: 14 }}
+                          animate={{ strokeDashoffset: 0 }}
+                          transition={{ duration: 0.3, delay: i * 0.06 + 0.3, ease: 'easeOut' }}
+                        />
+                      </svg>
                     </div>
                     <span className="font-jost text-sm text-brown-warm/80">
                       {feature}

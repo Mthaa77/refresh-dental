@@ -35,6 +35,10 @@ const sparkles = [
   { x: '5%', y: '75%', size: 5, delay: 1.6 },
   { x: '88%', y: '82%', size: 3, delay: 2.4 },
   { x: '50%', y: '5%', size: 4, delay: 0.4 },
+  /* 3 new premium sparkles with larger sizes */
+  { x: '15%', y: '45%', size: 4, delay: 1.2 },
+  { x: '78%', y: '35%', size: 8, delay: 0.6 },
+  { x: '42%', y: '88%', size: 12, delay: 2.0 },
 ]
 
 const containerVariants = {
@@ -58,18 +62,52 @@ export default function EmergencyDental() {
 
   return (
     <section id="emergency" className="relative overflow-hidden">
-      {/* Animated gold border at top */}
+      {/* Animated red-to-gold gradient border at top (3px) */}
       <motion.div
-        className="absolute top-0 left-0 right-0 h-1 z-10"
+        className="absolute top-0 left-0 right-0 h-[3px] z-10"
         initial={{ scaleX: 0 }}
         whileInView={{ scaleX: 1 }}
         viewport={{ once: true }}
-        transition={{ duration: 1, ease: 'easeOut' }}
+        transition={{ duration: 1.2, ease: 'easeOut' }}
         style={{
-          background: 'linear-gradient(90deg, transparent, #C9A96E, #E8D5B0, #C9A96E, transparent)',
+          background: 'linear-gradient(90deg, transparent 0%, #dc2626 20%, #C9A96E 50%, #dc2626 80%, transparent 100%)',
           transformOrigin: 'left',
         }}
       />
+
+      {/* Vignette overlay — radial gradient, transparent center → dark-red/30 edges */}
+      <div
+        className="absolute inset-0 z-[5] pointer-events-none"
+        style={{
+          background: 'radial-gradient(ellipse at center, transparent 40%, rgba(127, 29, 29, 0.3) 100%)',
+        }}
+      />
+
+      {/* Corner decorative cross/plus marks (gold, 10px) */}
+      {/* Top-left */}
+      <div className="absolute top-8 left-6 z-[6]" aria-hidden="true">
+        <svg width="10" height="10" viewBox="0 0 10 10" fill="none">
+          <path d="M5 0V10M0 5H10" stroke="#C9A96E" strokeWidth="1.2" strokeLinecap="round" />
+        </svg>
+      </div>
+      {/* Top-right */}
+      <div className="absolute top-8 right-6 z-[6]" aria-hidden="true">
+        <svg width="10" height="10" viewBox="0 0 10 10" fill="none">
+          <path d="M5 0V10M0 5H10" stroke="#C9A96E" strokeWidth="1.2" strokeLinecap="round" />
+        </svg>
+      </div>
+      {/* Bottom-left */}
+      <div className="absolute bottom-8 left-6 z-[6]" aria-hidden="true">
+        <svg width="10" height="10" viewBox="0 0 10 10" fill="none">
+          <path d="M5 0V10M0 5H10" stroke="#C9A96E" strokeWidth="1.2" strokeLinecap="round" />
+        </svg>
+      </div>
+      {/* Bottom-right */}
+      <div className="absolute bottom-8 right-6 z-[6]" aria-hidden="true">
+        <svg width="10" height="10" viewBox="0 0 10 10" fill="none">
+          <path d="M5 0V10M0 5H10" stroke="#C9A96E" strokeWidth="1.2" strokeLinecap="round" />
+        </svg>
+      </div>
 
       {/* Background gradient */}
       <div className="bg-gradient-to-br from-red-900/90 via-red-950/95 to-[#1A1510]" />
@@ -138,7 +176,7 @@ export default function EmergencyDental() {
               We&apos;re here for you 24/7. Don&apos;t wait — call now.
             </p>
 
-            {/* Phone icon with pulse rings */}
+            {/* Phone icon with pulse rings + heartbeat */}
             <div className="relative flex items-center justify-center lg:justify-start">
               <motion.a
                 href="tel:0123456789"
@@ -166,12 +204,27 @@ export default function EmergencyDental() {
                   />
                 ))}
 
-                {/* Phone icon background */}
+                {/* Phone icon background with heartbeat pulse */}
                 <motion.div
                   className="flex h-20 w-20 items-center justify-center rounded-full sm:h-24 sm:w-24"
                   style={{ backgroundColor: 'rgba(201, 169, 110, 0.15)' }}
-                  animate={isHovering ? { scale: 1.08 } : { scale: 1 }}
-                  transition={{ type: 'spring', stiffness: 300, damping: 15 }}
+                  animate={
+                    isHovering
+                      ? { scale: 1.08 }
+                      : {
+                          scale: [1, 1.08, 1],
+                        }
+                  }
+                  transition={
+                    isHovering
+                      ? { type: 'spring', stiffness: 300, damping: 15 }
+                      : {
+                          duration: 1.5,
+                          repeat: Infinity,
+                          ease: 'easeInOut',
+                          times: [0, 0.5, 1],
+                        }
+                  }
                 >
                   <Phone className="h-10 w-10 text-champagne-gold sm:h-12 sm:w-12" />
                 </motion.div>
@@ -238,7 +291,7 @@ export default function EmergencyDental() {
           </motion.div>
         </motion.div>
 
-        {/* Centered Call Now CTA */}
+        {/* Centered Call Now CTA with shimmer sweep */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -248,12 +301,25 @@ export default function EmergencyDental() {
         >
           <motion.a
             href="tel:0123456789"
-            className="inline-flex items-center gap-3 rounded-full bg-champagne-gold px-10 py-4 font-jost text-base font-semibold text-espresso shadow-lg transition-all hover:bg-champagne-gold/90 hover:shadow-xl sm:px-12 sm:py-5 sm:text-lg"
+            className="relative inline-flex items-center gap-3 overflow-hidden rounded-full bg-champagne-gold px-10 py-4 font-jost text-base font-semibold text-espresso shadow-lg transition-all hover:bg-champagne-gold/90 hover:shadow-xl sm:px-12 sm:py-5 sm:text-lg"
             whileHover={{ scale: 1.05, y: -2 }}
             whileTap={{ scale: 0.97 }}
           >
-            <Phone className="h-5 w-5 sm:h-6 sm:w-6" />
-            Call Now
+            {/* Shimmer sweep overlay */}
+            <motion.div
+              className="absolute inset-0 z-0 pointer-events-none"
+              animate={{ x: ['-100%', '100%'] }}
+              transition={{
+                duration: 2.5,
+                repeat: Infinity,
+                ease: 'linear',
+              }}
+              style={{
+                background: 'linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.15) 50%, transparent 100%)',
+              }}
+            />
+            <Phone className="relative z-10 h-5 w-5 sm:h-6 sm:w-6" />
+            <span className="relative z-10">Call Now</span>
           </motion.a>
         </motion.div>
       </div>
