@@ -1,6 +1,7 @@
 'use client'
 
-import { motion } from 'framer-motion'
+import { useRef, useCallback, useEffect, useState } from 'react'
+import { motion, useInView, useSpring, useMotionValue, useTransform } from 'framer-motion'
 import { Star, Users, Award, Shield } from 'lucide-react'
 
 const indicators = [
@@ -10,12 +11,12 @@ const indicators = [
     numberSuffix: '★',
     title: '5.0 Star Rating',
     description: 'Rated 5.0/5 on Google Reviews',
-    accentBg: 'bg-champagne-gold/10',
     accentText: 'text-champagne-gold',
-    borderColor: 'border-champagne-gold/20 hover:border-champagne-gold/40',
+    borderColor: 'border-champagne-gold/20',
     iconBg: 'bg-champagne-gold/15',
     iconColor: 'text-champagne-gold',
     stars: true,
+    glowColor: 'rgba(201, 169, 110, 0.15)',
   },
   {
     icon: Users,
@@ -23,12 +24,12 @@ const indicators = [
     numberSuffix: '+',
     title: 'Happy Patients',
     description: 'And counting — join our growing family',
-    accentBg: 'bg-sage-teal/10',
     accentText: 'text-sage-teal',
-    borderColor: 'border-sage-teal/15 hover:border-sage-teal/30',
+    borderColor: 'border-sage-teal/15',
     iconBg: 'bg-sage-teal/10',
     iconColor: 'text-sage-teal',
     stars: false,
+    glowColor: 'rgba(61, 125, 110, 0.15)',
   },
   {
     icon: Award,
@@ -36,12 +37,12 @@ const indicators = [
     numberSuffix: '+',
     title: 'Years Experience',
     description: 'A decade of excellence in dental care',
-    accentBg: 'bg-champagne-gold/10',
     accentText: 'text-champagne-gold',
-    borderColor: 'border-champagne-gold/20 hover:border-champagne-gold/40',
+    borderColor: 'border-champagne-gold/20',
     iconBg: 'bg-champagne-gold/15',
     iconColor: 'text-champagne-gold',
     stars: false,
+    glowColor: 'rgba(201, 169, 110, 0.15)',
   },
   {
     icon: Shield,
@@ -49,12 +50,12 @@ const indicators = [
     numberSuffix: '',
     title: 'Registered',
     description: 'Fully registered and compliant',
-    accentBg: 'bg-sage-teal/10',
     accentText: 'text-sage-teal',
-    borderColor: 'border-sage-teal/15 hover:border-sage-teal/30',
+    borderColor: 'border-sage-teal/15',
     iconBg: 'bg-sage-teal/10',
     iconColor: 'text-sage-teal',
     stars: false,
+    glowColor: 'rgba(61, 125, 110, 0.15)',
   },
 ]
 
@@ -74,10 +75,168 @@ const itemVariants = {
   },
 }
 
+function SpringNumber({ target, suffix, className }: { target: string; suffix: string; className: string }) {
+  const ref = useRef<HTMLSpanElement>(null)
+  const isInView = useInView(ref, { once: true, margin: '-40px' })
+  const numericTarget = parseFloat(target.replace(/[^0-9.]/g, ''))
+  const isNumeric = !isNaN(numericTarget)
+  const isDecimal = target.includes('.')
+  const numericValue = isNumeric ? numericTarget : 0
+
+  const spring = useSpring(0, { stiffness: 60, damping: 18, mass: 1.2 })
+  const motionVal = useMotionValue(0)
+
+  const [displayValue, setDisplayValue] = useState(isNumeric ? '0' : target)
+
+  // Sync spring to motion value and update display
+  useEffect(() => {
+    const unsub = spring.on('change', (v) => {
+      if (isDecimal) {
+        setDisplayValue(v.toFixed(1))
+      } else {
+        setDisplayValue(Math.round(v).toString())
+      }
+    })
+    return unsub
+  }, [spring, isDecimal])
+
+  // Start animation when in view
+  useEffect(() => {
+    if (isInView && isNumeric) {
+      spring.set(numericValue)
+    }
+  }, [isInView, isNumeric, numericValue, spring])
+
+  return (
+    <span ref={ref} className={className}>
+      {isNumeric ? displayValue : target}
+      <span className="text-2xl md:text-3xl">{suffix}</span>
+    </span>
+  )
+}
+
+function TrustCard({ item }: { item: (typeof indicators)[number] }) {
+  const cardRef = useRef<HTMLDivElement>(null)
+
+  const rotateX = useSpring(0, { stiffness: 200, damping: 20 })
+  const rotateY = useSpring(0, { stiffness: 200, damping: 20 })
+
+  const handleMouseMove = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
+    if (!cardRef.current) return
+    const rect = cardRef.current.getBoundingClientRect()
+    const centerX = rect.left + rect.width / 2
+    const centerY = rect.top + rect.height / 2
+    const percentX = (e.clientX - centerX) / (rect.width / 2)
+    const percentY = (e.clientY - centerY) / (rect.height / 2)
+    rotateX.set(-percentY * 8)
+    rotateY.set(percentX * 8)
+  }, [rotateX, rotateY])
+
+  const handleMouseLeave = useCallback(() => {
+    rotateX.set(0)
+    rotateY.set(0)
+  }, [rotateX, rotateY])
+
+  const Icon = item.icon
+
+  return (
+    <motion.div
+      ref={cardRef}
+      variants={itemVariants}
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
+      style={{
+        perspective: 600,
+        rotateX,
+        rotateY,
+        transformStyle: 'preserve-3d',
+      }}
+      whileHover={{
+        y: -4,
+        transition: { duration: 0.3 },
+      }}
+      className={`group relative rounded-2xl border ${item.borderColor} bg-white p-5 md:p-6 text-center transition-colors duration-300`}
+    >
+      {/* Pulsing accent glow */}
+      <motion.div
+        className="absolute inset-0 rounded-2xl pointer-events-none"
+        animate={{
+          boxShadow: [
+            `0 0 0px ${item.glowColor}`,
+            `0 0 20px ${item.glowColor}`,
+            `0 0 0px ${item.glowColor}`,
+          ],
+        }}
+        transition={{
+          duration: 3,
+          repeat: Infinity,
+          ease: 'easeInOut',
+        }}
+      />
+
+      {/* Icon with 3D effect and pulsing opacity */}
+      <div style={{ transform: 'translateZ(20px)' }}>
+        <motion.div
+          className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-xl transition-transform duration-300"
+          animate={{
+            opacity: [0.7, 1, 0.7],
+          }}
+          transition={{
+            duration: 3,
+            repeat: Infinity,
+            ease: 'easeInOut',
+          }}
+        >
+          <div className={`flex h-12 w-12 items-center justify-center rounded-xl ${item.iconBg}`}>
+            <Icon className={`h-6 w-6 ${item.iconColor}`} strokeWidth={1.5} />
+          </div>
+        </motion.div>
+      </div>
+
+      {/* Stars (only for rating) */}
+      {item.stars && (
+        <div className="flex items-center justify-center gap-0.5 mb-2">
+          {[...Array(5)].map((_, i) => (
+            <Star
+              key={i}
+              className="h-3.5 w-3.5 text-champagne-gold fill-champagne-gold"
+            />
+          ))}
+        </div>
+      )}
+
+      {/* Number with spring animation */}
+      <SpringNumber
+        target={item.number}
+        suffix={item.numberSuffix}
+        className={`font-cormorant text-3xl md:text-4xl font-medium mb-1 ${item.accentText}`}
+      />
+
+      {/* Title */}
+      <h3 className="font-dm-serif text-sm md:text-base text-espresso mb-1.5">
+        {item.title}
+      </h3>
+
+      {/* Description */}
+      <p className="font-jost text-xs font-light leading-relaxed text-brown-warm/60">
+        {item.description}
+      </p>
+    </motion.div>
+  )
+}
+
 export default function TrustIndicators() {
   return (
-    <section className="bg-white border-t border-b border-soft-border py-16 md:py-20">
-      <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+    <section className="bg-white border-t border-b border-soft-border py-16 md:py-20 relative overflow-hidden">
+      {/* Subtle radial gradient background emanating from center */}
+      <div
+        className="pointer-events-none absolute inset-0"
+        style={{
+          background: 'radial-gradient(ellipse at center, rgba(201, 169, 110, 0.03) 0%, transparent 70%)',
+        }}
+      />
+
+      <div className="relative z-10 mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -92,7 +251,26 @@ export default function TrustIndicators() {
           <h2 className="font-cormorant text-[clamp(1.75rem,3.5vw,3rem)] font-medium leading-tight text-espresso">
             Trusted by Centurion Families
           </h2>
+          {/* "Our Promise" subtitle */}
+          <motion.p
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.3, duration: 0.6 }}
+            className="mt-2 font-cormorant text-base md:text-lg italic text-champagne-gold/60"
+          >
+            Our Promise
+          </motion.p>
         </motion.div>
+
+        {/* Gold line separator */}
+        <motion.div
+          initial={{ scaleX: 0, opacity: 0 }}
+          whileInView={{ scaleX: 1, opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8, ease: [0.25, 0.46, 0.45, 0.94] }}
+          className="mb-10 md:mb-12 mx-auto h-px max-w-xs bg-gradient-to-r from-transparent via-champagne-gold/40 to-transparent origin-center"
+        />
 
         {/* Indicators Grid */}
         <motion.div
@@ -102,59 +280,9 @@ export default function TrustIndicators() {
           viewport={{ once: true, margin: '-60px' }}
           className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6"
         >
-          {indicators.map((item) => {
-            const Icon = item.icon
-            return (
-              <motion.div
-                key={item.title}
-                variants={itemVariants}
-                whileHover={{
-                  y: -4,
-                  scale: 1.02,
-                  boxShadow: '0 12px 40px -8px rgba(201, 169, 110, 0.1)',
-                  transition: { duration: 0.3 },
-                }}
-                className={`group rounded-2xl border ${item.borderColor} bg-white p-5 md:p-6 text-center transition-colors duration-300`}
-              >
-                {/* Icon */}
-                <div
-                  className={`mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-xl ${item.iconBg} transition-transform duration-300 group-hover:scale-110`}
-                >
-                  <Icon className={`h-6 w-6 ${item.iconColor}`} strokeWidth={1.5} />
-                </div>
-
-                {/* Stars (only for rating) */}
-                {item.stars && (
-                  <div className="flex items-center justify-center gap-0.5 mb-2">
-                    {[...Array(5)].map((_, i) => (
-                      <Star
-                        key={i}
-                        className="h-3.5 w-3.5 text-champagne-gold fill-champagne-gold"
-                      />
-                    ))}
-                  </div>
-                )}
-
-                {/* Number */}
-                <div
-                  className={`font-cormorant text-3xl md:text-4xl font-medium ${item.accentText} mb-1`}
-                >
-                  {item.number}
-                  <span className="text-2xl md:text-3xl">{item.numberSuffix}</span>
-                </div>
-
-                {/* Title */}
-                <h3 className="font-dm-serif text-sm md:text-base text-espresso mb-1.5">
-                  {item.title}
-                </h3>
-
-                {/* Description */}
-                <p className="font-jost text-xs font-light leading-relaxed text-brown-warm/60">
-                  {item.description}
-                </p>
-              </motion.div>
-            )
-          })}
+          {indicators.map((item) => (
+            <TrustCard key={item.title} item={item} />
+          ))}
         </motion.div>
       </div>
     </section>

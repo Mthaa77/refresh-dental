@@ -31,6 +31,9 @@ import CookieConsent from '@/components/refresh-dental/cookie-consent'
 import ScrollToTop from '@/components/refresh-dental/scroll-to-top'
 import AppointmentQuickBook from '@/components/refresh-dental/appointment-quick-book'
 import AccessibilityPanel from '@/components/refresh-dental/theme-toggle'
+import PageSectionsNav from '@/components/refresh-dental/page-sections-nav'
+import SmileAssessment from '@/components/refresh-dental/smile-assessment'
+import ReferFriend from '@/components/refresh-dental/refer-friend'
 
 const LoadingScreen = dynamic(
   () => import('@/components/refresh-dental/loading-screen'),
@@ -41,6 +44,7 @@ export default function Home() {
   return (
     <>
       <LoadingScreen />
+      <PageSectionsNav />
       <ScrollProgress />
       <Navigation />
       <PromoBanner />
@@ -61,8 +65,10 @@ export default function Home() {
         <BeforeAfterSection />
         <PaymentSection />
         <FAQSection />
+        <ReferFriend />
         <CorporateWellnessSection />
         <DentalTipsSection />
+        <SmileAssessment />
         <InstagramFeed />
         <ContactSection />
         <NewsletterCta />

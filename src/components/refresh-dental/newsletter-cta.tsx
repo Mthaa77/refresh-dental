@@ -4,19 +4,20 @@ import { useState, useMemo } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { ArrowRight, Phone, Sparkles, Check } from 'lucide-react'
 
-/* ── Floating Sparkle Particles ── */
+/* ── Floating Sparkle Particles (deterministic to avoid hydration mismatch) ── */
 function SparkleParticles() {
   const particles = useMemo(
     () =>
-      Array.from({ length: 18 }, (_, i) => ({
-        id: i,
-        left: `${Math.random() * 100}%`,
-        top: `${Math.random() * 100}%`,
-        size: Math.random() * 3 + 1.5,
-        duration: Math.random() * 4 + 3,
-        delay: Math.random() * 5,
-        opacity: Math.random() * 0.4 + 0.1,
-      })),
+      Array.from({ length: 18 }, (_, i) => {
+        const seed = i * 7 + 3;
+        const left = (seed * 17) % 100;
+        const top = (seed * 31) % 100;
+        const size = 1.5 + (seed % 3);
+        const duration = 3 + (seed % 4);
+        const delay = (seed * 2) % 5;
+        const opacity = 0.1 + ((seed * 3) % 4) / 10;
+        return { id: i, left: `${left}%`, top: `${top}%`, size, duration, delay, opacity };
+      }),
     [],
   )
 
@@ -135,7 +136,7 @@ export default function NewsletterCTA() {
 
       {/* Background glow */}
       <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-champagne-gold/5 rounded-full blur-3xl" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] h-[300px] md:w-[600px] md:h-[600px] max-w-[90vw] bg-champagne-gold/5 rounded-full blur-3xl" />
       </div>
 
       {/* Floating sparkle particles */}

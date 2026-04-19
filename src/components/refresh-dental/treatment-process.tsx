@@ -1,6 +1,7 @@
 'use client'
 
-import { motion } from 'framer-motion'
+import { useState, useRef, useEffect } from 'react'
+import { motion, useScroll, useTransform } from 'framer-motion'
 import { Calendar, Stethoscope, ClipboardList, Heart, PartyPopper } from 'lucide-react'
 
 const steps = [
@@ -10,6 +11,7 @@ const steps = [
     title: 'Book Your Visit',
     description:
       "Schedule your appointment online, by phone, or WhatsApp. We'll find a time that works for you.",
+    duration: '~15 min',
   },
   {
     number: 2,
@@ -17,6 +19,7 @@ const steps = [
     title: 'Meet Dr. Malunga',
     description:
       'Your first consultation includes a thorough examination and personalised treatment plan.',
+    duration: '~30 min',
   },
   {
     number: 3,
@@ -24,6 +27,7 @@ const steps = [
     title: 'Custom Treatment Plan',
     description:
       "We'll discuss your options, costs, and timeline — no surprises, no pressure.",
+    duration: '~20 min',
   },
   {
     number: 4,
@@ -31,6 +35,7 @@ const steps = [
     title: 'Expert Care',
     description:
       'Experience gentle, precise dental care using the latest technology and techniques.',
+    duration: '~60 min',
   },
   {
     number: 5,
@@ -38,6 +43,7 @@ const steps = [
     title: 'Enjoy Your Smile',
     description:
       'Walk out with the confidence of a refreshed, revitalised smile.',
+    duration: 'Lifetime',
   },
 ]
 
@@ -73,6 +79,12 @@ function StepCard({
   isLast: boolean
 }) {
   const Icon = step.icon
+  const [bouncing, setBouncing] = useState(false)
+
+  const handleBounce = () => {
+    setBouncing(true)
+    setTimeout(() => setBouncing(false), 600)
+  }
 
   return (
     <div className="relative flex flex-col items-center text-center">
@@ -83,6 +95,21 @@ function StepCard({
       >
         {/* Numbered circle with icon */}
         <div className="relative mb-5">
+          {/* Pulsing ring */}
+          <motion.div
+            className="absolute inset-0 rounded-full border-2 border-champagne-gold/20"
+            animate={{
+              scale: [1, 1.15, 1],
+              opacity: [0.3, 0.6, 0.3],
+            }}
+            transition={{
+              duration: 3,
+              repeat: Infinity,
+              ease: 'easeInOut',
+              delay: step.number * 0.3,
+            }}
+            style={{ margin: '-4px' }}
+          />
           {/* Outer gold ring */}
           <div className="flex h-20 w-20 items-center justify-center rounded-full border-2 border-champagne-gold/40 bg-ivory">
             {/* Inner circle */}
@@ -90,10 +117,24 @@ function StepCard({
               <Icon className="h-7 w-7 text-sage-teal" strokeWidth={1.5} />
             </div>
           </div>
-          {/* Number badge */}
-          <div className="absolute -top-1 -right-1 flex h-7 w-7 items-center justify-center rounded-full bg-champagne-gold text-xs font-bold text-espresso font-jost shadow-md">
+          {/* Number badge with bounce */}
+          <motion.button
+            onClick={handleBounce}
+            className="absolute -top-1 -right-1 flex h-7 w-7 items-center justify-center rounded-full bg-champagne-gold text-xs font-bold text-espresso font-jost shadow-md cursor-pointer border-0 outline-none"
+            animate={bouncing ? {
+              y: [0, -12, -4, -8, 0],
+              scale: [1, 1.15, 0.95, 1.05, 1],
+            } : {}}
+            transition={{
+              duration: 0.6,
+              type: 'spring',
+              stiffness: 400,
+              damping: 8,
+            }}
+            aria-label={`Step ${step.number}: ${step.title}`}
+          >
             {step.number}
-          </div>
+          </motion.button>
         </div>
 
         {/* Title */}
@@ -105,9 +146,22 @@ function StepCard({
         <p className="font-jost text-sm font-light leading-relaxed text-brown-warm/70 max-w-[220px]">
           {step.description}
         </p>
+
+        {/* Estimated time label */}
+        <motion.span
+          className="mt-3 inline-flex items-center gap-1 rounded-full border border-champagne-gold/20 bg-champagne-gold/5 px-3 py-1"
+          initial={{ opacity: 0, y: 6 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.5 + step.number * 0.1, duration: 0.4 }}
+        >
+          <span className="font-jost text-[11px] font-medium text-champagne-gold/70">
+            {step.duration}
+          </span>
+        </motion.span>
       </motion.div>
 
-      {/* Desktop connecting line (horizontal) */}
+      {/* Desktop connecting line (horizontal) with gradient animation */}
       {!isLast && (
         <motion.div
           variants={lineVariants}
@@ -121,13 +175,60 @@ function StepCard({
 }
 
 function MobileTimeline() {
+  const timelineRef = useRef<HTMLDivElement>(null)
+  const [timelineHeight, setTimelineHeight] = useState(0)
+
+  const { scrollYProgress } = useScroll({
+    target: timelineRef,
+    offset: ['start end', 'end start'],
+  })
+
+  const lineScale = useTransform(scrollYProgress, [0.1, 0.8], [0, 1])
+  const dotY = useTransform(scrollYProgress, [0.1, 0.8], [0, timelineHeight * 0.8])
+
+  useEffect(() => {
+    const el = timelineRef.current
+    if (el) {
+      setTimelineHeight(el.scrollHeight)
+      const observer = new ResizeObserver(() => {
+        setTimelineHeight(el.scrollHeight)
+      })
+      observer.observe(el)
+      return () => observer.disconnect()
+    }
+  }, [])
+
   return (
-    <div className="lg:hidden relative pl-10">
-      {/* Vertical connecting line */}
+    <div className="lg:hidden relative pl-10" ref={timelineRef}>
+      {/* Vertical connecting line with scroll-driven animation */}
+      <div className="absolute left-[18px] top-5 bottom-5 w-px origin-top">
+        <motion.div
+          className="h-full w-full bg-gradient-to-b from-champagne-gold/60 via-champagne-gold/30 to-champagne-gold/60"
+          style={{ scaleY: lineScale }}
+        />
+      </div>
+
+      {/* Glowing dot that travels along the mobile timeline */}
       <motion.div
-        variants={lineVariants}
-        className="absolute left-[18px] top-5 bottom-5 w-px origin-top bg-gradient-to-b from-champagne-gold/60 via-champagne-gold/30 to-champagne-gold/60"
-      />
+        className="absolute left-[14px] top-5 z-20"
+        style={{ y: dotY }}
+      >
+        <motion.div
+          className="h-[9px] w-[9px] rounded-full bg-champagne-gold"
+          animate={{
+            boxShadow: [
+              '0 0 4px rgba(201, 169, 110, 0.4)',
+              '0 0 12px rgba(201, 169, 110, 0.8), 0 0 24px rgba(201, 169, 110, 0.3)',
+              '0 0 4px rgba(201, 169, 110, 0.4)',
+            ],
+          }}
+          transition={{
+            duration: 2,
+            repeat: Infinity,
+            ease: 'easeInOut',
+          }}
+        />
+      </motion.div>
 
       <motion.div
         variants={containerVariants}
@@ -142,6 +243,20 @@ function MobileTimeline() {
             <motion.div key={step.number} variants={stepVariants} className="relative flex gap-5">
               {/* Icon circle on the line */}
               <div className="absolute -left-10 top-0 flex h-9 w-9 items-center justify-center rounded-full border-2 border-champagne-gold/40 bg-ivory z-10">
+                {/* Pulsing ring for mobile */}
+                <motion.div
+                  className="absolute inset-[-3px] rounded-full border-2 border-champagne-gold/15"
+                  animate={{
+                    scale: [1, 1.2, 1],
+                    opacity: [0.2, 0.5, 0.2],
+                  }}
+                  transition={{
+                    duration: 3,
+                    repeat: Infinity,
+                    ease: 'easeInOut',
+                    delay: step.number * 0.3,
+                  }}
+                />
                 <div className="flex h-6 w-6 items-center justify-center rounded-full bg-white">
                   <Icon className="h-3.5 w-3.5 text-sage-teal" strokeWidth={1.5} />
                 </div>
@@ -160,6 +275,12 @@ function MobileTimeline() {
                 <p className="font-jost text-sm font-light leading-relaxed text-brown-warm/70">
                   {step.description}
                 </p>
+                {/* Mobile estimated time label */}
+                <span className="mt-2 inline-flex items-center rounded-full border border-champagne-gold/20 bg-champagne-gold/5 px-2.5 py-0.5">
+                  <span className="font-jost text-[10px] font-medium text-champagne-gold/70">
+                    {step.duration}
+                  </span>
+                </span>
               </div>
             </motion.div>
           )
@@ -169,10 +290,77 @@ function MobileTimeline() {
   )
 }
 
+function DesktopTimeline() {
+  const gridRef = useRef<HTMLDivElement>(null)
+
+  const { scrollYProgress } = useScroll({
+    target: gridRef,
+    offset: ['start end', 'end start'],
+  })
+
+  const dotX = useTransform(scrollYProgress, [0.1, 0.7], [0, 100])
+
+  return (
+    <div className="relative" ref={gridRef}>
+      <motion.div
+        variants={containerVariants}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: '-60px' }}
+        className="hidden lg:grid lg:grid-cols-5 lg:gap-4 xl:gap-6 relative z-10"
+      >
+        {steps.map((step, index) => (
+          <StepCard
+            key={step.number}
+            step={step}
+            isLast={index === steps.length - 1}
+          />
+        ))}
+      </motion.div>
+
+      {/* Glowing dot that travels along the desktop timeline */}
+      <motion.div
+        className="hidden lg:block absolute top-10 z-30 pointer-events-none"
+        style={{
+          left: useTransform(dotX, [0, 100], ['8%', '92%']),
+        }}
+      >
+        <motion.div
+          className="h-[10px] w-[10px] rounded-full bg-champagne-gold -translate-x-1/2 -translate-y-1/2"
+          animate={{
+            boxShadow: [
+              '0 0 4px rgba(201, 169, 110, 0.4)',
+              '0 0 14px rgba(201, 169, 110, 0.8), 0 0 28px rgba(201, 169, 110, 0.3)',
+              '0 0 4px rgba(201, 169, 110, 0.4)',
+            ],
+          }}
+          transition={{
+            duration: 2,
+            repeat: Infinity,
+            ease: 'easeInOut',
+          }}
+        />
+      </motion.div>
+    </div>
+  )
+}
+
 export default function TreatmentProcess() {
   return (
-    <section id="process" className="bg-ivory py-20 md:py-28">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <section id="process" className="bg-ivory py-20 md:py-28 relative overflow-hidden">
+      {/* Subtle diagonal stripe pattern for texture */}
+      <div className="pointer-events-none absolute inset-0 opacity-[0.02]">
+        <svg className="h-full w-full" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" viewBox="0 0 200 200">
+          <defs>
+            <pattern id="diagonal-stripes" patternUnits="userSpaceOnUse" width="12" height="12" patternTransform="rotate(45)">
+              <line x1="0" y1="0" x2="0" y2="12" stroke="#C9A96E" strokeWidth="1" />
+            </pattern>
+          </defs>
+          <rect width="100%" height="100%" fill="url(#diagonal-stripes)" />
+        </svg>
+      </div>
+
+      <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -196,21 +384,7 @@ export default function TreatmentProcess() {
         <MobileTimeline />
 
         {/* Desktop Timeline (horizontal) */}
-        <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: '-60px' }}
-          className="hidden lg:grid lg:grid-cols-5 lg:gap-4 xl:gap-6"
-        >
-          {steps.map((step, index) => (
-            <StepCard
-              key={step.number}
-              step={step}
-              isLast={index === steps.length - 1}
-            />
-          ))}
-        </motion.div>
+        <DesktopTimeline />
       </div>
     </section>
   )
