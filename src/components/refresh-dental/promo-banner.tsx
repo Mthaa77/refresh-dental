@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useRef, useCallback } from 'react'
 import { motion, AnimatePresence, useInView } from 'framer-motion'
-import { X, Gift } from 'lucide-react'
+import { X, Gift, Sparkles } from 'lucide-react'
 
 const STORAGE_KEY = 'refresh-dental-promo-dismissed'
 const AUTO_DISMISS_MS = 8000
@@ -144,6 +144,14 @@ export default function PromoBanner() {
                 </motion.div>
 
                 {/* Text */}
+                {/* Sparkle icon for visual flair */}
+                <motion.span
+                  className="hidden sm:flex shrink-0"
+                  animate={{ rotate: [0, 15, -15, 0], scale: [1, 1.1, 1] }}
+                  transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
+                >
+                  <Sparkles className="h-3.5 w-3.5 text-champagne-gold" />
+                </motion.span>
                 <motion.p
                   initial={{ opacity: 0, y: 8 }}
                   animate={{ opacity: 1, y: 0 }}
@@ -182,7 +190,7 @@ export default function PromoBanner() {
                 initial={{ opacity: 0, scale: 0.8 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ delay: 0.4, duration: 0.4 }}
-                className="hidden sm:inline-flex shrink-0 items-center gap-1.5 rounded-full bg-champagne-gold px-4 py-1.5 font-jost text-xs font-semibold uppercase tracking-wider text-espresso transition-all duration-300 hover:bg-champagne-gold-light hover:shadow-lg hover:shadow-champagne-gold/20 active:scale-95"
+                className="hidden sm:inline-flex shrink-0 items-center gap-1.5 rounded-full bg-champagne-gold px-4 py-1.5 font-jost text-xs font-semibold uppercase tracking-wider text-espresso transition-all duration-300 hover:bg-champagne-gold-light hover:shadow-lg hover:shadow-champagne-gold/20 active:scale-95 hover-lift"
                 whileHover={{ y: -1 }}
                 whileTap={{ scale: 0.97 }}
               >
@@ -206,7 +214,7 @@ export default function PromoBanner() {
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ delay: 0.5, duration: 0.3 }}
                 onClick={handleDismiss}
-                className="shrink-0 flex h-6 w-6 items-center justify-center rounded-full text-white/50 transition-colors duration-200 hover:bg-white/10 hover:text-white/90"
+                className="shrink-0 flex h-7 w-7 items-center justify-center rounded-full text-white/70 transition-all duration-200 hover:bg-white/15 hover:text-white hover:shadow-lg hover:shadow-white/10"
                 aria-label="Dismiss promotional banner"
               >
                 <X className="h-3.5 w-3.5" />
@@ -225,8 +233,18 @@ export default function PromoBanner() {
             />
           </div>
 
-          {/* Bottom gold accent line */}
-          <div className="h-px bg-gradient-to-r from-transparent via-champagne-gold/40 to-transparent relative z-10" />
+          {/* Animated gradient border at bottom */}
+          <motion.div
+            className="h-[1px] relative z-10"
+            animate={{
+              background: [
+                'linear-gradient(90deg, transparent 0%, rgba(201, 169, 110, 0.2) 30%, rgba(201, 169, 110, 0.6) 50%, rgba(201, 169, 110, 0.2) 70%, transparent 100%)',
+                'linear-gradient(90deg, transparent 0%, rgba(201, 169, 110, 0.4) 40%, rgba(232, 213, 176, 0.8) 50%, rgba(201, 169, 110, 0.4) 60%, transparent 100%)',
+                'linear-gradient(90deg, transparent 0%, rgba(201, 169, 110, 0.2) 30%, rgba(201, 169, 110, 0.6) 50%, rgba(201, 169, 110, 0.2) 70%, transparent 100%)',
+              ],
+            }}
+            transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
+          />
         </motion.div>
       )}
     </AnimatePresence>

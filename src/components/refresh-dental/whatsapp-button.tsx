@@ -62,7 +62,7 @@ export default function WhatsAppButton() {
                 transition={{ type: 'spring', stiffness: 400, damping: 20 }}
                 className="hidden md:block whitespace-nowrap bg-espresso text-ivory text-sm font-jost px-4 py-2 rounded-full shadow-lg"
               >
-                Chat with us
+                Chat with us on WhatsApp
                 {/* Tooltip arrow */}
                 <div className="absolute left-full top-1/2 -translate-y-1/2 -ml-1 w-2 h-2 rotate-45 bg-espresso rounded-sm" />
               </motion.span>
@@ -74,7 +74,7 @@ export default function WhatsAppButton() {
             href="https://wa.me/27614164649"
             target="_blank"
             rel="noopener noreferrer"
-            className="relative flex items-center justify-center w-14 h-14 rounded-full shadow-lg cursor-pointer"
+            className="relative flex items-center justify-center w-16 h-16 rounded-full shadow-gold-strong cursor-pointer"
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.95 }}
             onHoverStart={() => setIsHovered(true)}
@@ -114,7 +114,36 @@ export default function WhatsAppButton() {
               }}
             />
 
-            {/* Double concentric pulse rings (staggered timing) */}
+            {/* Pulsing gold ring (outer) */}
+            <motion.div
+              className="absolute inset-0 rounded-full"
+              style={{ border: '2px solid rgba(201, 169, 110, 0.5)' }}
+              animate={{
+                scale: [1, 1.7],
+                opacity: [0.6, 0],
+              }}
+              transition={{
+                duration: 2.5,
+                repeat: Infinity,
+                ease: 'easeOut',
+              }}
+            />
+            {/* Pulsing gold ring (inner) */}
+            <motion.div
+              className="absolute inset-0 rounded-full"
+              style={{ border: '1.5px solid rgba(201, 169, 110, 0.35)' }}
+              animate={{
+                scale: [1, 1.5],
+                opacity: [0.5, 0],
+              }}
+              transition={{
+                duration: 2.5,
+                repeat: Infinity,
+                ease: 'easeOut',
+                delay: 0.5,
+              }}
+            />
+            {/* Green concentric pulse rings */}
             <motion.div
               className="absolute inset-0 rounded-full border-2 border-[#25D366]/50"
               animate={{
@@ -166,7 +195,7 @@ export default function WhatsAppButton() {
             </AnimatePresence>
 
             {/* WhatsApp icon */}
-            <MessageCircle className="relative z-10 w-7 h-7 text-white" />
+            <MessageCircle className="relative z-10 w-8 h-8 text-white" />
           </motion.a>
         </motion.div>
       )}

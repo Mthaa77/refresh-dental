@@ -118,15 +118,44 @@ export default function ParallaxStatement() {
           style={{ scaleX: lineScale }}
         />
 
-        {/* Attribution with gold gradient */}
-        <p className="mt-6 font-jost text-sm font-light tracking-wide gold-gradient-text">
+        {/* Attribution with shimmer-text animated effect */}
+        <p className="mt-6 font-jost text-sm font-light tracking-wide shimmer-text">
           — Dr. Lebogang Malunga
         </p>
 
-        {/* Location */}
         <p className="mt-4 font-jost text-xs tracking-wider text-ivory/50">
           Serving Centurion · Lyttelton Manor · Family Wellness Centre
         </p>
+
+        {/* Animated sparkles in corners */}
+        {[
+          { left: '5%', top: '10%', size: 3, delay: 0 },
+          { right: '6%', top: '8%', size: 4, delay: 0.8 },
+          { left: '7%', bottom: '12%', size: 4, delay: 1.6 },
+          { right: '8%', bottom: '10%', size: 3, delay: 2.4 },
+        ].map((sparkle, i) => (
+          <motion.div
+            key={`corner-sparkle-${i}`}
+            className="absolute rounded-full pointer-events-none"
+            style={{
+              ...Object.fromEntries(Object.entries(sparkle).filter(([k]) => k !== 'delay')),
+              width: sparkle.size,
+              height: sparkle.size,
+              backgroundColor: 'rgba(201, 169, 110, 0.6)',
+            }}
+            animate={{
+              opacity: [0.2, 0.9, 0.2],
+              scale: [0.8, 1.5, 0.8],
+            }}
+            transition={{
+              duration: 2.5,
+              repeat: Infinity,
+              delay: sparkle.delay,
+              ease: 'easeInOut',
+            }}
+            aria-hidden="true"
+          />
+        ))}
       </motion.div>
     </section>
   )

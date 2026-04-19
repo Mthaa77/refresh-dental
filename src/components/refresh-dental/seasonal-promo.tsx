@@ -107,6 +107,8 @@ export default function SeasonalPromo() {
 
   return (
     <section id="promotions" className="relative overflow-hidden bg-[#FDFAF6]">
+      {/* Decorative gold gradient top border */}
+      <div className="h-px bg-gradient-to-r from-transparent via-champagne-gold/60 to-transparent" />
       {/* Gold decorative background elements */}
       <motion.div
         className="absolute -top-8 -right-8 h-32 w-32 rounded-full opacity-[0.04] sm:-top-16 sm:-right-16 sm:h-48 sm:w-48 md:-top-32 md:-right-32 md:h-64 md:w-64"
@@ -213,7 +215,7 @@ export default function SeasonalPromo() {
               initial="enter"
               animate="center"
               exit="exit"
-              className="relative grid grid-cols-1 items-center gap-8 rounded-3xl border border-champagne-gold/15 bg-white p-6 shadow-sm sm:p-8 md:grid-cols-2 md:gap-12 overflow-hidden"
+              className="relative grid grid-cols-1 items-center gap-8 rounded-3xl border border-champagne-gold/15 bg-white p-6 shadow-elevated sm:p-8 md:grid-cols-2 md:gap-12 overflow-hidden gold-pulse"
             >
               {/* Diagonal stripe pattern background (ivory lines, 2% opacity) */}
               <div
@@ -357,7 +359,7 @@ export default function SeasonalPromo() {
                 <div className="pt-4">
                   <a
                     href="#contact"
-                    className="inline-flex items-center gap-2 rounded-full bg-champagne-gold px-7 py-3 font-jost text-sm font-semibold text-espresso transition-all hover:bg-champagne-gold/90 hover:shadow-lg"
+                    className="inline-flex items-center gap-2 rounded-full bg-champagne-gold px-7 py-3 font-jost text-sm font-semibold text-espresso transition-all hover:bg-champagne-gold/90 shadow-gold hover:shadow-gold-strong"
                   >
                     Claim This Offer
                     <ArrowRight className="h-4 w-4" />

@@ -91,8 +91,8 @@ export default function InsurancePartners() {
 
   return (
     <section id="insurance" className="relative overflow-hidden bg-white">
-      {/* Sand border top */}
-      <div className="h-px bg-gradient-to-r from-transparent via-[#F5EFE6] to-transparent" />
+      {/* Subtle gold gradient divider line above section */}
+      <div className="h-px bg-gradient-to-r from-transparent via-champagne-gold/40 to-transparent" />
 
       <div className="mx-auto max-w-6xl px-4 py-20 sm:px-6 md:py-24 lg:px-8">
         {/* Header */}
@@ -107,7 +107,7 @@ export default function InsurancePartners() {
             Peace of Mind
           </span>
           <div className="flex items-center justify-center gap-3">
-            <h2 className="font-cormorant text-[clamp(2rem,4vw,3.5rem)] font-medium leading-tight text-espresso">
+            <h2 className="font-cormorant text-[clamp(2rem,4vw,3.5rem)] font-medium leading-tight gold-gradient-text">
               Accepted Medical Aids
             </h2>
             {/* Verified Provider badge */}
@@ -162,7 +162,7 @@ export default function InsurancePartners() {
               variants={cardVariants}
               whileHover={{ y: -6, scale: 1.03, boxShadow: '0 12px 30px rgba(0,0,0,0.12)' }}
               transition={{ type: 'spring', stiffness: 300, damping: 20 }}
-              className="group relative overflow-hidden rounded-xl p-6 text-center shadow-sm transition-shadow hover:shadow-lg cursor-default"
+              className="group relative overflow-hidden rounded-xl p-6 text-center shadow-premium transition-shadow hover:shadow-lg cursor-default hover-lift"
               style={{
                 background: `linear-gradient(135deg, ${aid.gradientFrom}dd, ${aid.gradientTo}dd)`,
               }}

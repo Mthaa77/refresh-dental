@@ -46,6 +46,11 @@ import VirtualTourCta from '@/components/refresh-dental/virtual-tour-cta'
 import OnlineBookingWidget from '@/components/refresh-dental/online-booking-widget'
 import LocationMapEnhanced from '@/components/refresh-dental/location-map-enhanced'
 import PageSurvey from '@/components/refresh-dental/page-survey'
+import AnimatedCounterSection from '@/components/refresh-dental/animated-counter-section'
+import GuaranteeSection from '@/components/refresh-dental/guarantee-section'
+import VideoCtaSection from '@/components/refresh-dental/video-cta-section'
+import MarqueeBanner from '@/components/refresh-dental/marquee-banner'
+import QuickActionsFab from '@/components/refresh-dental/quick-actions-fab'
 
 const LoadingScreen = dynamic(
   () => import('@/components/refresh-dental/loading-screen'),
@@ -60,9 +65,11 @@ export default function Home() {
       <ScrollProgress />
       <Navigation />
       <PromoBanner />
+      <MarqueeBanner />
       <main className="min-h-screen">
         <Hero />
         <StatsBar />
+        <AnimatedCounterSection />
         <TreatmentProcess />
         <TrustIndicators />
         <AboutSection />
@@ -83,6 +90,7 @@ export default function Home() {
         <FAQSection />
         <ReferFriend />
         <CorporateWellnessSection />
+        <GuaranteeSection />
         <DentalTipsSection />
         <SmileAssessment />
         <InstagramFeed />
@@ -96,10 +104,12 @@ export default function Home() {
         <VirtualTourCta />
         <PageSurvey />
         <NewsletterCta />
+        <VideoCtaSection />
       </main>
       <Footer />
       <WhatsAppButton />
       <ScrollToTop />
+      <QuickActionsFab />
       <AppointmentQuickBook />
       <AccessibilityPanel />
       <CookieConsent />

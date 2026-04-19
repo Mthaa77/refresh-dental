@@ -75,6 +75,20 @@ export default function EmergencyDental() {
         }}
       />
 
+      {/* Pulsing red glow border animation */}
+      <motion.div
+        className="absolute inset-0 z-[4] pointer-events-none rounded-none"
+        animate={{
+          boxShadow: [
+            'inset 0 0 30px rgba(220, 38, 38, 0)',
+            'inset 0 0 30px rgba(220, 38, 38, 0.15)',
+            'inset 0 0 30px rgba(220, 38, 38, 0)',
+          ],
+        }}
+        transition={{ duration: 2.5, repeat: Infinity, ease: 'easeInOut' }}
+        aria-hidden="true"
+      />
+
       {/* Vignette overlay — radial gradient, transparent center → dark-red/30 edges */}
       <div
         className="absolute inset-0 z-[5] pointer-events-none"
@@ -193,15 +207,8 @@ export default function EmergencyDental() {
             </div>
 
             {/* Header with gradient text */}
-            <h2 className="font-cormorant text-[clamp(2.2rem,5vw,3.8rem)] font-medium leading-tight">
-              <span
-                className="bg-clip-text text-transparent"
-                style={{
-                  backgroundImage: 'linear-gradient(135deg, #f87171, #C9A96E, #E8D5B0)',
-                }}
-              >
+            <h2 className="font-cormorant text-[clamp(2.2rem,5vw,3.8rem)] font-medium leading-tight gold-gradient-text">
                 Dental Emergency?
-              </span>
             </h2>
 
             {/* Subtitle */}
@@ -291,7 +298,7 @@ export default function EmergencyDental() {
               ))}
               <a
                 href="tel:0123456789"
-                className="relative block font-cormorant text-[clamp(2rem,4vw,3rem)] font-semibold text-ivory transition-colors hover:text-champagne-gold"
+                className="relative block font-cormorant text-[clamp(2.5rem,5vw,3.5rem)] font-semibold text-ivory transition-colors hover:text-champagne-gold"
               >
                 012 345 6789
               </a>

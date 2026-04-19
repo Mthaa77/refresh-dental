@@ -42,14 +42,14 @@ export default function ScrollToTop() {
           onMouseEnter={() => setIsHovered(true)}
           onMouseLeave={() => setIsHovered(false)}
         >
-          {/* "Top" label on hover */}
+          {/* "Back to top" tooltip on hover */}
           <motion.span
-            className="font-jost text-[10px] font-semibold uppercase tracking-widest text-champagne-gold"
+            className="font-jost text-[10px] font-semibold uppercase tracking-widest text-champagne-gold whitespace-nowrap"
             initial={{ opacity: 0, y: 4 }}
             animate={{ opacity: isHovered ? 1 : 0, y: isHovered ? 0 : 4 }}
             transition={{ duration: 0.2 }}
           >
-            Top
+            Back to top
           </motion.span>
 
           {/* Button with progress ring */}
@@ -60,19 +60,19 @@ export default function ScrollToTop() {
             className="relative flex h-14 w-14 items-center justify-center"
             aria-label="Scroll to top"
           >
-            {/* Glow effect */}
+            {/* Gold glow effect — shadow-gold on hover */}
             <motion.div
               className="absolute inset-0 rounded-full"
               animate={{
                 boxShadow: isHovered
-                  ? '0 0 20px rgba(201, 169, 110, 0.3), 0 4px 16px rgba(201, 169, 110, 0.15)'
+                  ? '0 0 24px rgba(201, 169, 110, 0.4), 0 4px 20px rgba(201, 169, 110, 0.25)'
                   : '0 0 8px rgba(201, 169, 110, 0.15)',
               }}
               transition={{ duration: 0.3 }}
             />
 
-            {/* Glass-morphism background */}
-            <div className="absolute inset-0 rounded-full bg-white/80 border border-ivory/30 backdrop-blur-md" />
+            {/* Glass-morphism background with gold ring border */}
+            <div className="absolute inset-0 rounded-full bg-white/70 border border-champagne-gold/30 backdrop-blur-md" />
 
             {/* SVG progress ring */}
             <svg
@@ -103,13 +103,18 @@ export default function ScrollToTop() {
               />
             </svg>
 
-            {/* Arrow icon with rotation based on scroll */}
+            {/* Arrow icon with subtle bounce when visible */}
             <motion.div
               animate={{ rotate: scrollPercent * 1.8 }}
               transition={{ duration: 0.15, ease: 'linear' }}
               className="text-espresso"
             >
-              <ArrowUp className="h-5 w-5" />
+              <motion.div
+                animate={{ y: [0, -2, 0] }}
+                transition={{ duration: 1.5, repeat: Infinity, ease: 'easeInOut' }}
+              >
+                <ArrowUp className="h-5 w-5" />
+              </motion.div>
             </motion.div>
           </motion.button>
         </motion.div>

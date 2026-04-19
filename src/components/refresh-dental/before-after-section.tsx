@@ -159,15 +159,9 @@ function ComparisonSlider({ item, cardIndex }: { item: ComparisonItem; cardIndex
 
   return (
     <motion.div
-      className="group relative overflow-hidden rounded-2xl bg-white shadow-sm"
+      className="group relative overflow-hidden rounded-2xl bg-white shadow-elevated hover-lift"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
-      animate={{
-        boxShadow: isHovered
-          ? '0 8px 32px -4px rgba(201, 169, 110, 0.25)'
-          : '0 1px 3px 0 rgba(0, 0, 0, 0.06)',
-      }}
-      transition={{ duration: 0.3 }}
     >
       {/* Animated gold gradient border on hover — rotates via framer-motion */}
       <motion.div
@@ -358,12 +352,19 @@ function ComparisonSlider({ item, cardIndex }: { item: ComparisonItem; cardIndex
           })}
         </div>
 
-        {/* Before / After Labels */}
-        <div className="pointer-events-none absolute top-4 left-4 z-20 rounded-full bg-espresso/60 px-3 py-1 font-jost text-[10px] font-semibold uppercase tracking-widest text-white/90 backdrop-blur-sm">
-          Before
+        {/* Before Label — premium typography */}
+        <div className="pointer-events-none absolute top-4 left-4 z-20">
+          <span className="rounded-full bg-espresso/70 px-3.5 py-1.5 font-dm-serif text-[11px] font-semibold uppercase tracking-widest text-white/90 backdrop-blur-sm border border-white/10">
+            Before
+          </span>
+          <div className="mx-auto mt-1.5 h-px w-6 bg-gradient-to-r from-espresso/40 to-transparent" />
         </div>
-        <div className="pointer-events-none absolute top-4 right-4 z-20 rounded-full bg-champagne-gold/80 px-3 py-1 font-jost text-[10px] font-semibold uppercase tracking-widest text-white backdrop-blur-sm">
-          After
+        {/* After Label — premium typography */}
+        <div className="pointer-events-none absolute top-4 right-4 z-20">
+          <span className="rounded-full bg-champagne-gold/90 px-3.5 py-1.5 font-dm-serif text-[11px] font-semibold uppercase tracking-widest text-white backdrop-blur-sm border border-champagne-gold-light/30">
+            After
+          </span>
+          <div className="mx-auto mt-1.5 h-px w-6 bg-gradient-to-l from-champagne-gold/40 to-transparent" />
         </div>
       </div>
 
