@@ -1205,3 +1205,54 @@ Stage Summary:
 - Gold chrome enhanced: chrome-gold-bg on active filter, chrome-gold/20 stronger icon backgrounds
 - All existing functionality, animations, and framer-motion code preserved intact
 - Clean ESLint (0 errors), clean compilation
+
+---
+Task ID: 21
+Agent: fullstack-developer
+Task: Fix cookie consent banner, create stats marquee, create smile CTA section, integrate new components
+
+Work Log:
+- Fixed cookie-consent.tsx — Changed from large centered card to compact bottom bar
+  - Removed centered card wrapper (mx-auto max-w-4xl px-4 pb-4)
+  - Changed to full-width thin bar: fixed inset-x-0 bottom-0 z-40
+  - Added blur-glass backdrop: bg-espresso/90 backdrop-blur-lg
+  - Added thin gold gradient line at top of bar (2px, champagne-gold → gold-light)
+  - Compact padding: px-6 py-3 mobile, px-8 py-3.5 desktop
+  - Single row layout on desktop (icon + text + buttons), stacked on mobile
+  - Shortened "Manage Preferences" button to "Manage"
+  - Reduced button padding to py-1.5 for compact fit
+  - Preserved all existing functionality: localStorage, animations, AnimatePresence
+- Created stats-marquee.tsx — Continuously scrolling horizontal trust statistics marquee
+  - Dark espresso background with subtle grain texture overlay
+  - 8 trust items: 5.0 Google Rating, 500+ Happy Patients, 10+ Years Experience, HPCSA Registered, All Medical Aids Accepted, Interest-Free Payment Plans, 24/7 Emergency Available, State-of-the-Art Technology
+  - Color coding: gold items (champagne-gold → gold-light gradient text), teal items (sage-teal), red item (accent-red), blue item (accent-blue)
+  - Diamond dot (◆) separators in champagne-gold/40
+  - CSS marquee via framer-motion animate x: ['0%', '-50%'] with 30s linear infinite loop
+  - Items duplicated for seamless infinite scroll
+  - Subtle gold gradient border lines at top and bottom
+  - Compact ~60px section height
+- Created smile-cta.tsx — Smile transformation CTA section
+  - Dark espresso background with radial gradient overlays (gold + teal)
+  - 20 floating gold particles with randomized positions, sizes, drift patterns
+  - Sparkle icon in gold-bordered circle as section icon
+  - Large headline "Ready to Transform Your Smile?" with chrome gold gradient text (135deg gradient: B89830 → D4C08A → E8D5B0 → D4C08A → B89830)
+  - Subtitle: "Join 500+ patients who chose Refresh Dental for their smile journey"
+  - Two CTA buttons: "Book Free Consultation" (gold filled with ArrowRight icon) and "View Our Services" (gold outlined)
+  - Hover effects: scale(1.03) + gold box-shadow on primary, scale(1.03) on secondary
+  - Trust badge at bottom: ★ 5.0 Rated on Google · No Obligation · All Medical Aids Accepted
+  - Scroll-triggered staggered reveal animations (0.15s delays)
+  - Decorative gold gradient border lines at top and bottom
+  - Subtle grain texture overlay
+- Updated page.tsx to integrate new components:
+  - StatsMarquee: placed after StatsBar, before AnimatedCounterSection
+  - SmileCta: placed after ServicesGrid, before ImplantsSpotlight
+  - Imports already present from previous work session
+- All changes pass ESLint with zero errors
+- Dev server compiles cleanly
+
+Stage Summary:
+- Cookie consent banner redesigned as compact bottom bar with blur-glass effect and gold accent line
+- Stats marquee provides continuous scrolling trust indicators with color-coded items
+- Smile CTA section provides mid-page conversion point with floating particles and dual CTAs
+- Site section order: ...StatsBar → StatsMarquee → AnimatedCounterSection... → ServicesGrid → SmileCta → ImplantsSpotlight → ParallaxStatement...
+- Clean ESLint (0 errors), clean compilation

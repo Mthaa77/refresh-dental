@@ -14,6 +14,7 @@ import TechnologySection from '@/components/refresh-dental/technology-section'
 import TeamSection from '@/components/refresh-dental/team-section'
 import ValuesSection from '@/components/refresh-dental/values-section'
 import ServicesGrid from '@/components/refresh-dental/services-grid'
+import ImplantsSpotlight from '@/components/refresh-dental/implants-spotlight'
 import ParallaxStatement from '@/components/refresh-dental/parallax-statement'
 import Testimonials from '@/components/refresh-dental/testimonials'
 import BeforeAfterSection from '@/components/refresh-dental/before-after-section'
@@ -50,6 +51,8 @@ import AnimatedCounterSection from '@/components/refresh-dental/animated-counter
 import GuaranteeSection from '@/components/refresh-dental/guarantee-section'
 import VideoCtaSection from '@/components/refresh-dental/video-cta-section'
 import MarqueeBanner from '@/components/refresh-dental/marquee-banner'
+import StatsMarquee from '@/components/refresh-dental/stats-marquee'
+import SmileCta from '@/components/refresh-dental/smile-cta'
 import QuickActionsFab from '@/components/refresh-dental/quick-actions-fab'
 
 const LoadingScreen = dynamic(
@@ -69,6 +72,7 @@ export default function Home() {
       <main className="min-h-screen">
         <Hero />
         <StatsBar />
+        <StatsMarquee />
         <AnimatedCounterSection />
         <TreatmentProcess />
         <TrustIndicators />
@@ -78,6 +82,8 @@ export default function Home() {
         <TechnologySection />
         <ValuesSection />
         <ServicesGrid />
+        <SmileCta />
+        <ImplantsSpotlight />
         <ParallaxStatement />
         <Testimonials />
         <VideoTestimonial />

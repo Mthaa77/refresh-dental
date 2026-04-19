@@ -237,6 +237,8 @@ export default function Hero() {
       <div className="relative z-10 flex flex-col lg:flex-row w-full min-h-screen">
         {/* ======= LEFT SIDE — TEXT CONTENT ======= */}
         <div className="relative z-20 flex flex-col justify-center w-full lg:w-[60%] px-6 sm:px-10 lg:px-16 xl:px-24 py-24 lg:py-0">
+          {/* Subtle dark gradient overlay for text contrast */}
+          <div className="absolute inset-0 bg-gradient-to-r from-espresso/5 via-transparent to-transparent pointer-events-none rounded-none" />
           {/* Top Label */}
           <motion.div
             initial={{ opacity: 0, y: 12 }}
@@ -276,7 +278,7 @@ export default function Hero() {
             variants={subheadingLine1Variants}
             initial="hidden"
             animate="visible"
-            className="font-jost font-light text-brown-warm text-lg md:text-xl max-w-xl leading-relaxed mb-2"
+            className="font-jost font-normal text-brown-warm text-lg md:text-xl max-w-xl leading-relaxed mb-2"
           >
             Experience world-class dentistry crafted around your comfort.
           </motion.p>
@@ -284,7 +286,7 @@ export default function Hero() {
             variants={subheadingLine2Variants}
             initial="hidden"
             animate="visible"
-            className="font-jost font-light text-brown-muted text-base md:text-lg max-w-xl leading-relaxed mb-10"
+            className="font-jost font-normal text-brown-muted text-base md:text-lg max-w-xl leading-relaxed mb-10"
           >
             Where artistry meets science for smiles that inspire confidence.
           </motion.p>
@@ -304,7 +306,7 @@ export default function Hero() {
                 boxShadow: '0 0 40px rgba(184, 152, 48, 0.3)',
               }}
               whileTap={{ scale: 0.97 }}
-              className="relative inline-flex items-center bg-gradient-to-r from-champagne-gold to-gold-light text-white font-jost font-semibold text-sm tracking-wider uppercase rounded-full px-8 py-4 shadow-gold overflow-hidden transition-all duration-300"
+              className="relative inline-flex items-center bg-gradient-to-r from-champagne-gold to-gold-light text-white font-jost font-semibold text-base tracking-wider uppercase rounded-full px-8 py-4 shadow-gold overflow-hidden transition-all duration-300"
             >
               {/* Shimmer overlay */}
               <motion.span
@@ -325,7 +327,7 @@ export default function Hero() {
               href="#services"
               whileHover={{ scale: 1.03 }}
               whileTap={{ scale: 0.97 }}
-              className="inline-flex items-center border-2 border-sage-teal text-sage-teal hover:bg-sage-teal hover:text-white font-jost font-medium text-sm tracking-wider uppercase rounded-full px-8 py-4 transition-all duration-300"
+              className="inline-flex items-center border-[2.5px] border-sage-teal text-sage-teal hover:bg-sage-teal hover:text-white font-jost font-medium text-sm tracking-wider uppercase rounded-full px-8 py-4 transition-all duration-300"
             >
               Explore Our Services
             </motion.a>

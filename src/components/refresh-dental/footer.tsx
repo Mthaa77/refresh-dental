@@ -115,7 +115,7 @@ export default function Footer() {
               <li key={link.label}>
                 <a
                   href={link.href}
-                  className="text-ivory/75 hover:text-champagne-gold transition-colors text-[15px]"
+                  className="text-ivory/75 hover:text-champagne-gold transition-colors text-[15px] hover:underline hover:underline-offset-4 hover:decoration-champagne-gold/50"
                 >
                   {link.label}
                 </a>
@@ -130,7 +130,9 @@ export default function Footer() {
           <ul className="space-y-2.5">
             {services.map((service) => (
               <li key={service}>
-                <span className="text-ivory/75 text-[15px]">{service}</span>
+                <a href="#services" className="text-ivory/75 hover:text-champagne-gold transition-colors text-[15px] hover:underline hover:underline-offset-4 hover:decoration-champagne-gold/50">
+                  {service}
+                </a>
               </li>
             ))}
           </ul>
@@ -176,30 +178,33 @@ export default function Footer() {
 
       {/* Bottom Bar */}
       <div className="border-t border-ivory/10">
-        <div className="max-w-6xl mx-auto px-6 py-6 flex flex-col sm:flex-row items-center justify-center gap-4 text-center">
-          <p className="text-ivory/55 text-xs">
-            © 2025 Refresh Dental. Built by Carter Digitals.
-          </p>
-          <span className="hidden sm:inline text-ivory/45 text-xs">|</span>
-          <a
-            href="#"
-            className="text-ivory/55 hover:text-champagne-gold transition-colors text-xs"
-          >
-            Privacy Policy
-          </a>
-          {/* Animated back to top arrow */}
+        <div className="max-w-6xl mx-auto px-6 py-6 flex flex-col sm:flex-row items-center justify-between gap-4">
+          <div className="flex items-center gap-4 text-center">
+            <p className="text-ivory/55 text-xs">
+              © 2025 Refresh Dental. Built by Carter Digitals.
+            </p>
+            <span className="hidden sm:inline text-ivory/45 text-xs">|</span>
+            <a
+              href="#"
+              className="text-ivory/55 hover:text-champagne-gold transition-colors text-xs"
+            >
+              Privacy Policy
+            </a>
+          </div>
+          {/* Animated back to top arrow — right aligned */}
           <motion.a
             href="#home"
             aria-label="Back to top"
-            whileHover={{ y: -3 }}
+            whileHover={{ y: -3, scale: 1.1 }}
+            whileTap={{ scale: 0.95 }}
             animate={{ y: [0, -4, 0] }}
             transition={{
               y: { duration: 1.8, repeat: Infinity, ease: 'easeInOut' },
             }}
-            className="ml-auto sm:ml-0 flex items-center gap-1 text-ivory/55 hover:text-champagne-gold transition-colors"
+            className="flex items-center gap-1.5 text-ivory/55 hover:text-champagne-gold transition-colors rounded-full px-3 py-1.5 hover:bg-ivory/5"
           >
-            <span className="text-xs font-jost tracking-wider uppercase hidden sm:inline">Top</span>
-            <ArrowUp className="w-4 h-4" />
+            <span className="text-xs font-jost tracking-wider uppercase">Back to Top</span>
+            <ArrowUp className="w-3.5 h-3.5" />
           </motion.a>
         </div>
       </div>

@@ -14,27 +14,33 @@ interface MedicalAid {
 const medicalAids: MedicalAid[] = [
   {
     name: 'discovery',
-    display: 'DISCOVERY',
+    display: 'Discovery Health',
     gradientFrom: '#0A3D7C',
     gradientTo: '#1A6DD4',
   },
   {
-    name: 'bonitas',
-    display: 'BONITAS',
-    gradientFrom: '#1B7A3D',
-    gradientTo: '#28A05B',
-  },
-  {
     name: 'momentum',
-    display: 'MOMENTUM',
+    display: 'Momentum Health',
     gradientFrom: '#B22234',
     gradientTo: '#E8384F',
   },
   {
+    name: 'bonitas',
+    display: 'Bonitas',
+    gradientFrom: '#1B7A3D',
+    gradientTo: '#28A05B',
+  },
+  {
     name: 'medihelp',
-    display: 'MEDIHELP',
+    display: 'Medihelp',
     gradientFrom: '#D4681A',
     gradientTo: '#F5922A',
+  },
+  {
+    name: 'fedhealth',
+    display: 'Fedhealth',
+    gradientFrom: '#C41E3A',
+    gradientTo: '#E85D75',
   },
   {
     name: 'gems',
@@ -43,20 +49,32 @@ const medicalAids: MedicalAid[] = [
     gradientTo: '#2A9D8F',
   },
   {
+    name: 'bestmed',
+    display: 'Bestmed',
+    gradientFrom: '#2E5090',
+    gradientTo: '#4A7BC8',
+  },
+  {
     name: 'bankmed',
-    display: 'BANKMED',
+    display: 'Bankmed',
     gradientFrom: '#1B2A4A',
     gradientTo: '#2C4270',
   },
   {
     name: 'netcare',
-    display: 'NETCARE',
+    display: 'Netcare',
     gradientFrom: '#0D2B5E',
     gradientTo: '#1E4090',
   },
   {
+    name: 'polmed',
+    display: 'Polmed',
+    gradientFrom: '#1A5276',
+    gradientTo: '#2E86C1',
+  },
+  {
     name: 'profmed',
-    display: 'PROFMED',
+    display: 'Profmed',
     gradientFrom: '#5B2D8E',
     gradientTo: '#7B4FBA',
   },
@@ -104,7 +122,7 @@ export default function InsurancePartners() {
           className="mb-12 text-center"
         >
           <span className="mb-4 inline-block text-xs font-semibold uppercase tracking-[0.2em] text-champagne-gold">
-            Peace of Mind
+            We Work With
           </span>
           <div className="flex items-center justify-center gap-3">
             <h2 className="font-cormorant text-[clamp(2rem,4vw,3.5rem)] font-medium leading-tight gold-gradient-text">
@@ -123,7 +141,7 @@ export default function InsurancePartners() {
             </motion.span>
           </div>
           <p className="mx-auto mt-4 max-w-lg font-jost text-sm leading-relaxed text-brown-muted">
-            We work with all major South African medical aids
+            Making quality dental care accessible to everyone
           </p>
         </motion.div>
 
@@ -259,15 +277,22 @@ export default function InsurancePartners() {
           <p className="font-jost text-sm text-brown-muted/90">
             Don&apos;t see your medical aid? Contact us — we work with most providers.
           </p>
-          <motion.a
-            href="#contact"
-            className="inline-flex items-center gap-2 rounded-full border-2 border-champagne-gold bg-champagne-gold px-8 py-3 font-jost text-sm font-semibold text-espresso transition-all hover:bg-transparent hover:text-champagne-gold"
-            whileHover={{ scale: 1.03 }}
-            whileTap={{ scale: 0.97 }}
+          <motion.div
+            className="flex flex-col sm:flex-row items-center justify-center gap-4"
           >
-            Check Your Cover
-            <ArrowRight className="h-4 w-4" />
-          </motion.a>
+            <motion.a
+              href="#contact"
+              className="inline-flex items-center gap-2 rounded-full border-2 border-champagne-gold bg-champagne-gold px-8 py-3 font-jost text-sm font-semibold text-espresso transition-all hover:bg-transparent hover:text-champagne-gold"
+              whileHover={{ scale: 1.03 }}
+              whileTap={{ scale: 0.97 }}
+            >
+              Check Your Cover
+              <ArrowRight className="h-4 w-4" />
+            </motion.a>
+            <span className="font-jost text-xs text-brown-muted/70 tracking-wider">
+              And many more...
+            </span>
+          </motion.div>
         </motion.div>
       </div>
 
