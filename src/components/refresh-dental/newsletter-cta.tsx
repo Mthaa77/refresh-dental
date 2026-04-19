@@ -83,7 +83,7 @@ function SmileIcon() {
             cx="38"
             cy="10"
             r="2"
-            fill="#E8D5B0"
+            fill="#D4C08A"
             animate={{ opacity: [0.3, 1, 0.3], scale: [0.8, 1.2, 0.8] }}
             transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
           />
@@ -91,7 +91,7 @@ function SmileIcon() {
             cx="8"
             cy="14"
             r="1.5"
-            fill="#E8D5B0"
+            fill="#D4C08A"
             animate={{ opacity: [0.5, 1, 0.5], scale: [0.9, 1.1, 0.9] }}
             transition={{
               duration: 2.5,
@@ -126,9 +126,9 @@ export default function NewsletterCTA() {
         className="absolute inset-0"
         animate={{
           background: [
-            'linear-gradient(135deg, #1A1510 0%, #2C1E14 50%, #1A1510 100%)',
-            'linear-gradient(135deg, #2C1E14 0%, #1A1510 50%, #2C1E14 100%)',
-            'linear-gradient(135deg, #1A1510 0%, #2C1E14 50%, #1A1510 100%)',
+            'linear-gradient(135deg, #0F0D0A 0%, #1A1208 50%, #0F0D0A 100%)',
+            'linear-gradient(135deg, #1A1208 0%, #0F0D0A 50%, #1A1208 100%)',
+            'linear-gradient(135deg, #0F0D0A 0%, #1A1208 50%, #0F0D0A 100%)',
           ],
         }}
         transition={{ duration: 12, repeat: Infinity, ease: 'easeInOut' }}
@@ -231,7 +231,7 @@ export default function NewsletterCTA() {
           transition={{ duration: 0.6, ease: 'easeOut', delay: 0.3 }}
           className="space-y-4"
         >
-          <p className="text-ivory/50 text-sm max-w-md mx-auto flex items-center justify-center gap-1.5">
+          <p className="text-ivory/65 text-sm max-w-md mx-auto flex items-center justify-center gap-1.5">
             <Sparkles className="w-3.5 h-3.5 text-champagne-gold/60" />
             Join 500+ patients who receive exclusive oral health tips, special offers, and early access to new treatments.
           </p>

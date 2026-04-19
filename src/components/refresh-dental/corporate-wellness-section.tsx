@@ -167,7 +167,7 @@ export default function CorporateWellnessSection() {
       >
         <defs>
           <pattern id="corporate-grid" width="40" height="40" patternUnits="userSpaceOnUse">
-            <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#C9A96E" strokeWidth="0.5" />
+            <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#B89830" strokeWidth="0.5" />
           </pattern>
         </defs>
         <rect width="100%" height="100%" fill="url(#corporate-grid)" />
@@ -202,7 +202,7 @@ export default function CorporateWellnessSection() {
             initial={{ opacity: 0, y: 15 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="font-jost text-base md:text-lg text-brown-warm/70 max-w-2xl mx-auto text-center leading-relaxed mt-4 mb-12"
+            className="font-jost text-base md:text-lg text-brown-muted max-w-2xl mx-auto text-center leading-relaxed mt-4 mb-12"
           >
             Elevate your team&rsquo;s wellbeing with on-site dental care that reduces absenteeism, boosts morale, and shows your people you genuinely care.
           </motion.p>
@@ -228,7 +228,7 @@ export default function CorporateWellnessSection() {
               <span className="font-cormorant text-3xl font-semibold text-champagne-gold md:text-4xl">
                 <AnimatedCounter target={stat.value} suffix={stat.suffix} />
               </span>
-              <span className="mt-1 font-jost text-xs font-medium uppercase tracking-wider text-brown-warm/60">
+              <span className="mt-1 font-jost text-xs font-medium uppercase tracking-wider text-brown-muted/90">
                 {stat.label}
               </span>
             </div>
@@ -257,7 +257,7 @@ export default function CorporateWellnessSection() {
                   </div>
                 </div>
 
-                <p className="mb-6 font-jost text-sm font-light leading-relaxed text-brown-warm/80">
+                <p className="mb-6 font-jost text-sm font-light leading-relaxed text-brown-muted">
                   We partner with forward-thinking businesses of all sizes to deliver on-site dental
                   screenings, customised employee wellness plans, and engaging oral health education sessions.
                   A healthier team is a more productive, happier team — and it starts with a healthy smile.
@@ -285,7 +285,7 @@ export default function CorporateWellnessSection() {
                       >
                         <CheckCircle className="h-4 w-4 text-sage-teal" />
                       </motion.span>
-                      <span className="font-jost text-sm text-brown-warm/80">
+                      <span className="font-jost text-sm text-brown-muted">
                         {item.text}
                       </span>
                     </motion.li>
@@ -308,14 +308,14 @@ export default function CorporateWellnessSection() {
                   <h3 className="font-dm-serif text-xl text-espresso mb-3">
                     {corporateBack.title}
                   </h3>
-                  <p className="font-jost text-sm font-light leading-relaxed text-brown-warm/80 mb-6">
+                  <p className="font-jost text-sm font-light leading-relaxed text-brown-muted mb-6">
                     {corporateBack.description}
                   </p>
                   <div className="bg-white/60 rounded-xl px-6 py-4 border border-champagne-gold/10">
                     <span className="block font-cormorant text-3xl font-semibold text-champagne-gold">
                       {corporateBack.stat}
                     </span>
-                    <span className="block font-jost text-xs text-brown-warm/60 mt-1">
+                    <span className="block font-jost text-xs text-brown-muted/90 mt-1">
                       {corporateBack.statLabel}
                     </span>
                   </div>
@@ -351,7 +351,7 @@ export default function CorporateWellnessSection() {
                   </div>
                 </div>
 
-                <p className="mb-6 font-jost text-sm font-light leading-relaxed text-brown-warm/80">
+                <p className="mb-6 font-jost text-sm font-light leading-relaxed text-brown-muted">
                   Giving back is at the heart of everything we do. Through school dental
                   health programmes, free community screening days, and meaningful partnerships
                   with local organisations, we extend quality dental care to those who need it most.
@@ -379,7 +379,7 @@ export default function CorporateWellnessSection() {
                       >
                         <CheckCircle className="h-4 w-4 text-sage-teal" />
                       </motion.span>
-                      <span className="font-jost text-sm text-brown-warm/80">
+                      <span className="font-jost text-sm text-brown-muted">
                         {item.text}
                       </span>
                     </motion.li>
@@ -402,14 +402,14 @@ export default function CorporateWellnessSection() {
                   <h3 className="font-dm-serif text-xl text-espresso mb-3">
                     {communityBack.title}
                   </h3>
-                  <p className="font-jost text-sm font-light leading-relaxed text-brown-warm/80 mb-6">
+                  <p className="font-jost text-sm font-light leading-relaxed text-brown-muted mb-6">
                     {communityBack.description}
                   </p>
                   <div className="bg-white/60 rounded-xl px-6 py-4 border border-warm-blush/10">
                     <span className="block font-cormorant text-3xl font-semibold text-warm-blush">
                       {communityBack.stat}
                     </span>
-                    <span className="block font-jost text-xs text-brown-warm/60 mt-1">
+                    <span className="block font-jost text-xs text-brown-muted/90 mt-1">
                       {communityBack.statLabel}
                     </span>
                   </div>

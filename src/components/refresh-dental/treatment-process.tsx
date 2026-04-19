@@ -143,13 +143,13 @@ function StepCard({
         </h3>
 
         {/* Description */}
-        <p className="font-jost text-sm font-light leading-relaxed text-brown-warm/70 max-w-[220px]">
+        <p className="font-jost text-sm font-light leading-relaxed text-brown-muted max-w-[220px]">
           {step.description}
         </p>
 
         {/* Estimated time label */}
         <motion.span
-          className="mt-3 inline-flex items-center gap-1 rounded-full border border-champagne-gold/20 bg-champagne-gold/5 px-3 py-1"
+          className="mt-3 inline-flex items-center gap-1 rounded-full border border-champagne-gold/20 bg-champagne-gold/12 px-3 py-1"
           initial={{ opacity: 0, y: 6 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -217,9 +217,9 @@ function MobileTimeline() {
           className="h-[9px] w-[9px] rounded-full bg-champagne-gold"
           animate={{
             boxShadow: [
-              '0 0 4px rgba(201, 169, 110, 0.4)',
-              '0 0 12px rgba(201, 169, 110, 0.8), 0 0 24px rgba(201, 169, 110, 0.3)',
-              '0 0 4px rgba(201, 169, 110, 0.4)',
+              '0 0 4px rgba(184, 152, 48, 0.4)',
+              '0 0 12px rgba(184, 152, 48, 0.8), 0 0 24px rgba(184, 152, 48, 0.3)',
+              '0 0 4px rgba(184, 152, 48, 0.4)',
             ],
           }}
           transition={{
@@ -272,11 +272,11 @@ function MobileTimeline() {
                     {step.title}
                   </h3>
                 </div>
-                <p className="font-jost text-sm font-light leading-relaxed text-brown-warm/70">
+                <p className="font-jost text-sm font-light leading-relaxed text-brown-muted">
                   {step.description}
                 </p>
                 {/* Mobile estimated time label */}
-                <span className="mt-2 inline-flex items-center rounded-full border border-champagne-gold/20 bg-champagne-gold/5 px-2.5 py-0.5">
+                <span className="mt-2 inline-flex items-center rounded-full border border-champagne-gold/20 bg-champagne-gold/12 px-2.5 py-0.5">
                   <span className="font-jost text-[10px] font-medium text-champagne-gold/70">
                     {step.duration}
                   </span>
@@ -329,9 +329,9 @@ function DesktopTimeline() {
           className="h-[10px] w-[10px] rounded-full bg-champagne-gold -translate-x-1/2 -translate-y-1/2"
           animate={{
             boxShadow: [
-              '0 0 4px rgba(201, 169, 110, 0.4)',
-              '0 0 14px rgba(201, 169, 110, 0.8), 0 0 28px rgba(201, 169, 110, 0.3)',
-              '0 0 4px rgba(201, 169, 110, 0.4)',
+              '0 0 4px rgba(184, 152, 48, 0.4)',
+              '0 0 14px rgba(184, 152, 48, 0.8), 0 0 28px rgba(184, 152, 48, 0.3)',
+              '0 0 4px rgba(184, 152, 48, 0.4)',
             ],
           }}
           transition={{
@@ -353,7 +353,7 @@ export default function TreatmentProcess() {
         <svg className="h-full w-full" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" viewBox="0 0 200 200">
           <defs>
             <pattern id="diagonal-stripes" patternUnits="userSpaceOnUse" width="12" height="12" patternTransform="rotate(45)">
-              <line x1="0" y1="0" x2="0" y2="12" stroke="#C9A96E" strokeWidth="1" />
+              <line x1="0" y1="0" x2="0" y2="12" stroke="#B89830" strokeWidth="1" />
             </pattern>
           </defs>
           <rect width="100%" height="100%" fill="url(#diagonal-stripes)" />
@@ -379,7 +379,7 @@ export default function TreatmentProcess() {
             initial={{ opacity: 0, y: 15 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="font-jost text-base md:text-lg text-brown-warm/70 max-w-2xl mx-auto text-center leading-relaxed mt-4 mb-12"
+            className="font-jost text-base md:text-lg text-brown-muted max-w-2xl mx-auto text-center leading-relaxed mt-4 mb-12"
           >
             From your very first phone call to the moment you walk out with a confident new smile — we&rsquo;ve designed every step to feel seamless, comfortable, and uniquely yours.
           </motion.p>

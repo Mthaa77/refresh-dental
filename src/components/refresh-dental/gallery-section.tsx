@@ -121,7 +121,7 @@ export default function GallerySection() {
             initial={{ opacity: 0, y: 15 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="font-jost text-base md:text-lg text-brown-warm/70 max-w-2xl mx-auto text-center leading-relaxed mt-4 mb-12"
+            className="font-jost text-base md:text-lg text-brown-muted max-w-2xl mx-auto text-center leading-relaxed mt-4 mb-12"
           >
             Step inside our warm, modern practice — designed to make every visit feel like an escape, not an appointment.
           </motion.p>
@@ -131,7 +131,7 @@ export default function GallerySection() {
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
             transition={{ delay: 0.4, duration: 0.5 }}
-            className="mt-5 inline-flex items-center gap-2 rounded-full border border-champagne-gold/30 bg-champagne-gold/5 px-4 py-1.5"
+            className="mt-5 inline-flex items-center gap-2 rounded-full border border-champagne-gold/30 bg-champagne-gold/12 px-4 py-1.5"
           >
             <span className="text-sm" role="img" aria-hidden="true">📷</span>
             <span className="font-jost text-xs font-medium text-champagne-gold">
@@ -230,7 +230,7 @@ export default function GallerySection() {
           >
             <ChevronLeft className="h-5 w-5" />
           </motion.button>
-          <span className="font-jost text-xs text-brown-warm/50">
+          <span className="font-jost text-xs text-brown-muted/80">
             {lightboxIndex + 1} / {galleryImages.length}
           </span>
           <motion.button

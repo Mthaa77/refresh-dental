@@ -83,7 +83,7 @@ export default function PaymentSection() {
             initial={{ opacity: 0, y: 15 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="font-jost text-base md:text-lg text-brown-warm/70 max-w-2xl mx-auto text-center leading-relaxed mt-4 mb-12"
+            className="font-jost text-base md:text-lg text-brown-muted max-w-2xl mx-auto text-center leading-relaxed mt-4 mb-12"
           >
             Premium dental care shouldn&rsquo;t break the bank. We work with all major medical aids and offer flexible payment options so nothing stands between you and your best smile.
           </motion.p>
@@ -105,7 +105,7 @@ export default function PaymentSection() {
             All Medical Aids Accepted
           </h3>
 
-          <p className="text-brown-warm/80 leading-relaxed max-w-md">
+          <p className="text-brown-muted leading-relaxed max-w-md">
             We accept all major South African medical aid schemes — simply bring your
             card to your appointment and we'll handle the rest. No paperwork hassles, no surprises.
           </p>
@@ -136,8 +136,8 @@ export default function PaymentSection() {
           className="bg-ivory rounded-3xl p-8 shadow-elevated border border-soft-border space-y-6"
         >
           <div className="flex items-center gap-3 mb-2">
-            <div className="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-champagne-gold/10">
-              <CreditCard className="w-7 h-7 text-champagne-gold" />
+            <div className="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-accent-blue/10">
+              <CreditCard className="w-7 h-7 text-accent-blue" />
             </div>
             {/* Decorative tooth/diamond icon */}
             <motion.div
@@ -152,7 +152,7 @@ export default function PaymentSection() {
             Pay Over 3–6 Months, Interest-Free
           </h3>
 
-          <p className="text-brown-warm/80 leading-relaxed">
+          <p className="text-brown-muted leading-relaxed">
             We&apos;ve partnered with Athena to offer flexible, interest-free payment plans.
             Just a small once-off 6% processing fee — and that&apos;s it. No hidden costs, no surprises.
           </p>
@@ -172,7 +172,7 @@ export default function PaymentSection() {
                   type="number"
                   value={cost || ''}
                   onChange={(e) => handleCostChange(Number(e.target.value) || 0)}
-                  className="w-full bg-transparent border-b-2 border-champagne-gold focus:border-champagne-gold outline-none text-espresso font-semibold text-2xl pl-8 pb-2 transition-colors"
+                  className="w-full bg-transparent border-b-2 border-accent-blue focus:border-accent-blue outline-none text-espresso font-semibold text-2xl pl-8 pb-2 transition-colors"
                   placeholder="5000"
                   min={0}
                 />
@@ -213,15 +213,15 @@ export default function PaymentSection() {
               className="bg-sand/60 rounded-2xl p-6 text-center space-y-1"
               animate={{
                 boxShadow: glowing
-                  ? '0 0 20px rgba(201, 169, 110, 0.3), 0 0 40px rgba(201, 169, 110, 0.15)'
-                  : '0 0 0px rgba(201, 169, 110, 0)',
+                  ? '0 0 20px rgba(59, 111, 160, 0.3), 0 0 40px rgba(59, 111, 160, 0.15)'
+                  : '0 0 0px rgba(59, 111, 160, 0)',
               }}
               transition={{ duration: 0.4, ease: 'easeOut' }}
             >
               <p className="text-sm text-sand-muted uppercase tracking-wider">
                 Your monthly payment
               </p>
-              <p className="text-4xl font-dm-serif text-champagne-gold">
+              <p className="text-4xl font-dm-serif text-accent-blue">
                 R<span className="inline-block"><AnimatedNumber value={monthlyPayment} /></span>
                 <span className="text-lg text-sand-muted">/month</span>
               </p>
@@ -233,7 +233,7 @@ export default function PaymentSection() {
 
           <a
             href="#financing"
-            className="inline-flex items-center gap-2 text-champagne-gold font-medium shadow-gold rounded-full px-5 py-2.5 hover:gap-3 transition-all group"
+            className="inline-flex items-center gap-2 text-accent-blue font-medium shadow-gold rounded-full px-5 py-2.5 hover:gap-3 transition-all group"
           >
             Learn More About Financing
             <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />

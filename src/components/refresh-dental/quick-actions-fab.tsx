@@ -104,7 +104,7 @@ export default function QuickActionsFab() {
                   rel={action.href.startsWith('http') ? 'noopener noreferrer' : undefined}
                   onClick={handleAction}
                   className="flex h-10 w-10 items-center justify-center rounded-full text-white shadow-lg transition-all duration-200 hover:scale-110 hover:shadow-xl active:scale-95"
-                  style={{ backgroundColor: action.bgColor === 'bg-sage-teal' ? '#3D7D6E' : action.bgColor === 'bg-green-600' ? '#16a34a' : '#C9A96E' }}
+                  style={{ backgroundColor: action.bgColor === 'bg-sage-teal' ? '#2D6B5C' : action.bgColor === 'bg-green-600' ? '#16a34a' : '#B89830' }}
                   aria-label={action.label}
                 >
                   {action.icon}
@@ -123,7 +123,7 @@ export default function QuickActionsFab() {
         transition={{ duration: 0.3, ease: [0.25, 0.4, 0.25, 1] }}
         className="flex h-14 w-14 items-center justify-center rounded-full text-white shadow-gold transition-shadow duration-300 hover:shadow-gold-strong"
         style={{
-          background: 'linear-gradient(135deg, #C9A96E, #d4b078)',
+          background: 'linear-gradient(135deg, #B89830, #A07D1A)',
         }}
         aria-label="Quick actions menu"
       >

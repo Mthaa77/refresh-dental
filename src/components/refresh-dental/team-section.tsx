@@ -10,7 +10,7 @@ const teamMembers = [
     role: 'Dental Hygienist',
     bio: 'With over a decade of experience in preventive care, Thandi transforms routine hygiene visits into deeply restorative experiences that patients actually look forward to.',
     initials: 'TM',
-    color: 'bg-sage-teal',
+    color: 'bg-accent-blue',
     specialties: ['Preventive Care', 'Periodontal Therapy', 'Teeth Cleaning'],
     readTime: '3 min read',
   },
@@ -74,7 +74,7 @@ export default function TeamSection() {
             initial={{ opacity: 0, y: 15 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="font-jost text-base md:text-lg text-brown-warm/70 max-w-2xl mx-auto text-center leading-relaxed mt-4 mb-12"
+            className="font-jost text-base md:text-lg text-brown-muted max-w-2xl mx-auto text-center leading-relaxed mt-4 mb-12"
           >
             A dedicated team of professionals who share one mission — helping you achieve the smile you&rsquo;ve always dreamed of, in an environment that feels like home.
           </motion.p>
@@ -99,7 +99,7 @@ export default function TeamSection() {
             }}
             animate={{
               boxShadow: hoveredCard === 'dr-lebo'
-                ? ['0 20px 50px -12px rgba(201, 169, 110, 0.25)', '0 20px 60px -12px rgba(201, 169, 110, 0.40)', '0 20px 50px -12px rgba(201, 169, 110, 0.25)']
+                ? ['0 20px 50px -12px rgba(184, 152, 48, 0.25)', '0 20px 60px -12px rgba(184, 152, 48, 0.40)', '0 20px 50px -12px rgba(184, 152, 48, 0.25)']
                 : '0 4px 12px -2px rgba(0, 0, 0, 0.06)',
             }}
             transition={{ duration: 2, repeat: hoveredCard === 'dr-lebo' ? Infinity : 0, ease: 'easeInOut' }}
@@ -147,10 +147,10 @@ export default function TeamSection() {
                 <span className="relative inline-block mb-2 font-jost text-xs font-medium text-sage-teal">
                   Lead Dentist
                 </span>
-                <p className="relative font-jost text-xs text-brown-warm/60 mb-4">
+                <p className="relative font-jost text-xs text-brown-muted/90 mb-4">
                   BDS, PDD
                 </p>
-                <p className="relative font-jost text-sm font-light leading-relaxed text-brown-warm/70 mb-6">
+                <p className="relative font-jost text-sm font-light leading-relaxed text-brown-muted mb-6">
                   Dr. Lebo doesn't just transform smiles — she transforms lives. With expertise
                   spanning cosmetic dentistry, dental implants, and facial aesthetics, she combines
                   clinical precision with genuine compassion. Every treatment plan is crafted
@@ -160,7 +160,7 @@ export default function TeamSection() {
                   <div className="flex h-8 w-8 items-center justify-center rounded-full bg-sage-teal/10">
                     <Shield className="h-4 w-4 text-sage-teal" />
                   </div>
-                  <span className="font-jost text-xs font-medium text-brown-warm/70">
+                  <span className="font-jost text-xs font-medium text-brown-muted">
                     HPCSA Registered
                   </span>
                   {/* Verified badge with animated check */}
@@ -205,7 +205,7 @@ export default function TeamSection() {
               }}
               animate={{
                 boxShadow: hoveredCard === member.name
-                  ? ['0 16px 40px -10px rgba(201, 169, 110, 0.20)', '0 16px 48px -10px rgba(201, 169, 110, 0.35)', '0 16px 40px -10px rgba(201, 169, 110, 0.20)']
+                  ? ['0 16px 40px -10px rgba(184, 152, 48, 0.20)', '0 16px 48px -10px rgba(184, 152, 48, 0.35)', '0 16px 40px -10px rgba(184, 152, 48, 0.20)']
                   : '0 2px 8px -2px rgba(0, 0, 0, 0.05)',
               }}
               transition={{ duration: 2, repeat: hoveredCard === member.name ? Infinity : 0, ease: 'easeInOut', delay: i * 0.1 }}
@@ -237,7 +237,7 @@ export default function TeamSection() {
               </div>
 
               {/* Bio */}
-              <p className="relative font-jost text-sm font-light leading-relaxed text-brown-warm/70">
+              <p className="relative font-jost text-sm font-light leading-relaxed text-brown-muted">
                 {member.bio}
               </p>
 
@@ -252,7 +252,7 @@ export default function TeamSection() {
                       {member.specialties.map((specialty) => (
                         <li key={specialty} className="flex items-center gap-2">
                           <CircleDot className="h-2.5 w-2.5 flex-shrink-0 text-champagne-gold/60" />
-                          <span className="font-jost text-xs text-brown-warm/70">
+                          <span className="font-jost text-xs text-brown-muted">
                             {specialty}
                           </span>
                         </li>
@@ -293,7 +293,7 @@ export default function TeamSection() {
         >
           <a
             href="#contact"
-            className="group/link inline-flex items-center gap-2 font-jost text-sm text-brown-warm/70 shadow-gold rounded-full px-6 py-2.5 transition-all duration-300 hover:text-champagne-gold"
+            className="group/link inline-flex items-center gap-2 font-jost text-sm text-brown-muted shadow-gold rounded-full px-6 py-2.5 transition-all duration-300 hover:text-champagne-gold"
           >
             Interested in joining our team?
             <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover/link:translate-x-1" />

@@ -30,15 +30,15 @@ const emergencyServices: EmergencyCard[] = [
 
 /* Deterministic sparkle particles — no Math.random() */
 const sparkles = [
-  { x: '8%', y: '12%', size: 4, delay: 0 },
-  { x: '92%', y: '8%', size: 3, delay: 0.8 },
-  { x: '5%', y: '75%', size: 5, delay: 1.6 },
-  { x: '88%', y: '82%', size: 3, delay: 2.4 },
-  { x: '50%', y: '5%', size: 4, delay: 0.4 },
+  { x: '8%', y: '12%', size: 4, delay: 0, color: 'rgba(184, 152, 48, 0.5)' },
+  { x: '92%', y: '8%', size: 3, delay: 0.8, color: 'rgba(166, 61, 64, 0.5)' },
+  { x: '5%', y: '75%', size: 5, delay: 1.6, color: 'rgba(184, 152, 48, 0.5)' },
+  { x: '88%', y: '82%', size: 3, delay: 2.4, color: 'rgba(184, 152, 48, 0.5)' },
+  { x: '50%', y: '5%', size: 4, delay: 0.4, color: 'rgba(184, 152, 48, 0.5)' },
   /* 3 new premium sparkles with larger sizes */
-  { x: '15%', y: '45%', size: 4, delay: 1.2 },
-  { x: '78%', y: '35%', size: 8, delay: 0.6 },
-  { x: '42%', y: '88%', size: 12, delay: 2.0 },
+  { x: '15%', y: '45%', size: 4, delay: 1.2, color: 'rgba(166, 61, 64, 0.4)' },
+  { x: '78%', y: '35%', size: 8, delay: 0.6, color: 'rgba(184, 152, 48, 0.5)' },
+  { x: '42%', y: '88%', size: 12, delay: 2.0, color: 'rgba(184, 152, 48, 0.5)' },
 ]
 
 const containerVariants = {
@@ -70,7 +70,7 @@ export default function EmergencyDental() {
         viewport={{ once: true }}
         transition={{ duration: 1.2, ease: 'easeOut' }}
         style={{
-          background: 'linear-gradient(90deg, transparent 0%, #dc2626 20%, #C9A96E 50%, #dc2626 80%, transparent 100%)',
+          background: 'linear-gradient(90deg, transparent 0%, #A63D40 20%, #B89830 50%, #A63D40 80%, transparent 100%)',
           transformOrigin: 'left',
         }}
       />
@@ -80,9 +80,9 @@ export default function EmergencyDental() {
         className="absolute inset-0 z-[4] pointer-events-none rounded-none"
         animate={{
           boxShadow: [
-            'inset 0 0 30px rgba(220, 38, 38, 0)',
-            'inset 0 0 30px rgba(220, 38, 38, 0.15)',
-            'inset 0 0 30px rgba(220, 38, 38, 0)',
+            'inset 0 0 30px rgba(166, 61, 64, 0)',
+            'inset 0 0 30px rgba(166, 61, 64, 0.2)',
+            'inset 0 0 30px rgba(166, 61, 64, 0)',
           ],
         }}
         transition={{ duration: 2.5, repeat: Infinity, ease: 'easeInOut' }}
@@ -93,7 +93,7 @@ export default function EmergencyDental() {
       <div
         className="absolute inset-0 z-[5] pointer-events-none"
         style={{
-          background: 'radial-gradient(ellipse at center, transparent 40%, rgba(127, 29, 29, 0.3) 100%)',
+          background: 'radial-gradient(ellipse at center, transparent 40%, rgba(107, 45, 45, 0.35) 100%)',
         }}
       />
 
@@ -101,30 +101,30 @@ export default function EmergencyDental() {
       {/* Top-left */}
       <div className="absolute top-8 left-6 z-[6]" aria-hidden="true">
         <svg width="10" height="10" viewBox="0 0 10 10" fill="none">
-          <path d="M5 0V10M0 5H10" stroke="#C9A96E" strokeWidth="1.2" strokeLinecap="round" />
+          <path d="M5 0V10M0 5H10" stroke="#B89830" strokeWidth="1.2" strokeLinecap="round" />
         </svg>
       </div>
       {/* Top-right */}
       <div className="absolute top-8 right-6 z-[6]" aria-hidden="true">
         <svg width="10" height="10" viewBox="0 0 10 10" fill="none">
-          <path d="M5 0V10M0 5H10" stroke="#C9A96E" strokeWidth="1.2" strokeLinecap="round" />
+          <path d="M5 0V10M0 5H10" stroke="#B89830" strokeWidth="1.2" strokeLinecap="round" />
         </svg>
       </div>
       {/* Bottom-left */}
       <div className="absolute bottom-8 left-6 z-[6]" aria-hidden="true">
         <svg width="10" height="10" viewBox="0 0 10 10" fill="none">
-          <path d="M5 0V10M0 5H10" stroke="#C9A96E" strokeWidth="1.2" strokeLinecap="round" />
+          <path d="M5 0V10M0 5H10" stroke="#B89830" strokeWidth="1.2" strokeLinecap="round" />
         </svg>
       </div>
       {/* Bottom-right */}
       <div className="absolute bottom-8 right-6 z-[6]" aria-hidden="true">
         <svg width="10" height="10" viewBox="0 0 10 10" fill="none">
-          <path d="M5 0V10M0 5H10" stroke="#C9A96E" strokeWidth="1.2" strokeLinecap="round" />
+          <path d="M5 0V10M0 5H10" stroke="#B89830" strokeWidth="1.2" strokeLinecap="round" />
         </svg>
       </div>
 
       {/* Background gradient */}
-      <div className="bg-gradient-to-br from-red-900/90 via-red-950/95 to-[#1A1510]" />
+      <div className="bg-gradient-to-br from-red-900/90 via-red-950/95 to-espresso" />
 
       {/* Heartbeat-like pulse animation on background */}
       <motion.div
@@ -139,12 +139,12 @@ export default function EmergencyDental() {
           times: [0, 0.15, 0.3, 0.5, 1],
         }}
         style={{
-          background: 'radial-gradient(circle at 50% 50%, rgba(220, 38, 38, 0.5) 0%, transparent 70%)',
+          background: 'radial-gradient(circle at 50% 50%, rgba(166, 61, 64, 0.5) 0%, transparent 70%)',
         }}
         aria-hidden="true"
       />
 
-      {/* Floating sparkle particles */}
+      {/* Floating sparkle particles — with red accent sparkles */}
       {sparkles.map((s, i) => (
         <motion.div
           key={i}
@@ -154,7 +154,7 @@ export default function EmergencyDental() {
             top: s.y,
             width: s.size,
             height: s.size,
-            backgroundColor: 'rgba(201, 169, 110, 0.5)',
+            backgroundColor: s.color,
           }}
           animate={{
             opacity: [0.2, 0.8, 0.2],
@@ -187,7 +187,7 @@ export default function EmergencyDental() {
                 animate={{ rotate: 360 }}
                 transition={{ duration: 4, repeat: Infinity, ease: 'linear' }}
                 style={{
-                  background: 'conic-gradient(from 0deg, transparent 0%, rgba(201, 169, 110, 0.6) 25%, transparent 50%, rgba(220, 38, 38, 0.4) 75%, transparent 100%)',
+                  background: 'conic-gradient(from 0deg, transparent 0%, rgba(184, 152, 48, 0.6) 25%, transparent 50%, rgba(166, 61, 64, 0.5) 75%, transparent 100%)',
                   WebkitMask: 'linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)',
                   WebkitMaskComposite: 'xor',
                   maskComposite: 'exclude',
@@ -212,7 +212,7 @@ export default function EmergencyDental() {
             </h2>
 
             {/* Subtitle */}
-            <p className="font-jost text-base leading-relaxed text-ivory/70 max-w-md mx-auto lg:mx-0">
+            <p className="font-jost text-base leading-relaxed text-ivory/75 max-w-md mx-auto lg:mx-0">
               We&apos;re here for you 24/7. Don&apos;t wait — call now.
             </p>
 
@@ -220,17 +220,17 @@ export default function EmergencyDental() {
             <div className="relative flex items-center justify-center lg:justify-start">
               <motion.a
                 href="tel:0123456789"
-                className="relative flex h-28 w-28 items-center justify-center overflow-hidden rounded-full border-2 border-champagne-gold/30 sm:h-32 sm:w-32"
+                className="relative flex h-28 w-28 items-center justify-center overflow-hidden rounded-full border-2 border-accent-red/40 sm:h-32 sm:w-32"
                 onMouseEnter={() => setIsHovering(true)}
                 onMouseLeave={() => setIsHovering(false)}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
-                {/* Pulse rings */}
+                {/* Pulse rings — red accent */}
                 {[0, 1, 2].map((ring) => (
                   <motion.div
                     key={ring}
-                    className="absolute inset-0 rounded-full border border-champagne-gold"
+                    className="absolute inset-0 rounded-full border border-accent-red"
                     animate={{
                       scale: [1, 1.6 + ring * 0.3],
                       opacity: [0.5, 0],
@@ -247,7 +247,7 @@ export default function EmergencyDental() {
                 {/* Phone icon background with heartbeat pulse */}
                 <motion.div
                   className="flex h-20 w-20 items-center justify-center rounded-full sm:h-24 sm:w-24"
-                  style={{ backgroundColor: 'rgba(201, 169, 110, 0.15)' }}
+                  style={{ backgroundColor: 'rgba(166, 61, 64, 0.2)' }}
                   animate={
                     isHovering
                       ? { scale: 1.08 }
@@ -266,7 +266,7 @@ export default function EmergencyDental() {
                         }
                   }
                 >
-                  <Phone className="h-10 w-10 text-champagne-gold sm:h-12 sm:w-12" />
+                  <Phone className="h-10 w-10 text-accent-red sm:h-12 sm:w-12" />
                 </motion.div>
               </motion.a>
             </div>
@@ -291,8 +291,8 @@ export default function EmergencyDental() {
                   }}
                   style={{
                     borderColor: ring === 0
-                      ? 'rgba(220, 38, 38, 0.5)'
-                      : 'rgba(220, 38, 38, 0.3)',
+                      ? 'rgba(166, 61, 64, 0.6)'
+                      : 'rgba(166, 61, 64, 0.4)',
                   }}
                 />
               ))}
@@ -333,10 +333,10 @@ export default function EmergencyDental() {
                     ease: [0.25, 0.46, 0.45, 0.94],
                   }}
                   whileHover={{ y: -4, transition: { duration: 0.2 } }}
-                  className="flex items-start gap-4 rounded-2xl border border-ivory/10 bg-ivory/5 p-5 backdrop-blur-sm transition-colors hover:border-champagne-gold/30 hover:bg-ivory/8"
+                  className="flex items-start gap-4 rounded-2xl border border-ivory/10 bg-ivory/5 p-5 backdrop-blur-sm transition-colors hover:border-accent-red/40 hover:bg-ivory/8"
                 >
-                  {/* Icon in gold circle */}
-                  <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-champagne-gold/15 text-champagne-gold">
+                  {/* Icon in red-accented circle for emergency */}
+                  <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-accent-red/15 text-accent-red">
                     {service.icon}
                   </div>
                   {/* Text */}
@@ -344,7 +344,7 @@ export default function EmergencyDental() {
                     <h3 className="font-dm-serif text-lg text-ivory">
                       {service.title}
                     </h3>
-                    <p className="font-jost text-sm leading-relaxed text-ivory/60">
+                    <p className="font-jost text-sm leading-relaxed text-ivory/75">
                       {service.description}
                     </p>
                   </div>

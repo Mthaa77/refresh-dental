@@ -40,7 +40,7 @@ export default function ParallaxStatement() {
 
       {/* Vignette effect (darker edges) */}
       <div className="absolute inset-0 pointer-events-none" style={{
-        background: 'radial-gradient(ellipse at center, transparent 40%, rgba(26, 21, 16, 0.5) 100%)',
+        background: 'radial-gradient(ellipse at center, transparent 40%, rgba(15, 13, 10, 0.5) 100%)',
       }} />
 
       {/* Content */}
@@ -123,25 +123,25 @@ export default function ParallaxStatement() {
           — Dr. Lebogang Malunga
         </p>
 
-        <p className="mt-4 font-jost text-xs tracking-wider text-ivory/50">
+        <p className="mt-4 font-jost text-xs tracking-wider text-ivory/65">
           Serving Centurion · Lyttelton Manor · Family Wellness Centre
         </p>
 
-        {/* Animated sparkles in corners */}
+        {/* Animated sparkles in corners — gold, blue, red, gold for variety */}
         {[
-          { left: '5%', top: '10%', size: 3, delay: 0 },
-          { right: '6%', top: '8%', size: 4, delay: 0.8 },
-          { left: '7%', bottom: '12%', size: 4, delay: 1.6 },
-          { right: '8%', bottom: '10%', size: 3, delay: 2.4 },
+          { left: '5%', top: '10%', size: 3, delay: 0, color: 'rgba(184, 152, 48, 0.6)' },
+          { right: '6%', top: '8%', size: 4, delay: 0.8, color: 'rgba(59, 111, 160, 0.5)' },
+          { left: '7%', bottom: '12%', size: 4, delay: 1.6, color: 'rgba(166, 61, 64, 0.4)' },
+          { right: '8%', bottom: '10%', size: 3, delay: 2.4, color: 'rgba(184, 152, 48, 0.6)' },
         ].map((sparkle, i) => (
           <motion.div
             key={`corner-sparkle-${i}`}
             className="absolute rounded-full pointer-events-none"
             style={{
-              ...Object.fromEntries(Object.entries(sparkle).filter(([k]) => k !== 'delay')),
+              ...Object.fromEntries(Object.entries(sparkle).filter(([k]) => k !== 'delay' && k !== 'color')),
               width: sparkle.size,
               height: sparkle.size,
-              backgroundColor: 'rgba(201, 169, 110, 0.6)',
+              backgroundColor: sparkle.color,
             }}
             animate={{
               opacity: [0.2, 0.9, 0.2],

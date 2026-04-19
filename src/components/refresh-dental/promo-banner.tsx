@@ -93,8 +93,8 @@ export default function PromoBanner() {
             className="absolute inset-0"
             animate={{
               background: isInView
-                ? 'linear-gradient(135deg, #3D7D6E 0%, #2d6b5c 50%, #3D7D6E 100%)'
-                : 'linear-gradient(to right, #3D7D6E, #2d6b5c, #3D7D6E)',
+                ? 'linear-gradient(135deg, #2D6B5C 0%, #2d6b5c 50%, #2D6B5C 100%)'
+                : 'linear-gradient(to right, #2D6B5C, #2d6b5c, #2D6B5C)',
             }}
             transition={{ duration: 1, ease: 'easeOut' }}
           />
@@ -115,7 +115,7 @@ export default function PromoBanner() {
             <div
               className="h-full w-1/2"
               style={{
-                background: 'linear-gradient(90deg, transparent, rgba(201, 169, 110, 0.1), transparent)',
+                background: 'linear-gradient(90deg, transparent, rgba(184, 152, 48, 0.1), transparent)',
               }}
             />
           </motion.div>
@@ -238,9 +238,9 @@ export default function PromoBanner() {
             className="h-[1px] relative z-10"
             animate={{
               background: [
-                'linear-gradient(90deg, transparent 0%, rgba(201, 169, 110, 0.2) 30%, rgba(201, 169, 110, 0.6) 50%, rgba(201, 169, 110, 0.2) 70%, transparent 100%)',
-                'linear-gradient(90deg, transparent 0%, rgba(201, 169, 110, 0.4) 40%, rgba(232, 213, 176, 0.8) 50%, rgba(201, 169, 110, 0.4) 60%, transparent 100%)',
-                'linear-gradient(90deg, transparent 0%, rgba(201, 169, 110, 0.2) 30%, rgba(201, 169, 110, 0.6) 50%, rgba(201, 169, 110, 0.2) 70%, transparent 100%)',
+                'linear-gradient(90deg, transparent 0%, rgba(184, 152, 48, 0.2) 30%, rgba(184, 152, 48, 0.6) 50%, rgba(184, 152, 48, 0.2) 70%, transparent 100%)',
+                'linear-gradient(90deg, transparent 0%, rgba(184, 152, 48, 0.4) 40%, rgba(232, 213, 176, 0.8) 50%, rgba(184, 152, 48, 0.4) 60%, transparent 100%)',
+                'linear-gradient(90deg, transparent 0%, rgba(184, 152, 48, 0.2) 30%, rgba(184, 152, 48, 0.6) 50%, rgba(184, 152, 48, 0.2) 70%, transparent 100%)',
               ],
             }}
             transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}

@@ -8,17 +8,17 @@ const testimonials = [
   {
     name: 'Phillimon U.',
     treatment: 'General Checkup',
-    gradient: 'from-[#2A2218] to-[#1A1510]',
+    gradient: 'from-[#2A2218] to-[#0F0D0A]',
   },
   {
     name: 'Shaun K.',
     treatment: 'Cosmetic Treatment',
-    gradient: 'from-[#1A2020] to-[#1A1510]',
+    gradient: 'from-[#1A2020] to-[#0F0D0A]',
   },
   {
     name: 'Adaani F.',
     treatment: 'Emergency Care',
-    gradient: 'from-[#201A18] to-[#1A1510]',
+    gradient: 'from-[#201A18] to-[#0F0D0A]',
   },
 ]
 
@@ -83,7 +83,7 @@ export default function VideoTestimonial() {
             Hear From Our{' '}
             <span className="gold-gradient-text">Patients</span>
           </h2>
-          <p className="font-jost text-ivory/50 text-base md:text-lg max-w-lg mx-auto">
+          <p className="font-jost text-ivory/65 text-base md:text-lg max-w-lg mx-auto">
             Watch real stories from real patients
           </p>
         </motion.div>
@@ -128,7 +128,7 @@ export default function VideoTestimonial() {
                     <motion.div
                       className="relative flex h-20 w-20 items-center justify-center rounded-full border-2 border-champagne-gold/80 bg-white/10 backdrop-blur-md"
                       whileHover={{
-                        boxShadow: '0 0 30px rgba(201, 169, 110, 0.3)',
+                        boxShadow: '0 0 30px rgba(184, 152, 48, 0.3)',
                       }}
                       transition={{ duration: 0.3 }}
                     >

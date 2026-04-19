@@ -13,10 +13,10 @@ const indicators = [
     description: 'Rated 5.0/5 on Google Reviews — perfect scores across the board from our valued patients',
     accentText: 'text-champagne-gold',
     borderColor: 'border-champagne-gold/20',
-    iconBg: 'bg-champagne-gold/15',
+    iconBg: 'bg-champagne-gold/20',
     iconColor: 'text-champagne-gold',
     stars: true,
-    glowColor: 'rgba(201, 169, 110, 0.15)',
+    glowColor: 'rgba(184, 152, 48, 0.2)',
   },
   {
     icon: Users,
@@ -29,7 +29,7 @@ const indicators = [
     iconBg: 'bg-sage-teal/10',
     iconColor: 'text-sage-teal',
     stars: false,
-    glowColor: 'rgba(61, 125, 110, 0.15)',
+    glowColor: 'rgba(45, 107, 92, 0.2)',
   },
   {
     icon: Award,
@@ -38,11 +38,11 @@ const indicators = [
     title: 'Years Experience',
     description: 'A decade of clinical excellence, continuously advancing the art and science of dentistry',
     accentText: 'text-champagne-gold',
-    borderColor: 'border-champagne-gold/20',
-    iconBg: 'bg-champagne-gold/15',
+    borderColor: 'border-accent-red/15',
+    iconBg: 'bg-champagne-gold/20',
     iconColor: 'text-champagne-gold',
     stars: false,
-    glowColor: 'rgba(201, 169, 110, 0.15)',
+    glowColor: 'rgba(166, 61, 64, 0.2)',
   },
   {
     icon: Shield,
@@ -55,7 +55,7 @@ const indicators = [
     iconBg: 'bg-sage-teal/10',
     iconColor: 'text-sage-teal',
     stars: false,
-    glowColor: 'rgba(61, 125, 110, 0.15)',
+    glowColor: 'rgba(45, 107, 92, 0.2)',
   },
 ]
 
@@ -218,7 +218,7 @@ function TrustCard({ item }: { item: (typeof indicators)[number] }) {
       </h3>
 
       {/* Description */}
-      <p className="font-jost text-xs font-light leading-relaxed text-brown-warm/60">
+      <p className="font-jost text-xs font-light leading-relaxed text-brown-muted/90">
         {item.description}
       </p>
     </motion.div>
@@ -232,7 +232,7 @@ export default function TrustIndicators() {
       <div
         className="pointer-events-none absolute inset-0"
         style={{
-          background: 'radial-gradient(ellipse at center, rgba(201, 169, 110, 0.03) 0%, transparent 70%)',
+          background: 'radial-gradient(ellipse at center, rgba(184, 152, 48, 0.03) 0%, transparent 70%)',
         }}
       />
 
@@ -255,7 +255,7 @@ export default function TrustIndicators() {
             initial={{ opacity: 0, y: 15 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="font-jost text-base md:text-lg text-brown-warm/70 max-w-2xl mx-auto text-center leading-relaxed mt-4 mb-4"
+            className="font-jost text-base md:text-lg text-brown-muted max-w-2xl mx-auto text-center leading-relaxed mt-4 mb-4"
           >
             When you choose Refresh Dental, you&rsquo;re choosing a practice built on trust, excellence, and a genuine passion for creating beautiful smiles.
           </motion.p>

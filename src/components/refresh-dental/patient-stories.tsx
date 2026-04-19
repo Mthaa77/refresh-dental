@@ -104,21 +104,21 @@ function StoryVisual({ type }: { type: PatientStory['visual'] }) {
         >
           <defs>
             <linearGradient id="toothGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stopColor="#C9A96E" stopOpacity="0.8" />
-              <stop offset="100%" stopColor="#3D7D6E" stopOpacity="0.6" />
+              <stop offset="0%" stopColor="#B89830" stopOpacity="0.8" />
+              <stop offset="100%" stopColor="#2D6B5C" stopOpacity="0.6" />
             </linearGradient>
           </defs>
           <path
             d="M20 8C17 8 14 10 14 14V30C14 30 13 36 16 38C17 39 18 38.5 19 37C20 35 21 32 24 32C27 32 28 35 29 37C30 38.5 31 39 32 38C35 36 34 30 34 30V14C34 10 31 8 28 8H20Z"
             fill="url(#toothGrad)"
-            stroke="#C9A96E"
+            stroke="#B89830"
             strokeWidth="1"
             strokeOpacity="0.4"
           />
           {/* Sparkle */}
           <path
             d="M36 10L37 13L40 14L37 15L36 18L35 15L32 14L35 13L36 10Z"
-            fill="#C9A96E"
+            fill="#B89830"
             fillOpacity="0.5"
           />
         </svg>
@@ -138,17 +138,17 @@ function StoryVisual({ type }: { type: PatientStory['visual'] }) {
         aria-hidden="true"
       >
         {/* Adult 1 */}
-        <circle cx="20" cy="12" r="5" fill="#3D7D6E" fillOpacity="0.4" />
-        <path d="M12 36C12 28 16 24 20 24C24 24 28 28 28 36" fill="#3D7D6E" fillOpacity="0.3" />
+        <circle cx="20" cy="12" r="5" fill="#2D6B5C" fillOpacity="0.4" />
+        <path d="M12 36C12 28 16 24 20 24C24 24 28 28 28 36" fill="#2D6B5C" fillOpacity="0.3" />
         {/* Adult 2 */}
-        <circle cx="60" cy="12" r="5" fill="#C9A96E" fillOpacity="0.5" />
-        <path d="M52 36C52 28 56 24 60 24C64 24 68 28 68 36" fill="#C9A96E" fillOpacity="0.35" />
+        <circle cx="60" cy="12" r="5" fill="#B89830" fillOpacity="0.5" />
+        <path d="M52 36C52 28 56 24 60 24C64 24 68 28 68 36" fill="#B89830" fillOpacity="0.35" />
         {/* Child 1 */}
         <circle cx="34" cy="16" r="3.5" fill="#8FBFB5" fillOpacity="0.5" />
         <path d="M28 36C28 30 31 28 34 28C37 28 40 30 40 36" fill="#8FBFB5" fillOpacity="0.35" />
         {/* Child 2 */}
-        <circle cx="46" cy="16" r="3.5" fill="#E8D5B0" fillOpacity="0.6" />
-        <path d="M40 36C40 30 43 28 46 28C49 28 52 30 52 36" fill="#E8D5B0" fillOpacity="0.4" />
+        <circle cx="46" cy="16" r="3.5" fill="#D4C08A" fillOpacity="0.6" />
+        <path d="M40 36C40 30 43 28 46 28C49 28 52 30 52 36" fill="#D4C08A" fillOpacity="0.4" />
       </svg>
     </div>
   )
@@ -173,7 +173,7 @@ function StoryCard({
       animate={{
         y: isHovered ? -6 : 0,
         boxShadow: isHovered
-          ? '0 20px 60px -12px rgba(201, 169, 110, 0.2)'
+          ? '0 20px 60px -12px rgba(184, 152, 48, 0.2)'
           : '0 4px 16px -4px rgba(0, 0, 0, 0.06)',
       }}
       transition={{ duration: 0.35, ease: [0.25, 0.46, 0.45, 0.94] }}
@@ -225,7 +225,7 @@ function StoryCard({
       </h3>
 
       {/* Description */}
-      <p className="mb-4 font-jost text-sm font-light leading-relaxed text-brown-warm/70">
+      <p className="mb-4 font-jost text-sm font-light leading-relaxed text-brown-muted">
         &ldquo;{story.description}&rdquo;
       </p>
 
@@ -268,7 +268,7 @@ export default function PatientStories() {
     <section
       id="patient-stories"
       className="relative overflow-hidden py-20 md:py-28"
-      style={{ backgroundColor: '#FDFAF6' }}
+      style={{ backgroundColor: '#F0EBE1' }}
     >
       {/* Subtle gold diagonal lines pattern at 2% opacity */}
       <div
@@ -277,8 +277,8 @@ export default function PatientStories() {
         style={{
           backgroundImage: `repeating-linear-gradient(
             45deg,
-            rgba(201, 169, 110, 0.02) 0px,
-            rgba(201, 169, 110, 0.02) 1px,
+            rgba(184, 152, 48, 0.02) 0px,
+            rgba(184, 152, 48, 0.02) 1px,
             transparent 1px,
             transparent 28px
           )`,
@@ -300,7 +300,7 @@ export default function PatientStories() {
           <h2 className="font-cormorant text-[clamp(2rem,4vw,3rem)] font-medium leading-tight text-espresso">
             Patient Success Stories
           </h2>
-          <p className="mx-auto mt-4 max-w-lg font-jost text-sm font-light leading-relaxed text-brown-warm/60">
+          <p className="mx-auto mt-4 max-w-lg font-jost text-sm font-light leading-relaxed text-brown-muted/90">
             Real transformations, real smiles
           </p>
           {/* Gold accent line */}

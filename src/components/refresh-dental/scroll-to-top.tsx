@@ -65,8 +65,8 @@ export default function ScrollToTop() {
               className="absolute inset-0 rounded-full"
               animate={{
                 boxShadow: isHovered
-                  ? '0 0 24px rgba(201, 169, 110, 0.4), 0 4px 20px rgba(201, 169, 110, 0.25)'
-                  : '0 0 8px rgba(201, 169, 110, 0.15)',
+                  ? '0 0 24px rgba(184, 152, 48, 0.4), 0 4px 20px rgba(184, 152, 48, 0.25)'
+                  : '0 0 8px rgba(184, 152, 48, 0.15)',
               }}
               transition={{ duration: 0.3 }}
             />
@@ -85,7 +85,7 @@ export default function ScrollToTop() {
                 cy="24"
                 r={radius}
                 fill="none"
-                stroke="rgba(201, 169, 110, 0.15)"
+                stroke="rgba(184, 152, 48, 0.15)"
                 strokeWidth="2"
               />
               {/* Progress arc */}
@@ -94,7 +94,7 @@ export default function ScrollToTop() {
                 cy="24"
                 r={radius}
                 fill="none"
-                stroke="#C9A96E"
+                stroke="#B89830"
                 strokeWidth="2"
                 strokeLinecap="round"
                 strokeDasharray={circumference}

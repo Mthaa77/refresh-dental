@@ -20,7 +20,7 @@ export default function MarqueeBanner() {
   return (
     <div
       className="w-full py-3 shadow-gold overflow-hidden"
-      style={{ background: 'linear-gradient(90deg, #E8D5B0, #C9A96E, #E8D5B0)' }}
+      style={{ background: 'linear-gradient(90deg, #D4C08A, #B89830, #D4C08A)' }}
     >
       <style
         dangerouslySetInnerHTML={{

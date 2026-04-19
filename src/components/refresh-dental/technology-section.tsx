@@ -76,9 +76,9 @@ function TechnologyCard({ tech, idx }: { tech: (typeof technologies)[number]; id
         className="relative rounded-2xl border border-champagne-gold/10 bg-white p-6 shadow-premium hover-lift hover:shadow-gold transition-all duration-300 hover:-translate-y-1"
         style={{
           boxShadow: isHovered
-            ? '0 0 0 1px rgba(201, 169, 110, 0.3), 0 12px 40px -8px rgba(201, 169, 110, 0.12)'
+            ? '0 0 0 1px rgba(184, 152, 48, 0.3), 0 12px 40px -8px rgba(184, 152, 48, 0.12), 0 8px 32px -4px rgba(59, 111, 160, 0.08)'
             : undefined,
-          borderColor: isHovered ? 'rgba(201, 169, 110, 0.3)' : undefined,
+          borderColor: isHovered ? 'rgba(184, 152, 48, 0.3)' : undefined,
         }}
       >
         {/* Gold accent line on hover */}
@@ -86,13 +86,13 @@ function TechnologyCard({ tech, idx }: { tech: (typeof technologies)[number]; id
 
         {/* Icon with glow ring */}
         <div className="mb-4 relative">
-          {/* Animated glow ring */}
+          {/* Animated glow ring — gold + subtle blue on hover */}
           <motion.div
             className="absolute inset-0 rounded-full"
             animate={{
               boxShadow: isHovered
-                ? '0 0 20px rgba(201, 169, 110, 0.2), 0 0 40px rgba(201, 169, 110, 0.1)'
-                : '0 0 0px rgba(201, 169, 110, 0)',
+                ? '0 0 20px rgba(184, 152, 48, 0.2), 0 0 40px rgba(184, 152, 48, 0.1), 0 0 30px rgba(59, 111, 160, 0.08)'
+                : '0 0 0px rgba(184, 152, 48, 0)',
             }}
             transition={{ duration: 0.5, ease: 'easeOut' }}
           />
@@ -100,8 +100,8 @@ function TechnologyCard({ tech, idx }: { tech: (typeof technologies)[number]; id
             className="flex h-14 w-14 items-center justify-center rounded-full bg-champagne-gold/8 transition-transform duration-300 group-hover:scale-110"
             animate={{
               boxShadow: isHovered
-                ? '0 0 0 4px rgba(201, 169, 110, 0.08), 0 0 0 8px rgba(201, 169, 110, 0.04)'
-                : '0 0 0 0px rgba(201, 169, 110, 0)',
+                ? '0 0 0 4px rgba(184, 152, 48, 0.08), 0 0 0 8px rgba(184, 152, 48, 0.04), 0 0 0 6px rgba(59, 111, 160, 0.05)'
+                : '0 0 0 0px rgba(184, 152, 48, 0)',
             }}
             transition={{ duration: 0.4, ease: 'easeOut' }}
           >
@@ -116,7 +116,7 @@ function TechnologyCard({ tech, idx }: { tech: (typeof technologies)[number]; id
         <h3 className="mb-2 font-dm-serif text-xl text-espresso text-shadow-espresso">
           {tech.title}
         </h3>
-        <p className="font-jost text-sm leading-relaxed text-brown-warm/60">
+        <p className="font-jost text-sm leading-relaxed text-brown-muted/90">
           {tech.description}
         </p>
 
@@ -132,7 +132,7 @@ function TechnologyCard({ tech, idx }: { tech: (typeof technologies)[number]; id
             >
               <div className="mt-3 flex items-start gap-2 border-t border-champagne-gold/10 pt-3">
                 <span className="mt-0.5 text-xs">💡</span>
-                <p className="font-jost text-xs leading-relaxed text-sage-teal/80">
+                <p className="font-jost text-xs leading-relaxed text-sage-teal">
                   <span className="font-semibold text-sage-teal">Did You Know? </span>
                   {tech.fact}
                 </p>
@@ -156,35 +156,35 @@ export default function TechnologySection() {
           preserveAspectRatio="none"
           viewBox="0 0 800 600"
         >
-          {/* Horizontal lines */}
-          <line x1="0" y1="60" x2="800" y2="60" stroke="#C9A96E" strokeWidth="0.5" />
-          <line x1="0" y1="150" x2="800" y2="150" stroke="#C9A96E" strokeWidth="0.5" />
-          <line x1="0" y1="280" x2="800" y2="280" stroke="#C9A96E" strokeWidth="0.5" />
-          <line x1="0" y1="400" x2="800" y2="400" stroke="#C9A96E" strokeWidth="0.5" />
-          <line x1="0" y1="520" x2="800" y2="520" stroke="#C9A96E" strokeWidth="0.5" />
-          {/* Vertical lines */}
-          <line x1="100" y1="0" x2="100" y2="600" stroke="#C9A96E" strokeWidth="0.5" />
-          <line x1="250" y1="0" x2="250" y2="600" stroke="#C9A96E" strokeWidth="0.5" />
-          <line x1="400" y1="0" x2="400" y2="600" stroke="#C9A96E" strokeWidth="0.5" />
-          <line x1="550" y1="0" x2="550" y2="600" stroke="#C9A96E" strokeWidth="0.5" />
-          <line x1="700" y1="0" x2="700" y2="600" stroke="#C9A96E" strokeWidth="0.5" />
+          {/* Horizontal lines — 2 changed to blue accent */}
+          <line x1="0" y1="60" x2="800" y2="60" stroke="#B89830" strokeWidth="0.5" />
+          <line x1="0" y1="150" x2="800" y2="150" stroke="#3B6FA0" strokeWidth="0.5" />
+          <line x1="0" y1="280" x2="800" y2="280" stroke="#B89830" strokeWidth="0.5" />
+          <line x1="0" y1="400" x2="800" y2="400" stroke="#3B6FA0" strokeWidth="0.5" />
+          <line x1="0" y1="520" x2="800" y2="520" stroke="#B89830" strokeWidth="0.5" />
+          {/* Vertical lines — 1 changed to blue accent */}
+          <line x1="100" y1="0" x2="100" y2="600" stroke="#B89830" strokeWidth="0.5" />
+          <line x1="250" y1="0" x2="250" y2="600" stroke="#B89830" strokeWidth="0.5" />
+          <line x1="400" y1="0" x2="400" y2="600" stroke="#3B6FA0" strokeWidth="0.5" />
+          <line x1="550" y1="0" x2="550" y2="600" stroke="#B89830" strokeWidth="0.5" />
+          <line x1="700" y1="0" x2="700" y2="600" stroke="#B89830" strokeWidth="0.5" />
           {/* Circuit nodes (small circles at intersections) */}
-          <circle cx="100" cy="60" r="4" fill="none" stroke="#C9A96E" strokeWidth="0.8" />
-          <circle cx="250" cy="150" r="4" fill="none" stroke="#C9A96E" strokeWidth="0.8" />
-          <circle cx="400" cy="280" r="4" fill="none" stroke="#C9A96E" strokeWidth="0.8" />
-          <circle cx="550" cy="400" r="4" fill="none" stroke="#C9A96E" strokeWidth="0.8" />
-          <circle cx="700" cy="520" r="4" fill="none" stroke="#C9A96E" strokeWidth="0.8" />
-          <circle cx="250" cy="280" r="4" fill="none" stroke="#C9A96E" strokeWidth="0.8" />
-          <circle cx="550" cy="150" r="4" fill="none" stroke="#C9A96E" strokeWidth="0.8" />
-          <circle cx="100" cy="400" r="4" fill="none" stroke="#C9A96E" strokeWidth="0.8" />
-          <circle cx="700" cy="60" r="4" fill="none" stroke="#C9A96E" strokeWidth="0.8" />
-          <circle cx="400" cy="520" r="4" fill="none" stroke="#C9A96E" strokeWidth="0.8" />
+          <circle cx="100" cy="60" r="4" fill="none" stroke="#B89830" strokeWidth="0.8" />
+          <circle cx="250" cy="150" r="4" fill="none" stroke="#3B6FA0" strokeWidth="0.8" />
+          <circle cx="400" cy="280" r="4" fill="none" stroke="#3B6FA0" strokeWidth="0.8" />
+          <circle cx="550" cy="400" r="4" fill="none" stroke="#3B6FA0" strokeWidth="0.8" />
+          <circle cx="700" cy="520" r="4" fill="none" stroke="#B89830" strokeWidth="0.8" />
+          <circle cx="250" cy="280" r="4" fill="none" stroke="#B89830" strokeWidth="0.8" />
+          <circle cx="550" cy="150" r="4" fill="none" stroke="#B89830" strokeWidth="0.8" />
+          <circle cx="100" cy="400" r="4" fill="none" stroke="#B89830" strokeWidth="0.8" />
+          <circle cx="700" cy="60" r="4" fill="none" stroke="#B89830" strokeWidth="0.8" />
+          <circle cx="400" cy="520" r="4" fill="none" stroke="#3B6FA0" strokeWidth="0.8" />
           {/* Diagonal connectors */}
-          <line x1="100" y1="60" x2="250" y2="150" stroke="#C9A96E" strokeWidth="0.3" />
-          <line x1="250" y1="150" x2="400" y2="280" stroke="#C9A96E" strokeWidth="0.3" />
-          <line x1="400" y1="280" x2="550" y2="400" stroke="#C9A96E" strokeWidth="0.3" />
-          <line x1="550" y1="400" x2="700" y2="520" stroke="#C9A96E" strokeWidth="0.3" />
-          <line x1="250" y1="280" x2="550" y2="150" stroke="#C9A96E" strokeWidth="0.3" />
+          <line x1="100" y1="60" x2="250" y2="150" stroke="#B89830" strokeWidth="0.3" />
+          <line x1="250" y1="150" x2="400" y2="280" stroke="#B89830" strokeWidth="0.3" />
+          <line x1="400" y1="280" x2="550" y2="400" stroke="#B89830" strokeWidth="0.3" />
+          <line x1="550" y1="400" x2="700" y2="520" stroke="#B89830" strokeWidth="0.3" />
+          <line x1="250" y1="280" x2="550" y2="150" stroke="#B89830" strokeWidth="0.3" />
         </svg>
       </div>
 
@@ -232,7 +232,7 @@ export default function TechnologySection() {
             initial={{ opacity: 0, y: 15 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="font-jost text-base md:text-lg text-brown-warm/70 max-w-2xl mx-auto text-center leading-relaxed mt-4 mb-12"
+            className="font-jost text-base md:text-lg text-brown-muted max-w-2xl mx-auto text-center leading-relaxed mt-4 mb-12"
           >
             We invest in the latest dental technology so you benefit from faster, more comfortable, and more precise treatments — because you deserve nothing but the best.
           </motion.p>

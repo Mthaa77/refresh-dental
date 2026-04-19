@@ -117,7 +117,7 @@ export default function WhatsAppButton() {
             {/* Pulsing gold ring (outer) */}
             <motion.div
               className="absolute inset-0 rounded-full"
-              style={{ border: '2px solid rgba(201, 169, 110, 0.5)' }}
+              style={{ border: '2px solid rgba(184, 152, 48, 0.5)' }}
               animate={{
                 scale: [1, 1.7],
                 opacity: [0.6, 0],
@@ -131,7 +131,7 @@ export default function WhatsAppButton() {
             {/* Pulsing gold ring (inner) */}
             <motion.div
               className="absolute inset-0 rounded-full"
-              style={{ border: '1.5px solid rgba(201, 169, 110, 0.35)' }}
+              style={{ border: '1.5px solid rgba(184, 152, 48, 0.35)' }}
               animate={{
                 scale: [1, 1.5],
                 opacity: [0.5, 0],

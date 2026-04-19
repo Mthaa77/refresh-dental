@@ -85,7 +85,7 @@ export default function LocationMapEnhanced() {
   return (
     <section
       id="location"
-      className="bg-[#FDFAF6] py-20 lg:py-24 overflow-hidden"
+      className="bg-[#F0EBE1] py-20 lg:py-24 overflow-hidden"
     >
       <div className="max-w-6xl mx-auto px-6">
         {/* Section Header */}
@@ -102,7 +102,7 @@ export default function LocationMapEnhanced() {
           <h2 className="font-cormorant text-3xl md:text-4xl lg:text-5xl text-espresso mt-3">
             Find Our Practice
           </h2>
-          <p className="font-jost text-brown-warm/70 mt-3 max-w-lg mx-auto">
+          <p className="font-jost text-brown-muted mt-3 max-w-lg mx-auto">
             Located inside the Family Wellness Centre in Lyttelton Manor,
             Centurion. Free parking available on-site.
           </p>
@@ -191,7 +191,7 @@ export default function LocationMapEnhanced() {
                 <h4 className="font-dm-serif text-base text-espresso mb-1.5">
                   {card.label}
                 </h4>
-                <p className="font-jost text-sm text-brown-warm/70 whitespace-pre-line leading-relaxed">
+                <p className="font-jost text-sm text-brown-muted whitespace-pre-line leading-relaxed">
                   {card.value}
                 </p>
                 <span className="inline-flex items-center gap-1 mt-3 font-jost text-xs font-semibold text-champagne-gold uppercase tracking-wider">
@@ -258,7 +258,7 @@ export default function LocationMapEnhanced() {
                   >
                     <span
                       className={`font-medium ${
-                        isToday ? 'text-espresso' : 'text-brown-warm/50'
+                        isToday ? 'text-espresso' : 'text-brown-muted/80'
                       }`}
                     >
                       {s.day}
@@ -273,7 +273,7 @@ export default function LocationMapEnhanced() {
                         s.timeRange
                           ? isToday
                             ? 'text-sage-teal font-medium'
-                            : 'text-brown-warm/70'
+                            : 'text-brown-muted'
                           : 'text-brown-warm/30'
                       }
                     >
@@ -304,7 +304,7 @@ export default function LocationMapEnhanced() {
               <span className="font-dm-serif text-base text-espresso mb-1">
                 Free Parking
               </span>
-              <span className="font-jost text-xs text-brown-warm/60">
+              <span className="font-jost text-xs text-brown-muted/90">
                 Ample on-site parking available at the Family Wellness Centre
               </span>
             </div>
@@ -313,7 +313,7 @@ export default function LocationMapEnhanced() {
             <div className="rounded-2xl border border-champagne-gold/15 bg-champagne-gold/[0.04] p-4 flex items-center gap-3">
               <Phone className="h-5 w-5 text-champagne-gold flex-shrink-0" />
               <div>
-                <p className="font-jost text-xs text-brown-warm/50">Emergency Line</p>
+                <p className="font-jost text-xs text-brown-muted/80">Emergency Line</p>
                 <a
                   href="tel:0614164649"
                   className="font-jost text-sm font-semibold text-espresso hover:text-champagne-gold transition-colors"

@@ -143,10 +143,10 @@ export default function Navigation() {
           scrolled ? 'border-b border-champagne-gold/10' : ''
         }`}
         animate={{
-          backgroundColor: scrolled ? '#FDFAF6' : 'rgba(26, 21, 16, 0)',
+          backgroundColor: scrolled ? '#F0EBE1' : 'rgba(15, 13, 10, 0)',
           boxShadow: scrolled
-            ? '0 1px 20px rgba(26, 21, 16, 0.08)'
-            : '0 0px 0px rgba(26, 21, 16, 0)',
+            ? '0 1px 20px rgba(15, 13, 10, 0.08)'
+            : '0 0px 0px rgba(15, 13, 10, 0)',
         }}
         transition={{ duration: 0.4, ease: 'easeInOut' }}
       >
@@ -180,8 +180,8 @@ export default function Navigation() {
                   <a
                     href={link.href}
                     onClick={(e) => handleNavClick(e, link.href)}
-                    className="relative font-jost text-[13px] font-medium tracking-[0.08em] uppercase transition-colors duration-300 hover:text-champagne-gold"
-                    style={{ color: isActive ? '#C9A96E' : scrolled ? '#1A1510' : '#FDFAF6' }}
+                    className="relative font-jost text-[13px] font-medium tracking-[0.08em] uppercase transition-colors duration-300 hover:text-[#A07D1A]"
+                    style={{ color: isActive ? '#B89830' : scrolled ? '#0F0D0A' : '#F0EBE1' }}
                   >
                     {link.label}
                     {/* Gold underline animation */}
@@ -214,8 +214,8 @@ export default function Navigation() {
             <motion.a
               href="#contact"
               onClick={handleBookAppointment}
-              className="hidden items-center gap-2 rounded-full bg-gradient-to-r from-champagne-gold to-[#d4b078] px-6 py-2.5 font-jost text-sm font-semibold tracking-wide text-white shadow-gold transition-colors duration-300 md:inline-flex"
-              whileHover={{ scale: 1.05, boxShadow: '0 0 24px rgba(201, 169, 110, 0.35)' }}
+              className="hidden items-center gap-2 rounded-full bg-gradient-to-r from-champagne-gold to-[#A07D1A] px-6 py-2.5 font-jost text-sm font-semibold tracking-wide text-white shadow-gold transition-colors duration-300 md:inline-flex"
+              whileHover={{ scale: 1.05, boxShadow: '0 0 24px rgba(160, 125, 26, 0.35)' }}
               whileTap={{ scale: 0.97 }}
             >
               <Phone className="h-3.5 w-3.5" />
@@ -249,7 +249,7 @@ export default function Navigation() {
                   >
                     <Menu
                       className="h-6 w-6"
-                      style={{ color: scrolled ? '#1A1510' : '#FDFAF6' }}
+                      style={{ color: scrolled ? '#0F0D0A' : '#F0EBE1' }}
                     />
                   </motion.div>
                 )}
@@ -263,18 +263,20 @@ export default function Navigation() {
       <AnimatePresence>
         {mobileOpen && (
           <motion.div
-            className="fixed inset-0 z-50 flex flex-col items-center bg-gradient-to-b from-espresso via-[#0f0c08] to-espresso md:hidden"
+            className="fixed inset-0 z-50 flex flex-col items-center bg-gradient-to-b from-espresso via-[#0a0d18] to-espresso md:hidden"
             variants={mobileOverlayVariants}
             initial="hidden"
             animate="visible"
             exit="exit"
           >
-            {/* Decorative gold particle dots */}
+            {/* Decorative gold particle dots + subtle blue accent dot */}
             <div className="pointer-events-none absolute inset-0 overflow-hidden">
               <div className="absolute top-[12%] left-[15%] h-1.5 w-1.5 rounded-full bg-champagne-gold/20" />
               <div className="absolute top-[25%] right-[10%] h-1 w-1 rounded-full bg-champagne-gold/15" />
               <div className="absolute bottom-[30%] left-[8%] h-1 w-1 rounded-full bg-champagne-gold/10" />
               <div className="absolute bottom-[20%] right-[20%] h-2 w-2 rounded-full bg-champagne-gold/10" />
+              {/* Subtle blue accent dot */}
+              <div className="absolute top-[18%] right-[30%] h-1.5 w-1.5 rounded-full bg-accent-blue/15" />
             </div>
 
             {/* Dedicated Close Button — top right */}
@@ -307,7 +309,7 @@ export default function Navigation() {
                 Refresh Dental
               </motion.h2>
               <motion.p
-                className="mt-1 font-jost text-sm text-ivory/40"
+                className="mt-1 font-jost text-sm text-ivory/55"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ duration: 0.4, delay: 0.3 }}
@@ -386,11 +388,11 @@ export default function Navigation() {
             <motion.a
               href="#contact"
               onClick={handleBookAppointment}
-              className="mb-8 inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-champagne-gold to-[#d4b078] px-8 py-3 font-jost text-base font-semibold tracking-wide text-white shadow-gold"
+              className="mb-8 inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-champagne-gold to-[#A07D1A] px-8 py-3 font-jost text-base font-semibold tracking-wide text-white shadow-gold"
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.4, delay: 0.8 }}
-              whileHover={{ scale: 1.05, boxShadow: '0 0 24px rgba(201, 169, 110, 0.35)' }}
+              whileHover={{ scale: 1.05, boxShadow: '0 0 24px rgba(160, 125, 26, 0.35)' }}
               whileTap={{ scale: 0.97 }}
             >
               <Phone className="h-4 w-4" />
@@ -413,7 +415,7 @@ export default function Navigation() {
                   aria-label={social.label}
                   whileHover={{ scale: 1.15 }}
                   transition={{ duration: 0.25 }}
-                  className="flex h-9 w-9 items-center justify-center rounded-full border border-ivory/10 text-ivory/40 transition-colors duration-300 hover:border-champagne-gold/30 hover:text-champagne-gold"
+                  className="flex h-9 w-9 items-center justify-center rounded-full border border-ivory/20 text-ivory/55 transition-colors duration-300 hover:border-champagne-gold/30 hover:text-champagne-gold"
                 >
                   <social.icon className="h-4 w-4" />
                 </motion.a>

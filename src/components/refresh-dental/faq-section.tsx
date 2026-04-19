@@ -7,17 +7,17 @@ import { Plus, Minus, Search, ThumbsUp, ThumbsDown, MessageCircle, ArrowRight } 
 type Category = 'Payment' | 'General' | 'Emergency' | 'Cosmetic' | 'Aesthetics'
 
 const categoryColors: Record<Category, string> = {
-  Payment: '#C9A96E',
-  General: '#3D7D6E',
-  Emergency: '#D47878',
-  Cosmetic: '#E8D5B0',
-  Aesthetics: '#C9A96E',
+  Payment: '#B89830',
+  General: '#2D6B5C',
+  Emergency: '#A63D40',
+  Cosmetic: '#D4C08A',
+  Aesthetics: '#B89830',
 }
 
 const categoryGradients: Record<Category, string> = {
   Payment: 'from-champagne-gold to-gold-light',
   General: 'from-sage-teal to-sage-teal/40',
-  Emergency: 'from-warm-blush to-warm-blush/40',
+  Emergency: 'from-accent-red to-accent-red/40',
   Cosmetic: 'from-gold-light to-champagne-gold/40',
   Aesthetics: 'from-champagne-gold to-champagne-gold/50',
 }
@@ -123,7 +123,7 @@ export default function FAQSection() {
             initial={{ opacity: 0, y: 15 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="font-jost text-base md:text-lg text-brown-warm/70 max-w-2xl mx-auto text-center leading-relaxed mt-4 mb-12"
+            className="font-jost text-base md:text-lg text-brown-muted max-w-2xl mx-auto text-center leading-relaxed mt-4 mb-12"
           >
             Got questions? We&rsquo;ve got answers. If you don&rsquo;t find what you&rsquo;re looking for, our friendly team is just a phone call away.
           </motion.p>
@@ -150,7 +150,7 @@ export default function FAQSection() {
               <motion.span
                 initial={{ opacity: 0, scale: 0.8 }}
                 animate={{ opacity: 1, scale: 1 }}
-                className="absolute right-4 top-1/2 -translate-y-1/2 text-xs font-jost text-brown-warm/50"
+                className="absolute right-4 top-1/2 -translate-y-1/2 text-xs font-jost text-brown-muted/80"
               >
                 {filteredFaqs.length} result{filteredFaqs.length !== 1 ? 's' : ''}
               </motion.span>
@@ -165,7 +165,7 @@ export default function FAQSection() {
           viewport={{ once: true }}
           className="mb-4 flex items-center justify-between"
         >
-          <span className="font-jost text-xs text-brown-warm/50 uppercase tracking-wider">
+          <span className="font-jost text-xs text-brown-muted/80 uppercase tracking-wider">
             {filteredFaqs.length} question{filteredFaqs.length !== 1 ? 's' : ''}
           </span>
           {expandedCount > 0 && (
@@ -193,11 +193,11 @@ export default function FAQSection() {
               style={{
                 boxShadow:
                   openIndex === i
-                    ? '0 8px 32px -4px rgba(201, 169, 110, 0.12)'
+                    ? '0 8px 32px -4px rgba(184, 152, 48, 0.15)'
                     : 'none',
                 borderColor:
                   openIndex === i
-                    ? 'rgba(201, 169, 110, 0.4)'
+                    ? 'rgba(184, 152, 48, 0.45)'
                     : undefined,
               }}
             >
@@ -252,7 +252,7 @@ export default function FAQSection() {
                   >
                     <div className="px-6 pb-6 pt-0 pl-[3.25rem]">
                       <div className="h-px bg-soft-border mb-4" />
-                      <p className="font-jost text-sm font-light leading-relaxed text-brown-warm/80">
+                      <p className="font-jost text-sm font-light leading-relaxed text-brown-muted">
                         {faq.answer}
                       </p>
 
@@ -263,7 +263,7 @@ export default function FAQSection() {
                         transition={{ duration: 0.3, delay: 0.15 }}
                         className="mt-5 flex items-center gap-3"
                       >
-                        <span className="font-jost text-xs text-brown-warm/50">
+                        <span className="font-jost text-xs text-brown-muted/80">
                           Did this answer your question?
                         </span>
                         <div className="flex items-center gap-1.5">
@@ -274,7 +274,7 @@ export default function FAQSection() {
                             className={`flex items-center gap-1 rounded-full px-2.5 py-1 text-xs font-jost transition-colors ${
                               feedback[i] === 'up'
                                 ? 'bg-sage-teal/10 text-sage-teal'
-                                : 'bg-sand/50 text-brown-warm/40 hover:text-sage-teal'
+                                : 'bg-sand/50 text-brown-muted/80 hover:text-sage-teal'
                             }`}
                           >
                             <ThumbsUp className="h-3 w-3" />
@@ -287,7 +287,7 @@ export default function FAQSection() {
                             className={`flex items-center gap-1 rounded-full px-2.5 py-1 text-xs font-jost transition-colors ${
                               feedback[i] === 'down'
                                 ? 'bg-warm-blush/10 text-warm-blush'
-                                : 'bg-sand/50 text-brown-warm/40 hover:text-warm-blush'
+                                : 'bg-sand/50 text-brown-muted/80 hover:text-warm-blush'
                             }`}
                           >
                             <ThumbsDown className="h-3 w-3" />
@@ -318,7 +318,7 @@ export default function FAQSection() {
               className="py-12 text-center"
             >
               <Search className="mx-auto h-8 w-8 text-sand-muted/40 mb-3" />
-              <p className="font-jost text-sm text-brown-warm/50">
+              <p className="font-jost text-sm text-brown-muted/80">
                 No questions match &ldquo;{searchQuery}&rdquo;
               </p>
               <button
@@ -346,16 +346,16 @@ export default function FAQSection() {
           >
             {/* Decorative corner accents */}
             <svg className="absolute top-3 left-3 pointer-events-none" width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
-              <path d="M2 2 L2 10 L10 10" stroke="#C9A96E" strokeWidth="1" strokeLinecap="round" opacity="0.3" />
+              <path d="M2 2 L2 10 L10 10" stroke="#B89830" strokeWidth="1" strokeLinecap="round" opacity="0.3" />
             </svg>
             <svg className="absolute top-3 right-3 pointer-events-none" width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
-              <path d="M18 2 L18 10 L10 10" stroke="#C9A96E" strokeWidth="1" strokeLinecap="round" opacity="0.3" />
+              <path d="M18 2 L18 10 L10 10" stroke="#B89830" strokeWidth="1" strokeLinecap="round" opacity="0.3" />
             </svg>
             <svg className="absolute bottom-3 left-3 pointer-events-none" width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
-              <path d="M2 18 L2 10 L10 10" stroke="#C9A96E" strokeWidth="1" strokeLinecap="round" opacity="0.3" />
+              <path d="M2 18 L2 10 L10 10" stroke="#B89830" strokeWidth="1" strokeLinecap="round" opacity="0.3" />
             </svg>
             <svg className="absolute bottom-3 right-3 pointer-events-none" width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
-              <path d="M18 18 L18 10 L10 10" stroke="#C9A96E" strokeWidth="1" strokeLinecap="round" opacity="0.3" />
+              <path d="M18 18 L18 10 L10 10" stroke="#B89830" strokeWidth="1" strokeLinecap="round" opacity="0.3" />
             </svg>
 
             <motion.div
@@ -368,14 +368,14 @@ export default function FAQSection() {
             <h3 className="font-dm-serif text-xl text-espresso mb-2">
               Still Have Questions?
             </h3>
-            <p className="font-jost text-sm text-brown-warm/70 mb-6 max-w-sm mx-auto">
+            <p className="font-jost text-sm text-brown-muted mb-6 max-w-sm mx-auto">
               We&apos;d love to hear from you. Get in touch with our friendly team and we&apos;ll help you with anything you need.
             </p>
             <motion.a
               href="#contact"
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
-              className="inline-flex items-center gap-2 rounded-full bg-champagne-gold px-7 py-3 font-jost text-sm font-semibold uppercase tracking-wider text-white transition-colors hover:bg-[#b8964f] hover:shadow-lg hover:shadow-champagne-gold/20"
+              className="inline-flex items-center gap-2 rounded-full bg-champagne-gold px-7 py-3 font-jost text-sm font-semibold uppercase tracking-wider text-white transition-colors hover:bg-[#A07D1A] hover:shadow-lg hover:shadow-champagne-gold/20"
             >
               Get in Touch
               <ArrowRight className="h-4 w-4" />

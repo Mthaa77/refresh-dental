@@ -120,8 +120,8 @@ function CertificationCard({
         className={`flex h-16 w-16 items-center justify-center rounded-full border-2 ${cert.borderColor} transition-all duration-300 group-hover:scale-110`}
         whileHover={{
           boxShadow: isGoldBorder
-            ? '0 0 24px rgba(201, 169, 110, 0.3)'
-            : '0 0 24px rgba(61, 125, 110, 0.25)',
+            ? '0 0 24px rgba(184, 152, 48, 0.3)'
+            : '0 0 24px rgba(45, 107, 92, 0.25)',
         }}
         transition={{ duration: 0.3 }}
       >
@@ -138,7 +138,7 @@ function CertificationCard({
       </h3>
 
       {/* Description */}
-      <p className="text-center font-jost text-sm font-light leading-relaxed text-ivory/50">
+      <p className="text-center font-jost text-sm font-light leading-relaxed text-ivory/65">
         {cert.description}
       </p>
     </motion.div>
@@ -150,7 +150,7 @@ export default function AwardsCertifications() {
     <section
       id="awards"
       className="relative overflow-hidden py-20 md:py-28"
-      style={{ backgroundColor: '#1A1510' }}
+      style={{ backgroundColor: '#0F0D0A' }}
     >
       {/* Floating gold particles */}
       {goldParticles.map((p, i) => (
@@ -166,7 +166,7 @@ export default function AwardsCertifications() {
             top: p.y,
             width: p.size,
             height: p.size,
-            backgroundColor: '#C9A96E',
+            backgroundColor: '#B89830',
           }}
           aria-hidden="true"
         />
@@ -177,7 +177,7 @@ export default function AwardsCertifications() {
         className="pointer-events-none absolute left-1/2 top-1/2 h-[300px] w-[300px] -translate-x-1/2 -translate-y-1/2 rounded-full sm:h-[450px] sm:w-[450px] md:h-[600px] md:w-[600px]"
         style={{
           background:
-            'radial-gradient(circle, rgba(201, 169, 110, 0.05) 0%, transparent 70%)',
+            'radial-gradient(circle, rgba(184, 152, 48, 0.05) 0%, transparent 70%)',
         }}
         aria-hidden="true"
       />
@@ -197,7 +197,7 @@ export default function AwardsCertifications() {
           <h2 className="font-cormorant text-[clamp(2rem,4vw,3rem)] font-medium leading-tight gold-gradient-text">
             Awards &amp; Recognition
           </h2>
-          <p className="mx-auto mt-4 max-w-lg font-jost text-sm font-light leading-relaxed text-ivory/50">
+          <p className="mx-auto mt-4 max-w-lg font-jost text-sm font-light leading-relaxed text-ivory/65">
             Excellence recognized by industry leaders
           </p>
           {/* Gold accent line */}

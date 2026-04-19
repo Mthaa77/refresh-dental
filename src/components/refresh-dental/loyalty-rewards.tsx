@@ -45,12 +45,12 @@ const tiers: RewardTier[] = [
     name: 'Gold',
     threshold: '10+ Visits',
     benefits: '20% off all treatments + priority booking + free whitening',
-    gradientFrom: '#C9A96E',
-    gradientTo: '#E8D5B0',
+    gradientFrom: '#B89830',
+    gradientTo: '#D4C08A',
     textColor: 'text-champagne-gold',
     borderColor: 'border-champagne-gold/30',
     isGold: true,
-    badgeColor: '#C9A96E',
+    badgeColor: '#B89830',
   },
   {
     number: '04',
@@ -94,7 +94,7 @@ function TierCard({ tier }: { tier: RewardTier }) {
         y: isHovered ? -4 : 0,
         boxShadow: isHovered
           ? tier.isGold
-            ? '0 16px 48px -8px rgba(201, 169, 110, 0.3)'
+            ? '0 16px 48px -8px rgba(184, 152, 48, 0.3)'
             : '0 12px 32px -8px rgba(0, 0, 0, 0.1)'
           : '0 2px 8px -2px rgba(0, 0, 0, 0.05)',
       }}
@@ -111,7 +111,7 @@ function TierCard({ tier }: { tier: RewardTier }) {
           ease: 'linear',
         }}
         style={{
-          background: 'linear-gradient(90deg, transparent 0%, rgba(201, 169, 110, 0.08) 50%, transparent 100%)',
+          background: 'linear-gradient(90deg, transparent 0%, rgba(184, 152, 48, 0.08) 50%, transparent 100%)',
         }}
       />
 
@@ -163,11 +163,11 @@ function TierCard({ tier }: { tier: RewardTier }) {
             <h3 className={`font-dm-serif text-base ${tier.textColor}`}>
               {tier.name} Tier
             </h3>
-            <span className="rounded-full bg-sand px-2 py-0.5 font-jost text-[10px] font-semibold uppercase tracking-wider text-brown-warm/60">
+            <span className="rounded-full bg-sand px-2 py-0.5 font-jost text-[10px] font-semibold uppercase tracking-wider text-brown-muted/90">
               {tier.threshold}
             </span>
           </div>
-          <p className="font-jost text-sm font-light leading-relaxed text-brown-warm/70">
+          <p className="font-jost text-sm font-light leading-relaxed text-brown-muted">
             {tier.benefits}
           </p>
         </div>
@@ -191,7 +191,7 @@ export default function LoyaltyRewards() {
     <section
       id="rewards"
       className="relative overflow-hidden py-20 md:py-28"
-      style={{ backgroundColor: '#F5EFE6' }}
+      style={{ backgroundColor: '#E3DACA' }}
     >
       {/* Floating gold coin/star icons that float up on scroll reveal */}
       {floatingCoins.map((coin, i) => {
@@ -231,7 +231,7 @@ export default function LoyaltyRewards() {
           <h2 className="font-cormorant text-[clamp(2rem,4vw,3rem)] font-medium leading-tight text-espresso">
             Refresh Rewards
           </h2>
-          <p className="mx-auto mt-4 max-w-lg font-jost text-sm font-light leading-relaxed text-brown-warm/60">
+          <p className="mx-auto mt-4 max-w-lg font-jost text-sm font-light leading-relaxed text-brown-muted/90">
             Your smile, your benefits
           </p>
           {/* Gold accent line */}
@@ -253,7 +253,7 @@ export default function LoyaltyRewards() {
             viewport={{ once: true, margin: '-60px' }}
             transition={{ duration: 0.6 }}
           >
-            <p className="mb-8 font-jost text-sm font-light leading-relaxed text-brown-warm/70">
+            <p className="mb-8 font-jost text-sm font-light leading-relaxed text-brown-muted">
               At Refresh Dental, we believe in rewarding loyalty. Our exclusive
               rewards program is designed to give back to our valued patients.
               The more you visit, the more you earn — because your smile journey
@@ -290,7 +290,7 @@ export default function LoyaltyRewards() {
                 transition={{ duration: 0.5, delay: 0.5 }}
               >
                 <div className="mb-2 flex items-center justify-between">
-                  <span className="font-jost text-xs font-medium text-brown-warm/70">
+                  <span className="font-jost text-xs font-medium text-brown-muted">
                     Your Progress
                   </span>
                   <span className="font-jost text-xs font-semibold text-champagne-gold">
@@ -300,7 +300,7 @@ export default function LoyaltyRewards() {
                 <div className="relative mb-2 h-3 w-full overflow-hidden rounded-full bg-sand">
                   <motion.div
                     className="absolute left-0 top-0 h-full rounded-full"
-                    style={{ background: 'linear-gradient(90deg, #C9A96E, #E8D5B0)' }}
+                    style={{ background: 'linear-gradient(90deg, #B89830, #D4C08A)' }}
                     initial={{ width: '0%' }}
                     whileInView={{ width: '20%' }}
                     viewport={{ once: true }}
@@ -314,7 +314,7 @@ export default function LoyaltyRewards() {
                         key={visit}
                         className="flex h-5 w-5 items-center justify-center rounded-full"
                         style={{
-                          backgroundColor: visit <= 1 ? '#C9A96E' : 'rgba(201, 169, 110, 0.15)',
+                          backgroundColor: visit <= 1 ? '#B89830' : 'rgba(184, 152, 48, 0.15)',
                         }}
                         initial={{ scale: 0 }}
                         whileInView={{ scale: 1 }}
@@ -359,7 +359,7 @@ export default function LoyaltyRewards() {
                 className="relative overflow-hidden rounded-3xl p-8 shadow-2xl"
                 style={{
                   background:
-                    'linear-gradient(135deg, #C9A96E 0%, #E8D5B0 50%, #C9A96E 100%)',
+                    'linear-gradient(135deg, #B89830 0%, #D4C08A 50%, #B89830 100%)',
                   aspectRatio: '1.586 / 1',
                   minHeight: '220px',
                 }}
@@ -369,7 +369,7 @@ export default function LoyaltyRewards() {
                   className="pointer-events-none absolute inset-0 opacity-[0.08]"
                   aria-hidden="true"
                   style={{
-                    backgroundImage: `radial-gradient(circle at 1px 1px, #1A1510 1px, transparent 0)`,
+                    backgroundImage: `radial-gradient(circle at 1px 1px, #0F0D0A 1px, transparent 0)`,
                     backgroundSize: '20px 20px',
                   }}
                 />

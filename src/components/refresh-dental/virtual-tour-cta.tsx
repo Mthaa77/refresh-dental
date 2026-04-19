@@ -38,14 +38,14 @@ export default function VirtualTourCta() {
       id="virtual-tour"
       ref={ref}
       className="relative overflow-hidden"
-      style={{ background: '#1A1510' }}
+      style={{ background: '#0F0D0A' }}
     >
       {/* Subtle grid pattern overlay */}
       <div className="pointer-events-none absolute inset-0 opacity-[0.04]">
         <svg className="h-full w-full" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" viewBox="0 0 200 200">
           <defs>
             <pattern id="tour-grid" patternUnits="userSpaceOnUse" width="40" height="40">
-              <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#C9A96E" strokeWidth="0.5" />
+              <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#B89830" strokeWidth="0.5" />
             </pattern>
           </defs>
           <rect width="100%" height="100%" fill="url(#tour-grid)" />
@@ -55,28 +55,28 @@ export default function VirtualTourCta() {
       {/* Gold corner accents */}
       <div className="pointer-events-none absolute top-6 left-6 w-16 h-16">
         <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M0 0L24 0L24 2L2 2L2 24L0 24Z" fill="#C9A96E" opacity="0.4" />
+          <path d="M0 0L24 0L24 2L2 2L2 24L0 24Z" fill="#B89830" opacity="0.4" />
         </svg>
       </div>
       <div className="pointer-events-none absolute top-6 right-6 w-16 h-16">
         <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M64 0L40 0L40 2L62 2L62 24L64 24Z" fill="#C9A96E" opacity="0.4" />
+          <path d="M64 0L40 0L40 2L62 2L62 24L64 24Z" fill="#B89830" opacity="0.4" />
         </svg>
       </div>
       <div className="pointer-events-none absolute bottom-6 left-6 w-16 h-16">
         <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M0 64L24 64L24 62L2 62L2 40L0 40Z" fill="#C9A96E" opacity="0.4" />
+          <path d="M0 64L24 64L24 62L2 62L2 40L0 40Z" fill="#B89830" opacity="0.4" />
         </svg>
       </div>
       <div className="pointer-events-none absolute bottom-6 right-6 w-16 h-16">
         <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M64 64L40 64L40 62L62 62L62 40L64 40Z" fill="#C9A96E" opacity="0.4" />
+          <path d="M64 64L40 64L40 62L62 62L62 40L64 40Z" fill="#B89830" opacity="0.4" />
         </svg>
       </div>
 
       {/* Ambient glow */}
       <div className="pointer-events-none absolute top-0 right-1/4 w-96 h-96 rounded-full opacity-[0.06]"
-        style={{ background: 'radial-gradient(circle, #C9A96E, transparent 70%)' }}
+        style={{ background: 'radial-gradient(circle, #B89830, transparent 70%)' }}
       />
 
       <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-20 md:py-28">
@@ -99,7 +99,7 @@ export default function VirtualTourCta() {
 
             <h2
               className="font-cormorant text-[clamp(2rem,5vw,3.5rem)] font-medium leading-tight mb-6"
-              style={{ color: '#FDFAF6' }}
+              style={{ color: '#F0EBE1' }}
             >
               Step Inside Our{' '}
               <span className="gold-gradient-text">Practice</span>
@@ -150,8 +150,8 @@ export default function VirtualTourCta() {
                 href="#contact"
                 className="inline-flex items-center justify-center gap-2 rounded-full px-7 py-3 font-jost text-sm font-medium transition-shadow duration-200"
                 style={{
-                  background: 'linear-gradient(135deg, #C9A96E, #E8D5B0)',
-                  color: '#1A1510',
+                  background: 'linear-gradient(135deg, #B89830, #D4C08A)',
+                  color: '#0F0D0A',
                 }}
                 whileHover={{ scale: 1.03, boxShadow: '0 8px 24px rgba(201,169,110,0.3)' }}
                 whileTap={{ scale: 0.97 }}
@@ -164,7 +164,7 @@ export default function VirtualTourCta() {
                 className="inline-flex items-center justify-center gap-2 rounded-full px-7 py-3 font-jost text-sm font-medium transition-colors duration-200"
                 style={{
                   border: '1px solid rgba(201,169,110,0.35)',
-                  color: '#FDFAF6',
+                  color: '#F0EBE1',
                   background: 'transparent',
                 }}
                 whileHover={{
@@ -243,7 +243,7 @@ export default function VirtualTourCta() {
                   <div
                     className="relative flex h-16 w-16 md:h-20 md:w-20 items-center justify-center rounded-full cursor-pointer"
                     style={{
-                      background: 'linear-gradient(135deg, #C9A96E, #E8D5B0)',
+                      background: 'linear-gradient(135deg, #B89830, #D4C08A)',
                       boxShadow: '0 8px 32px rgba(201,169,110,0.4)',
                     }}
                   >
@@ -270,7 +270,7 @@ export default function VirtualTourCta() {
                   style={{
                     background: 'rgba(201,169,110,0.15)',
                     border: '1px solid rgba(201,169,110,0.3)',
-                    color: '#C9A96E',
+                    color: '#B89830',
                   }}
                 >
                   360° View
@@ -284,7 +284,7 @@ export default function VirtualTourCta() {
               <svg width="8" height="8" viewBox="0 0 10 10" fill="none">
                 <path
                   d="M5 0L5.8 4.2L10 5L5.8 5.8L5 10L4.2 5.8L0 5L4.2 4.2Z"
-                  fill="#C9A96E"
+                  fill="#B89830"
                   opacity="0.3"
                 />
               </svg>

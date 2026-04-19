@@ -120,7 +120,7 @@ export default function InstagramFeed() {
             target="_blank"
             rel="noopener noreferrer"
             whileHover={{ scale: 1.02 }}
-            className="mt-4 inline-flex items-center gap-2 font-jost text-sm text-brown-warm/60 transition-colors duration-300 hover:text-champagne-gold"
+            className="mt-4 inline-flex items-center gap-2 font-jost text-sm text-brown-muted/90 transition-colors duration-300 hover:text-champagne-gold"
           >
             <Instagram className="h-4 w-4" strokeWidth={1.5} />
             @refresh_dental
@@ -180,7 +180,7 @@ export default function InstagramFeed() {
                 <motion.div
                   className="absolute inset-0"
                   style={{
-                    background: 'conic-gradient(from 0deg, transparent 60%, rgba(201, 169, 110, 0.6) 75%, rgba(232, 213, 176, 0.8) 80%, rgba(201, 169, 110, 0.6) 85%, transparent 100%)',
+                    background: 'conic-gradient(from 0deg, transparent 60%, rgba(184, 152, 48, 0.6) 75%, rgba(232, 213, 176, 0.8) 80%, rgba(184, 152, 48, 0.6) 85%, transparent 100%)',
                     mask: 'linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)',
                     maskComposite: 'exclude',
                     WebkitMaskComposite: 'xor',
@@ -303,7 +303,7 @@ export default function InstagramFeed() {
             target="_blank"
             rel="noopener noreferrer"
             whileHover={{
-              boxShadow: '0 8px 30px -4px rgba(201, 169, 110, 0.25)',
+              boxShadow: '0 8px 30px -4px rgba(184, 152, 48, 0.25)',
             }}
             transition={{ duration: 0.3 }}
             className="relative inline-flex items-center gap-2.5 rounded-full border border-champagne-gold/40 bg-white px-7 py-3 font-jost text-sm font-medium uppercase tracking-wider text-espresso transition-all duration-300 hover:border-champagne-gold hover:bg-champagne-gold/5"
@@ -323,7 +323,7 @@ export default function InstagramFeed() {
         >
           <motion.path
             d="M0,40 C240,80 480,0 720,40 C960,80 1200,0 1440,40 L1440,100 L0,100 Z"
-            fill="#FDFAF6"
+            fill="#F0EBE1"
             initial={{ d: 'M0,40 C240,80 480,0 720,40 C960,80 1200,0 1440,40 L1440,100 L0,100 Z' }}
             animate={{
               d: [
@@ -340,7 +340,7 @@ export default function InstagramFeed() {
           />
           <motion.path
             d="M0,60 C240,30 480,80 720,50 C960,30 1200,80 1440,50 L1440,100 L0,100 Z"
-            fill="#FDFAF6"
+            fill="#F0EBE1"
             opacity="0.5"
             initial={{ d: 'M0,60 C240,30 480,80 720,50 C960,30 1200,80 1440,50 L1440,100 L0,100 Z' }}
             animate={{

@@ -44,6 +44,7 @@ const socialLinks = [
     label: 'LinkedIn',
     href: 'https://www.linkedin.com/in/drlebogangmalunga',
     icon: Linkedin,
+    isBlueHover: true,
   },
   {
     label: 'TikTok',
@@ -74,7 +75,7 @@ export default function Footer() {
               Refresh Dental
             </span>
           </div>
-          <p className="text-ivory/50 italic text-sm leading-relaxed">
+          <p className="text-ivory/65 italic text-sm leading-relaxed">
             &ldquo;Refreshed smiles, refreshed lives.&rdquo;
           </p>
 
@@ -89,10 +90,16 @@ export default function Footer() {
                 aria-label={social.label}
                 whileHover={{
                   scale: 1.15,
-                  boxShadow: '0 0 16px rgba(201, 169, 110, 0.5)',
+                  boxShadow: social.isBlueHover
+                    ? '0 0 16px rgba(59, 111, 160, 0.5)'
+                    : '0 0 16px rgba(184, 152, 48, 0.5)',
                 }}
                 transition={{ duration: 0.25 }}
-                className="flex items-center justify-center w-9 h-9 rounded-full border border-ivory/15 text-ivory/50 hover:text-champagne-gold hover:border-champagne-gold/40 shadow-premium hover-lift transition-all duration-300"
+                className={`flex items-center justify-center w-9 h-9 rounded-full border border-ivory/25 text-ivory/65 transition-all duration-300 hover-lift ${
+                  social.isBlueHover
+                    ? 'hover:text-accent-blue hover:border-accent-blue/40'
+                    : 'hover:text-champagne-gold hover:border-champagne-gold/40'
+                } shadow-premium`}
               >
                 <social.icon className="w-4 h-4" />
               </motion.a>
@@ -108,7 +115,7 @@ export default function Footer() {
               <li key={link.label}>
                 <a
                   href={link.href}
-                  className="text-ivory/60 hover:text-champagne-gold transition-colors text-[15px]"
+                  className="text-ivory/75 hover:text-champagne-gold transition-colors text-[15px]"
                 >
                   {link.label}
                 </a>
@@ -119,11 +126,11 @@ export default function Footer() {
 
         {/* Column 3 — Services */}
         <div className="space-y-4">
-          <h4 className="font-dm-serif text-ivory text-lg">Services</h4>
+          <h4 className="font-dm-serif text-soft-blue text-lg">Services</h4>
           <ul className="space-y-2.5">
             {services.map((service) => (
               <li key={service}>
-                <span className="text-ivory/60 text-[15px]">{service}</span>
+                <span className="text-ivory/75 text-[15px]">{service}</span>
               </li>
             ))}
           </ul>
@@ -135,13 +142,13 @@ export default function Footer() {
           <ul className="space-y-3">
             <li className="flex items-start gap-2.5">
               <MapPin className="w-4 h-4 text-champagne-gold mt-0.5 shrink-0" />
-              <span className="text-ivory/60 text-[15px]">
+              <span className="text-ivory/75 text-[15px]">
                 153 River Road, Centurion
               </span>
             </li>
             <li className="flex items-start gap-2.5">
               <Phone className="w-4 h-4 text-champagne-gold mt-0.5 shrink-0" />
-              <span className="text-ivory/60 text-[15px]">
+              <span className="text-ivory/75 text-[15px]">
                 061 416 4649 / 012 883 3636
               </span>
             </li>
@@ -149,7 +156,7 @@ export default function Footer() {
               <Mail className="w-4 h-4 text-champagne-gold mt-0.5 shrink-0" />
               <a
                 href="mailto:admin@refreshdental.co.za"
-                className="text-ivory/60 hover:text-champagne-gold transition-colors text-[15px]"
+                className="text-ivory/75 hover:text-champagne-gold transition-colors text-[15px]"
               >
                 admin@refreshdental.co.za
               </a>
@@ -158,7 +165,7 @@ export default function Footer() {
               <Mail className="w-4 h-4 text-champagne-gold mt-0.5 shrink-0" />
               <a
                 href="mailto:drlebo@refreshdental.co.za"
-                className="text-ivory/60 hover:text-champagne-gold transition-colors text-[15px]"
+                className="text-ivory/75 hover:text-champagne-gold transition-colors text-[15px]"
               >
                 drlebo@refreshdental.co.za
               </a>
@@ -170,13 +177,13 @@ export default function Footer() {
       {/* Bottom Bar */}
       <div className="border-t border-ivory/10">
         <div className="max-w-6xl mx-auto px-6 py-6 flex flex-col sm:flex-row items-center justify-center gap-4 text-center">
-          <p className="text-ivory/40 text-xs">
+          <p className="text-ivory/55 text-xs">
             © 2025 Refresh Dental. Built by Carter Digitals.
           </p>
-          <span className="hidden sm:inline text-ivory/20 text-xs">|</span>
+          <span className="hidden sm:inline text-ivory/45 text-xs">|</span>
           <a
             href="#"
-            className="text-ivory/40 hover:text-champagne-gold transition-colors text-xs"
+            className="text-ivory/55 hover:text-champagne-gold transition-colors text-xs"
           >
             Privacy Policy
           </a>
@@ -189,7 +196,7 @@ export default function Footer() {
             transition={{
               y: { duration: 1.8, repeat: Infinity, ease: 'easeInOut' },
             }}
-            className="ml-auto sm:ml-0 flex items-center gap-1 text-ivory/40 hover:text-champagne-gold transition-colors"
+            className="ml-auto sm:ml-0 flex items-center gap-1 text-ivory/55 hover:text-champagne-gold transition-colors"
           >
             <span className="text-xs font-jost tracking-wider uppercase hidden sm:inline">Top</span>
             <ArrowUp className="w-4 h-4" />

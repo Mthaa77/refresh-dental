@@ -42,7 +42,7 @@ export default function PageSurvey() {
   return (
     <section
       id="survey"
-      className="bg-[#1A1510] py-20 lg:py-24 overflow-hidden relative"
+      className="bg-[#0F0D0A] py-20 lg:py-24 overflow-hidden relative"
     >
       {/* Gold border frame */}
       <div className="absolute inset-4 md:inset-8 rounded-3xl border border-champagne-gold/15 pointer-events-none" />
@@ -81,10 +81,10 @@ export default function PageSurvey() {
           className="text-center mb-10"
         >
           <MessageSquare className="h-8 w-8 text-champagne-gold mx-auto mb-3" />
-          <h2 className="font-cormorant text-3xl md:text-4xl lg:text-5xl text-[#FDFAF6]">
+          <h2 className="font-cormorant text-3xl md:text-4xl lg:text-5xl text-[#F0EBE1]">
             How Are We Doing?
           </h2>
-          <p className="font-jost text-[#FDFAF6]/50 mt-3 max-w-md mx-auto">
+          <p className="font-jost text-[#F0EBE1]/50 mt-3 max-w-md mx-auto">
             Your feedback helps us improve. It only takes a moment and means
             the world to our team.
           </p>
@@ -109,10 +109,10 @@ export default function PageSurvey() {
               >
                 <CheckCircle2 className="h-10 w-10 text-champagne-gold" />
               </motion.div>
-              <h3 className="font-cormorant text-2xl md:text-3xl text-[#FDFAF6] mb-3">
+              <h3 className="font-cormorant text-2xl md:text-3xl text-[#F0EBE1] mb-3">
                 Thank You!
               </h3>
-              <p className="font-jost text-[#FDFAF6]/50 max-w-sm mx-auto leading-relaxed">
+              <p className="font-jost text-[#F0EBE1]/50 max-w-sm mx-auto leading-relaxed">
                 Your feedback has been received. We truly appreciate you taking
                 the time to share your experience with us.
               </p>
@@ -148,7 +148,7 @@ export default function PageSurvey() {
                 transition={{ duration: 0.4, delay: 0.1 }}
                 className="text-center"
               >
-                <label className="block font-dm-serif text-lg text-[#FDFAF6] mb-4">
+                <label className="block font-dm-serif text-lg text-[#F0EBE1] mb-4">
                   How would you rate your visit?
                 </label>
                 <div className="flex justify-center gap-3">
@@ -167,7 +167,7 @@ export default function PageSurvey() {
                         className={`h-8 w-8 md:h-10 md:w-10 transition-colors duration-200 ${
                           star <= displayRating
                             ? 'text-champagne-gold fill-champagne-gold'
-                            : 'text-[#FDFAF6]/20'
+                            : 'text-[#F0EBE1]/20'
                         }`}
                       />
                       {star <= displayRating && (
@@ -204,7 +204,7 @@ export default function PageSurvey() {
                 transition={{ duration: 0.4, delay: 0.2 }}
                 className="text-center"
               >
-                <label className="block font-dm-serif text-lg text-[#FDFAF6] mb-4">
+                <label className="block font-dm-serif text-lg text-[#F0EBE1] mb-4">
                   How was your experience?
                 </label>
                 <div className="flex justify-center gap-3 md:gap-4">
@@ -216,7 +216,7 @@ export default function PageSurvey() {
                         flex flex-col items-center gap-1.5 rounded-2xl border px-4 py-3 md:px-5 md:py-4 transition-all duration-200
                         ${experience === opt.value
                           ? 'border-champagne-gold bg-champagne-gold/10'
-                          : 'border-[#FDFAF6]/10 bg-[#FDFAF6]/[0.03] hover:border-[#FDFAF6]/20 hover:bg-[#FDFAF6]/[0.06]'
+                          : 'border-[#F0EBE1]/10 bg-[#F0EBE1]/[0.03] hover:border-[#F0EBE1]/20 hover:bg-[#F0EBE1]/[0.06]'
                         }
                       `}
                       whileHover={{ scale: 1.05 }}
@@ -227,7 +227,7 @@ export default function PageSurvey() {
                         className={`font-jost text-xs ${
                           experience === opt.value
                             ? 'text-champagne-gold font-semibold'
-                            : 'text-[#FDFAF6]/40'
+                            : 'text-[#F0EBE1]/40'
                         }`}
                       >
                         {opt.label}
@@ -245,11 +245,11 @@ export default function PageSurvey() {
                 transition={{ duration: 0.4, delay: 0.3 }}
                 className="text-center"
               >
-                <label className="block font-dm-serif text-lg text-[#FDFAF6] mb-4">
+                <label className="block font-dm-serif text-lg text-[#F0EBE1] mb-4">
                   Would you recommend us?
                 </label>
                 <div className="flex justify-center">
-                  <div className="inline-flex rounded-xl border border-[#FDFAF6]/10 bg-[#FDFAF6]/[0.03] p-1">
+                  <div className="inline-flex rounded-xl border border-[#F0EBE1]/10 bg-[#F0EBE1]/[0.03] p-1">
                     {(['yes', 'no'] as const).map((option) => (
                       <motion.button
                         key={option}
@@ -257,8 +257,8 @@ export default function PageSurvey() {
                         className={`
                           relative px-8 py-2.5 rounded-lg font-jost text-sm font-medium transition-colors duration-200
                           ${recommend === option
-                            ? 'text-[#1A1510]'
-                            : 'text-[#FDFAF6]/40 hover:text-[#FDFAF6]/60'
+                            ? 'text-[#0F0D0A]'
+                            : 'text-[#F0EBE1]/40 hover:text-[#F0EBE1]/60'
                           }
                         `}
                         whileTap={{ scale: 0.95 }}
@@ -285,7 +285,7 @@ export default function PageSurvey() {
                 transition={{ duration: 0.4, delay: 0.4 }}
                 className="text-center"
               >
-                <label className="block font-dm-serif text-lg text-[#FDFAF6] mb-4">
+                <label className="block font-dm-serif text-lg text-[#F0EBE1] mb-4">
                   Any feedback?
                 </label>
                 <div className="max-w-md mx-auto">
@@ -299,14 +299,14 @@ export default function PageSurvey() {
                     placeholder="Tell us what you think..."
                     rows={3}
                     maxLength={maxChars}
-                    className="w-full rounded-xl border border-[#FDFAF6]/10 bg-[#FDFAF6]/[0.04] px-4 py-3 font-jost text-sm text-[#FDFAF6] placeholder:text-[#FDFAF6]/20 focus:outline-none focus:border-champagne-gold/40 focus:ring-1 focus:ring-champagne-gold/20 transition-colors resize-none"
+                    className="w-full rounded-xl border border-[#F0EBE1]/10 bg-[#F0EBE1]/[0.04] px-4 py-3 font-jost text-sm text-[#F0EBE1] placeholder:text-[#F0EBE1]/20 focus:outline-none focus:border-champagne-gold/40 focus:ring-1 focus:ring-champagne-gold/20 transition-colors resize-none"
                   />
                   <div className="flex justify-end mt-1">
                     <span
                       className={`font-jost text-[10px] ${
                         charCount > maxChars - 30
                           ? 'text-[#B85C4A]'
-                          : 'text-[#FDFAF6]/20'
+                          : 'text-[#F0EBE1]/20'
                       }`}
                     >
                       {charCount}/{maxChars}
@@ -340,7 +340,7 @@ export default function PageSurvey() {
                   Submit Feedback
                 </motion.button>
                 {!canSubmit && (
-                  <p className="font-jost text-[11px] text-[#FDFAF6]/20 mt-3">
+                  <p className="font-jost text-[11px] text-[#F0EBE1]/20 mt-3">
                     Please complete all required fields to submit
                   </p>
                 )}

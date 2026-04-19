@@ -79,7 +79,7 @@ export default function TradingHours() {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: '-60px' }}
       transition={{ duration: 0.5 }}
-      className="rounded-2xl border border-soft-border bg-gradient-to-br from-[#FDFAF6] to-[#F5EFE6] p-5 space-y-4"
+      className="rounded-2xl border border-soft-border bg-gradient-to-br from-[#F0EBE1] to-[#E3DACA] p-5 space-y-4"
     >
       {/* Header */}
       <div className="flex items-center justify-between">
@@ -132,7 +132,7 @@ export default function TradingHours() {
               <div className="flex items-center gap-2">
                 <span
                   className={`font-jost text-sm ${
-                    isToday ? 'font-semibold text-espresso' : 'text-brown-warm/70'
+                    isToday ? 'font-semibold text-espresso' : 'text-brown-muted'
                   }`}
                 >
                   {schedule.day}
@@ -149,8 +149,8 @@ export default function TradingHours() {
                     schedule.timeRange
                       ? isToday
                         ? 'font-medium text-sage-teal'
-                        : 'text-brown-warm/80'
-                      : 'text-brown-warm/40'
+                        : 'text-brown-muted'
+                      : 'text-brown-muted/70'
                   }`}
                 >
                   {isSatNote && !secondSat && isToday ? 'Closed' : schedule.hours}
@@ -174,7 +174,7 @@ export default function TradingHours() {
           <p className="font-jost text-xs font-semibold text-sage-teal uppercase tracking-wide">
             Emergency Available
           </p>
-          <p className="font-jost text-xs text-brown-warm/70 mt-0.5">
+          <p className="font-jost text-xs text-brown-muted mt-0.5">
             24/7 — Call{' '}
             <a
               href="tel:0614164649"

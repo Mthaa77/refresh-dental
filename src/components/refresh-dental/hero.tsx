@@ -95,21 +95,22 @@ const ctaContainerVariants = {
    ======================================== */
 
 const particles = [
-  { id: 0, size: 18, x: 12, y: 25, duration: 14, delay: 0.5, opacity: 0.08 },
-  { id: 1, size: 24, x: 78, y: 15, duration: 16, delay: 1.2, opacity: 0.06 },
-  { id: 2, size: 10, x: 45, y: 60, duration: 11, delay: 2.8, opacity: 0.12 },
-  { id: 3, size: 28, x: 88, y: 72, duration: 18, delay: 0.8, opacity: 0.05 },
-  { id: 4, size: 14, x: 22, y: 80, duration: 13, delay: 3.5, opacity: 0.10 },
-  { id: 5, size: 20, x: 65, y: 40, duration: 15, delay: 1.8, opacity: 0.07 },
-  { id: 6, size: 12, x: 35, y: 10, duration: 12, delay: 2.2, opacity: 0.14 },
-  { id: 7, size: 16, x: 92, y: 50, duration: 17, delay: 3.0, opacity: 0.09 },
-  // 6 additional particles
-  { id: 8, size: 8, x: 5, y: 45, duration: 19, delay: 4.1, opacity: 0.11 },
-  { id: 9, size: 22, x: 55, y: 85, duration: 10, delay: 0.3, opacity: 0.07 },
-  { id: 10, size: 6, x: 30, y: 35, duration: 20, delay: 1.7, opacity: 0.15 },
-  { id: 11, size: 15, x: 82, y: 5, duration: 13, delay: 2.5, opacity: 0.06 },
-  { id: 12, size: 11, x: 50, y: 20, duration: 16, delay: 3.3, opacity: 0.10 },
-  { id: 13, size: 19, x: 15, y: 65, duration: 14, delay: 4.5, opacity: 0.08 },
+  { id: 0, size: 18, x: 12, y: 25, duration: 14, delay: 0.5, opacity: 0.08, color: 'bg-champagne-gold' },
+  { id: 1, size: 24, x: 78, y: 15, duration: 16, delay: 1.2, opacity: 0.06, color: 'bg-champagne-gold' },
+  { id: 2, size: 10, x: 45, y: 60, duration: 11, delay: 2.8, opacity: 0.12, color: 'bg-champagne-gold' },
+  { id: 3, size: 28, x: 88, y: 72, duration: 18, delay: 0.8, opacity: 0.05, color: 'bg-champagne-gold' },
+  { id: 4, size: 14, x: 22, y: 80, duration: 13, delay: 3.5, opacity: 0.10, color: 'bg-champagne-gold' },
+  { id: 5, size: 20, x: 65, y: 40, duration: 15, delay: 1.8, opacity: 0.07, color: 'bg-champagne-gold' },
+  { id: 6, size: 12, x: 35, y: 10, duration: 12, delay: 2.2, opacity: 0.14, color: 'bg-champagne-gold' },
+  { id: 7, size: 16, x: 92, y: 50, duration: 17, delay: 3.0, opacity: 0.09, color: 'bg-champagne-gold' },
+  // 5 additional gold particles
+  { id: 8, size: 8, x: 5, y: 45, duration: 19, delay: 4.1, opacity: 0.11, color: 'bg-champagne-gold' },
+  { id: 9, size: 22, x: 55, y: 85, duration: 10, delay: 0.3, opacity: 0.07, color: 'bg-champagne-gold' },
+  { id: 10, size: 6, x: 30, y: 35, duration: 20, delay: 1.7, opacity: 0.15, color: 'bg-champagne-gold' },
+  { id: 11, size: 15, x: 82, y: 5, duration: 13, delay: 2.5, opacity: 0.06, color: 'bg-champagne-gold' },
+  { id: 12, size: 11, x: 50, y: 20, duration: 16, delay: 3.3, opacity: 0.10, color: 'bg-champagne-gold' },
+  // Subtle red particle accent
+  { id: 13, size: 14, x: 70, y: 75, duration: 15, delay: 2.0, opacity: 0.07, color: 'bg-soft-red' },
 ];
 
 /* Large ambient orbs for luxury atmosphere */
@@ -137,12 +138,12 @@ const orbs = [
     animDelay: 2,
   },
   {
-    id: 'orb-blush',
+    id: 'orb-navy',
     size: 300,
     x: '40%',
     y: '5%',
-    color: 'bg-[#E8C4B8]',
-    opacity: 0.03,
+    color: 'bg-royal-navy',
+    opacity: 0.025,
     blur: 'blur-3xl',
     animDuration: 18,
     animDelay: 4,
@@ -183,7 +184,7 @@ export default function Hero() {
         {particles.map((p) => (
           <motion.div
             key={p.id}
-            className="absolute rounded-full bg-champagne-gold"
+            className={`absolute rounded-full ${p.color}`}
             style={{
               width: p.size,
               height: p.size,
@@ -283,7 +284,7 @@ export default function Hero() {
             variants={subheadingLine2Variants}
             initial="hidden"
             animate="visible"
-            className="font-jost font-light text-brown-warm/70 text-base md:text-lg max-w-xl leading-relaxed mb-10"
+            className="font-jost font-light text-brown-muted text-base md:text-lg max-w-xl leading-relaxed mb-10"
           >
             Where artistry meets science for smiles that inspire confidence.
           </motion.p>
@@ -300,7 +301,7 @@ export default function Hero() {
               href="#contact"
               whileHover={{
                 scale: 1.05,
-                boxShadow: '0 0 40px rgba(201, 169, 110, 0.3)',
+                boxShadow: '0 0 40px rgba(184, 152, 48, 0.3)',
               }}
               whileTap={{ scale: 0.97 }}
               className="relative inline-flex items-center bg-gradient-to-r from-champagne-gold to-gold-light text-white font-jost font-semibold text-sm tracking-wider uppercase rounded-full px-8 py-4 shadow-gold overflow-hidden transition-all duration-300"
@@ -344,7 +345,7 @@ export default function Hero() {
                 variants={badgeVariants}
                 initial="hidden"
                 animate="visible"
-                className="inline-flex items-center gap-1.5 backdrop-blur-sm bg-white/60 border border-white/40 rounded-full px-3 py-1.5 shadow-sm"
+                className="inline-flex items-center gap-1.5 backdrop-blur-sm bg-card/70 border border-soft-border/40 rounded-full px-3 py-1.5 shadow-sm"
               >
                 <badge.icon className={`w-3.5 h-3.5 ${badge.accent}`} />
                 <span className="font-jost text-xs font-medium text-brown-warm">
@@ -364,7 +365,7 @@ export default function Hero() {
             className="absolute inset-0"
           >
             {/* Gold gradient border frame */}
-            <div className="absolute inset-3 rounded-2xl z-10 pointer-events-none border-2 border-transparent" style={{ borderImage: 'linear-gradient(180deg, rgba(201,169,110,0.4) 0%, rgba(201,169,110,0.05) 50%, rgba(201,169,110,0.3) 100%) 1' }} />
+            <div className="absolute inset-3 rounded-2xl z-10 pointer-events-none border-2 border-transparent" style={{ borderImage: 'linear-gradient(180deg, rgba(184,152,48,0.4) 0%, rgba(184,152,48,0.05) 50%, rgba(184,152,48,0.3) 100%) 1' }} />
 
             <img
               src="/images/dr-lebo-hero.png"
@@ -384,7 +385,7 @@ export default function Hero() {
             animate="visible"
             className="absolute bottom-8 right-4 sm:bottom-12 sm:right-8 lg:bottom-16 lg:right-[-1rem] z-30"
           >
-            <div className="relative glass-card rounded-2xl shadow-elevated p-5 max-w-[260px]">
+            <div className="relative rounded-2xl shadow-elevated p-5 max-w-[260px] glass-card" style={{ border: '1px solid rgba(200, 187, 170, 0.4)' }}>
               {/* Gold gradient top border */}
               <div className="absolute top-0 left-6 right-6 h-[2px] bg-gradient-to-r from-transparent via-champagne-gold to-transparent rounded-full" />
 

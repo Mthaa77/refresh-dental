@@ -92,7 +92,7 @@ export default function DentalTipsSection() {
             initial={{ opacity: 0, y: 15 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="font-jost text-base md:text-lg text-brown-warm/70 max-w-2xl mx-auto text-center leading-relaxed mt-4 mb-12"
+            className="font-jost text-base md:text-lg text-brown-muted max-w-2xl mx-auto text-center leading-relaxed mt-4 mb-12"
           >
             Small daily habits that make a big difference — expert tips from Dr. Malunga to keep your smile healthy and radiant between visits.
           </motion.p>
@@ -112,7 +112,7 @@ export default function DentalTipsSection() {
               variants={cardVariants}
               whileHover={{
                 y: -5,
-                boxShadow: '0 12px 36px -8px rgba(201, 169, 110, 0.14)',
+                boxShadow: '0 12px 36px -8px rgba(184, 152, 48, 0.14)',
                 transition: { duration: 0.3 },
               }}
               className="group relative overflow-hidden rounded-2xl border border-soft-border bg-white p-6 shadow-premium hover-lift hover:shadow-gold transition-colors duration-300 hover:border-champagne-gold/40"
@@ -135,14 +135,14 @@ export default function DentalTipsSection() {
                 whileHover={{ x: '100%' }}
                 transition={{ duration: 0.6, ease: 'easeInOut' }}
                 style={{
-                  background: 'linear-gradient(90deg, transparent 0%, rgba(201, 169, 110, 0.04) 50%, transparent 100%)',
+                  background: 'linear-gradient(90deg, transparent 0%, rgba(184, 152, 48, 0.04) 50%, transparent 100%)',
                 }}
               />
 
               {/* Numbered gold corner badge — animated reveal on scroll */}
               <motion.span
                 className="absolute top-4 right-4 font-cormorant text-3xl font-semibold leading-none select-none md:text-4xl"
-                style={{ color: 'rgba(201, 169, 110, 0.12)' }}
+                style={{ color: 'rgba(184, 152, 48, 0.12)' }}
                 initial={{ opacity: 0, scale: 0.5, rotate: -10 }}
                 whileInView={{ opacity: 1, scale: 1, rotate: 0 }}
                 viewport={{ once: true }}
@@ -184,13 +184,13 @@ export default function DentalTipsSection() {
               </span>
 
               {/* Read Time indicator */}
-              <span className="mb-3 inline-flex items-center gap-1 font-jost text-[10px] text-brown-warm/40">
+              <span className="mb-3 inline-flex items-center gap-1 font-jost text-[10px] text-brown-muted/70">
                 <Clock className="h-3 w-3" />
                 {tip.readTime}
               </span>
 
               {/* Description */}
-              <p className="font-jost text-sm font-light leading-relaxed text-brown-warm/70">
+              <p className="font-jost text-sm font-light leading-relaxed text-brown-muted">
                 {tip.description}
               </p>
 

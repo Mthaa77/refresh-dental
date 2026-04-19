@@ -138,7 +138,7 @@ export default function OnlineBookingWidget() {
   return (
     <section
       id="booking"
-      className="bg-white border-y border-[#F5EFE6] py-20 lg:py-24 overflow-hidden"
+      className="bg-white border-y border-[#E3DACA] py-20 lg:py-24 overflow-hidden"
     >
       <div className="max-w-6xl mx-auto px-6">
         {/* Section Header */}
@@ -155,7 +155,7 @@ export default function OnlineBookingWidget() {
           <h2 className="font-cormorant text-3xl md:text-4xl lg:text-5xl text-espresso mt-3">
             Book an Appointment
           </h2>
-          <p className="font-jost text-brown-warm/70 mt-3 max-w-lg mx-auto">
+          <p className="font-jost text-brown-muted mt-3 max-w-lg mx-auto">
             Select your preferred date and time below. We&apos;ll confirm your
             appointment within 24 hours.
           </p>
@@ -208,7 +208,7 @@ export default function OnlineBookingWidget() {
                 {WEEKDAYS.map((wd) => (
                   <div
                     key={wd}
-                    className="text-center font-jost text-[11px] font-semibold text-brown-warm/50 uppercase tracking-wider py-1"
+                    className="text-center font-jost text-[11px] font-semibold text-brown-muted/80 uppercase tracking-wider py-1"
                   >
                     {wd}
                   </div>
@@ -253,11 +253,11 @@ export default function OnlineBookingWidget() {
               <div className="flex items-center gap-4 pt-2">
                 <div className="flex items-center gap-1.5">
                   <span className="h-2.5 w-2.5 rounded-sm bg-champagne-gold" />
-                  <span className="font-jost text-[11px] text-brown-warm/50">Available</span>
+                  <span className="font-jost text-[11px] text-brown-muted/80">Available</span>
                 </div>
                 <div className="flex items-center gap-1.5">
                   <span className="h-2.5 w-2.5 rounded-sm bg-brown-warm/20" />
-                  <span className="font-jost text-[11px] text-brown-warm/50">Unavailable</span>
+                  <span className="font-jost text-[11px] text-brown-muted/80">Unavailable</span>
                 </div>
               </div>
             </div>
@@ -334,7 +334,7 @@ export default function OnlineBookingWidget() {
                   </div>
                 ) : (
                   <div className="flex items-center justify-center rounded-xl border border-dashed border-soft-border bg-sand/30 py-10">
-                    <p className="font-jost text-sm text-brown-warm/40">
+                    <p className="font-jost text-sm text-brown-muted/70">
                       Select a date to view available times
                     </p>
                   </div>
@@ -381,7 +381,7 @@ export default function OnlineBookingWidget() {
                         Confirm Booking
                       </motion.a>
 
-                      <p className="font-jost text-[11px] text-brown-warm/40 text-center">
+                      <p className="font-jost text-[11px] text-brown-muted/70 text-center">
                         You&apos;ll be redirected to our contact form to complete your booking
                       </p>
                     </div>

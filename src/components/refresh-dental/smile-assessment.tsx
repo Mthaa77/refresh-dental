@@ -111,18 +111,18 @@ function getRecommendation(answers: string[]): TreatmentResult {
 
 // Confetti / sparkle burst particles
 const confettiParticles = [
-  { x: '15%', y: '20%', size: 8, color: '#C9A96E', delay: 0, duration: 1.2, yEnd: -40 },
-  { x: '80%', y: '15%', size: 6, color: '#E8D5B0', delay: 0.05, duration: 1.0, yEnd: -35 },
-  { x: '50%', y: '10%', size: 7, color: '#3D7D6E', delay: 0.1, duration: 1.4, yEnd: -45 },
-  { x: '25%', y: '25%', size: 5, color: '#C9A96E', delay: 0.15, duration: 1.1, yEnd: -30 },
-  { x: '70%', y: '18%', size: 6, color: '#FDFAF6', delay: 0.08, duration: 1.3, yEnd: -38 },
-  { x: '40%', y: '22%', size: 5, color: '#C9A96E', delay: 0.12, duration: 1.0, yEnd: -32 },
-  { x: '60%', y: '12%', size: 7, color: '#E8D5B0', delay: 0.03, duration: 1.5, yEnd: -42 },
-  { x: '35%', y: '28%', size: 4, color: '#3D7D6E', delay: 0.18, duration: 1.2, yEnd: -28 },
-  { x: '55%', y: '16%', size: 6, color: '#FDFAF6', delay: 0.07, duration: 1.1, yEnd: -36 },
-  { x: '85%', y: '24%', size: 5, color: '#C9A96E', delay: 0.14, duration: 1.3, yEnd: -34 },
-  { x: '10%', y: '30%', size: 4, color: '#E8D5B0', delay: 0.2, duration: 1.0, yEnd: -26 },
-  { x: '75%', y: '20%', size: 6, color: '#C9A96E', delay: 0.06, duration: 1.4, yEnd: -40 },
+  { x: '15%', y: '20%', size: 8, color: '#B89830', delay: 0, duration: 1.2, yEnd: -40 },
+  { x: '80%', y: '15%', size: 6, color: '#D4C08A', delay: 0.05, duration: 1.0, yEnd: -35 },
+  { x: '50%', y: '10%', size: 7, color: '#2D6B5C', delay: 0.1, duration: 1.4, yEnd: -45 },
+  { x: '25%', y: '25%', size: 5, color: '#B89830', delay: 0.15, duration: 1.1, yEnd: -30 },
+  { x: '70%', y: '18%', size: 6, color: '#F0EBE1', delay: 0.08, duration: 1.3, yEnd: -38 },
+  { x: '40%', y: '22%', size: 5, color: '#B89830', delay: 0.12, duration: 1.0, yEnd: -32 },
+  { x: '60%', y: '12%', size: 7, color: '#D4C08A', delay: 0.03, duration: 1.5, yEnd: -42 },
+  { x: '35%', y: '28%', size: 4, color: '#2D6B5C', delay: 0.18, duration: 1.2, yEnd: -28 },
+  { x: '55%', y: '16%', size: 6, color: '#F0EBE1', delay: 0.07, duration: 1.1, yEnd: -36 },
+  { x: '85%', y: '24%', size: 5, color: '#B89830', delay: 0.14, duration: 1.3, yEnd: -34 },
+  { x: '10%', y: '30%', size: 4, color: '#D4C08A', delay: 0.2, duration: 1.0, yEnd: -26 },
+  { x: '75%', y: '20%', size: 6, color: '#B89830', delay: 0.06, duration: 1.4, yEnd: -40 },
 ]
 
 const confettiBurst = (p: { delay: number; duration: number; yEnd: number }) => ({
@@ -193,7 +193,7 @@ function ToothWatermark() {
     >
       <path
         d="M50 10C35 10 22 18 18 32C14 46 18 62 22 78C24 88 26 95 30 100C32 103 35 102 37 98C40 92 43 82 50 82C57 82 60 92 63 98C65 102 68 103 70 100C74 95 76 88 78 78C82 62 86 46 82 32C78 18 65 10 50 10Z"
-        fill="#C9A96E"
+        fill="#B89830"
       />
     </svg>
   )
@@ -276,7 +276,7 @@ export default function SmileAssessment() {
           <h2 className="font-cormorant text-[clamp(2rem,4vw,3.5rem)] font-medium leading-tight text-espresso">
             Discover Your Perfect Smile
           </h2>
-          <p className="mx-auto mt-4 max-w-lg font-jost text-sm leading-relaxed text-brown-warm/70">
+          <p className="mx-auto mt-4 max-w-lg font-jost text-sm leading-relaxed text-brown-muted">
             Take our quick 3-step assessment and find out which treatment is right for you.
           </p>
         </motion.div>
@@ -316,7 +316,7 @@ export default function SmileAssessment() {
               {/* Progress Bar */}
               <div className="mb-8">
                 <div className="mb-2 flex items-center justify-between">
-                  <span className="font-jost text-xs font-medium uppercase tracking-wider text-brown-warm/50">
+                  <span className="font-jost text-xs font-medium uppercase tracking-wider text-brown-muted/80">
                     Step {currentStep + 1} of {questions.length}
                   </span>
                   <span className="font-jost text-xs font-semibold text-champagne-gold">
@@ -383,7 +383,7 @@ export default function SmileAssessment() {
                           whileHover={{
                             y: -2,
                             boxShadow: isSelected
-                              ? '0 8px 24px -4px rgba(201, 169, 110, 0.2)'
+                              ? '0 8px 24px -4px rgba(184, 152, 48, 0.2)'
                               : '0 4px 16px -4px rgba(0, 0, 0, 0.08)',
                             transition: { duration: 0.2 },
                           }}
@@ -432,7 +432,7 @@ export default function SmileAssessment() {
                   animate={{ opacity: 1 }}
                   exit={{ opacity: 0 }}
                   onClick={handleBack}
-                  className="mt-6 inline-flex items-center gap-2 font-jost text-xs font-medium uppercase tracking-wider text-brown-warm/50 transition-colors hover:text-champagne-gold"
+                  className="mt-6 inline-flex items-center gap-2 font-jost text-xs font-medium uppercase tracking-wider text-brown-muted/80 transition-colors hover:text-champagne-gold"
                 >
                   <ArrowLeft className="h-3.5 w-3.5" />
                   Previous Step
@@ -452,7 +452,7 @@ export default function SmileAssessment() {
                 className="pointer-events-none absolute inset-0 rounded-3xl"
                 style={{
                   padding: '2px',
-                  background: 'linear-gradient(135deg, #C9A96E 0%, #E8D5B0 30%, #C9A96E 60%, #3D7D6E 100%)',
+                  background: 'linear-gradient(135deg, #B89830 0%, #D4C08A 30%, #B89830 60%, #2D6B5C 100%)',
                   WebkitMask: 'linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)',
                   WebkitMaskComposite: 'xor',
                   maskComposite: 'exclude',
@@ -481,7 +481,7 @@ export default function SmileAssessment() {
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.4, duration: 0.5 }}
-                className="mb-8 text-center font-jost text-sm font-light leading-relaxed text-brown-warm/80"
+                className="mb-8 text-center font-jost text-sm font-light leading-relaxed text-brown-muted"
               >
                 {result.description}
               </motion.p>
@@ -521,7 +521,7 @@ export default function SmileAssessment() {
                 transition={{ delay: 0.65, duration: 0.5 }}
                 className="mb-8 rounded-2xl border border-soft-border bg-sand/50 p-4"
               >
-                <span className="mb-3 block font-jost text-[10px] font-semibold uppercase tracking-wider text-brown-warm/40">
+                <span className="mb-3 block font-jost text-[10px] font-semibold uppercase tracking-wider text-brown-muted/70">
                   Your Responses
                 </span>
                 <div className="space-y-2">
@@ -531,7 +531,7 @@ export default function SmileAssessment() {
                         {i + 1}
                       </span>
                       <div>
-                        <span className="block font-jost text-xs text-brown-warm/50">{q.question}</span>
+                        <span className="block font-jost text-xs text-brown-muted/80">{q.question}</span>
                         <span className="block font-jost text-xs font-medium text-espresso">
                           {answers[i]}
                         </span>
@@ -557,7 +557,7 @@ export default function SmileAssessment() {
                 </a>
                 <button
                   onClick={handleRestart}
-                  className="group inline-flex items-center gap-2 rounded-full border-2 border-soft-border px-6 py-3 font-jost text-xs font-medium uppercase tracking-wider text-brown-warm/60 transition-all duration-300 hover:border-champagne-gold/40 hover:text-champagne-gold"
+                  className="group inline-flex items-center gap-2 rounded-full border-2 border-soft-border px-6 py-3 font-jost text-xs font-medium uppercase tracking-wider text-brown-muted/90 transition-all duration-300 hover:border-champagne-gold/40 hover:text-champagne-gold"
                 >
                   <RotateCcw className="h-3.5 w-3.5 transition-transform duration-300 group-hover:-rotate-180" />
                   Retake Assessment

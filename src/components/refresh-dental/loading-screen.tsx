@@ -44,7 +44,7 @@ function DiamondOrnament() {
     >
       <path
         d="M5 0L10 5L5 10L0 5L5 0Z"
-        fill="#C9A96E"
+        fill="#B89830"
         fillOpacity="0.8"
       />
     </svg>
@@ -121,7 +121,7 @@ export default function LoadingScreen() {
           <motion.div
             className="pointer-events-none absolute z-0 h-48 w-48 rounded-full"
             style={{
-              background: 'radial-gradient(circle, rgba(201, 169, 110, 0.12) 0%, rgba(201, 169, 110, 0.05) 40%, transparent 70%)',
+              background: 'radial-gradient(circle, rgba(184, 152, 48, 0.12) 0%, rgba(184, 152, 48, 0.05) 40%, transparent 70%)',
               filter: 'blur(24px)',
             }}
             initial={{ opacity: 0, scale: 0.8 }}

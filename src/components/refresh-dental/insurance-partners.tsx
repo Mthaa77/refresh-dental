@@ -122,7 +122,7 @@ export default function InsurancePartners() {
               Verified Provider
             </motion.span>
           </div>
-          <p className="mx-auto mt-4 max-w-lg font-jost text-sm leading-relaxed text-brown-warm/70">
+          <p className="mx-auto mt-4 max-w-lg font-jost text-sm leading-relaxed text-brown-muted">
             We work with all major South African medical aids
           </p>
         </motion.div>
@@ -130,7 +130,7 @@ export default function InsurancePartners() {
         {/* Gold divider */}
         <motion.div
           className="mx-auto mb-14 h-px w-32"
-          style={{ backgroundColor: '#C9A96E' }}
+          style={{ backgroundColor: '#B89830' }}
           initial={{ scaleX: 0 }}
           whileInView={{ scaleX: 1 }}
           viewport={{ once: true }}
@@ -141,7 +141,7 @@ export default function InsurancePartners() {
         <motion.div
           className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 h-[250px] w-[300px] rounded-full pointer-events-none sm:h-[400px] sm:w-[500px] md:h-[500px] md:w-[600px]"
           style={{
-            background: 'radial-gradient(ellipse, rgba(201, 169, 110, 0.03) 0%, transparent 70%)',
+            background: 'radial-gradient(ellipse, rgba(184, 152, 48, 0.03) 0%, transparent 70%)',
           }}
           animate={{ opacity: [0.5, 1, 0.5], scale: [0.95, 1.05, 0.95] }}
           transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut' }}
@@ -194,7 +194,7 @@ export default function InsurancePartners() {
                     >
                       <path
                         d="M0 0H70V24L35 18L0 24Z"
-                        fill="#C9A96E"
+                        fill="#B89830"
                       />
                     </svg>
                     <span className="absolute right-1 top-1 font-jost text-[7px] font-bold uppercase tracking-wider text-espresso leading-none whitespace-nowrap z-10">
@@ -256,7 +256,7 @@ export default function InsurancePartners() {
           transition={{ duration: 0.5, delay: 0.4 }}
           className="mt-12 text-center space-y-5"
         >
-          <p className="font-jost text-sm text-brown-warm/60">
+          <p className="font-jost text-sm text-brown-muted/90">
             Don&apos;t see your medical aid? Contact us — we work with most providers.
           </p>
           <motion.a
@@ -272,7 +272,7 @@ export default function InsurancePartners() {
       </div>
 
       {/* Sand border bottom */}
-      <div className="h-px bg-gradient-to-r from-transparent via-[#F5EFE6] to-transparent" />
+      <div className="h-px bg-gradient-to-r from-transparent via-[#E3DACA] to-transparent" />
     </section>
   )
 }

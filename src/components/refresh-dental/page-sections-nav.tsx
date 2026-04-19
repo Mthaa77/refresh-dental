@@ -11,12 +11,12 @@ interface SectionItem {
 }
 
 const sections: SectionItem[] = [
-  { id: 'home', label: 'Home', color: '#1A1510', glowColor: 'rgba(26, 21, 16, 0.4)' },
-  { id: 'about', label: 'About', color: '#C9A96E', glowColor: 'rgba(201, 169, 110, 0.5)' },
-  { id: 'services', label: 'Services', color: '#3D7D6E', glowColor: 'rgba(61, 125, 110, 0.5)' },
-  { id: 'testimonials', label: 'Testimonials', color: '#C9A96E', glowColor: 'rgba(201, 169, 110, 0.5)' },
-  { id: 'financing', label: 'Payment', color: '#3D7D6E', glowColor: 'rgba(61, 125, 110, 0.5)' },
-  { id: 'contact', label: 'Contact', color: '#C9A96E', glowColor: 'rgba(201, 169, 110, 0.5)' },
+  { id: 'home', label: 'Home', color: '#0F0D0A', glowColor: 'rgba(15, 13, 10, 0.4)' },
+  { id: 'about', label: 'About', color: '#B89830', glowColor: 'rgba(184, 152, 48, 0.5)' },
+  { id: 'services', label: 'Services', color: '#2D6B5C', glowColor: 'rgba(45, 107, 92, 0.5)' },
+  { id: 'testimonials', label: 'Testimonials', color: '#B89830', glowColor: 'rgba(184, 152, 48, 0.5)' },
+  { id: 'financing', label: 'Payment', color: '#2D6B5C', glowColor: 'rgba(45, 107, 92, 0.5)' },
+  { id: 'contact', label: 'Contact', color: '#B89830', glowColor: 'rgba(184, 152, 48, 0.5)' },
 ]
 
 export default function PageSectionsNav() {
@@ -65,7 +65,7 @@ export default function PageSectionsNav() {
         {/* Vertical connecting line */}
         <div
           className="absolute top-[8px] bottom-[8px] w-px"
-          style={{ backgroundColor: 'rgba(201, 169, 110, 0.2)' }}
+          style={{ backgroundColor: 'rgba(184, 152, 48, 0.2)' }}
         />
 
         {sections.map((section, i) => {
@@ -91,7 +91,7 @@ export default function PageSectionsNav() {
                     boxShadow: isActive
                       ? `0 0 12px 2px ${section.glowColor}`
                       : '0 0 0px 0px transparent',
-                    backgroundColor: isActive ? section.color : 'rgba(201, 169, 110, 0.35)',
+                    backgroundColor: isActive ? section.color : 'rgba(184, 152, 48, 0.35)',
                   }}
                   whileHover={{
                     width: 11,
@@ -116,8 +116,8 @@ export default function PageSectionsNav() {
                       backgroundColor: 'rgba(253, 250, 246, 0.85)',
                       backdropFilter: 'blur(12px)',
                       WebkitBackdropFilter: 'blur(12px)',
-                      border: '1px solid rgba(201, 169, 110, 0.25)',
-                      boxShadow: '0 4px 12px -2px rgba(26, 21, 16, 0.1)',
+                      border: '1px solid rgba(184, 152, 48, 0.25)',
+                      boxShadow: '0 4px 12px -2px rgba(15, 13, 10, 0.1)',
                     }}
                   >
                     {section.label}
@@ -126,8 +126,8 @@ export default function PageSectionsNav() {
                       className="absolute -left-1.5 top-1/2 h-2.5 w-2.5 -translate-y-1/2 rotate-45"
                       style={{
                         backgroundColor: 'rgba(253, 250, 246, 0.85)',
-                        borderLeft: '1px solid rgba(201, 169, 110, 0.25)',
-                        borderBottom: '1px solid rgba(201, 169, 110, 0.25)',
+                        borderLeft: '1px solid rgba(184, 152, 48, 0.25)',
+                        borderBottom: '1px solid rgba(184, 152, 48, 0.25)',
                       }}
                     />
                   </motion.div>

@@ -89,7 +89,7 @@ function StatItem({ value, suffix, label, delay, isInView, index, total }: StatI
       {/* Diamond icon above number */}
       <DiamondIcon />
 
-      <div className="font-cormorant text-4xl md:text-5xl text-[#E8D5B0] mb-2 relative text-shadow-gold-strong">
+      <div className="font-cormorant text-4xl md:text-5xl text-[#D4C08A] mb-2 relative text-shadow-gold-strong">
         <AnimatedCounter
           value={value}
           suffix={suffix}
@@ -106,13 +106,13 @@ function StatItem({ value, suffix, label, delay, isInView, index, total }: StatI
           />
         )}
       </div>
-      <div className="font-jost uppercase tracking-wider text-xs text-[#FDFAF6]/60">
+      <div className="font-jost uppercase tracking-wider text-xs text-[#F0EBE1]/60">
         {label}
       </div>
 
       {/* Vertical golden separator between stats on desktop */}
       {index < total - 1 && (
-        <div className="hidden md:block absolute -right-6 lg:-right-7 top-1/2 -translate-y-1/2 h-10 w-px bg-gradient-to-b from-transparent via-champagne-gold/40 to-transparent" />
+        <div className="hidden md:block absolute -right-6 lg:-right-7 top-1/2 -translate-y-1/2 h-10 w-px bg-gradient-to-b from-transparent via-champagne-gold/30 to-transparent" />
       )}
     </motion.div>
   );
@@ -135,8 +135,8 @@ export default function StatsBar() {
       className="relative bg-espresso py-12 px-4 overflow-hidden"
       aria-label="Practice statistics"
     >
-      {/* Section title */}
-      <h3 className="text-center text-lg sm:text-xl font-cormorant font-light text-[#E8D5B0] mb-10 text-shadow-gold tracking-wider">
+      {/* Section title with subtle blue glow */}
+      <h3 className="text-center text-lg sm:text-xl font-cormorant font-light text-[#D4C08A] mb-10 text-shadow-gold text-shadow-blue tracking-wider">
         The Numbers Behind Confident Smiles
       </h3>
       {/* Subtle gradient texture overlay */}

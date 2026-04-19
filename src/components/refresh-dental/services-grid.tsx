@@ -58,8 +58,11 @@ export default function ServicesGrid() {
 
   return (
     <>
-    <section id="services" className="bg-sand py-20 md:py-28">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <section id="services" className="bg-sand py-20 md:py-28 relative overflow-hidden">
+      {/* Subtle blue tint decorative overlay */}
+      <div className="pointer-events-none absolute inset-0 blue-tint" />
+
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -80,7 +83,7 @@ export default function ServicesGrid() {
             initial={{ opacity: 0, y: 15 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="font-jost text-base md:text-lg text-brown-warm/70 max-w-2xl mx-auto text-center leading-relaxed mt-4 mb-12"
+            className="font-jost text-base md:text-lg text-brown-muted max-w-2xl mx-auto text-center leading-relaxed mt-4 mb-12"
           >
             From routine check-ups to complete smile makeovers — every treatment is delivered with precision, care, and a commitment to exceeding your expectations.
           </motion.p>
@@ -100,7 +103,7 @@ export default function ServicesGrid() {
               onClick={() => setActiveCategory(cat)}
               className={`rounded-full px-5 py-2 text-xs font-semibold uppercase tracking-wider transition-all duration-300 ${
                 activeCategory === cat
-                  ? "bg-champagne-gold text-white shadow-md"
+                  ? "chrome-gold-bg text-white shadow-md"
                   : "bg-white text-sand-muted hover:bg-champagne-gold/10 hover:text-espresso"
               }`}
             >
@@ -133,8 +136,8 @@ export default function ServicesGrid() {
                 whileHover={{
                   y: -4,
                   boxShadow:
-                    "0 12px 40px -8px rgba(201, 169, 110, 0.18), 0 4px 12px -2px rgba(26, 21, 16, 0.08)",
-                  borderColor: "rgba(201, 169, 110, 0.6)",
+                    "0 12px 40px -8px rgba(184, 152, 48, 0.18), 0 4px 12px -2px rgba(15, 13, 10, 0.08)",
+                  borderColor: "rgba(184, 152, 48, 0.6)",
                   transition: { duration: 0.3 },
                 }}
               >
@@ -198,7 +201,7 @@ export default function ServicesGrid() {
                     </h3>
 
                     {/* Description */}
-                    <p className="mt-2 font-jost text-sm font-light leading-relaxed text-brown-warm/60">
+                    <p className="mt-2 font-jost text-sm font-light leading-relaxed text-brown-muted/90">
                       {service.desc}
                     </p>
                   </div>

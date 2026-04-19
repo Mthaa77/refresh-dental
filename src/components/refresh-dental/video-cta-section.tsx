@@ -84,7 +84,7 @@ export default function VideoCtaSection() {
           initial={{ opacity: 0, y: 15 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.7, delay: 0.25 }}
-          className="font-jost text-ivory/60 text-base md:text-lg max-w-xl mx-auto mb-10 md:mb-12"
+          className="font-jost text-ivory/75 text-base md:text-lg max-w-xl mx-auto mb-10 md:mb-12"
         >
           Take the first step today. Our team is ready to craft a personalised treatment plan
           that&apos;s as unique as your smile.
@@ -100,7 +100,7 @@ export default function VideoCtaSection() {
           {/* Primary CTA — Book */}
           <a
             href="#contact"
-            className="group relative inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-champagne-gold to-[#d4b078] px-8 py-4 font-jost text-sm font-semibold uppercase tracking-wider text-white shadow-gold transition-all duration-300 hover:shadow-gold-strong hover:-translate-y-0.5 active:scale-[0.97] overflow-hidden"
+            className="group relative inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-champagne-gold to-[#A07D1A] px-8 py-4 font-jost text-sm font-semibold uppercase tracking-wider text-white shadow-gold transition-all duration-300 hover:shadow-gold-strong hover:-translate-y-0.5 active:scale-[0.97] overflow-hidden"
           >
             {/* Shimmer overlay */}
             <motion.div
@@ -135,7 +135,7 @@ export default function VideoCtaSection() {
           initial={{ opacity: 0 }}
           animate={isInView ? { opacity: 1 } : {}}
           transition={{ duration: 0.6, delay: 0.5 }}
-          className="font-jost text-xs md:text-sm text-ivory/40 tracking-wide"
+          className="font-jost text-xs md:text-sm text-ivory/55 tracking-wide"
         >
           ✓ No obligation · ✓ Free consultation · ✓ All medical aids welcome
         </motion.p>

@@ -151,7 +151,7 @@ function BenefitCard({ benefit, isInView }: { benefit: typeof benefits[number]; 
           <h3 className="font-dm-serif text-base text-ivory">
             {benefit.title}
           </h3>
-          <p className="mt-0.5 font-jost text-sm font-light leading-relaxed text-ivory/60">
+          <p className="mt-0.5 font-jost text-sm font-light leading-relaxed text-ivory/75">
             {benefit.description}
           </p>
         </div>
@@ -183,22 +183,22 @@ export default function ReferFriend() {
       {/* Decorative corner ornaments (gold L-shaped brackets) */}
       <div className="pointer-events-none absolute left-6 top-6 z-10 hidden md:block">
         <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
-          <path d="M0 24V0H6V18H24V24H0Z" fill="#C9A96E" fillOpacity="0.3" />
+          <path d="M0 24V0H6V18H24V24H0Z" fill="#B89830" fillOpacity="0.3" />
         </svg>
       </div>
       <div className="pointer-events-none absolute right-6 top-6 z-10 hidden md:block">
         <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
-          <path d="M32 24V0H26V18H8V24H32Z" fill="#C9A96E" fillOpacity="0.3" />
+          <path d="M32 24V0H26V18H8V24H32Z" fill="#B89830" fillOpacity="0.3" />
         </svg>
       </div>
       <div className="pointer-events-none absolute bottom-6 left-6 z-10 hidden md:block">
         <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
-          <path d="M0 8V32H6V14H24V8H0Z" fill="#C9A96E" fillOpacity="0.3" />
+          <path d="M0 8V32H6V14H24V8H0Z" fill="#B89830" fillOpacity="0.3" />
         </svg>
       </div>
       <div className="pointer-events-none absolute bottom-6 right-6 z-10 hidden md:block">
         <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
-          <path d="M32 8V32H26V14H8V8H32Z" fill="#C9A96E" fillOpacity="0.3" />
+          <path d="M32 8V32H26V14H8V8H32Z" fill="#B89830" fillOpacity="0.3" />
         </svg>
       </div>
 
@@ -244,7 +244,7 @@ export default function ReferFriend() {
               transition={{ delay: 0.3, duration: 0.5 }}
               className="mt-8"
             >
-              <span className="mb-2 block font-jost text-[10px] font-semibold uppercase tracking-wider text-ivory/40">
+              <span className="mb-2 block font-jost text-[10px] font-semibold uppercase tracking-wider text-ivory/55">
                 Your Referral Code
               </span>
               <div className="flex items-center gap-2">
@@ -355,7 +355,7 @@ export default function ReferFriend() {
               <div
                 className="absolute inset-0 opacity-[0.06]"
                 style={{
-                  backgroundImage: `radial-gradient(circle at 1px 1px, #1A1510 1px, transparent 0)`,
+                  backgroundImage: `radial-gradient(circle at 1px 1px, #0F0D0A 1px, transparent 0)`,
                   backgroundSize: '24px 24px',
                 }}
               />
@@ -420,8 +420,8 @@ export default function ReferFriend() {
                   >
                     <defs>
                       <linearGradient id="heartGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                        <stop offset="0%" stopColor="#FDFAF6" stopOpacity="0.95" />
-                        <stop offset="100%" stopColor="#E8D5B0" stopOpacity="0.9" />
+                        <stop offset="0%" stopColor="#F0EBE1" stopOpacity="0.95" />
+                        <stop offset="100%" stopColor="#D4C08A" stopOpacity="0.9" />
                       </linearGradient>
                     </defs>
                     {/* Heart outline */}
@@ -434,7 +434,7 @@ export default function ReferFriend() {
                     {/* Tooth icon inside heart */}
                     <path
                       d="M33 30C33 26 36 23 40 23C44 23 47 26 47 30V48C47 48 46 53 44 55C43 56 42 56 41 55C40 54 40 50 40 50C40 50 40 54 39 55C38 56 37 56 36 55C34 53 33 48 33 48V30Z"
-                      fill="rgba(26, 21, 16, 0.15)"
+                      fill="rgba(15, 13, 10, 0.15)"
                     />
                   </svg>
                 </motion.div>

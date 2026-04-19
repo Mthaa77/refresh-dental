@@ -1113,3 +1113,95 @@ Stage Summary:
 - Stats bar labels made more relatable and benefit-focused
 - About section bio and CTA strengthened for higher conversion
 - Clean ESLint (0 errors)
+
+---
+Task ID: 20
+Agent: fullstack-developer
+Task: Update 3 core components to match new darker/richer color system
+
+Work Log:
+- Updated globals.css with complete new color system (darker, richer palette with blue/red accents)
+  - ivory: #F0EBE1, sand: #E3DACA, champagne-gold: #B89830, gold-light: #D4C08A
+  - brown-warm: #3D3026, brown-muted: #6B5D4E, soft-border: #C8BBAA, espresso: #0F0D0A
+  - NEW: accent-blue: #3B6FA0, royal-navy: #1A2744, soft-blue: #5A8DB8
+  - NEW: accent-red: #A63D40, deep-burgundy: #6B2D2D, soft-red: #C46060
+- Updated navigation.tsx:
+  - Replaced hardcoded #FDFAF6 → #F0EBE1 (scrolled bg, hamburger color)
+  - Replaced hardcoded rgba(26,21,16,...) → rgba(15,13,10,...) (deeper espresso shadow)
+  - Updated active nav link color from #C9A96E → #B89830 (new champagne-gold)
+  - Updated inactive scrolled text from #1A1510 → #0F0D0A (deeper espresso)
+  - Changed desktop CTA gradient to-[#d4b078] → to-[#A07D1A] (richer gold-rich)
+  - Changed mobile CTA gradient to-[#d4b078] → to-[#A07D1A] (matching)
+  - Updated hover state from hover:text-champagne-gold → hover:text-[#A07D1A] (richer gold)
+  - Updated hover boxShadow rgba to use (160,125,26,...) for new gold-rich value
+  - Added subtle blue accent dot (bg-accent-blue/15) in mobile menu decorative area
+  - Changed mobile overlay from via-[#0f0c08] → via-[#0a0d18] (subtle navy tint)
+- Updated hero.tsx:
+  - Changed second subheading text-brown-warm/70 → text-brown-muted for better readability
+  - Updated trust badge card styles: bg-white/60 → bg-card/70, border-white/40 → border-soft-border/40
+  - Changed blush orb from bg-[#E8C4B8] → bg-royal-navy with opacity 0.025 (blue-tinted)
+  - Added color property to particle system; particle #13 changed to bg-soft-red (subtle red accent)
+  - Updated glass-card border to use explicit border-soft-border/40 style
+  - Updated image border frame rgba from (201,169,110,...) → (184,152,48,...) (new champagne-gold)
+- Updated stats-bar.tsx:
+  - Replaced hardcoded text-[#E8D5B0] → text-[#D4C08A] for gold-light stat numbers
+  - Replaced hardcoded text-[#FDFAF6]/60 → text-[#F0EBE1]/60 for label text
+  - Updated section title text-[#E8D5B0] → text-[#D4C08A] for gold-light
+  - Added text-shadow-blue class to section title for subtle blue glow
+  - Changed vertical separator champagne-gold/40 → champagne-gold/30
+- All changes pass ESLint with zero errors
+- Dev server compiles cleanly
+
+Stage Summary:
+- 3 core components updated to match new darker/richer color system
+- Navigation: deeper espresso values, richer gold CTA, blue accent dot in mobile menu, navy-tinted overlay
+- Hero: brown-muted secondary text, card/soft-border trust badges, royal-navy orb, soft-red particle accent
+- Stats Bar: updated gold-light hex values, blue glow on title, refined separators
+- All hardcoded hex colors aligned with new globals.css palette
+- Clean ESLint (0 errors), clean compilation
+
+---
+Task ID: 23-b
+Agent: fullstack-developer
+Task: Update 5 components to match new darker/richer color system with blue/red accents
+
+Work Log:
+- Updated about-section.tsx:
+  - Replaced 3 instances of `text-[#5C4E3D]` → `text-brown-warm` (bio paragraphs)
+  - Replaced `text-brown-warm/70` → `text-brown-muted` (intro paragraph)
+  - Added blue accent dot before "Meet Your Dentist" label (bg-accent-blue, w-1.5 h-1.5)
+  - Added `bg-card` class to content card alongside shadow-elevated
+  - Added `text-shadow-teal` class to pull quote blockquote
+- Updated services-grid.tsx:
+  - Replaced `text-brown-warm/70` → `text-brown-muted` (section description)
+  - Replaced `text-brown-warm/60` → `text-brown-muted/90` (service card descriptions)
+  - Changed active category filter button to use `chrome-gold-bg` class instead of plain `bg-champagne-gold`
+  - Added subtle blue tint overlay (`blue-tint` class) as decorative background
+  - Made section `relative overflow-hidden` with `z-10` on content to layer blue tint behind
+- Updated trust-indicators.tsx:
+  - Replaced `text-brown-warm/70` → `text-brown-muted` (section description)
+  - Replaced `text-brown-warm/60` → `text-brown-muted/90` (card descriptions)
+  - Changed `bg-champagne-gold/15` → `bg-champagne-gold/20` for stronger icon backgrounds
+  - Increased glow intensity from 0.15 to 0.2 across all trust cards
+  - Changed "10+ Years Experience" card border to `border-accent-red/15` with red glow color for visual variety
+- Updated technology-section.tsx:
+  - Replaced `text-brown-warm/60` → `text-brown-muted/90` (card descriptions)
+  - Changed 2 horizontal SVG lines (y=150, y=400) to blue: `stroke="#3B6FA0"`
+  - Changed 1 vertical SVG line (x=400) to blue: `stroke="#3B6FA0"`
+  - Updated 4 circuit node circles to blue at blue-line intersections
+  - Added subtle blue glow on hover alongside gold glow (box-shadow with rgba(59,111,160,0.08))
+  - Changed "Did You Know?" tooltip opacity from `text-sage-teal/80` → `text-sage-teal` (full opacity)
+- Updated values-section.tsx:
+  - Replaced `text-brown-warm/70` → `text-brown-muted` (section description + card descriptions)
+  - Changed "Clinical Excellence" card icon to `bg-accent-blue/15 text-accent-blue`
+  - Changed "Emergency Available" card icon to `bg-accent-red/15 text-accent-red`
+
+Stage Summary:
+- 5 components updated to match new darker/richer color system
+- Text contrast improved: brown-muted (new dedicated secondary text color) replaces all brown-warm opacity variants
+- Hardcoded hex colors eliminated: text-[#5C4E3D] → text-brown-warm, text-[#E8D5B0] → text-gold-light
+- Blue accents added: about-section (dot), services-grid (tint overlay), technology-section (3 SVG lines + 4 nodes), values-section (1 card icon)
+- Red accents added: trust-indicators (1 card border/glow), values-section (1 card icon)
+- Gold chrome enhanced: chrome-gold-bg on active filter, chrome-gold/20 stronger icon backgrounds
+- All existing functionality, animations, and framer-motion code preserved intact
+- Clean ESLint (0 errors), clean compilation

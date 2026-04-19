@@ -105,8 +105,8 @@ export default function AccessibilityPanel() {
         aria-label="Accessibility Preferences"
         animate={{
           boxShadow: isOpen
-            ? '0 0 0 3px rgba(201, 169, 110, 0.4), 0 4px 20px rgba(26, 21, 16, 0.15)'
-            : '0 4px 14px rgba(26, 21, 16, 0.1)',
+            ? '0 0 0 3px rgba(184, 152, 48, 0.4), 0 4px 20px rgba(15, 13, 10, 0.15)'
+            : '0 4px 14px rgba(15, 13, 10, 0.1)',
         }}
         transition={{ duration: 0.3 }}
       >
@@ -126,7 +126,7 @@ export default function AccessibilityPanel() {
             {/* Panel header */}
             <div className="mb-4">
               <h3 className="font-dm-serif text-lg text-espresso">Accessibility</h3>
-              <p className="text-sm text-brown-warm/70 font-jost">Customize your experience</p>
+              <p className="text-sm text-brown-muted font-jost">Customize your experience</p>
             </div>
 
             {/* Text Size */}
@@ -209,7 +209,7 @@ export default function AccessibilityPanel() {
       <style jsx global>{`
         .high-contrast body,
         .high-contrast * {
-          text-shadow: 0 0 0.5px rgba(26, 21, 16, 0.15) !important;
+          text-shadow: 0 0 0.5px rgba(15, 13, 10, 0.15) !important;
         }
         .high-contrast h1,
         .high-contrast h2,
@@ -218,7 +218,7 @@ export default function AccessibilityPanel() {
           font-weight: 800 !important;
         }
         .high-contrast img {
-          box-shadow: 0 2px 12px rgba(26, 21, 16, 0.2) !important;
+          box-shadow: 0 2px 12px rgba(15, 13, 10, 0.2) !important;
         }
         .reduce-motion * {
           animation-duration: 0.01ms !important;

@@ -103,7 +103,7 @@ export default function ContactForm() {
         <h3 className="font-cormorant text-3xl text-espresso mb-2">
           Message Sent!
         </h3>
-        <p className="font-jost text-sm text-brown-warm/70 max-w-sm">
+        <p className="font-jost text-sm text-brown-muted max-w-sm">
           Thank you, {formData.firstName}! We&apos;ll get back to you within 24
           hours. For urgent matters, please call 061 416 4649.
         </p>
@@ -316,7 +316,7 @@ export default function ContactForm() {
         <button
           type="submit"
           disabled={loading}
-          className="group flex w-full items-center justify-center gap-2 rounded-xl bg-[#C9A96E] py-3.5 font-jost text-sm font-semibold uppercase tracking-wider text-white transition-all duration-300 hover:bg-[#b8964f] hover:shadow-lg hover:shadow-champagne-gold/20 disabled:opacity-60 disabled:cursor-not-allowed"
+          className="group flex w-full items-center justify-center gap-2 rounded-xl bg-[#B89830] py-3.5 font-jost text-sm font-semibold uppercase tracking-wider text-white transition-all duration-300 hover:bg-[#A07D1A] hover:shadow-lg hover:shadow-champagne-gold/20 disabled:opacity-60 disabled:cursor-not-allowed"
         >
           {loading ? (
             <motion.div

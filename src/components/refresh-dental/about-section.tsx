@@ -105,17 +105,17 @@ export default function AboutSection() {
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, margin: '-80px' }}
-            className="w-full lg:w-[55%] lg:py-8 shadow-elevated rounded-3xl p-6 md:p-10"
+            className="w-full lg:w-[55%] lg:py-8 shadow-elevated rounded-3xl bg-card border-soft-border p-6 md:p-10"
           >
-            {/* Gold label */}
-            <motion.span
-              variants={textItemVariants}
-              className="inline-block font-jost text-xs tracking-[0.15em] text-champagne-gold uppercase mb-6"
-            >
-              Meet Your Dentist
-            </motion.span>
+            {/* Gold label with blue accent dot */}
+            <motion.div variants={textItemVariants} className="flex items-center mb-6">
+              <span className="inline-block w-1.5 h-1.5 rounded-full bg-accent-blue mr-2" />
+              <span className="inline-block font-jost text-xs tracking-[0.15em] text-champagne-gold uppercase">
+                Meet Your Dentist
+              </span>
+            </motion.div>
 
-            <motion.p className="font-jost text-base text-brown-warm/70 max-w-md leading-relaxed mb-6">
+            <motion.p className="font-jost text-base text-brown-muted max-w-md leading-relaxed mb-6">
               Transforming lives through exceptional dental care — one smile at a time.
             </motion.p>
 
@@ -157,7 +157,7 @@ export default function AboutSection() {
             {/* Pull Quote */}
             <motion.blockquote
               variants={textItemVariants}
-              className="font-cormorant italic text-xl md:text-2xl text-sage-teal mb-8 leading-relaxed"
+              className="font-cormorant italic text-xl md:text-2xl text-sage-teal text-shadow-teal mb-8 leading-relaxed"
             >
               &ldquo;A revitalised smile doesn&rsquo;t just change your appearance
               — it changes your life.&rdquo;
@@ -173,7 +173,7 @@ export default function AboutSection() {
 
             {/* Bio Paragraph */}
             <motion.div variants={textItemVariants}>
-              <p className="font-jost font-light text-[#5C4E3D] leading-relaxed mb-4 max-w-lg">
+              <p className="font-jost font-light text-brown-warm leading-relaxed mb-4 max-w-lg">
                 Dr. Lebogang Malunga founded Refresh Dental with a bold vision — to transform dental care from a clinical necessity into a life-changing experience that celebrates each patient&rsquo;s unique journey to confidence.
               </p>
 
@@ -187,10 +187,10 @@ export default function AboutSection() {
                 transition={{ duration: 0.5, ease: [0.25, 0.4, 0.25, 1] }}
                 className="overflow-hidden"
               >
-                <p className="font-jost font-light text-[#5C4E3D] leading-relaxed mb-4 max-w-lg">
+                <p className="font-jost font-light text-brown-warm leading-relaxed mb-4 max-w-lg">
                   With over a decade of expertise in cosmetic and restorative dentistry, Dr. Malunga combines artistry with cutting-edge science to deliver results that go beyond expectations.
                 </p>
-                <p className="font-jost font-light text-[#5C4E3D] leading-relaxed mb-4 max-w-lg">
+                <p className="font-jost font-light text-brown-warm leading-relaxed mb-4 max-w-lg">
                   Beyond the clinic, Dr. Malunga is deeply invested in the Centurion
                   community. She leads corporate dental wellness programmes, participates
                   in outreach initiatives, and mentors aspiring dental professionals. Her
@@ -202,7 +202,7 @@ export default function AboutSection() {
               {/* Gold "Read More" toggle */}
               <button
                 onClick={() => setShowMore(!showMore)}
-                className="group inline-flex items-center gap-1.5 text-champagne-gold font-jost text-sm font-medium tracking-wider uppercase mb-8 hover:text-[#b8964f] transition-colors duration-300"
+                className="group inline-flex items-center gap-1.5 text-champagne-gold font-jost text-sm font-medium tracking-wider uppercase mb-8 hover:text-[#A07D1A] transition-colors duration-300"
               >
                 {showMore ? 'Read Less' : 'Read More'}
                 <motion.span

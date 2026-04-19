@@ -132,7 +132,7 @@ function DesktopJourney({
         <motion.div
           className="absolute top-[40px] left-[8%] h-px origin-left"
           style={{
-            background: 'linear-gradient(90deg, #C9A96E, #E8D5B0)',
+            background: 'linear-gradient(90deg, #B89830, #D4C08A)',
           }}
           initial={{ width: 0 }}
           animate={
@@ -177,7 +177,7 @@ function DesktopJourney({
                     className="relative flex h-20 w-20 items-center justify-center rounded-full border-2 transition-all duration-300"
                     style={{
                       borderColor: isActive
-                        ? '#C9A96E'
+                        ? '#B89830'
                         : isPast
                           ? 'rgba(201,169,110,0.5)'
                           : 'rgba(201,169,110,0.2)',
@@ -185,7 +185,7 @@ function DesktopJourney({
                         ? 'linear-gradient(135deg, rgba(201,169,110,0.15), rgba(232,213,176,0.2))'
                         : isPast
                           ? 'rgba(201,169,110,0.06)'
-                          : '#FDFAF6',
+                          : '#F0EBE1',
                     }}
                     whileHover={{ scale: 1.08 }}
                     transition={{ type: 'spring', stiffness: 300, damping: 15 }}
@@ -193,7 +193,7 @@ function DesktopJourney({
                     <Icon
                       className="h-7 w-7 transition-colors duration-300"
                       style={{
-                        color: isActive ? '#C9A96E' : isPast ? 'rgba(61,125,110,0.8)' : 'rgba(92,78,61,0.4)',
+                        color: isActive ? '#B89830' : isPast ? 'rgba(61,125,110,0.8)' : 'rgba(92,78,61,0.4)',
                         strokeWidth: 1.5,
                       }}
                     />
@@ -203,8 +203,8 @@ function DesktopJourney({
                   <div
                     className="absolute -top-1 -right-1 flex h-6 w-6 items-center justify-center rounded-full text-[10px] font-bold font-jost shadow-sm"
                     style={{
-                      background: isPast ? '#C9A96E' : 'rgba(201,169,110,0.2)',
-                      color: isPast ? '#1A1510' : '#5C4E3D',
+                      background: isPast ? '#B89830' : 'rgba(201,169,110,0.2)',
+                      color: isPast ? '#0F0D0A' : '#3D3026',
                     }}
                   >
                     {index + 1}
@@ -214,7 +214,7 @@ function DesktopJourney({
                 {/* Title */}
                 <h3
                   className="font-dm-serif text-sm text-center leading-tight mb-1 transition-colors duration-300"
-                  style={{ color: isActive ? '#1A1510' : '#5C4E3D' }}
+                  style={{ color: isActive ? '#0F0D0A' : '#3D3026' }}
                 >
                   {stage.title}
                 </h3>
@@ -224,7 +224,7 @@ function DesktopJourney({
                   className="font-jost text-[10px] px-2 py-0.5 rounded-full border transition-colors duration-300"
                   style={{
                     borderColor: isActive ? 'rgba(201,169,110,0.3)' : 'rgba(201,169,110,0.15)',
-                    color: isActive ? '#C9A96E' : '#9B8B7A',
+                    color: isActive ? '#B89830' : '#6B5D4E',
                     background: isActive ? 'rgba(201,169,110,0.06)' : 'transparent',
                   }}
                 >
@@ -291,7 +291,7 @@ function MobileJourney({
                 className="relative flex h-9 w-9 items-center justify-center rounded-full border-2 transition-all duration-300"
                 style={{
                   borderColor: isActive
-                    ? '#C9A96E'
+                    ? '#B89830'
                     : isPast
                       ? 'rgba(201,169,110,0.5)'
                       : 'rgba(201,169,110,0.2)',
@@ -299,13 +299,13 @@ function MobileJourney({
                     ? 'linear-gradient(135deg, rgba(201,169,110,0.15), rgba(232,213,176,0.2))'
                     : isPast
                       ? 'rgba(201,169,110,0.06)'
-                      : '#FDFAF6',
+                      : '#F0EBE1',
                 }}
               >
                 <Icon
                   className="h-4 w-4 transition-colors duration-300"
                   style={{
-                    color: isActive ? '#C9A96E' : isPast ? '#3D7D6E' : '#9B8B7A',
+                    color: isActive ? '#B89830' : isPast ? '#2D6B5C' : '#6B5D4E',
                     strokeWidth: 1.5,
                   }}
                 />
@@ -325,15 +325,15 @@ function MobileJourney({
                 <span
                   className="flex h-5 w-5 items-center justify-center rounded-full text-[10px] font-bold font-jost"
                   style={{
-                    background: isPast ? '#C9A96E' : 'rgba(201,169,110,0.2)',
-                    color: isPast ? '#1A1510' : '#5C4E3D',
+                    background: isPast ? '#B89830' : 'rgba(201,169,110,0.2)',
+                    color: isPast ? '#0F0D0A' : '#3D3026',
                   }}
                 >
                   {index + 1}
                 </span>
                 <h3
                   className="font-dm-serif text-base"
-                  style={{ color: isActive ? '#1A1510' : '#5C4E3D' }}
+                  style={{ color: isActive ? '#0F0D0A' : '#3D3026' }}
                 >
                   {stage.title}
                 </h3>
@@ -341,14 +341,14 @@ function MobileJourney({
                   className="ml-auto font-jost text-[10px] px-2 py-0.5 rounded-full border"
                   style={{
                     borderColor: isActive ? 'rgba(201,169,110,0.3)' : 'rgba(201,169,110,0.15)',
-                    color: '#9B8B7A',
+                    color: '#6B5D4E',
                   }}
                 >
                   {stage.duration}
                 </span>
               </div>
 
-              <p className="font-jost text-sm font-light leading-relaxed text-brown-warm/70">
+              <p className="font-jost text-sm font-light leading-relaxed text-brown-muted">
                 {stage.description}
               </p>
             </div>
@@ -407,7 +407,7 @@ function DetailPanel({
 
             {/* Details */}
             <div className="flex-1">
-              <p className="font-jost text-sm leading-relaxed text-brown-warm/80 mb-4">
+              <p className="font-jost text-sm leading-relaxed text-brown-muted mb-4">
                 {stage.description}
               </p>
 
@@ -436,7 +436,7 @@ function DetailPanel({
                     >
                       <path d="M5 0L5.8 4.2L10 5L5.8 5.8L5 10L4.2 5.8L0 5L4.2 4.2Z" />
                     </svg>
-                    <span className="font-jost text-sm text-brown-warm/70">{detail}</span>
+                    <span className="font-jost text-sm text-brown-muted">{detail}</span>
                   </motion.li>
                 ))}
               </ul>
@@ -488,7 +488,7 @@ export default function PatientJourneyMap() {
         <svg className="h-full w-full" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" viewBox="0 0 200 200">
           <defs>
             <pattern id="journey-stripes" patternUnits="userSpaceOnUse" width="12" height="12" patternTransform="rotate(45)">
-              <line x1="0" y1="0" x2="0" y2="12" stroke="#C9A96E" strokeWidth="1" />
+              <line x1="0" y1="0" x2="0" y2="12" stroke="#B89830" strokeWidth="1" />
             </pattern>
           </defs>
           <rect width="100%" height="100%" fill="url(#journey-stripes)" />
@@ -509,7 +509,7 @@ export default function PatientJourneyMap() {
           <h2 className="font-cormorant text-[clamp(2rem,4vw,3rem)] font-medium leading-tight text-espresso">
             The Patient Journey
           </h2>
-          <p className="mx-auto mt-4 max-w-xl font-jost text-sm leading-relaxed text-brown-warm/70">
+          <p className="mx-auto mt-4 max-w-xl font-jost text-sm leading-relaxed text-brown-muted">
             From your first call to lifelong care — every step is designed with your comfort and confidence in mind
           </p>
         </motion.div>
@@ -522,7 +522,7 @@ export default function PatientJourneyMap() {
           className="mb-10"
         >
           <div className="flex items-center justify-between mb-2">
-            <span className="font-jost text-xs text-brown-warm/50">
+            <span className="font-jost text-xs text-brown-muted/80">
               Journey Progress
             </span>
             <span className="font-jost text-xs font-medium text-champagne-gold">
@@ -533,7 +533,7 @@ export default function PatientJourneyMap() {
             <motion.div
               className="h-full rounded-full"
               style={{
-                background: 'linear-gradient(90deg, #C9A96E, #E8D5B0)',
+                background: 'linear-gradient(90deg, #B89830, #D4C08A)',
               }}
               animate={{
                 width:

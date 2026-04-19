@@ -170,11 +170,11 @@ function ComparisonSlider({ item, cardIndex }: { item: ComparisonItem; cardIndex
           opacity: isHovered ? 1 : 0,
           background: isHovered
             ? [
-                'linear-gradient(0deg, #C9A96E 0%, #E8D5B0 50%, #C9A96E 100%)',
-                'linear-gradient(90deg, #C9A96E 0%, #E8D5B0 50%, #C9A96E 100%)',
-                'linear-gradient(180deg, #C9A96E 0%, #E8D5B0 50%, #C9A96E 100%)',
-                'linear-gradient(270deg, #C9A96E 0%, #E8D5B0 50%, #C9A96E 100%)',
-                'linear-gradient(360deg, #C9A96E 0%, #E8D5B0 50%, #C9A96E 100%)',
+                'linear-gradient(0deg, #B89830 0%, #D4C08A 50%, #B89830 100%)',
+                'linear-gradient(90deg, #B89830 0%, #D4C08A 50%, #B89830 100%)',
+                'linear-gradient(180deg, #B89830 0%, #D4C08A 50%, #B89830 100%)',
+                'linear-gradient(270deg, #B89830 0%, #D4C08A 50%, #B89830 100%)',
+                'linear-gradient(360deg, #B89830 0%, #D4C08A 50%, #B89830 100%)',
               ]
             : 'transparent',
         }}
@@ -216,7 +216,7 @@ function ComparisonSlider({ item, cardIndex }: { item: ComparisonItem; cardIndex
           <div className="absolute inset-0 flex items-center justify-center">
             <div className="text-center">
               <span className="text-4xl opacity-80">{item.afterIcon}</span>
-              <div className="mt-2 font-cormorant text-lg font-medium text-brown-warm/40">
+              <div className="mt-2 font-cormorant text-lg font-medium text-brown-muted/70">
                 After
               </div>
             </div>
@@ -286,8 +286,8 @@ function ComparisonSlider({ item, cardIndex }: { item: ComparisonItem; cardIndex
             className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
             animate={{
               boxShadow: isHovered
-                ? '0 0 0 6px rgba(201, 169, 110, 0.3), 0 0 20px rgba(201, 169, 110, 0.4)'
-                : '0 0 0 3px rgba(201, 169, 110, 0.15), 0 0 12px rgba(201, 169, 110, 0.2)',
+                ? '0 0 0 6px rgba(184, 152, 48, 0.3), 0 0 20px rgba(184, 152, 48, 0.4)'
+                : '0 0 0 3px rgba(184, 152, 48, 0.15), 0 0 12px rgba(184, 152, 48, 0.2)',
             }}
             transition={{ duration: 0.3 }}
           >
@@ -341,10 +341,10 @@ function ComparisonSlider({ item, cardIndex }: { item: ComparisonItem; cardIndex
                   width: isActive ? 16 : 6,
                   height: isActive ? 6 : 6,
                   backgroundColor: isActive
-                    ? '#C9A96E'
+                    ? '#B89830'
                     : isNear
-                    ? 'rgba(201, 169, 110, 0.4)'
-                    : 'rgba(201, 169, 110, 0.15)',
+                    ? 'rgba(184, 152, 48, 0.4)'
+                    : 'rgba(184, 152, 48, 0.15)',
                 }}
                 transition={{ duration: 0.25, ease: 'easeOut' }}
               />
@@ -406,7 +406,7 @@ function ComparisonSlider({ item, cardIndex }: { item: ComparisonItem; cardIndex
               <div className="absolute -top-1 left-4 h-2 w-2 rotate-45 bg-espresso/90" />
             </motion.div>
           </div>
-          <p className="font-jost text-xs font-light leading-relaxed text-brown-warm/60">
+          <p className="font-jost text-xs font-light leading-relaxed text-brown-muted/90">
             {item.description}
           </p>
           <motion.a
@@ -444,7 +444,7 @@ export default function BeforeAfterSection() {
           <h2 className="font-cormorant text-[clamp(2rem,4vw,3.5rem)] font-medium leading-tight text-espresso">
             See the Transformation
           </h2>
-          <p className="mx-auto mt-4 max-w-xl font-jost text-sm leading-relaxed text-brown-warm/70">
+          <p className="mx-auto mt-4 max-w-xl font-jost text-sm leading-relaxed text-brown-muted">
             Real results from our cosmetic dental treatments. Drag the slider to
             see the difference.
           </p>
@@ -473,7 +473,7 @@ export default function BeforeAfterSection() {
           transition={{ duration: 0.5, delay: 0.4 }}
           className="mt-12 text-center"
         >
-          <p className="font-jost text-sm text-brown-warm/70">
+          <p className="font-jost text-sm text-brown-muted">
             Ready to transform your smile?
           </p>
         </motion.div>

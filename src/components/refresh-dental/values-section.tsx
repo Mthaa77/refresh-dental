@@ -26,7 +26,7 @@ const values = [
     icon: Award,
     title: 'Clinical Excellence',
     description: 'Dr. Malunga relentlessly pursues the latest advancements in dental science, blending state-of-the-art technology with meticulous, evidence-based expertise you can trust.',
-    accent: 'bg-sage-teal/10 text-sage-teal',
+    accent: 'bg-accent-blue/15 text-accent-blue',
   },
   {
     icon: Shield,
@@ -38,7 +38,7 @@ const values = [
     icon: Clock,
     title: 'Emergency Available',
     description: 'Dental emergencies don\'t wait — and neither do we. One call is all it takes, and we\'ll prioritise getting you out of pain and back to smiling the very same day.',
-    accent: 'bg-warm-blush/15 text-warm-blush',
+    accent: 'bg-accent-red/15 text-accent-red',
   },
 ]
 
@@ -80,7 +80,7 @@ export default function ValuesSection() {
             initial={{ opacity: 0, y: 15 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="font-jost text-base md:text-lg text-brown-warm/70 max-w-2xl mx-auto text-center leading-relaxed mt-4 mb-12"
+            className="font-jost text-base md:text-lg text-brown-muted max-w-2xl mx-auto text-center leading-relaxed mt-4 mb-12"
           >
             Six pillars that define the Refresh Dental experience — and why thousands of families trust us with their smiles.
           </motion.p>
@@ -100,7 +100,7 @@ export default function ValuesSection() {
               variants={itemVariants}
               whileHover={{
                 y: -4,
-                boxShadow: '0 12px 40px -8px rgba(201, 169, 110, 0.12)',
+                boxShadow: '0 12px 40px -8px rgba(184, 152, 48, 0.12)',
                 transition: { duration: 0.3 },
               }}
               className="group relative rounded-2xl border border-soft-border bg-white p-6 overflow-hidden transition-all duration-300 hover:border-champagne-gold/30 shadow-premium hover-lift shadow-inner-gold hover:shadow-gold"
@@ -145,7 +145,7 @@ export default function ValuesSection() {
               <h3 className="font-dm-serif text-lg text-espresso mb-2 relative">
                 {value.title}
               </h3>
-              <p className="font-jost text-sm font-light leading-relaxed text-brown-warm/70 relative">
+              <p className="font-jost text-sm font-light leading-relaxed text-brown-muted relative">
                 {value.description}
               </p>
             </motion.div>

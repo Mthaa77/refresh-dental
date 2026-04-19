@@ -129,7 +129,7 @@ export default function Testimonials() {
             initial={{ opacity: 0, y: 15 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="font-jost text-base md:text-lg text-brown-warm/70 max-w-2xl mx-auto text-center leading-relaxed mt-4 mb-12"
+            className="font-jost text-base md:text-lg text-brown-muted max-w-2xl mx-auto text-center leading-relaxed mt-4 mb-12"
           >
             Don&rsquo;t just take our word for it — hear directly from the patients whose lives we&rsquo;ve touched and smiles we&rsquo;ve transformed.
           </motion.p>
@@ -182,7 +182,7 @@ export default function Testimonials() {
               }`}
               style={
                 activeIndex === i
-                  ? { boxShadow: '0 8px 32px -4px rgba(201, 169, 110, 0.15)' }
+                  ? { boxShadow: '0 8px 32px -4px rgba(184, 152, 48, 0.15)' }
                   : undefined
               }
             >
@@ -223,7 +223,7 @@ export default function Testimonials() {
               </div>
 
               {/* Review Text */}
-              <p className="relative z-10 font-jost text-[15px] font-light italic leading-relaxed text-brown-warm/80">
+              <p className="relative z-10 font-jost text-[15px] font-light italic leading-relaxed text-brown-muted">
                 &ldquo;{t.text}&rdquo;
               </p>
 
@@ -241,10 +241,10 @@ export default function Testimonials() {
                   </span>
                 </div>
                 <div className="flex items-center gap-2">
-                  {/* Verified Patient badge */}
-                  <span className="inline-flex items-center gap-1 rounded-full bg-champagne-gold/8 px-2 py-0.5">
-                    <BadgeCheck className="h-3 w-3 text-sage-teal" strokeWidth={2.5} />
-                    <span className="font-jost text-[9px] font-semibold uppercase tracking-wider text-sage-teal">
+                  {/* Verified Patient badge — blue accent for trust */}
+                  <span className="inline-flex items-center gap-1 rounded-full bg-accent-blue/10 px-2 py-0.5">
+                    <BadgeCheck className="h-3 w-3 text-accent-blue" strokeWidth={2.5} />
+                    <span className="font-jost text-[9px] font-semibold uppercase tracking-wider text-accent-blue">
                       Verified
                     </span>
                   </span>

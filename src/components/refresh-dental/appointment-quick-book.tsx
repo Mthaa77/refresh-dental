@@ -138,7 +138,7 @@ export default function AppointmentQuickBook() {
                   <h3 className="font-dm-serif text-lg text-espresso mb-1">
                     Request Sent!
                   </h3>
-                  <p className="text-sm font-jost text-brown-warm/70 text-center">
+                  <p className="text-sm font-jost text-brown-muted text-center">
                     We&apos;ll confirm your appointment shortly.
                   </p>
                 </motion.div>
@@ -156,14 +156,14 @@ export default function AppointmentQuickBook() {
                     <h3 className="font-dm-serif text-lg text-espresso">
                       Quick Appointment
                     </h3>
-                    <p className="text-xs font-jost text-brown-warm/60 mt-0.5">
+                    <p className="text-xs font-jost text-brown-muted/90 mt-0.5">
                       Fill in to request a booking
                     </p>
                   </div>
 
                   {/* Service dropdown */}
                   <div>
-                    <label className="block text-xs font-jost font-medium text-brown-warm/70 mb-1.5">
+                    <label className="block text-xs font-jost font-medium text-brown-muted mb-1.5">
                       Service
                     </label>
                     <div className="relative">
@@ -177,13 +177,13 @@ export default function AppointmentQuickBook() {
                           <option key={s} value={s}>{s}</option>
                         ))}
                       </select>
-                      <ChevronDown className="absolute right-2.5 top-1/2 -translate-y-1/2 h-4 w-4 text-brown-warm/50 pointer-events-none" />
+                      <ChevronDown className="absolute right-2.5 top-1/2 -translate-y-1/2 h-4 w-4 text-brown-muted/80 pointer-events-none" />
                     </div>
                   </div>
 
                   {/* Date input */}
                   <div>
-                    <label className="block text-xs font-jost font-medium text-brown-warm/70 mb-1.5">
+                    <label className="block text-xs font-jost font-medium text-brown-muted mb-1.5">
                       Preferred Date
                     </label>
                     <input
@@ -197,7 +197,7 @@ export default function AppointmentQuickBook() {
 
                   {/* Time slots */}
                   <div>
-                    <label className="flex items-center gap-1.5 text-xs font-jost font-medium text-brown-warm/70 mb-2">
+                    <label className="flex items-center gap-1.5 text-xs font-jost font-medium text-brown-muted mb-2">
                       <Clock className="h-3 w-3" /> Preferred Time
                     </label>
                     <div className="grid grid-cols-4 gap-2">
@@ -222,7 +222,7 @@ export default function AppointmentQuickBook() {
                   {/* Name & Phone - inline */}
                   <div className="grid grid-cols-2 gap-2">
                     <div>
-                      <label className="flex items-center gap-1 text-xs font-jost font-medium text-brown-warm/70 mb-1.5">
+                      <label className="flex items-center gap-1 text-xs font-jost font-medium text-brown-muted mb-1.5">
                         <User className="h-3 w-3" /> Name
                       </label>
                       <input
@@ -234,7 +234,7 @@ export default function AppointmentQuickBook() {
                       />
                     </div>
                     <div>
-                      <label className="flex items-center gap-1 text-xs font-jost font-medium text-brown-warm/70 mb-1.5">
+                      <label className="flex items-center gap-1 text-xs font-jost font-medium text-brown-muted mb-1.5">
                         <Phone className="h-3 w-3" /> Phone
                       </label>
                       <input

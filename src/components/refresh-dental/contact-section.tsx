@@ -82,8 +82,8 @@ export default function ContactSection() {
             transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
             aria-hidden="true"
           >
-            <div className="flex h-10 w-10 items-center justify-center rounded-full bg-champagne-gold/10">
-              <Navigation className="h-5 w-5 text-champagne-gold" />
+            <div className="flex h-10 w-10 items-center justify-center rounded-full bg-accent-blue/10">
+              <Navigation className="h-5 w-5 text-accent-blue" />
             </div>
           </motion.div>
 
@@ -112,7 +112,7 @@ export default function ContactSection() {
             initial={{ opacity: 0, y: 15 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="font-jost text-base md:text-lg text-brown-warm/70 max-w-2xl mx-auto text-center leading-relaxed mt-4 mb-12"
+            className="font-jost text-base md:text-lg text-brown-muted max-w-2xl mx-auto text-center leading-relaxed mt-4 mb-12"
           >
             Ready to take the first step towards your dream smile? We&rsquo;d love to hear from you. Walk-ins welcome, appointments preferred.
           </motion.p>
@@ -175,7 +175,7 @@ export default function ContactSection() {
               <motion.div
                 className="absolute inset-0 rounded-2xl"
                 style={{
-                  background: 'conic-gradient(from 0deg, #C9A96E, #E8D5B0, #C9A96E, #E8D5B0, #C9A96E)',
+                  background: 'conic-gradient(from 0deg, #B89830, #D4C08A, #B89830, #D4C08A, #B89830)',
                 }}
                 animate={{ rotate: 360 }}
                 transition={{
@@ -222,7 +222,7 @@ export default function ContactSection() {
                   y1="0"
                   x2="0.5"
                   y2="100%"
-                  stroke="#C9A96E"
+                  stroke="#B89830"
                   strokeWidth="1"
                   strokeDasharray="4 6"
                   style={{ pathLength: pathProgress, strokeOpacity: 0.3 }}
@@ -250,7 +250,7 @@ export default function ContactSection() {
                 </div>
                 <div>
                   <h4 className="font-dm-serif text-sm text-espresso mb-1">Address</h4>
-                  <p className="font-jost text-sm text-brown-warm/80 leading-relaxed">
+                  <p className="font-jost text-sm text-brown-muted leading-relaxed">
                     153 River Road<br />
                     Lyttelton Manor, Centurion<br />
                     Pretoria 0157
@@ -274,15 +274,15 @@ export default function ContactSection() {
                     : {}
                 }
               >
-                <div className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full bg-sage-teal/10">
-                  <Phone className="h-5 w-5 text-sage-teal" />
+                <div className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full bg-accent-blue/10">
+                  <Phone className="h-5 w-5 text-accent-blue" />
                 </div>
                 <div>
                   <h4 className="font-dm-serif text-sm text-espresso mb-1">Phone</h4>
-                  <a href="tel:0128833636" className="block font-jost text-sm text-brown-warm/80 hover:text-champagne-gold transition-colors">
+                  <a href="tel:0128833636" className="block font-jost text-sm text-brown-muted hover:text-accent-blue transition-colors">
                     012 883 3636
                   </a>
-                  <a href="tel:0614164649" className="block font-jost text-sm text-brown-warm/80 hover:text-champagne-gold transition-colors">
+                  <a href="tel:0614164649" className="block font-jost text-sm text-brown-muted hover:text-accent-blue transition-colors">
                     061 416 4649
                   </a>
                 </div>
@@ -309,10 +309,10 @@ export default function ContactSection() {
                 </div>
                 <div>
                   <h4 className="font-dm-serif text-sm text-espresso mb-1">Email</h4>
-                  <a href="mailto:admin@refreshdental.co.za" className="block font-jost text-sm text-brown-warm/80 hover:text-champagne-gold transition-colors">
+                  <a href="mailto:admin@refreshdental.co.za" className="block font-jost text-sm text-brown-muted hover:text-accent-blue transition-colors">
                     admin@refreshdental.co.za
                   </a>
-                  <a href="mailto:drlebo@refreshdental.co.za" className="block font-jost text-sm text-brown-warm/80 hover:text-champagne-gold transition-colors">
+                  <a href="mailto:drlebo@refreshdental.co.za" className="block font-jost text-sm text-brown-muted hover:text-accent-blue transition-colors">
                     drlebo@refreshdental.co.za
                   </a>
                 </div>
@@ -379,10 +379,10 @@ export default function ContactSection() {
             >
               {/* Pulsing red border */}
               <motion.div
-                className="absolute inset-0 rounded-2xl border-2 border-warm-blush/30"
+                className="absolute inset-0 rounded-2xl border-2 border-accent-red/30"
                 animate={{
                   opacity: [0.3, 0.8, 0.3],
-                  borderColor: ['rgba(220, 120, 120, 0.2)', 'rgba(220, 120, 120, 0.6)', 'rgba(220, 120, 120, 0.2)'],
+                  borderColor: ['rgba(166, 61, 64, 0.2)', 'rgba(166, 61, 64, 0.6)', 'rgba(166, 61, 64, 0.2)'],
                 }}
                 transition={{
                   duration: 2,
@@ -391,17 +391,17 @@ export default function ContactSection() {
                 }}
               />
               <div className="relative flex items-center gap-2">
-                <AlertCircle className="w-4 h-4 text-warm-blush flex-shrink-0" />
+                <AlertCircle className="w-4 h-4 text-accent-red flex-shrink-0" />
                 <h4 className="font-dm-serif text-base text-espresso">
                   Dental Emergency?
                 </h4>
               </div>
-              <p className="relative font-jost text-sm text-brown-warm/70 leading-relaxed">
+              <p className="relative font-jost text-sm text-brown-muted leading-relaxed">
                 Dr. Malunga is available for urgent cases. Call immediately for same-day appointments.
               </p>
               <a
                 href="tel:0614164649"
-                className="relative inline-flex items-center gap-2 mt-2 bg-champagne-gold text-white font-jost font-semibold rounded-full px-5 py-2 text-sm hover:bg-[#b8964f] transition-colors"
+                className="relative inline-flex items-center gap-2 mt-2 bg-champagne-gold text-white font-jost font-semibold rounded-full px-5 py-2 text-sm hover:bg-[#A07D1A] transition-colors"
               >
                 <Phone className="w-3.5 h-3.5" />
                 061 416 4649
@@ -434,7 +434,7 @@ export default function ContactSection() {
               >
                 <motion.path
                   d="M2 2 L2 12 L12 12"
-                  stroke="#C9A96E"
+                  stroke="#B89830"
                   strokeWidth="1.5"
                   strokeLinecap="round"
                   initial={{ pathLength: 0 }}
@@ -455,7 +455,7 @@ export default function ContactSection() {
               >
                 <motion.path
                   d="M22 2 L22 12 L12 12"
-                  stroke="#C9A96E"
+                  stroke="#B89830"
                   strokeWidth="1.5"
                   strokeLinecap="round"
                   initial={{ pathLength: 0 }}
@@ -476,7 +476,7 @@ export default function ContactSection() {
               >
                 <motion.path
                   d="M2 22 L2 12 L12 12"
-                  stroke="#C9A96E"
+                  stroke="#B89830"
                   strokeWidth="1.5"
                   strokeLinecap="round"
                   initial={{ pathLength: 0 }}
@@ -497,7 +497,7 @@ export default function ContactSection() {
               >
                 <motion.path
                   d="M22 22 L22 12 L12 12"
-                  stroke="#C9A96E"
+                  stroke="#B89830"
                   strokeWidth="1.5"
                   strokeLinecap="round"
                   initial={{ pathLength: 0 }}
@@ -542,7 +542,7 @@ export default function ContactSection() {
                 <svg width="40" height="40" viewBox="0 0 40 40" className="opacity-[0.03]">
                   <path
                     d="M20 2C15 2 11 5 10 9C8.5 14 9 18 11 22C12.5 25 13 28 13 32C13 35 14.5 38 16 38C17.5 38 18 36 19 33C19.5 31.5 20 30 20 30C20 30 20.5 31.5 21 33C22 36 22.5 38 24 38C25.5 38 27 35 27 32C27 28 27.5 25 29 22C31 18 31.5 14 30 9C29 5 25 2 20 2Z"
-                    fill="#C9A96E"
+                    fill="#B89830"
                   />
                 </svg>
               </motion.div>

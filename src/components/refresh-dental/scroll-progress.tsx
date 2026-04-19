@@ -21,7 +21,7 @@ export default function ScrollProgress() {
         className="fixed top-0 left-0 right-0 h-[3px] z-[9999] origin-left"
         style={{
           scaleX,
-          background: 'linear-gradient(90deg, #C9A96E 0%, #E8D5B0 50%, #C9A96E 100%)',
+          background: 'linear-gradient(90deg, #B89830 0%, #D4C08A 50%, #B89830 100%)',
         }}
         role="progressbar"
         aria-label="Page scroll progress"
@@ -35,7 +35,7 @@ export default function ScrollProgress() {
           width: '40px',
           height: '3px',
           transform: 'translateX(-50%)',
-          background: 'linear-gradient(90deg, transparent, rgba(201, 169, 110, 0.8), rgba(232, 213, 176, 1))',
+          background: 'linear-gradient(90deg, transparent, rgba(184, 152, 48, 0.8), rgba(232, 213, 176, 1))',
           filter: 'blur(2px)',
         }}
         aria-hidden="true"
@@ -53,7 +53,7 @@ export default function ScrollProgress() {
         <motion.div
           className="h-[7px] w-[7px] rounded-full bg-champagne-gold"
           style={{
-            boxShadow: '0 0 8px rgba(201, 169, 110, 0.6), 0 0 16px rgba(201, 169, 110, 0.3)',
+            boxShadow: '0 0 8px rgba(184, 152, 48, 0.6), 0 0 16px rgba(184, 152, 48, 0.3)',
           }}
           animate={{
             scale: [1, 1.4, 1],
@@ -69,7 +69,7 @@ export default function ScrollProgress() {
         <motion.div
           className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-[14px] w-[14px] rounded-full"
           style={{
-            border: '1.5px solid rgba(201, 169, 110, 0.3)',
+            border: '1.5px solid rgba(184, 152, 48, 0.3)',
           }}
           animate={{
             scale: [1, 1.8, 1],

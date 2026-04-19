@@ -467,7 +467,7 @@ export default function ServiceDetailDrawer({ serviceKey, isOpen, onClose }: Ser
                   <motion.div
                     className="absolute inset-0 rounded-full"
                     style={{
-                      background: 'linear-gradient(90deg, transparent, #C9A96E, #E8D5B0, transparent)',
+                      background: 'linear-gradient(90deg, transparent, #B89830, #D4C08A, transparent)',
                     }}
                     animate={{
                       x: ['-100%', '100%'],
@@ -549,7 +549,7 @@ export default function ServiceDetailDrawer({ serviceKey, isOpen, onClose }: Ser
                           <div className="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-lg bg-champagne-gold/10">
                             <IconComponent className="h-4 w-4 text-champagne-gold" />
                           </div>
-                          <span className="font-jost text-xs text-brown-warm/80 leading-relaxed pt-1">
+                          <span className="font-jost text-xs text-brown-muted leading-relaxed pt-1">
                             {b}
                           </span>
                         </motion.div>
@@ -566,7 +566,7 @@ export default function ServiceDetailDrawer({ serviceKey, isOpen, onClose }: Ser
                   className="bg-sand rounded-2xl p-6"
                 >
                   <h3 className="font-dm-serif text-xl text-espresso mb-2">Who Is This For?</h3>
-                  <p className="font-jost text-sm font-light leading-relaxed text-brown-warm/80">
+                  <p className="font-jost text-sm font-light leading-relaxed text-brown-muted">
                     {service.who}
                   </p>
                 </motion.div>
@@ -602,7 +602,7 @@ export default function ServiceDetailDrawer({ serviceKey, isOpen, onClose }: Ser
                                 exit={{ height: 0, opacity: 0 }}
                                 className="overflow-hidden"
                               >
-                                <p className="px-4 pb-3 font-jost text-sm text-brown-warm/70">
+                                <p className="px-4 pb-3 font-jost text-sm text-brown-muted">
                                   {faq.a}
                                 </p>
                               </motion.div>
@@ -626,9 +626,9 @@ export default function ServiceDetailDrawer({ serviceKey, isOpen, onClose }: Ser
                     onClick={onClose}
                     animate={{
                       boxShadow: [
-                        '0 0 0 0 rgba(201, 169, 110, 0.4)',
-                        '0 0 0 10px rgba(201, 169, 110, 0)',
-                        '0 0 0 0 rgba(201, 169, 110, 0)',
+                        '0 0 0 0 rgba(184, 152, 48, 0.4)',
+                        '0 0 0 10px rgba(184, 152, 48, 0)',
+                        '0 0 0 0 rgba(184, 152, 48, 0)',
                       ],
                     }}
                     transition={{
@@ -636,9 +636,9 @@ export default function ServiceDetailDrawer({ serviceKey, isOpen, onClose }: Ser
                       repeat: Infinity,
                       ease: 'easeInOut',
                     }}
-                    whileHover={{ scale: 1.02, boxShadow: '0 8px 30px -4px rgba(201, 169, 110, 0.4)' }}
+                    whileHover={{ scale: 1.02, boxShadow: '0 8px 30px -4px rgba(184, 152, 48, 0.4)' }}
                     whileTap={{ scale: 0.98 }}
-                    className="flex w-full items-center justify-center gap-2 rounded-xl bg-[#C9A96E] py-4 font-jost text-sm font-semibold uppercase tracking-wider text-white transition-all duration-300 hover:bg-[#b8964f]"
+                    className="flex w-full items-center justify-center gap-2 rounded-xl bg-[#B89830] py-4 font-jost text-sm font-semibold uppercase tracking-wider text-white transition-all duration-300 hover:bg-[#A07D1A]"
                   >
                     Book This Service
                     <ArrowRight className="h-4 w-4" />
@@ -668,13 +668,13 @@ function StepTimeline({ steps }: { steps: string[] }) {
           {/* Circle + connecting line */}
           <div className="flex flex-col items-center">
             <motion.div
-              initial={{ scale: 0, backgroundColor: 'rgba(201, 169, 110, 0.1)' }}
-              animate={{ scale: 1, backgroundColor: '#C9A96E' }}
+              initial={{ scale: 0, backgroundColor: 'rgba(184, 152, 48, 0.1)' }}
+              animate={{ scale: 1, backgroundColor: '#B89830' }}
               transition={{ duration: 0.3, delay: 0.3 + i * 0.1, ease: 'easeOut' }}
               className="flex h-7 w-7 flex-shrink-0 items-center justify-center rounded-full"
             >
               <motion.span
-                initial={{ color: '#C9A96E' }}
+                initial={{ color: '#B89830' }}
                 animate={{ color: '#FFFFFF' }}
                 transition={{ duration: 0.3, delay: 0.4 + i * 0.1 }}
                 className="text-xs font-semibold font-jost"
@@ -693,7 +693,7 @@ function StepTimeline({ steps }: { steps: string[] }) {
             )}
           </div>
           <div className="pb-6">
-            <p className="font-jost text-sm text-brown-warm/80 pt-0.5">{step}</p>
+            <p className="font-jost text-sm text-brown-muted pt-0.5">{step}</p>
           </div>
         </motion.div>
       ))}
@@ -712,7 +712,7 @@ function DrawerBackground() {
       <motion.div
         className="absolute -top-32 -left-32 w-64 h-64 rounded-full"
         style={{
-          background: 'radial-gradient(circle, rgba(201, 169, 110, 0.08) 0%, transparent 70%)',
+          background: 'radial-gradient(circle, rgba(184, 152, 48, 0.08) 0%, transparent 70%)',
         }}
         animate={{
           y: [0, -15, 0],
@@ -728,7 +728,7 @@ function DrawerBackground() {
       <motion.div
         className="absolute -bottom-48 -right-48 w-80 h-80 rounded-full"
         style={{
-          background: 'radial-gradient(circle, rgba(61, 125, 110, 0.05) 0%, transparent 70%)',
+          background: 'radial-gradient(circle, rgba(45, 107, 92, 0.05) 0%, transparent 70%)',
         }}
         animate={{
           y: [0, 12, 0],

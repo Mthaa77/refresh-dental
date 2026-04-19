@@ -60,7 +60,7 @@ export default function GuaranteeSection() {
     <section
       ref={ref}
       className="relative py-20 md:py-28 overflow-hidden"
-      style={{ background: 'linear-gradient(180deg, #FDFAF6 0%, #F5EFE6 50%, #FDFAF6 100%)' }}
+      style={{ background: 'linear-gradient(180deg, #F0EBE1 0%, #E3DACA 50%, #F0EBE1 100%)' }}
     >
       {/* Content */}
       <div className="relative max-w-4xl mx-auto px-4 sm:px-6">
@@ -105,7 +105,7 @@ export default function GuaranteeSection() {
                 className="group flex items-start gap-5 md:gap-6 cursor-default"
               >
                 {/* Gold circle icon */}
-                <div className="shrink-0 flex h-14 w-14 items-center justify-center rounded-full bg-gradient-to-br from-champagne-gold to-[#d4b078] text-white shadow-gold transition-transform duration-300 group-hover:scale-110 group-hover:shadow-gold-strong">
+                <div className="shrink-0 flex h-14 w-14 items-center justify-center rounded-full bg-gradient-to-br from-champagne-gold to-[#A07D1A] text-white shadow-gold transition-transform duration-300 group-hover:scale-110 group-hover:shadow-gold-strong">
                   {item.icon}
                 </div>
 
@@ -132,7 +132,7 @@ export default function GuaranteeSection() {
         >
           <a
             href="#contact"
-            className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-champagne-gold to-[#d4b078] px-8 py-3.5 font-jost text-sm font-semibold uppercase tracking-wider text-white shadow-gold transition-all duration-300 hover:shadow-gold-strong hover:-translate-y-0.5 active:scale-[0.97]"
+            className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-champagne-gold to-[#A07D1A] px-8 py-3.5 font-jost text-sm font-semibold uppercase tracking-wider text-white shadow-gold transition-all duration-300 hover:shadow-gold-strong hover:-translate-y-0.5 active:scale-[0.97]"
           >
             Experience the Refresh Dental Difference
             <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />

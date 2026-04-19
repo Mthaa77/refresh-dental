@@ -117,7 +117,7 @@ export default function LocationSection() {
                 Dental Emergency?
               </h4>
             </div>
-            <p className="text-brown-warm/80 text-sm leading-relaxed">
+            <p className="text-brown-muted text-sm leading-relaxed">
               Dr. Malunga is available for urgent cases. Call immediately for
               same-day emergency appointments.
             </p>

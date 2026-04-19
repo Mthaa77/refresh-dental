@@ -106,19 +106,19 @@ export default function SeasonalPromo() {
   const activeOffer = offers[activeTab]
 
   return (
-    <section id="promotions" className="relative overflow-hidden bg-[#FDFAF6]">
+    <section id="promotions" className="relative overflow-hidden bg-[#F0EBE1]">
       {/* Decorative gold gradient top border */}
       <div className="h-px bg-gradient-to-r from-transparent via-champagne-gold/60 to-transparent" />
       {/* Gold decorative background elements */}
       <motion.div
         className="absolute -top-8 -right-8 h-32 w-32 rounded-full opacity-[0.04] sm:-top-16 sm:-right-16 sm:h-48 sm:w-48 md:-top-32 md:-right-32 md:h-64 md:w-64"
-        style={{ backgroundColor: '#C9A96E' }}
+        style={{ backgroundColor: '#B89830' }}
         animate={{ scale: [1, 1.1, 1] }}
         transition={{ duration: 8, repeat: Infinity, ease: 'easeInOut' }}
       />
       <motion.div
         className="absolute -bottom-6 -left-6 h-24 w-24 rounded-full opacity-[0.03] sm:-bottom-12 sm:-left-12 sm:h-36 sm:w-36 md:-bottom-24 md:-left-24 md:h-48 md:w-48"
-        style={{ backgroundColor: '#C9A96E' }}
+        style={{ backgroundColor: '#B89830' }}
         animate={{ scale: [1, 1.15, 1] }}
         transition={{ duration: 10, repeat: Infinity, ease: 'easeInOut', delay: 2 }}
       />
@@ -138,13 +138,13 @@ export default function SeasonalPromo() {
           <h2 className="font-cormorant text-[clamp(2rem,4vw,3.5rem)] font-medium leading-tight text-espresso">
             Special Offers
           </h2>
-          <p className="mx-auto mt-4 max-w-lg font-jost text-sm leading-relaxed text-brown-warm/70">
+          <p className="mx-auto mt-4 max-w-lg font-jost text-sm leading-relaxed text-brown-muted">
             Take advantage of our exclusive promotions and start your journey to a healthier smile.
           </p>
           {/* Gold accent line */}
           <motion.div
             className="mx-auto mt-6 h-px w-20"
-            style={{ backgroundColor: '#C9A96E' }}
+            style={{ backgroundColor: '#B89830' }}
             initial={{ scaleX: 0 }}
             whileInView={{ scaleX: 1 }}
             viewport={{ once: true }}
@@ -170,7 +170,7 @@ export default function SeasonalPromo() {
                 className={
                   activeTab === index
                     ? 'text-champagne-gold'
-                    : 'text-brown-warm/50 hover:text-brown-warm/80'
+                    : 'text-brown-muted/80 hover:text-brown-muted'
                 }
               >
                 {offer.tabLabel}
@@ -194,8 +194,8 @@ export default function SeasonalPromo() {
                 <motion.div
                   className="absolute bottom-0 left-0 right-0 h-0.5"
                   style={{
-                    backgroundColor: '#C9A96E',
-                    boxShadow: '0 0 8px rgba(201, 169, 110, 0.4)',
+                    backgroundColor: '#B89830',
+                    boxShadow: '0 0 8px rgba(184, 152, 48, 0.4)',
                   }}
                   layoutId="promo-tab-indicator"
                   transition={{ type: 'spring', stiffness: 400, damping: 30 }}
@@ -256,7 +256,7 @@ export default function SeasonalPromo() {
                     Limited Time
                   </motion.span>
                 </div>
-                <p className="font-jost text-sm leading-relaxed text-brown-warm/70">
+                <p className="font-jost text-sm leading-relaxed text-brown-muted">
                   {activeOffer.description}
                 </p>
                 {/* Price with animated gold sparkles */}
@@ -289,7 +289,7 @@ export default function SeasonalPromo() {
                     <path d="M7 0L8.5 5.5L14 7L8.5 8.5L7 14L5.5 8.5L0 7L5.5 5.5Z" fill="currentColor" />
                   </motion.svg>
                   {activeOffer.originalPrice && (
-                    <span className="font-jost text-base text-brown-warm/40 line-through">
+                    <span className="font-jost text-base text-brown-muted/70 line-through">
                       {activeOffer.originalPrice}
                     </span>
                   )}
@@ -349,7 +349,7 @@ export default function SeasonalPromo() {
                         />
                       </svg>
                     </div>
-                    <span className="font-jost text-sm text-brown-warm/80">
+                    <span className="font-jost text-sm text-brown-muted">
                       {feature}
                     </span>
                   </motion.div>
