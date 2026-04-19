@@ -1,7 +1,6 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import Image from 'next/image'
 
 const galleryImages = [
   {
@@ -19,14 +18,14 @@ const galleryImages = [
     aspect: 'aspect-[4/3]',
   },
   {
-    src: '/images/dental-smile-hero.png',
+    src: '/images/dental-smile-hero.jpg',
     alt: 'Professional dental care and beautiful smiles',
     caption: 'Your Smile, Our Passion',
     span: 'md:col-span-1',
     aspect: 'aspect-square',
   },
   {
-    src: '/images/dental-smile-hero.png',
+    src: '/images/dental-smile-hero.jpg',
     alt: 'Advanced dental technology',
     caption: 'Advanced Technology',
     span: 'md:col-span-1',
@@ -108,12 +107,11 @@ export default function GallerySection() {
               <div
                 className={`relative h-full w-full ${image.aspect} overflow-hidden rounded-2xl`}
               >
-                <Image
+                <img
                   src={image.src}
                   alt={image.alt}
-                  fill
-                  className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.02]"
-                  sizes="(max-width: 768px) 50vw, 33vw"
+                  className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.02]"
+                  loading="lazy"
                 />
               </div>
 

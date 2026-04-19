@@ -85,7 +85,7 @@ export default function FAQSection() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: '-40px' }}
               transition={{ duration: 0.4, delay: i * 0.05 }}
-              className="overflow-hidden rounded-2xl border border-soft-border bg-white transition-all duration-300"
+              className="overflow-hidden rounded-2xl border border-soft-border bg-white transition-all duration-300 relative"
               style={{
                 boxShadow:
                   openIndex === i
@@ -97,12 +97,34 @@ export default function FAQSection() {
                     : undefined,
               }}
             >
+              {/* Gold accent bar on left side when open */}
+              <motion.div
+                className="absolute left-0 top-0 bottom-0 w-[3px] bg-gradient-to-b from-champagne-gold to-champagne-gold/30 rounded-l-2xl"
+                initial={{ scaleY: 0 }}
+                animate={{ scaleY: openIndex === i ? 1 : 0 }}
+                transition={{ duration: 0.3, ease: [0.25, 0.46, 0.45, 0.94] }}
+                style={{ transformOrigin: 'top' }}
+              />
+
               <button
                 onClick={() => toggle(i)}
                 className="flex w-full items-center justify-between px-6 py-5 text-left transition-colors duration-200 hover:bg-sand/30"
               >
-                <span className="pr-4 font-dm-serif text-lg text-espresso">
-                  {faq.question}
+                <span className="flex items-center gap-3 pr-4">
+                  {/* Number circle */}
+                  <motion.span
+                    className="flex-shrink-0 flex items-center justify-center w-7 h-7 rounded-full text-[11px] font-jost font-semibold transition-all duration-300"
+                    animate={{
+                      backgroundColor: openIndex === i ? '#C9A96E' : 'rgba(201, 169, 110, 0.1)',
+                      color: openIndex === i ? '#FFFFFF' : '#C9A96E',
+                    }}
+                    transition={{ duration: 0.3 }}
+                  >
+                    {String(i + 1).padStart(2, '0')}
+                  </motion.span>
+                  <span className="font-dm-serif text-lg text-espresso">
+                    {faq.question}
+                  </span>
                 </span>
                 <motion.div
                   animate={{ rotate: openIndex === i ? 45 : 0 }}
@@ -115,13 +137,16 @@ export default function FAQSection() {
               <AnimatePresence initial={false}>
                 {openIndex === i && (
                   <motion.div
-                    initial={{ height: 0, opacity: 0 }}
-                    animate={{ height: 'auto', opacity: 1 }}
-                    exit={{ height: 0, opacity: 0 }}
-                    transition={{ duration: 0.3, ease: [0.25, 0.46, 0.45, 0.94] }}
+                    initial={{ height: 0, opacity: 0, scale: 0.98 }}
+                    animate={{ height: 'auto', opacity: 1, scale: 1 }}
+                    exit={{ height: 0, opacity: 0, scale: 0.98 }}
+                    transition={{
+                      duration: 0.35,
+                      ease: [0.25, 0.46, 0.45, 0.94],
+                    }}
                     className="overflow-hidden"
                   >
-                    <div className="px-6 pb-6 pt-0">
+                    <div className="px-6 pb-6 pt-0 pl-[3.25rem]">
                       <div className="h-px bg-soft-border mb-4" />
                       <p className="font-jost text-sm font-light leading-relaxed text-brown-warm/80">
                         {faq.answer}

@@ -89,7 +89,7 @@ export default function ValuesSection() {
           viewport={{ once: true, margin: '-60px' }}
           className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5"
         >
-          {values.map((value) => (
+          {values.map((value, index) => (
             <motion.div
               key={value.title}
               variants={itemVariants}
@@ -98,17 +98,49 @@ export default function ValuesSection() {
                 boxShadow: '0 12px 40px -8px rgba(201, 169, 110, 0.12)',
                 transition: { duration: 0.3 },
               }}
-              className="group rounded-2xl border border-soft-border bg-white p-6 transition-colors duration-300 hover:border-champagne-gold/30"
+              className="group relative rounded-2xl border border-soft-border bg-white p-6 overflow-hidden transition-all duration-300 hover:border-champagne-gold/30"
             >
-              <div
-                className={`mb-4 inline-flex h-12 w-12 items-center justify-center rounded-xl ${value.accent}`}
-              >
-                <value.icon className="h-6 w-6" />
+              {/* Watermark number */}
+              <span className="absolute top-3 right-4 font-cormorant text-[4.5rem] font-bold leading-none text-champagne-gold/[0.06] select-none pointer-events-none">
+                {String(index + 1).padStart(2, '0')}
+              </span>
+
+              {/* Gold accent line at top — animated width on hover */}
+              <motion.div
+                className="absolute top-0 left-0 h-[2px] bg-gradient-to-r from-champagne-gold to-champagne-gold/0"
+                initial={{ width: '0%' }}
+                whileInView={{ width: '40%' }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.8, delay: 0.3 + index * 0.08 }}
+              />
+              <motion.div
+                className="absolute top-0 left-0 h-[2px] bg-gradient-to-r from-champagne-gold to-champagne-gold/30"
+                initial={{ width: '0%' }}
+                whileHover={{ width: '100%' }}
+                transition={{ duration: 0.4 }}
+              />
+
+              {/* Subtle gradient background on hover */}
+              <div className="absolute inset-0 bg-gradient-to-br from-champagne-gold/[0.02] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-2xl pointer-events-none" />
+
+              {/* Icon with hover animation */}
+              <div className="relative">
+                <motion.div
+                  className={`mb-4 inline-flex h-12 w-12 items-center justify-center rounded-xl ${value.accent}`}
+                  whileHover={{
+                    rotate: [0, -8, 8, -4, 0],
+                    scale: [1, 1.15, 1.05, 1.1, 1],
+                  }}
+                  transition={{ duration: 0.6 }}
+                >
+                  <value.icon className="h-6 w-6" />
+                </motion.div>
               </div>
-              <h3 className="font-dm-serif text-lg text-espresso mb-2">
+
+              <h3 className="font-dm-serif text-lg text-espresso mb-2 relative">
                 {value.title}
               </h3>
-              <p className="font-jost text-sm font-light leading-relaxed text-brown-warm/70">
+              <p className="font-jost text-sm font-light leading-relaxed text-brown-warm/70 relative">
                 {value.description}
               </p>
             </motion.div>

@@ -55,6 +55,17 @@ const badgeVariants = {
   },
 };
 
+// Floating gold particles
+const particles = Array.from({ length: 8 }, (_, i) => ({
+  id: i,
+  size: Math.random() * 20 + 8,
+  x: Math.random() * 100,
+  y: Math.random() * 100,
+  duration: Math.random() * 8 + 10,
+  delay: Math.random() * 4,
+  opacity: Math.random() * 0.15 + 0.05,
+}));
+
 export default function Hero() {
   const words = ['Your', 'Smile,', 'Refreshed.', 'Revived.'];
 
@@ -63,19 +74,69 @@ export default function Hero() {
       id="home"
       className="relative min-h-screen flex items-center grain-overlay overflow-hidden bg-ivory"
     >
+      {/* Floating gold circles / particles in background */}
+      <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
+        {particles.map((p) => (
+          <motion.div
+            key={p.id}
+            className="absolute rounded-full bg-champagne-gold"
+            style={{
+              width: p.size,
+              height: p.size,
+              left: `${p.x}%`,
+              top: `${p.y}%`,
+              opacity: p.opacity,
+            }}
+            animate={{
+              y: [0, -30, 10, -20, 0],
+              x: [0, 15, -10, 20, 0],
+              scale: [1, 1.15, 0.95, 1.1, 1],
+            }}
+            transition={{
+              duration: p.duration,
+              delay: p.delay,
+              repeat: Infinity,
+              ease: 'easeInOut',
+            }}
+          />
+        ))}
+        {/* Larger soft glow circles */}
+        <motion.div
+          className="absolute rounded-full bg-champagne-gold/5 blur-3xl"
+          style={{ width: 300, height: 300, top: '10%', left: '5%' }}
+          animate={{ y: [0, -20, 0], x: [0, 10, 0], scale: [1, 1.08, 1] }}
+          transition={{ duration: 12, repeat: Infinity, ease: 'easeInOut' }}
+        />
+        <motion.div
+          className="absolute rounded-full bg-sage-teal/5 blur-3xl"
+          style={{ width: 250, height: 250, bottom: '20%', right: '30%' }}
+          animate={{ y: [0, 15, 0], x: [0, -12, 0], scale: [1, 1.05, 1] }}
+          transition={{ duration: 15, repeat: Infinity, ease: 'easeInOut' }}
+        />
+      </div>
+
       {/* Main content wrapper */}
       <div className="relative z-10 flex flex-col lg:flex-row w-full min-h-screen">
         {/* Left Side - Content */}
         <div className="relative z-20 flex flex-col justify-center w-full lg:w-[60%] px-6 sm:px-10 lg:px-16 xl:px-24 py-20 lg:py-0">
           {/* Top Label */}
-          <motion.span
+          <motion.div
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.1 }}
-            className="font-jost text-xs tracking-[0.15em] text-champagne-gold uppercase mb-8"
+            className="mb-8"
           >
-            Refresh Dental · Centurion
-          </motion.span>
+            <span className="font-jost text-xs tracking-[0.15em] text-champagne-gold uppercase">
+              Refresh Dental · Centurion
+            </span>
+            {/* Thin decorative gold line under label */}
+            <motion.div
+              initial={{ scaleX: 0 }}
+              animate={{ scaleX: 1 }}
+              transition={{ duration: 0.8, delay: 0.5, ease: [0.25, 0.4, 0.25, 1] }}
+              className="mt-2 h-[1px] w-24 origin-left bg-gradient-to-r from-champagne-gold to-champagne-gold/0"
+            />
+          </motion.div>
 
           {/* H1 Heading */}
           <h1 className="font-cormorant font-light text-espresso leading-[1.05] mb-8">
@@ -119,12 +180,25 @@ export default function Hero() {
             transition={{ duration: 0.8, delay: 1.1 }}
             className="flex flex-wrap gap-4 mb-8"
           >
-            <a
+            <motion.a
               href="#contact"
-              className="inline-flex items-center bg-[#C9A96E] hover:bg-[#b8964f] text-white font-jost font-medium text-sm tracking-wider uppercase rounded-full px-8 py-3.5 transition-all duration-300 hover:shadow-lg hover:shadow-champagne-gold/20"
+              whileHover={{ scale: 1.03 }}
+              whileTap={{ scale: 0.97 }}
+              className="relative inline-flex items-center bg-[#C9A96E] text-white font-jost font-medium text-sm tracking-wider uppercase rounded-full px-8 py-3.5 transition-colors duration-300 hover:bg-[#b8964f] overflow-hidden"
             >
-              Book an Appointment →
-            </a>
+              {/* Shimmer / pulse overlay */}
+              <motion.span
+                className="absolute inset-0 bg-gradient-to-r from-transparent via-white/25 to-transparent"
+                animate={{ x: ['-100%', '100%'] }}
+                transition={{
+                  duration: 2.5,
+                  repeat: Infinity,
+                  repeatDelay: 1.5,
+                  ease: 'easeInOut',
+                }}
+              />
+              <span className="relative z-10">Book an Appointment →</span>
+            </motion.a>
             <a
               href="#services"
               className="inline-flex items-center border-2 border-sage-teal text-sage-teal hover:bg-sage-teal hover:text-white font-jost font-medium text-sm tracking-wider uppercase rounded-full px-8 py-3.5 transition-all duration-300"
@@ -165,17 +239,19 @@ export default function Hero() {
             <div className="absolute inset-0 bg-gradient-to-r from-transparent to-espresso/10" />
           </motion.div>
 
-          {/* Floating Card */}
+          {/* Floating Card — Enhanced glass-morphism */}
           <motion.div
             variants={cardVariants}
             initial="hidden"
             animate="visible"
             className="absolute bottom-8 right-4 sm:bottom-12 sm:right-8 lg:bottom-16 lg:right-[-1rem] z-30"
           >
-            <div className="bg-white/95 backdrop-blur-md rounded-2xl shadow-xl shadow-espresso/10 p-5 border border-soft-border max-w-[260px]">
+            <div className="relative bg-white/60 backdrop-blur-xl rounded-2xl shadow-xl shadow-espresso/5 p-5 border border-white/40 max-w-[260px]">
+              {/* Glass highlight top edge */}
+              <div className="absolute top-0 left-4 right-4 h-[1px] bg-gradient-to-r from-transparent via-champagne-gold/40 to-transparent" />
               <div className="space-y-3">
                 <div className="flex items-center gap-3">
-                  <div className="flex-shrink-0 w-8 h-8 rounded-full bg-sage-teal/10 flex items-center justify-center">
+                  <div className="flex-shrink-0 w-8 h-8 rounded-full bg-sage-teal/10 backdrop-blur-sm flex items-center justify-center">
                     <Clock className="w-4 h-4 text-sage-teal" />
                   </div>
                   <span className="font-jost text-sm text-espresso">
@@ -183,7 +259,7 @@ export default function Hero() {
                   </span>
                 </div>
                 <div className="flex items-center gap-3">
-                  <div className="flex-shrink-0 w-8 h-8 rounded-full bg-sage-teal/10 flex items-center justify-center">
+                  <div className="flex-shrink-0 w-8 h-8 rounded-full bg-sage-teal/10 backdrop-blur-sm flex items-center justify-center">
                     <Shield className="w-4 h-4 text-sage-teal" />
                   </div>
                   <span className="font-jost text-sm text-espresso">
@@ -191,7 +267,7 @@ export default function Hero() {
                   </span>
                 </div>
                 <div className="flex items-center gap-3">
-                  <div className="flex-shrink-0 w-8 h-8 rounded-full bg-sage-teal/10 flex items-center justify-center">
+                  <div className="flex-shrink-0 w-8 h-8 rounded-full bg-sage-teal/10 backdrop-blur-sm flex items-center justify-center">
                     <Sparkles className="w-4 h-4 text-sage-teal" />
                   </div>
                   <span className="font-jost text-sm text-espresso">

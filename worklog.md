@@ -349,3 +349,154 @@ Recommendations for Next Phase:
 5. LOW: Add multilingual support (English/Afrikaans/Zulu toggle for South African market)
 6. LOW: Add Google Analytics / Meta Pixel tracking
 7. LOW: Add a "Careers" page (the team section has a "Join Our Team" CTA)
+
+---
+Task ID: 15-b
+Agent: fullstack-developer
+Task: Create 3 new feature components — Promo Banner, Treatment Process, Trust Indicators
+
+Work Log:
+- Created promo-banner.tsx — Dismissible promotional banner below navigation
+  - Content: "New patients get 20% off their first consultation! Book today."
+  - Full-width bar with sage-teal gradient background and gold accents
+  - Close/dismiss (X) button on right; stores dismissed state in sessionStorage
+  - Smooth slide-down animation on appear, slide-up on dismiss (framer-motion AnimatePresence)
+  - CTA button "Claim Offer" linking to #contact (desktop: rounded pill button, mobile: text link)
+  - Mobile: compact single-line layout; Desktop: full width with centered content + gift icon
+  - Bottom gold accent line separator
+- Created treatment-process.tsx — Visual step-by-step treatment journey section
+  - Title: "Your Journey to a Refreshed Smile" with gold accent subtitle
+  - 5 steps: Book Your Visit, Meet Dr. Malunga, Custom Treatment Plan, Expert Care, Enjoy Your Smile
+  - Desktop: horizontal timeline with gold gradient connecting lines between steps
+  - Mobile: vertical timeline with gold connecting line on left, icon circles + step numbers inline
+  - Each step: numbered gold badge, icon in gold-bordered circle, title (DM Serif), description (Jost)
+  - Scroll-triggered staggered reveal animations (0.15s stagger)
+  - Section ID: "process", background: ivory (#FDFAF6)
+- Created trust-indicators.tsx — Compact trust badges / social proof section
+  - Title: "Trusted by Centurion Families"
+  - 4 trust indicators in 2x2 mobile / 4-col desktop grid:
+    1. 5.0 Star Rating — 5 gold filled stars, gold accent
+    2. 500+ Happy Patients — Users icon, sage-teal accent
+    3. 10+ Years Experience — Award icon, gold accent
+    4. HPCSA Registered — Shield icon, sage-teal accent
+  - Each card: icon (rounded-xl bg), large number (Cormorant), title, description
+  - Hover: scale(1.02) + lift + shadow animation
+  - Compact py-16/20 height, white bg with border top/bottom
+  - Scroll reveal with stagger (0.1s)
+- Updated page.tsx to integrate all 3 new components:
+  - PromoBanner: after Navigation, before <main>
+  - TreatmentProcess: after StatsBar, before AboutSection
+  - TrustIndicators: after TreatmentProcess, before AboutSection
+- All changes pass ESLint with zero errors
+- Dev server compiles cleanly (verified via dev.log)
+
+Stage Summary:
+- 3 new premium components added to the website
+- PromoBanner provides session-persistent promotional notice with smooth animations
+- TreatmentProcess provides visual patient journey with horizontal/vertical responsive timeline
+- TrustIndicators provides compact social proof grid with alternating gold/sage-teal accents
+- Site section order: Hero → StatsBar → TreatmentProcess → TrustIndicators → AboutSection → ...
+- Clean ESLint (0 errors), clean compilation
+
+---
+Task ID: 15-a
+Agent: fullstack-developer
+Task: Premium styling enhancements for 6 existing components
+
+Work Log:
+- Enhanced hero.tsx:
+  - Added 8 floating gold circle/particle animations in background (randomized sizes, positions, durations)
+  - Added 2 larger soft glow circles (gold + sage-teal with blur-3xl) for ambient atmosphere
+  - Added thin decorative gold gradient line under "Centurion" label with scale-in animation
+  - Added shimmer/pulse overlay animation on "Book an Appointment" button (white gradient sweeping left-to-right, repeating)
+  - Enhanced floating info card with glass-morphism: bg-white/60, backdrop-blur-xl, border-white/40, glass highlight top edge
+- Enhanced about-section.tsx:
+  - Added animated gold accent line (2px) that draws from left to right based on scroll progress (useTransform + useScroll)
+  - Added credential badge pills (BDS, PDD) with staggered reveal animations and descriptive tooltips
+  - Added expandable "Read More" section with 2 additional bio paragraphs (education, community involvement)
+  - Added pulsing gold glow behind portrait image (animated blur + opacity + scale)
+  - Changed CTA from "Read Full Story" to "Book Your Consultation"
+- Enhanced values-section.tsx:
+  - Added large watermark index numbers (01-06) in top-right corner of each card (champagne-gold/6% opacity, Cormorant font)
+  - Added animated gold accent line at top of each card (draws in on scroll, expands to 100% width on hover)
+  - Added rotating/pulsing animation on icon hover (rotate + scale sequence)
+  - Added subtle gradient background on hover (champagne-gold/2% → transparent, opacity transition)
+- Enhanced faq-section.tsx:
+  - Added number circles (01-08) on left side of each question with active state styling
+  - Added smooth gold accent bar (3px) on left side of opened question with scaleY animation
+  - Improved expand/collapse animation with slight scale bounce (scale 0.98 → 1 on open/close)
+  - Increased left padding on answer content to align with question text
+- Enhanced contact-section.tsx:
+  - Added pulsing ring animation around WhatsApp button (2 concentric rings, staggered timing)
+  - Added red pulse animation on emergency callout border (opacity + border-color oscillation)
+  - Added animated gold diamond icon in section header (scale + rotate wobble animation)
+  - Used z-index layering for pulsing ring elements behind WhatsApp button
+- Enhanced footer.tsx:
+  - Added gold gradient line (2px) at very top of footer (transparent → champagne-gold → transparent)
+  - Enhanced social icons with hover glow effect (gold box-shadow + scale 1.15 via framer-motion)
+  - Added circular border styling to social icons (border-ivory/15, hover border-champagne-gold/40)
+  - Added animated "Back to Top" arrow in footer bottom bar (continuous bounce animation + hover lift)
+- All changes pass ESLint with zero errors
+- Dev server compiles cleanly (verified via dev.log)
+
+Stage Summary:
+- 6 existing components enhanced with premium styling details
+- All animations use framer-motion (no CSS keyframes)
+- Design system colors maintained: champagne-gold, sage-teal, ivory, espresso
+- Typography system maintained: font-cormorant, font-dm-serif, font-jost
+- All components remain responsive (mobile-first)
+- No existing functionality broken
+- Clean ESLint (0 errors), clean compilation
+
+---
+Task ID: 16
+Agent: Main Orchestrator (Cron #4)
+Task: QA, bug fixes, styling enhancements, and new feature development
+
+Work Log:
+- Read worklog.md to understand project state (16 sections, 27+ components)
+- Performed comprehensive QA via agent-browser:
+  - Initial audit found 7 broken images (all Next.js Image component URLs failing)
+  - Root cause: gallery-section.tsx and team-section.tsx used `next/image` Image component which fails for local images
+  - Additional issue: dental-smile-hero.png was actually JPEG data with wrong extension
+- Fixed all broken images:
+  - Replaced `<Image>` with native `<img>` in gallery-section.tsx (6 image references)
+  - Replaced `<Image>` with native `<img>` in team-section.tsx (1 image reference)
+  - Copied dental-smile-hero.png → dental-smile-hero.jpg with correct extension
+  - Updated gallery-section.tsx to reference .jpg version
+- Verified fix: all 11 images load correctly (0 broken) after scrolling through all sections
+- Launched 2 parallel subagents for development:
+  - Agent 15-a: Enhanced 6 existing components (hero, about, values, FAQ, contact, footer)
+  - Agent 15-b: Created 3 new components (promo-banner, treatment-process, trust-indicators)
+- Final QA verification:
+  - 11 images (0 broken), 9 section IDs, 68 interactive elements, 0 horizontal overflow, 0 console errors
+  - Desktop screenshots: hero, process, about, services, testimonials, contact, newsletter, footer
+  - Mobile responsive test (iPhone 14) — all sections render correctly
+  - Dev log confirms clean compilation throughout
+
+Stage Summary:
+- CRITICAL BUG FIXED: 7 broken images (gallery + team section) caused by Next.js Image component
+- Site now has 19 scroll sections + 3 utility components
+- 6 existing components enhanced with premium animations and effects
+- 3 new feature components: promotional banner, treatment process timeline, trust indicators
+- Page section order updated: Loading → ScrollProgress → Nav → PromoBanner → Hero → Stats → TreatmentProcess → TrustIndicators → About → Team → Gallery → Values → Services → Parallax → Testimonials → Before/After → Payment → FAQ → CorporateWellness → DentalTips → Contact → Newsletter → Footer → WhatsApp → ScrollToTop
+- Clean ESLint (0 errors), clean compilation, clean QA
+
+Current Project Status:
+- Website is ultra-premium and feature-rich with 19 scroll sections + 3 utility components
+- All core sections from the master build prompt fully implemented and heavily enhanced
+- Interactive features: scroll progress, promo banner, payment calculator, testimonial carousel, FAQ accordion, service drawer (12 services), contact form, mobile menu, loading screen, scroll-to-top, before/after slider, trading hours, treatment process timeline, trust indicators
+- All images loading from local /public/images/ (no broken images)
+- SEO structured data (JSON-LD) and meta tags configured
+- Responsive design verified on desktop and mobile
+- No bugs, no errors, no console warnings
+
+Recommendations for Next Phase:
+1. MEDIUM: Add online booking integration (currently CTA links to contact form)
+2. MEDIUM: Add video testimonials or TikTok social embed widget
+3. MEDIUM: Add a full blog system with individual article pages
+4. LOW: Add dark mode toggle (next-themes is available in stack)
+5. LOW: Add multilingual support (English/Afrikaans/Zulu for South African market)
+6. LOW: Add Google Analytics / Meta Pixel tracking integration
+7. LOW: Add a "Careers" page (team section has "Join Our Team" CTA)
+8. LOW: Generate additional AI images for remaining sections (before/after real photos)

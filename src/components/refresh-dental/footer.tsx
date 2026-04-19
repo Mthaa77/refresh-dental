@@ -1,5 +1,6 @@
 'use client'
 
+import { motion } from 'framer-motion'
 import {
   Instagram,
   Facebook,
@@ -8,6 +9,7 @@ import {
   MapPin,
   Phone,
   Mail,
+  ArrowUp,
 } from 'lucide-react'
 
 const quickLinks = [
@@ -52,7 +54,10 @@ const socialLinks = [
 
 export default function Footer() {
   return (
-    <footer className="bg-espresso">
+    <footer className="bg-espresso relative">
+      {/* Gold gradient line at top of footer */}
+      <div className="h-[2px] w-full bg-gradient-to-r from-transparent via-champagne-gold to-transparent" />
+
       {/* Main Footer */}
       <div className="max-w-6xl mx-auto px-6 py-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
         {/* Column 1 — Brand */}
@@ -73,19 +78,24 @@ export default function Footer() {
             &ldquo;Refreshed smiles, refreshed lives.&rdquo;
           </p>
 
-          {/* Social Icons */}
+          {/* Social Icons with hover glow */}
           <div className="flex items-center gap-4 pt-2">
             {socialLinks.map((social) => (
-              <a
+              <motion.a
                 key={social.label}
                 href={social.href}
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={social.label}
-                className="text-ivory/50 hover:text-champagne-gold transition-colors"
+                whileHover={{
+                  scale: 1.15,
+                  boxShadow: '0 0 16px rgba(201, 169, 110, 0.5)',
+                }}
+                transition={{ duration: 0.25 }}
+                className="flex items-center justify-center w-9 h-9 rounded-full border border-ivory/15 text-ivory/50 hover:text-champagne-gold hover:border-champagne-gold/40 transition-colors"
               >
-                <social.icon className="w-5 h-5" />
-              </a>
+                <social.icon className="w-4 h-4" />
+              </motion.a>
             ))}
           </div>
         </div>
@@ -159,7 +169,7 @@ export default function Footer() {
 
       {/* Bottom Bar */}
       <div className="border-t border-ivory/10">
-        <div className="max-w-6xl mx-auto px-6 py-6 flex flex-col sm:flex-row items-center justify-center gap-2 text-center">
+        <div className="max-w-6xl mx-auto px-6 py-6 flex flex-col sm:flex-row items-center justify-center gap-4 text-center">
           <p className="text-ivory/40 text-xs">
             © 2025 Refresh Dental. Built by Carter Digitals.
           </p>
@@ -170,6 +180,20 @@ export default function Footer() {
           >
             Privacy Policy
           </a>
+          {/* Animated back to top arrow */}
+          <motion.a
+            href="#home"
+            aria-label="Back to top"
+            whileHover={{ y: -3 }}
+            animate={{ y: [0, -4, 0] }}
+            transition={{
+              y: { duration: 1.8, repeat: Infinity, ease: 'easeInOut' },
+            }}
+            className="ml-auto sm:ml-0 flex items-center gap-1 text-ivory/40 hover:text-champagne-gold transition-colors"
+          >
+            <span className="text-xs font-jost tracking-wider uppercase hidden sm:inline">Top</span>
+            <ArrowUp className="w-4 h-4" />
+          </motion.a>
         </div>
       </div>
     </footer>

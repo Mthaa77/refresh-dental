@@ -1,7 +1,6 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import Image from 'next/image'
 import { Shield, ArrowRight } from 'lucide-react'
 
 const teamMembers = [
@@ -89,12 +88,11 @@ export default function TeamSection() {
             <div className="flex flex-col md:flex-row">
               {/* Portrait */}
               <div className="relative w-full md:w-2/5 aspect-square md:aspect-auto flex-shrink-0">
-                <Image
+                <img
                   src="/images/dr-lebo-hero.png"
                   alt="Dr. Lebogang Malunga — Principal Dentist at Refresh Dental"
-                  fill
-                  className="object-cover object-top transition-transform duration-700 ease-out group-hover:scale-[1.03]"
-                  sizes="(max-width: 768px) 100vw, 320px"
+                  className="absolute inset-0 h-full w-full object-cover object-top transition-transform duration-700 ease-out group-hover:scale-[1.03]"
+                  loading="lazy"
                 />
                 {/* Gold accent line */}
                 <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-champagne-gold via-champagne-gold/60 to-transparent" />

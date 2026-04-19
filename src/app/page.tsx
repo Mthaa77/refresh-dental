@@ -3,8 +3,11 @@
 import dynamic from 'next/dynamic'
 import ScrollProgress from '@/components/refresh-dental/scroll-progress'
 import Navigation from '@/components/refresh-dental/navigation'
+import PromoBanner from '@/components/refresh-dental/promo-banner'
 import Hero from '@/components/refresh-dental/hero'
 import StatsBar from '@/components/refresh-dental/stats-bar'
+import TreatmentProcess from '@/components/refresh-dental/treatment-process'
+import TrustIndicators from '@/components/refresh-dental/trust-indicators'
 import AboutSection from '@/components/refresh-dental/about-section'
 import GallerySection from '@/components/refresh-dental/gallery-section'
 import TeamSection from '@/components/refresh-dental/team-section'
@@ -34,9 +37,12 @@ export default function Home() {
       <LoadingScreen />
       <ScrollProgress />
       <Navigation />
+      <PromoBanner />
       <main className="min-h-screen">
         <Hero />
         <StatsBar />
+        <TreatmentProcess />
+        <TrustIndicators />
         <AboutSection />
         <TeamSection />
         <GallerySection />
