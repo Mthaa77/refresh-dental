@@ -139,7 +139,7 @@ export default function InsurancePartners() {
 
         {/* Subtle pulsing glow behind the grid */}
         <motion.div
-          className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 h-[500px] w-[600px] rounded-full pointer-events-none"
+          className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 h-[250px] w-[300px] rounded-full pointer-events-none sm:h-[400px] sm:w-[500px] md:h-[500px] md:w-[600px]"
           style={{
             background: 'radial-gradient(ellipse, rgba(201, 169, 110, 0.03) 0%, transparent 70%)',
           }}

@@ -202,7 +202,7 @@ export default function ReferFriend() {
         </svg>
       </div>
 
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div className="mx-auto max-w-7xl overflow-hidden px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 items-center gap-12 md:grid-cols-2 md:gap-16">
           {/* Left Column — Content */}
           <motion.div

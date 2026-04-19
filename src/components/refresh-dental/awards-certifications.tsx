@@ -174,7 +174,7 @@ export default function AwardsCertifications() {
 
       {/* Subtle radial gradient glow in center */}
       <div
-        className="pointer-events-none absolute left-1/2 top-1/2 h-[600px] w-[600px] -translate-x-1/2 -translate-y-1/2 rounded-full"
+        className="pointer-events-none absolute left-1/2 top-1/2 h-[300px] w-[300px] -translate-x-1/2 -translate-y-1/2 rounded-full sm:h-[450px] sm:w-[450px] md:h-[600px] md:w-[600px]"
         style={{
           background:
             'radial-gradient(circle, rgba(201, 169, 110, 0.05) 0%, transparent 70%)',

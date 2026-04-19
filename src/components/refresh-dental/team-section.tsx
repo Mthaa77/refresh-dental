@@ -1,7 +1,8 @@
 'use client'
 
+import { useState } from 'react'
 import { motion } from 'framer-motion'
-import { Shield, ArrowRight, Sparkles, CircleDot } from 'lucide-react'
+import { Shield, ArrowRight, Sparkles, CircleDot, Linkedin, BadgeCheck } from 'lucide-react'
 
 const teamMembers = [
   {
@@ -11,6 +12,7 @@ const teamMembers = [
     initials: 'TM',
     color: 'bg-sage-teal',
     specialties: ['Preventive Care', 'Periodontal Therapy', 'Teeth Cleaning'],
+    readTime: '3 min read',
   },
   {
     name: 'Sarah van der Merwe',
@@ -19,6 +21,7 @@ const teamMembers = [
     initials: 'SM',
     color: 'bg-warm-blush',
     specialties: ['Chairside Assistance', 'Infection Control', 'Patient Comfort'],
+    readTime: '2 min read',
   },
   {
     name: 'David Nkosi',
@@ -27,6 +30,7 @@ const teamMembers = [
     initials: 'DN',
     color: 'bg-champagne-gold/80',
     specialties: ['Appointment Scheduling', 'Insurance Claims', 'Patient Relations'],
+    readTime: '2 min read',
   },
 ]
 
@@ -47,6 +51,8 @@ const cardVariants = {
 }
 
 export default function TeamSection() {
+  const [hoveredCard, setHoveredCard] = useState<string | null>(null)
+
   return (
     <section id="team" className="bg-ivory py-20 md:py-28">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -81,11 +87,18 @@ export default function TeamSection() {
           {/* Dr. Lebo — Featured Card (spans 2 cols on desktop) */}
           <motion.div
             variants={cardVariants}
+            onMouseEnter={() => setHoveredCard('dr-lebo')}
+            onMouseLeave={() => setHoveredCard(null)}
             whileHover={{
               y: -6,
-              boxShadow: '0 20px 50px -12px rgba(201, 169, 110, 0.18)',
               transition: { duration: 0.35 },
             }}
+            animate={{
+              boxShadow: hoveredCard === 'dr-lebo'
+                ? ['0 20px 50px -12px rgba(201, 169, 110, 0.25)', '0 20px 60px -12px rgba(201, 169, 110, 0.40)', '0 20px 50px -12px rgba(201, 169, 110, 0.25)']
+                : '0 4px 12px -2px rgba(0, 0, 0, 0.06)',
+            }}
+            transition={{ duration: 2, repeat: hoveredCard === 'dr-lebo' ? Infinity : 0, ease: 'easeInOut' }}
             className="group sm:col-span-2 rounded-2xl border border-soft-border bg-white overflow-hidden transition-colors duration-300 hover:border-champagne-gold/40"
           >
             <div className="flex flex-col md:flex-row">
@@ -127,6 +140,9 @@ export default function TeamSection() {
                 <h3 className="relative font-dm-serif text-xl md:text-2xl text-espresso mb-1">
                   Dr. Lebogang Malunga
                 </h3>
+                <span className="relative inline-block mb-2 font-jost text-xs font-medium text-sage-teal">
+                  Lead Dentist
+                </span>
                 <p className="relative font-jost text-xs text-brown-warm/60 mb-4">
                   BDS, PDD
                 </p>
@@ -143,21 +159,52 @@ export default function TeamSection() {
                   <span className="font-jost text-xs font-medium text-brown-warm/70">
                     HPCSA Registered
                   </span>
+                  {/* Verified badge with animated check */}
+                  <motion.span
+                    animate={{ scale: [1, 1.15, 1] }}
+                    transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
+                    className="inline-flex items-center gap-1 ml-1 rounded-full bg-sage-teal/10 px-2 py-0.5"
+                  >
+                    <BadgeCheck className="h-3.5 w-3.5 text-sage-teal" />
+                    <span className="font-jost text-[10px] font-semibold uppercase tracking-wider text-sage-teal">Verified</span>
+                  </motion.span>
                 </div>
+
+                {/* LinkedIn icon — slides in from bottom on hover */}
+                <motion.div
+                  className="absolute bottom-4 right-4"
+                  initial={{ y: 20, opacity: 0 }}
+                  animate={{
+                    y: hoveredCard === 'dr-lebo' ? 0 : 20,
+                    opacity: hoveredCard === 'dr-lebo' ? 1 : 0,
+                  }}
+                  transition={{ duration: 0.35, ease: 'easeOut' }}
+                >
+                  <div className="flex h-8 w-8 items-center justify-center rounded-full bg-sage-teal/10 transition-colors hover:bg-sage-teal/20">
+                    <Linkedin className="h-4 w-4 text-sage-teal" />
+                  </div>
+                </motion.div>
               </div>
             </div>
           </motion.div>
 
           {/* Team Member Cards */}
-          {teamMembers.map((member) => (
+          {teamMembers.map((member, i) => (
             <motion.div
               key={member.name}
               variants={cardVariants}
+              onMouseEnter={() => setHoveredCard(member.name)}
+              onMouseLeave={() => setHoveredCard(null)}
               whileHover={{
                 y: -6,
-                boxShadow: '0 16px 40px -10px rgba(201, 169, 110, 0.15)',
                 transition: { duration: 0.35 },
               }}
+              animate={{
+                boxShadow: hoveredCard === member.name
+                  ? ['0 16px 40px -10px rgba(201, 169, 110, 0.20)', '0 16px 48px -10px rgba(201, 169, 110, 0.35)', '0 16px 40px -10px rgba(201, 169, 110, 0.20)']
+                  : '0 2px 8px -2px rgba(0, 0, 0, 0.05)',
+              }}
+              transition={{ duration: 2, repeat: hoveredCard === member.name ? Infinity : 0, ease: 'easeInOut', delay: i * 0.1 }}
               className="group relative overflow-hidden rounded-2xl border border-soft-border bg-white p-6 transition-colors duration-300 hover:border-champagne-gold/40"
             >
               {/* Gradient overlay on hover */}
@@ -213,6 +260,21 @@ export default function TeamSection() {
 
               {/* Gold accent line at bottom */}
               <div className="mt-5 h-[1px] w-10 bg-champagne-gold/40 transition-all duration-500 group-hover:w-full group-hover:bg-champagne-gold" />
+
+              {/* LinkedIn icon — slides in from bottom on hover */}
+              <motion.div
+                className="absolute bottom-3 right-3"
+                initial={{ y: 20, opacity: 0 }}
+                animate={{
+                  y: hoveredCard === member.name ? 0 : 20,
+                  opacity: hoveredCard === member.name ? 1 : 0,
+                }}
+                transition={{ duration: 0.35, ease: 'easeOut' }}
+              >
+                <div className="flex h-7 w-7 items-center justify-center rounded-full bg-sage-teal/10 transition-colors hover:bg-sage-teal/20">
+                  <Linkedin className="h-3.5 w-3.5 text-sage-teal" />
+                </div>
+              </motion.div>
             </motion.div>
           ))}
         </motion.div>

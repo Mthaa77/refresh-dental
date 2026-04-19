@@ -73,8 +73,8 @@ export default function PaymentSection() {
   }
 
   return (
-    <section id="financing" className="bg-sand py-24">
-      <div className="max-w-6xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-12 items-start">
+    <section id="financing" className="relative overflow-hidden bg-sand py-24">
+      <div className="max-w-6xl mx-auto px-6 overflow-hidden grid grid-cols-1 md:grid-cols-2 gap-12 items-start">
         {/* Left Column — Medical Aid */}
         <motion.div
           initial={{ opacity: 0, x: -30 }}

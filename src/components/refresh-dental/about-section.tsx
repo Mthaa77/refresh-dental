@@ -67,10 +67,10 @@ export default function AboutSection() {
       ref={sectionRef}
       className="relative bg-ivory py-24 overflow-hidden"
     >
-      <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-16 xl:px-24">
+      <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-16 xl:px-24 overflow-hidden">
         <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-20">
           {/* Left — Portrait Image with gold glow */}
-          <div className="relative w-full lg:w-[45%] flex-shrink-0 lg:-ml-12 xl:-ml-20">
+          <div className="relative w-full lg:w-[45%] flex-shrink-0 lg:-ml-12 xl:-ml-20 overflow-hidden">
             {/* Gold glow behind portrait */}
             <motion.div
               className="absolute -inset-4 rounded-3xl bg-champagne-gold/10 blur-2xl pointer-events-none"

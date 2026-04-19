@@ -109,13 +109,13 @@ export default function SeasonalPromo() {
     <section id="promotions" className="relative overflow-hidden bg-[#FDFAF6]">
       {/* Gold decorative background elements */}
       <motion.div
-        className="absolute -top-32 -right-32 h-64 w-64 rounded-full opacity-[0.04]"
+        className="absolute -top-8 -right-8 h-32 w-32 rounded-full opacity-[0.04] sm:-top-16 sm:-right-16 sm:h-48 sm:w-48 md:-top-32 md:-right-32 md:h-64 md:w-64"
         style={{ backgroundColor: '#C9A96E' }}
         animate={{ scale: [1, 1.1, 1] }}
         transition={{ duration: 8, repeat: Infinity, ease: 'easeInOut' }}
       />
       <motion.div
-        className="absolute -bottom-24 -left-24 h-48 w-48 rounded-full opacity-[0.03]"
+        className="absolute -bottom-6 -left-6 h-24 w-24 rounded-full opacity-[0.03] sm:-bottom-12 sm:-left-12 sm:h-36 sm:w-36 md:-bottom-24 md:-left-24 md:h-48 md:w-48"
         style={{ backgroundColor: '#C9A96E' }}
         animate={{ scale: [1, 1.15, 1] }}
         transition={{ duration: 10, repeat: Infinity, ease: 'easeInOut', delay: 2 }}

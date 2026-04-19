@@ -112,6 +112,24 @@ export default function EmergencyDental() {
       {/* Background gradient */}
       <div className="bg-gradient-to-br from-red-900/90 via-red-950/95 to-[#1A1510]" />
 
+      {/* Heartbeat-like pulse animation on background */}
+      <motion.div
+        className="absolute inset-0 z-[1] pointer-events-none"
+        animate={{
+          opacity: [0.03, 0.06, 0.03, 0.08, 0.03],
+        }}
+        transition={{
+          duration: 2.5,
+          repeat: Infinity,
+          ease: 'easeInOut',
+          times: [0, 0.15, 0.3, 0.5, 1],
+        }}
+        style={{
+          background: 'radial-gradient(circle at 50% 50%, rgba(220, 38, 38, 0.5) 0%, transparent 70%)',
+        }}
+        aria-hidden="true"
+      />
+
       {/* Floating sparkle particles */}
       {sparkles.map((s, i) => (
         <motion.div
@@ -138,7 +156,7 @@ export default function EmergencyDental() {
       ))}
 
       {/* Content */}
-      <div className="relative z-10 mx-auto max-w-7xl px-4 py-20 sm:px-6 md:py-28 lg:px-8">
+      <div className="relative z-10 mx-auto max-w-7xl overflow-hidden px-4 py-20 sm:px-6 md:py-28 lg:px-8">
         <motion.div
           variants={containerVariants}
           initial="hidden"
@@ -148,16 +166,31 @@ export default function EmergencyDental() {
         >
           {/* Left side — Phone & CTA */}
           <motion.div variants={itemVariants} className="text-center lg:text-left space-y-8">
-            {/* Section label */}
-            <motion.span
-              className="inline-block rounded-full bg-champagne-gold/15 px-4 py-1.5 font-jost text-xs font-semibold uppercase tracking-[0.2em] text-champagne-gold"
-              initial={{ opacity: 0, scale: 0.9 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5 }}
-            >
-              24/7 Emergency Care
-            </motion.span>
+            {/* Section label — 24/7 badge with spinning border */}
+            <div className="relative inline-block">
+              <motion.div
+                className="absolute -inset-1 rounded-full"
+                animate={{ rotate: 360 }}
+                transition={{ duration: 4, repeat: Infinity, ease: 'linear' }}
+                style={{
+                  background: 'conic-gradient(from 0deg, transparent 0%, rgba(201, 169, 110, 0.6) 25%, transparent 50%, rgba(220, 38, 38, 0.4) 75%, transparent 100%)',
+                  WebkitMask: 'linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)',
+                  WebkitMaskComposite: 'xor',
+                  maskComposite: 'exclude',
+                  padding: '2px',
+                  borderRadius: '9999px',
+                }}
+              />
+              <motion.span
+                className="relative inline-block rounded-full bg-champagne-gold/15 px-4 py-1.5 font-jost text-xs font-semibold uppercase tracking-[0.2em] text-champagne-gold"
+                initial={{ opacity: 0, scale: 0.9 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5 }}
+              >
+                24/7 Emergency Care
+              </motion.span>
+            </div>
 
             {/* Header with gradient text */}
             <h2 className="font-cormorant text-[clamp(2.2rem,5vw,3.8rem)] font-medium leading-tight">
@@ -180,7 +213,7 @@ export default function EmergencyDental() {
             <div className="relative flex items-center justify-center lg:justify-start">
               <motion.a
                 href="tel:0123456789"
-                className="relative flex h-28 w-28 items-center justify-center rounded-full border-2 border-champagne-gold/30 sm:h-32 sm:w-32"
+                className="relative flex h-28 w-28 items-center justify-center overflow-hidden rounded-full border-2 border-champagne-gold/30 sm:h-32 sm:w-32"
                 onMouseEnter={() => setIsHovering(true)}
                 onMouseLeave={() => setIsHovering(false)}
                 whileHover={{ scale: 1.05 }}
@@ -231,11 +264,34 @@ export default function EmergencyDental() {
               </motion.a>
             </div>
 
-            {/* Phone number */}
-            <div>
+            {/* Phone number with pulsing red ring */}
+            <div className="relative inline-block">
+              {/* Pulsing red ring around phone number */}
+              {[0, 1].map((ring) => (
+                <motion.div
+                  key={ring}
+                  className="absolute -inset-2 rounded-full border"
+                  animate={{
+                    opacity: [0.4, 0.1, 0.4],
+                    scale: [1, 1.04 + ring * 0.02, 1],
+                  }}
+                  transition={{
+                    duration: 1.8,
+                    repeat: Infinity,
+                    delay: ring * 0.6,
+                    ease: 'easeInOut',
+                    times: [0, 0.5, 1],
+                  }}
+                  style={{
+                    borderColor: ring === 0
+                      ? 'rgba(220, 38, 38, 0.5)'
+                      : 'rgba(220, 38, 38, 0.3)',
+                  }}
+                />
+              ))}
               <a
                 href="tel:0123456789"
-                className="font-cormorant text-[clamp(2rem,4vw,3rem)] font-semibold text-ivory transition-colors hover:text-champagne-gold"
+                className="relative block font-cormorant text-[clamp(2rem,4vw,3rem)] font-semibold text-ivory transition-colors hover:text-champagne-gold"
               >
                 012 345 6789
               </a>

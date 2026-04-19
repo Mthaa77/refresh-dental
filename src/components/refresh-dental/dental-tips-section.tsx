@@ -1,7 +1,7 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { Sparkles, Heart, UtensilsCrossed, Calendar, Shield, Smile, ArrowRight } from 'lucide-react'
+import { Sparkles, Heart, UtensilsCrossed, Calendar, Shield, Smile, ArrowRight, Clock } from 'lucide-react'
 
 const tips = [
   {
@@ -10,6 +10,7 @@ const tips = [
     description:
       'Proper brushing technique is the foundation of oral health. Use a soft-bristled brush at a 45-degree angle for two minutes, twice daily.',
     accent: 'bg-champagne-gold/10 text-champagne-gold',
+    readTime: '2 min read',
   },
   {
     icon: Heart,
@@ -17,6 +18,7 @@ const tips = [
     description:
       'Flossing removes plaque from areas your brush can\'t reach. Make it a daily habit for healthier gums and fresher breath.',
     accent: 'bg-warm-blush/20 text-warm-blush',
+    readTime: '2 min read',
   },
   {
     icon: UtensilsCrossed,
@@ -24,6 +26,7 @@ const tips = [
     description:
       'Limit sugary snacks and acidic drinks. Calcium-rich foods and crunchy vegetables naturally strengthen your enamel.',
     accent: 'bg-sage-teal/10 text-sage-teal',
+    readTime: '3 min read',
   },
   {
     icon: Calendar,
@@ -31,6 +34,7 @@ const tips = [
     description:
       'Visit your dentist every 6 months for professional cleaning and early detection of potential issues.',
     accent: 'bg-champagne-gold/10 text-champagne-gold',
+    readTime: '2 min read',
   },
   {
     icon: Shield,
@@ -38,6 +42,7 @@ const tips = [
     description:
       'Always consult your dentist before whitening. Professional treatments are safer and more effective than over-the-counter options.',
     accent: 'bg-sage-teal/10 text-sage-teal',
+    readTime: '3 min read',
   },
   {
     icon: Smile,
@@ -45,6 +50,7 @@ const tips = [
     description:
       'Start dental visits by age 1. Make brushing fun with flavored toothpaste and positive reinforcement.',
     accent: 'bg-warm-blush/20 text-warm-blush',
+    readTime: '2 min read',
   },
 ]
 
@@ -106,10 +112,39 @@ export default function DentalTipsSection() {
               }}
               className="group relative overflow-hidden rounded-2xl border border-soft-border bg-white p-6 transition-colors duration-300 hover:border-champagne-gold/40"
             >
-              {/* Numbered badge — top right */}
-              <span className="absolute top-4 right-4 font-cormorant text-3xl font-semibold leading-none select-none md:text-4xl" style={{ color: 'rgba(201, 169, 110, 0.1)' }}>
+              {/* Subtle ivory dots pattern overlay — 2% opacity */}
+              <div
+                className="pointer-events-none absolute inset-0 rounded-2xl"
+                style={{
+                  backgroundImage: 'radial-gradient(circle at 1px 1px, rgba(253, 250, 246, 1) 1px, transparent 0)',
+                  backgroundSize: '16px 16px',
+                  opacity: 0.02,
+                }}
+                aria-hidden="true"
+              />
+
+              {/* Gradient hover sweep effect — left to right */}
+              <motion.div
+                className="pointer-events-none absolute inset-0 z-0"
+                initial={{ x: '-100%' }}
+                whileHover={{ x: '100%' }}
+                transition={{ duration: 0.6, ease: 'easeInOut' }}
+                style={{
+                  background: 'linear-gradient(90deg, transparent 0%, rgba(201, 169, 110, 0.04) 50%, transparent 100%)',
+                }}
+              />
+
+              {/* Numbered gold corner badge — animated reveal on scroll */}
+              <motion.span
+                className="absolute top-4 right-4 font-cormorant text-3xl font-semibold leading-none select-none md:text-4xl"
+                style={{ color: 'rgba(201, 169, 110, 0.12)' }}
+                initial={{ opacity: 0, scale: 0.5, rotate: -10 }}
+                whileInView={{ opacity: 1, scale: 1, rotate: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: idx * 0.08 + 0.3, ease: 'easeOut' }}
+              >
                 {String(idx + 1).padStart(2, '0')}
-              </span>
+              </motion.span>
 
               {/* Gold accent line — top */}
               <div className="absolute top-0 left-6 right-6 h-[2px] bg-gradient-to-r from-transparent via-champagne-gold/0 to-transparent transition-all duration-500 group-hover:via-champagne-gold/60" />
@@ -141,6 +176,12 @@ export default function DentalTipsSection() {
                 <span className="font-jost text-[10px] font-semibold uppercase tracking-wider text-champagne-gold">
                   Pro Tip
                 </span>
+              </span>
+
+              {/* Read Time indicator */}
+              <span className="mb-3 inline-flex items-center gap-1 font-jost text-[10px] text-brown-warm/40">
+                <Clock className="h-3 w-3" />
+                {tip.readTime}
               </span>
 
               {/* Description */}

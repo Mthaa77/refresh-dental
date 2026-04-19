@@ -15,6 +15,12 @@ interface ComparisonItem {
   afterIcon: string
 }
 
+const procedureDetails: Record<string, string> = {
+  'Teeth Whitening': 'In-office LED-accelerated whitening achieving up to 8 shades brighter in 60 minutes',
+  'Dental Veneers': 'Custom-crafted porcelain shells bonded to correct chips, gaps, and discoloration permanently',
+  'Complete Smile Makeover': 'Comprehensive multi-treatment plan combining veneers, whitening, and alignment correction',
+}
+
 const comparisons: ComparisonItem[] = [
   {
     title: 'Teeth Whitening',
@@ -115,6 +121,7 @@ const cardVariants = {
 function ComparisonSlider({ item, cardIndex }: { item: ComparisonItem; cardIndex: number }) {
   const [sliderPosition, setSliderPosition] = useState(50)
   const [isHovered, setIsHovered] = useState(false)
+  const [titleHovered, setTitleHovered] = useState(false)
   const containerRef = useRef<HTMLDivElement>(null)
   const isDragging = useRef(false)
 
@@ -162,18 +169,24 @@ function ComparisonSlider({ item, cardIndex }: { item: ComparisonItem; cardIndex
       }}
       transition={{ duration: 0.3 }}
     >
-      {/* Gradient border on hover */}
+      {/* Animated gold gradient border on hover — rotates via framer-motion */}
       <motion.div
         className="pointer-events-none absolute inset-0 rounded-2xl"
         animate={{
           opacity: isHovered ? 1 : 0,
+          background: isHovered
+            ? [
+                'linear-gradient(0deg, #C9A96E 0%, #E8D5B0 50%, #C9A96E 100%)',
+                'linear-gradient(90deg, #C9A96E 0%, #E8D5B0 50%, #C9A96E 100%)',
+                'linear-gradient(180deg, #C9A96E 0%, #E8D5B0 50%, #C9A96E 100%)',
+                'linear-gradient(270deg, #C9A96E 0%, #E8D5B0 50%, #C9A96E 100%)',
+                'linear-gradient(360deg, #C9A96E 0%, #E8D5B0 50%, #C9A96E 100%)',
+              ]
+            : 'transparent',
         }}
-        transition={{ duration: 0.4 }}
+        transition={{ duration: 3, repeat: isHovered ? Infinity : 0, ease: 'linear' }}
         style={{
           padding: '2px',
-          background: isHovered
-            ? 'linear-gradient(135deg, #C9A96E 0%, #E8D5B0 50%, #C9A96E 100%)'
-            : 'transparent',
           WebkitMask: 'linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)',
           WebkitMaskComposite: 'xor',
           maskComposite: 'exclude',
@@ -321,6 +334,30 @@ function ComparisonSlider({ item, cardIndex }: { item: ComparisonItem; cardIndex
           </motion.div>
         </div>
 
+        {/* Animated step indicator dots — gold dots showing slider position */}
+        <div className="pointer-events-none absolute bottom-3 left-0 right-0 z-20 flex justify-center gap-2">
+          {[0, 25, 50, 75, 100].map((pos, dotIdx) => {
+            const isActive = Math.abs(sliderPosition - pos) < 15
+            const isNear = Math.abs(sliderPosition - pos) < 30
+            return (
+              <motion.div
+                key={dotIdx}
+                className="rounded-full"
+                animate={{
+                  width: isActive ? 16 : 6,
+                  height: isActive ? 6 : 6,
+                  backgroundColor: isActive
+                    ? '#C9A96E'
+                    : isNear
+                    ? 'rgba(201, 169, 110, 0.4)'
+                    : 'rgba(201, 169, 110, 0.15)',
+                }}
+                transition={{ duration: 0.25, ease: 'easeOut' }}
+              />
+            )
+          })}
+        </div>
+
         {/* Before / After Labels */}
         <div className="pointer-events-none absolute top-4 left-4 z-20 rounded-full bg-espresso/60 px-3 py-1 font-jost text-[10px] font-semibold uppercase tracking-widest text-white/90 backdrop-blur-sm">
           Before
@@ -341,9 +378,33 @@ function ComparisonSlider({ item, cardIndex }: { item: ComparisonItem; cardIndex
           transition={{ duration: 0.3 }}
         />
         <div className="p-5">
-          <h3 className="font-dm-serif text-lg text-espresso mb-1">
-            {item.title}
-          </h3>
+          {/* Card title with procedure details tooltip */}
+          <div className="relative">
+            <h3
+              className="font-dm-serif text-lg text-espresso mb-1 cursor-default"
+              onMouseEnter={() => setTitleHovered(true)}
+              onMouseLeave={() => setTitleHovered(false)}
+            >
+              {item.title}
+            </h3>
+            {/* Tooltip — appears on hover over card title */}
+            <motion.div
+              className="absolute left-0 top-full z-50 mt-1 max-w-xs rounded-lg bg-espresso/90 px-3 py-2 shadow-lg backdrop-blur-sm"
+              initial={{ opacity: 0, y: 4 }}
+              animate={{
+                opacity: titleHovered ? 1 : 0,
+                y: titleHovered ? 0 : 4,
+              }}
+              transition={{ duration: 0.2 }}
+              style={{ pointerEvents: titleHovered ? 'auto' : 'none' }}
+            >
+              <p className="font-jost text-[11px] leading-relaxed text-ivory/90">
+                {procedureDetails[item.title] || item.description}
+              </p>
+              {/* Tooltip arrow */}
+              <div className="absolute -top-1 left-4 h-2 w-2 rotate-45 bg-espresso/90" />
+            </motion.div>
+          </div>
           <p className="font-jost text-xs font-light leading-relaxed text-brown-warm/60">
             {item.description}
           </p>
