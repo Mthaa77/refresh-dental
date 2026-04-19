@@ -1,0 +1,354 @@
+'use client'
+
+import { useState } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
+import { Star, Send, CheckCircle2, MessageSquare } from 'lucide-react'
+
+const EXPERIENCE_OPTIONS = [
+  { emoji: '😊', label: 'Great', value: 'great' },
+  { emoji: '🙂', label: 'Good', value: 'good' },
+  { emoji: '😐', label: 'Okay', value: 'okay' },
+  { emoji: '😕', label: 'Poor', value: 'poor' },
+]
+
+// Deterministic sparkle particles
+const SPARKLES = Array.from({ length: 12 }, (_, i) => ({
+  x: (i * 37 + 13) % 100,
+  y: (i * 53 + 7) % 100,
+  size: (i % 3) + 1,
+  delay: (i * 0.4) % 5,
+  duration: 3 + (i % 3),
+}))
+
+export default function PageSurvey() {
+  const [rating, setRating] = useState(0)
+  const [hoverRating, setHoverRating] = useState(0)
+  const [experience, setExperience] = useState('')
+  const [recommend, setRecommend] = useState<'yes' | 'no' | null>(null)
+  const [feedback, setFeedback] = useState('')
+  const [isSubmitted, setIsSubmitted] = useState(false)
+
+  const displayRating = hoverRating || rating
+  const canSubmit = rating > 0 && experience !== '' && recommend !== null
+
+  const handleSubmit = () => {
+    if (!canSubmit) return
+    setIsSubmitted(true)
+  }
+
+  const charCount = feedback.length
+  const maxChars = 200
+
+  return (
+    <section
+      id="survey"
+      className="bg-[#1A1510] py-20 lg:py-24 overflow-hidden relative"
+    >
+      {/* Gold border frame */}
+      <div className="absolute inset-4 md:inset-8 rounded-3xl border border-champagne-gold/15 pointer-events-none" />
+
+      {/* Deterministic sparkle particles */}
+      {SPARKLES.map((sp, i) => (
+        <motion.span
+          key={i}
+          className="absolute rounded-full bg-champagne-gold pointer-events-none"
+          style={{
+            left: `${sp.x}%`,
+            top: `${sp.y}%`,
+            width: sp.size,
+            height: sp.size,
+          }}
+          animate={{
+            opacity: [0, 0.6, 0],
+            scale: [0.5, 1.2, 0.5],
+          }}
+          transition={{
+            duration: sp.duration,
+            repeat: Infinity,
+            delay: sp.delay,
+            ease: 'easeInOut',
+          }}
+        />
+      ))}
+
+      <div className="max-w-2xl mx-auto px-6 relative z-10">
+        {/* Section Header */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-60px' }}
+          transition={{ duration: 0.5 }}
+          className="text-center mb-10"
+        >
+          <MessageSquare className="h-8 w-8 text-champagne-gold mx-auto mb-3" />
+          <h2 className="font-cormorant text-3xl md:text-4xl lg:text-5xl text-[#FDFAF6]">
+            How Are We Doing?
+          </h2>
+          <p className="font-jost text-[#FDFAF6]/50 mt-3 max-w-md mx-auto">
+            Your feedback helps us improve. It only takes a moment and means
+            the world to our team.
+          </p>
+        </motion.div>
+
+        <AnimatePresence mode="wait">
+          {isSubmitted ? (
+            /* Thank You State */
+            <motion.div
+              key="thank-you"
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.9 }}
+              transition={{ duration: 0.4, type: 'spring', stiffness: 200, damping: 20 }}
+              className="text-center py-12"
+            >
+              <motion.div
+                initial={{ scale: 0 }}
+                animate={{ scale: 1 }}
+                transition={{ type: 'spring', stiffness: 300, damping: 20, delay: 0.15 }}
+                className="inline-flex h-20 w-20 items-center justify-center rounded-full bg-champagne-gold/10 border border-champagne-gold/20 mb-6"
+              >
+                <CheckCircle2 className="h-10 w-10 text-champagne-gold" />
+              </motion.div>
+              <h3 className="font-cormorant text-2xl md:text-3xl text-[#FDFAF6] mb-3">
+                Thank You!
+              </h3>
+              <p className="font-jost text-[#FDFAF6]/50 max-w-sm mx-auto leading-relaxed">
+                Your feedback has been received. We truly appreciate you taking
+                the time to share your experience with us.
+              </p>
+              <motion.div
+                className="mt-6 flex justify-center gap-1"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.5 }}
+              >
+                {[1, 2, 3, 4, 5].map((star) => (
+                  <Star
+                    key={star}
+                    className="h-5 w-5 text-champagne-gold fill-champagne-gold"
+                  />
+                ))}
+              </motion.div>
+            </motion.div>
+          ) : (
+            /* Survey Form */
+            <motion.div
+              key="survey-form"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+              transition={{ duration: 0.4 }}
+              className="space-y-8"
+            >
+              {/* Question 1: Star Rating */}
+              <motion.div
+                initial={{ opacity: 0, y: 15 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.4, delay: 0.1 }}
+                className="text-center"
+              >
+                <label className="block font-dm-serif text-lg text-[#FDFAF6] mb-4">
+                  How would you rate your visit?
+                </label>
+                <div className="flex justify-center gap-3">
+                  {[1, 2, 3, 4, 5].map((star) => (
+                    <motion.button
+                      key={star}
+                      onClick={() => setRating(star)}
+                      onMouseEnter={() => setHoverRating(star)}
+                      onMouseLeave={() => setHoverRating(0)}
+                      className="relative"
+                      whileHover={{ scale: 1.15 }}
+                      whileTap={{ scale: 0.9 }}
+                      aria-label={`${star} star${star > 1 ? 's' : ''}`}
+                    >
+                      <Star
+                        className={`h-8 w-8 md:h-10 md:w-10 transition-colors duration-200 ${
+                          star <= displayRating
+                            ? 'text-champagne-gold fill-champagne-gold'
+                            : 'text-[#FDFAF6]/20'
+                        }`}
+                      />
+                      {star <= displayRating && (
+                        <motion.span
+                          className="absolute inset-0 rounded-full bg-champagne-gold/20"
+                          initial={{ scale: 0, opacity: 0 }}
+                          animate={{ scale: 1.3, opacity: 0 }}
+                          transition={{ duration: 0.4 }}
+                        />
+                      )}
+                    </motion.button>
+                  ))}
+                </div>
+                {rating > 0 && (
+                  <motion.p
+                    initial={{ opacity: 0, y: -5 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    className="font-jost text-xs text-champagne-gold mt-2"
+                  >
+                    {rating === 1 && 'We\'re sorry to hear that'}
+                    {rating === 2 && 'We\'ll work to improve'}
+                    {rating === 3 && 'Thanks for your feedback'}
+                    {rating === 4 && 'Glad you had a good visit!'}
+                    {rating === 5 && 'Wonderful! We\'re thrilled!'}
+                  </motion.p>
+                )}
+              </motion.div>
+
+              {/* Question 2: Emoji Experience */}
+              <motion.div
+                initial={{ opacity: 0, y: 15 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.4, delay: 0.2 }}
+                className="text-center"
+              >
+                <label className="block font-dm-serif text-lg text-[#FDFAF6] mb-4">
+                  How was your experience?
+                </label>
+                <div className="flex justify-center gap-3 md:gap-4">
+                  {EXPERIENCE_OPTIONS.map((opt) => (
+                    <motion.button
+                      key={opt.value}
+                      onClick={() => setExperience(opt.value)}
+                      className={`
+                        flex flex-col items-center gap-1.5 rounded-2xl border px-4 py-3 md:px-5 md:py-4 transition-all duration-200
+                        ${experience === opt.value
+                          ? 'border-champagne-gold bg-champagne-gold/10'
+                          : 'border-[#FDFAF6]/10 bg-[#FDFAF6]/[0.03] hover:border-[#FDFAF6]/20 hover:bg-[#FDFAF6]/[0.06]'
+                        }
+                      `}
+                      whileHover={{ scale: 1.05 }}
+                      whileTap={{ scale: 0.95 }}
+                    >
+                      <span className="text-2xl md:text-3xl">{opt.emoji}</span>
+                      <span
+                        className={`font-jost text-xs ${
+                          experience === opt.value
+                            ? 'text-champagne-gold font-semibold'
+                            : 'text-[#FDFAF6]/40'
+                        }`}
+                      >
+                        {opt.label}
+                      </span>
+                    </motion.button>
+                  ))}
+                </div>
+              </motion.div>
+
+              {/* Question 3: Recommend Toggle */}
+              <motion.div
+                initial={{ opacity: 0, y: 15 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.4, delay: 0.3 }}
+                className="text-center"
+              >
+                <label className="block font-dm-serif text-lg text-[#FDFAF6] mb-4">
+                  Would you recommend us?
+                </label>
+                <div className="flex justify-center">
+                  <div className="inline-flex rounded-xl border border-[#FDFAF6]/10 bg-[#FDFAF6]/[0.03] p-1">
+                    {(['yes', 'no'] as const).map((option) => (
+                      <motion.button
+                        key={option}
+                        onClick={() => setRecommend(option)}
+                        className={`
+                          relative px-8 py-2.5 rounded-lg font-jost text-sm font-medium transition-colors duration-200
+                          ${recommend === option
+                            ? 'text-[#1A1510]'
+                            : 'text-[#FDFAF6]/40 hover:text-[#FDFAF6]/60'
+                          }
+                        `}
+                        whileTap={{ scale: 0.95 }}
+                      >
+                        {recommend === option && (
+                          <motion.span
+                            className="absolute inset-0 rounded-lg bg-champagne-gold"
+                            layoutId="recommend-pill"
+                            transition={{ type: 'spring', stiffness: 400, damping: 30 }}
+                          />
+                        )}
+                        <span className="relative z-10 capitalize">{option}</span>
+                      </motion.button>
+                    ))}
+                  </div>
+                </div>
+              </motion.div>
+
+              {/* Question 4: Free-text Feedback */}
+              <motion.div
+                initial={{ opacity: 0, y: 15 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.4, delay: 0.4 }}
+                className="text-center"
+              >
+                <label className="block font-dm-serif text-lg text-[#FDFAF6] mb-4">
+                  Any feedback?
+                </label>
+                <div className="max-w-md mx-auto">
+                  <textarea
+                    value={feedback}
+                    onChange={(e) => {
+                      if (e.target.value.length <= maxChars) {
+                        setFeedback(e.target.value)
+                      }
+                    }}
+                    placeholder="Tell us what you think..."
+                    rows={3}
+                    maxLength={maxChars}
+                    className="w-full rounded-xl border border-[#FDFAF6]/10 bg-[#FDFAF6]/[0.04] px-4 py-3 font-jost text-sm text-[#FDFAF6] placeholder:text-[#FDFAF6]/20 focus:outline-none focus:border-champagne-gold/40 focus:ring-1 focus:ring-champagne-gold/20 transition-colors resize-none"
+                  />
+                  <div className="flex justify-end mt-1">
+                    <span
+                      className={`font-jost text-[10px] ${
+                        charCount > maxChars - 30
+                          ? 'text-[#B85C4A]'
+                          : 'text-[#FDFAF6]/20'
+                      }`}
+                    >
+                      {charCount}/{maxChars}
+                    </span>
+                  </div>
+                </div>
+              </motion.div>
+
+              {/* Submit Button */}
+              <motion.div
+                initial={{ opacity: 0, y: 15 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.4, delay: 0.5 }}
+                className="text-center pt-2"
+              >
+                <motion.button
+                  onClick={handleSubmit}
+                  disabled={!canSubmit}
+                  className={`
+                    inline-flex items-center gap-2.5 rounded-full px-8 py-3.5 font-jost text-sm font-semibold transition-colors duration-200
+                    ${canSubmit
+                      ? 'bg-champagne-gold text-white shadow-lg shadow-champagne-gold/20 hover:bg-champagne-gold/90'
+                      : 'bg-champagne-gold/20 text-champagne-gold/40 cursor-not-allowed'
+                    }
+                  `}
+                  whileHover={canSubmit ? { scale: 1.03 } : undefined}
+                  whileTap={canSubmit ? { scale: 0.97 } : undefined}
+                >
+                  <Send className="h-4 w-4" />
+                  Submit Feedback
+                </motion.button>
+                {!canSubmit && (
+                  <p className="font-jost text-[11px] text-[#FDFAF6]/20 mt-3">
+                    Please complete all required fields to submit
+                  </p>
+                )}
+              </motion.div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </div>
+    </section>
+  )
+}

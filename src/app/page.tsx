@@ -43,6 +43,9 @@ import LoyaltyRewards from '@/components/refresh-dental/loyalty-rewards'
 import ReviewsSummary from '@/components/refresh-dental/reviews-summary'
 import PatientJourneyMap from '@/components/refresh-dental/patient-journey-map'
 import VirtualTourCta from '@/components/refresh-dental/virtual-tour-cta'
+import OnlineBookingWidget from '@/components/refresh-dental/online-booking-widget'
+import LocationMapEnhanced from '@/components/refresh-dental/location-map-enhanced'
+import PageSurvey from '@/components/refresh-dental/page-survey'
 
 const LoadingScreen = dynamic(
   () => import('@/components/refresh-dental/loading-screen'),
@@ -85,10 +88,13 @@ export default function Home() {
         <InstagramFeed />
         <AwardsCertifications />
         <LoyaltyRewards />
+        <OnlineBookingWidget />
         <ReviewsSummary />
         <PatientJourneyMap />
+        <LocationMapEnhanced />
         <ContactSection />
         <VirtualTourCta />
+        <PageSurvey />
         <NewsletterCta />
       </main>
       <Footer />

@@ -1,8 +1,8 @@
 'use client'
 
-import { useState } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
-import { X, Clock, ArrowRight, CheckCircle } from 'lucide-react'
+import { useState, useRef, useEffect } from 'react'
+import { motion, AnimatePresence, useScroll, useTransform } from 'framer-motion'
+import { X, Clock, ArrowRight, CheckCircle, Star, Shield, Heart, Sparkles, Zap, Smile } from 'lucide-react'
 
 interface Service {
   name: string
@@ -393,7 +393,6 @@ const servicesData: Record<string, Service> = {
   },
 }
 
-// Default data for services without full detail
 const defaultService = (name: string, duration: string, category: string, desc: string): Service => ({
   name,
   duration,
@@ -414,6 +413,9 @@ const defaultService = (name: string, duration: string, category: string, desc: 
   who: 'Anyone seeking professional dental care in a comfortable, modern environment.',
 })
 
+// Benefit icons map for the icon grid
+const benefitIcons = [Sparkles, Shield, Heart, Star, Zap, Smile]
+
 interface ServiceDetailDrawerProps {
   serviceKey: string | null
   isOpen: boolean
@@ -422,6 +424,7 @@ interface ServiceDetailDrawerProps {
 
 export default function ServiceDetailDrawer({ serviceKey, isOpen, onClose }: ServiceDetailDrawerProps) {
   const [activeFaq, setActiveFaq] = useState<number | null>(null)
+  const drawerContentRef = useRef<HTMLDivElement>(null)
 
   if (!serviceKey) return null
 
@@ -449,124 +452,294 @@ export default function ServiceDetailDrawer({ serviceKey, isOpen, onClose }: Ser
             animate={{ x: 0 }}
             exit={{ x: '100%' }}
             transition={{ type: 'spring', damping: 30, stiffness: 300 }}
-            className="fixed top-0 right-0 z-[70] h-full w-full max-w-lg overflow-y-auto bg-ivory shadow-2xl"
+            className="fixed top-0 right-0 z-[70] h-full w-full max-w-lg overflow-hidden bg-ivory shadow-2xl"
           >
-            {/* Header */}
-            <div className="sticky top-0 z-10 flex items-center justify-between bg-ivory/95 backdrop-blur-sm px-6 py-4 border-b border-soft-border">
-              <div>
-                <span className="text-[10px] font-semibold uppercase tracking-[0.2em] text-champagne-gold">
-                  {service.category}
-                </span>
-                <h2 className="font-cormorant text-2xl text-espresso">{service.name}</h2>
-              </div>
-              <button
-                onClick={onClose}
-                className="flex h-10 w-10 items-center justify-center rounded-full border border-soft-border transition-colors hover:border-champagne-gold hover:text-champagne-gold"
-              >
-                <X className="h-5 w-5" />
-              </button>
-            </div>
+            {/* Parallax background gradient */}
+            <DrawerBackground />
 
-            <div className="px-6 py-8 space-y-10">
-              {/* Duration & Description */}
-              <div>
-                <div className="flex items-center gap-2 mb-4">
-                  <Clock className="h-4 w-4 text-sage-teal" />
-                  <span className="font-jost text-sm text-sage-teal">{service.duration}</span>
-                </div>
-                <p className="font-jost text-sm font-light leading-relaxed text-brown-warm">
-                  {service.longDesc}
-                </p>
-              </div>
-
-              {/* What to Expect */}
-              <div>
-                <h3 className="font-dm-serif text-xl text-espresso mb-4">What to Expect</h3>
-                <div className="space-y-3">
-                  {service.steps.map((step, i) => (
-                    <div key={i} className="flex gap-3">
-                      <div className="flex h-7 w-7 flex-shrink-0 items-center justify-center rounded-full bg-champagne-gold/10 text-xs font-semibold text-champagne-gold">
-                        {i + 1}
-                      </div>
-                      <p className="font-jost text-sm text-brown-warm/80 pt-1">{step}</p>
-                    </div>
-                  ))}
-                </div>
+            <div ref={drawerContentRef} className="relative h-full overflow-y-auto">
+              {/* Shimmer drawer handle/grip at top */}
+              <div className="sticky top-0 z-20 flex justify-center pt-3 pb-1 bg-ivory/90 backdrop-blur-sm">
+                <motion.div
+                  className="h-1 w-16 rounded-full overflow-hidden bg-champagne-gold/15 relative"
+                  aria-hidden="true"
+                >
+                  <motion.div
+                    className="absolute inset-0 rounded-full"
+                    style={{
+                      background: 'linear-gradient(90deg, transparent, #C9A96E, #E8D5B0, transparent)',
+                    }}
+                    animate={{
+                      x: ['-100%', '100%'],
+                    }}
+                    transition={{
+                      duration: 2,
+                      repeat: Infinity,
+                      ease: 'easeInOut',
+                      repeatDelay: 1,
+                    }}
+                  />
+                </motion.div>
               </div>
 
-              {/* Benefits */}
-              <div>
-                <h3 className="font-dm-serif text-xl text-espresso mb-4">Benefits</h3>
-                <div className="grid grid-cols-1 gap-2">
-                  {service.benefits.map((b, i) => (
-                    <div key={i} className="flex items-center gap-3">
-                      <CheckCircle className="h-4 w-4 text-sage-teal flex-shrink-0" />
-                      <span className="font-jost text-sm text-brown-warm/80">{b}</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-
-              {/* Who Is It For */}
-              <div className="bg-sand rounded-2xl p-6">
-                <h3 className="font-dm-serif text-xl text-espresso mb-2">Who Is This For?</h3>
-                <p className="font-jost text-sm font-light leading-relaxed text-brown-warm/80">
-                  {service.who}
-                </p>
-              </div>
-
-              {/* FAQs */}
-              {service.faqs.length > 0 && (
+              {/* Header */}
+              <div className="sticky top-5 z-10 flex items-center justify-between bg-ivory/95 backdrop-blur-sm px-6 py-4 border-b border-soft-border">
                 <div>
-                  <h3 className="font-dm-serif text-xl text-espresso mb-4">Questions</h3>
-                  <div className="space-y-2">
-                    {service.faqs.map((faq, i) => (
-                      <div key={i} className="rounded-xl border border-soft-border bg-white overflow-hidden">
-                        <button
-                          onClick={() => setActiveFaq(activeFaq === i ? null : i)}
-                          className="flex w-full items-center justify-between px-4 py-3 text-left"
-                        >
-                          <span className="pr-4 font-jost text-sm text-espresso">{faq.q}</span>
-                          <motion.span
-                            animate={{ rotate: activeFaq === i ? 45 : 0 }}
-                            className="text-champagne-gold text-lg flex-shrink-0"
-                          >
-                            +
-                          </motion.span>
-                        </button>
-                        <AnimatePresence>
-                          {activeFaq === i && (
-                            <motion.div
-                              initial={{ height: 0, opacity: 0 }}
-                              animate={{ height: 'auto', opacity: 1 }}
-                              exit={{ height: 0, opacity: 0 }}
-                              className="overflow-hidden"
-                            >
-                              <p className="px-4 pb-3 font-jost text-sm text-brown-warm/70">
-                                {faq.a}
-                              </p>
-                            </motion.div>
-                          )}
-                        </AnimatePresence>
-                      </div>
-                    ))}
-                  </div>
+                  <span className="text-[10px] font-semibold uppercase tracking-[0.2em] text-champagne-gold">
+                    {service.category}
+                  </span>
+                  <h2 className="font-cormorant text-2xl text-espresso">{service.name}</h2>
                 </div>
-              )}
+                <button
+                  onClick={onClose}
+                  className="flex h-10 w-10 items-center justify-center rounded-full border border-soft-border transition-colors hover:border-champagne-gold hover:text-champagne-gold"
+                >
+                  <X className="h-5 w-5" />
+                </button>
+              </div>
 
-              {/* CTA */}
-              <a
-                href="#contact"
-                onClick={onClose}
-                className="flex w-full items-center justify-center gap-2 rounded-xl bg-[#C9A96E] py-4 font-jost text-sm font-semibold uppercase tracking-wider text-white transition-all duration-300 hover:bg-[#b8964f] hover:shadow-lg"
-              >
-                Book This Service
-                <ArrowRight className="h-4 w-4" />
-              </a>
+              <div className="px-6 py-8 space-y-10">
+                {/* Duration & Description */}
+                <motion.div
+                  initial={{ opacity: 0, y: 12 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.1 }}
+                >
+                  <div className="flex items-center gap-2 mb-4">
+                    <Clock className="h-4 w-4 text-sage-teal" />
+                    <span className="font-jost text-sm text-sage-teal">{service.duration}</span>
+                  </div>
+                  <p className="font-jost text-sm font-light leading-relaxed text-brown-warm">
+                    {service.longDesc}
+                  </p>
+                </motion.div>
+
+                {/* What to Expect — Animated Step Indicators */}
+                <motion.div
+                  initial={{ opacity: 0, y: 12 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.2 }}
+                >
+                  <h3 className="font-dm-serif text-xl text-espresso mb-6">What to Expect</h3>
+                  <StepTimeline steps={service.steps} />
+                </motion.div>
+
+                {/* Benefits — Icon Grid with Staggered Reveal */}
+                <motion.div
+                  initial={{ opacity: 0, y: 12 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.3 }}
+                >
+                  <h3 className="font-dm-serif text-xl text-espresso mb-4">Benefits</h3>
+                  <div className="grid grid-cols-2 gap-3">
+                    {service.benefits.map((b, i) => {
+                      const IconComponent = benefitIcons[i % benefitIcons.length]
+                      return (
+                        <motion.div
+                          key={i}
+                          initial={{ opacity: 0, y: 16, scale: 0.95 }}
+                          animate={{ opacity: 1, y: 0, scale: 1 }}
+                          transition={{
+                            duration: 0.4,
+                            delay: 0.35 + i * 0.08,
+                            ease: [0.25, 0.46, 0.45, 0.94],
+                          }}
+                          className="flex items-start gap-2.5 rounded-xl border border-soft-border bg-white p-3.5"
+                        >
+                          <div className="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-lg bg-champagne-gold/10">
+                            <IconComponent className="h-4 w-4 text-champagne-gold" />
+                          </div>
+                          <span className="font-jost text-xs text-brown-warm/80 leading-relaxed pt-1">
+                            {b}
+                          </span>
+                        </motion.div>
+                      )
+                    })}
+                  </div>
+                </motion.div>
+
+                {/* Who Is It For */}
+                <motion.div
+                  initial={{ opacity: 0, y: 12 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.5 }}
+                  className="bg-sand rounded-2xl p-6"
+                >
+                  <h3 className="font-dm-serif text-xl text-espresso mb-2">Who Is This For?</h3>
+                  <p className="font-jost text-sm font-light leading-relaxed text-brown-warm/80">
+                    {service.who}
+                  </p>
+                </motion.div>
+
+                {/* FAQs */}
+                {service.faqs.length > 0 && (
+                  <motion.div
+                    initial={{ opacity: 0, y: 12 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.55 }}
+                  >
+                    <h3 className="font-dm-serif text-xl text-espresso mb-4">Questions</h3>
+                    <div className="space-y-2">
+                      {service.faqs.map((faq, i) => (
+                        <div key={i} className="rounded-xl border border-soft-border bg-white overflow-hidden">
+                          <button
+                            onClick={() => setActiveFaq(activeFaq === i ? null : i)}
+                            className="flex w-full items-center justify-between px-4 py-3 text-left"
+                          >
+                            <span className="pr-4 font-jost text-sm text-espresso">{faq.q}</span>
+                            <motion.span
+                              animate={{ rotate: activeFaq === i ? 45 : 0 }}
+                              className="text-champagne-gold text-lg flex-shrink-0"
+                            >
+                              +
+                            </motion.span>
+                          </button>
+                          <AnimatePresence>
+                            {activeFaq === i && (
+                              <motion.div
+                                initial={{ height: 0, opacity: 0 }}
+                                animate={{ height: 'auto', opacity: 1 }}
+                                exit={{ height: 0, opacity: 0 }}
+                                className="overflow-hidden"
+                              >
+                                <p className="px-4 pb-3 font-jost text-sm text-brown-warm/70">
+                                  {faq.a}
+                                </p>
+                              </motion.div>
+                            )}
+                          </AnimatePresence>
+                        </div>
+                      ))}
+                    </div>
+                  </motion.div>
+                )}
+
+                {/* Pulsing "Book Now" CTA */}
+                <motion.div
+                  initial={{ opacity: 0, y: 12 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.6 }}
+                  className="pb-8"
+                >
+                  <motion.a
+                    href="#contact"
+                    onClick={onClose}
+                    animate={{
+                      boxShadow: [
+                        '0 0 0 0 rgba(201, 169, 110, 0.4)',
+                        '0 0 0 10px rgba(201, 169, 110, 0)',
+                        '0 0 0 0 rgba(201, 169, 110, 0)',
+                      ],
+                    }}
+                    transition={{
+                      duration: 2,
+                      repeat: Infinity,
+                      ease: 'easeInOut',
+                    }}
+                    whileHover={{ scale: 1.02, boxShadow: '0 8px 30px -4px rgba(201, 169, 110, 0.4)' }}
+                    whileTap={{ scale: 0.98 }}
+                    className="flex w-full items-center justify-center gap-2 rounded-xl bg-[#C9A96E] py-4 font-jost text-sm font-semibold uppercase tracking-wider text-white transition-all duration-300 hover:bg-[#b8964f]"
+                  >
+                    Book This Service
+                    <ArrowRight className="h-4 w-4" />
+                  </motion.a>
+                </motion.div>
+              </div>
             </div>
           </motion.div>
         </>
       )}
     </AnimatePresence>
+  )
+}
+
+// Step Timeline with animated circles connected by line
+function StepTimeline({ steps }: { steps: string[] }) {
+  return (
+    <div className="relative space-y-0">
+      {steps.map((step, i) => (
+        <motion.div
+          key={i}
+          initial={{ opacity: 0, x: -12 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.4, delay: 0.25 + i * 0.1 }}
+          className="relative flex gap-4"
+        >
+          {/* Circle + connecting line */}
+          <div className="flex flex-col items-center">
+            <motion.div
+              initial={{ scale: 0, backgroundColor: 'rgba(201, 169, 110, 0.1)' }}
+              animate={{ scale: 1, backgroundColor: '#C9A96E' }}
+              transition={{ duration: 0.3, delay: 0.3 + i * 0.1, ease: 'easeOut' }}
+              className="flex h-7 w-7 flex-shrink-0 items-center justify-center rounded-full"
+            >
+              <motion.span
+                initial={{ color: '#C9A96E' }}
+                animate={{ color: '#FFFFFF' }}
+                transition={{ duration: 0.3, delay: 0.4 + i * 0.1 }}
+                className="text-xs font-semibold font-jost"
+              >
+                {i + 1}
+              </motion.span>
+            </motion.div>
+            {/* Connecting line */}
+            {i < steps.length - 1 && (
+              <motion.div
+                initial={{ scaleY: 0 }}
+                animate={{ scaleY: 1 }}
+                transition={{ duration: 0.4, delay: 0.4 + i * 0.1, ease: 'easeOut' }}
+                className="w-[2px] flex-1 min-h-[24px] bg-gradient-to-b from-champagne-gold to-champagne-gold/20 origin-top"
+              />
+            )}
+          </div>
+          <div className="pb-6">
+            <p className="font-jost text-sm text-brown-warm/80 pt-0.5">{step}</p>
+          </div>
+        </motion.div>
+      ))}
+    </div>
+  )
+}
+
+// Subtle parallax background gradient for the drawer
+function DrawerBackground() {
+  return (
+    <div
+      className="absolute inset-0 z-[0] pointer-events-none"
+      aria-hidden="true"
+    >
+      {/* Top-left subtle gold glow */}
+      <motion.div
+        className="absolute -top-32 -left-32 w-64 h-64 rounded-full"
+        style={{
+          background: 'radial-gradient(circle, rgba(201, 169, 110, 0.08) 0%, transparent 70%)',
+        }}
+        animate={{
+          y: [0, -15, 0],
+          x: [0, 10, 0],
+        }}
+        transition={{
+          duration: 8,
+          repeat: Infinity,
+          ease: 'easeInOut',
+        }}
+      />
+      {/* Bottom-right subtle teal glow */}
+      <motion.div
+        className="absolute -bottom-48 -right-48 w-80 h-80 rounded-full"
+        style={{
+          background: 'radial-gradient(circle, rgba(61, 125, 110, 0.05) 0%, transparent 70%)',
+        }}
+        animate={{
+          y: [0, 12, 0],
+          x: [0, -8, 0],
+        }}
+        transition={{
+          duration: 10,
+          repeat: Infinity,
+          ease: 'easeInOut',
+        }}
+      />
+    </div>
   )
 }

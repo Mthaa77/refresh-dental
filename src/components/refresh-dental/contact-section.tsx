@@ -20,8 +20,26 @@ export default function ContactSection() {
   const pathProgress = useTransform(scrollYProgress, [0, 1], [0, 1])
 
   return (
-    <section id="contact" className="bg-ivory py-20 md:py-28">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <section id="contact" className="relative bg-ivory py-20 md:py-28 overflow-hidden">
+      {/* Grain texture overlay on section background */}
+      <svg
+        className="absolute inset-0 w-full h-full pointer-events-none z-[1]"
+        aria-hidden="true"
+        style={{ mixBlendMode: 'overlay', opacity: 0.03 }}
+      >
+        <filter id="grain-filter-contact-section">
+          <feTurbulence
+            type="fractalNoise"
+            baseFrequency="0.8"
+            numOctaves="4"
+            stitchTiles="stitch"
+          />
+          <feColorMatrix type="saturate" values="0" />
+        </filter>
+        <rect width="100%" height="100%" filter="url(#grain-filter-contact-section)" />
+      </svg>
+
+      <div className="relative z-[2] mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -99,24 +117,82 @@ export default function ContactSection() {
         <div className="grid grid-cols-1 lg:grid-cols-5 gap-12 lg:gap-10">
           {/* Left Column — Map + Contact Info (2 cols) */}
           <div className="lg:col-span-2 space-y-8">
-            {/* Google Maps */}
+            {/* "Visit Us" subheading with pulsing gold dot */}
+            <motion.div
+              initial={{ opacity: 0, x: -12 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, margin: '-80px' }}
+              transition={{ duration: 0.5 }}
+              className="flex items-center gap-2.5"
+            >
+              {/* Pulsing gold dot */}
+              <motion.div
+                className="relative flex items-center justify-center"
+                aria-hidden="true"
+              >
+                <motion.span
+                  className="block h-2.5 w-2.5 rounded-full bg-champagne-gold"
+                  animate={{
+                    scale: [1, 1.4, 1],
+                    opacity: [0.7, 1, 0.7],
+                  }}
+                  transition={{
+                    duration: 2,
+                    repeat: Infinity,
+                    ease: 'easeInOut',
+                  }}
+                />
+                <motion.span
+                  className="absolute block h-2.5 w-2.5 rounded-full bg-champagne-gold/30"
+                  animate={{
+                    scale: [1, 2.2, 1],
+                    opacity: [0.4, 0, 0.4],
+                  }}
+                  transition={{
+                    duration: 2,
+                    repeat: Infinity,
+                    ease: 'easeInOut',
+                  }}
+                />
+              </motion.div>
+              <h3 className="font-dm-serif text-lg text-espresso">Visit Us</h3>
+            </motion.div>
+
+            {/* Google Maps with animated gradient border */}
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: '-100px' }}
               transition={{ duration: 0.6, ease: 'easeOut' }}
-              className="rounded-2xl overflow-hidden shadow-sm border border-soft-border h-[300px]"
+              className="relative p-[2px] rounded-2xl"
             >
-              <iframe
-                src="https://maps.google.com/maps?q=153+River+Road,+Centurion,+Pretoria+0157&output=embed"
-                width="100%"
-                height="100%"
-                style={{ border: 0 }}
-                allowFullScreen
-                loading="lazy"
-                referrerPolicy="no-referrer-when-downgrade"
-                title="Refresh Dental Location"
+              {/* Animated gradient border — champagne-gold to gold-light sweep */}
+              <motion.div
+                className="absolute inset-0 rounded-2xl"
+                style={{
+                  background: 'conic-gradient(from 0deg, #C9A96E, #E8D5B0, #C9A96E, #E8D5B0, #C9A96E)',
+                }}
+                animate={{ rotate: 360 }}
+                transition={{
+                  duration: 8,
+                  repeat: Infinity,
+                  ease: 'linear',
+                }}
+                aria-hidden="true"
               />
+              {/* Inner mask to create border effect */}
+              <div className="relative z-[1] rounded-2xl overflow-hidden h-[300px] bg-white">
+                <iframe
+                  src="https://maps.google.com/maps?q=153+River+Road,+Centurion,+Pretoria+0157&output=embed"
+                  width="100%"
+                  height="100%"
+                  style={{ border: 0 }}
+                  allowFullScreen
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                  title="Refresh Dental Location"
+                />
+              </div>
             </motion.div>
 
             {/* Trading Hours Widget */}
@@ -337,6 +413,95 @@ export default function ContactSection() {
             className="lg:col-span-3"
           >
             <div className="relative overflow-hidden rounded-2xl border border-soft-border bg-white p-6 md:p-8 shadow-sm">
+              {/* Animated corner brackets (gold SVG) */}
+              {/* Top-left corner bracket */}
+              <motion.svg
+                className="absolute top-3 left-3 z-[2] pointer-events-none"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                initial={{ opacity: 0, pathLength: 0 }}
+                whileInView={{ opacity: 1, pathLength: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.8, delay: 0.3 }}
+                aria-hidden="true"
+              >
+                <motion.path
+                  d="M2 2 L2 12 L12 12"
+                  stroke="#C9A96E"
+                  strokeWidth="1.5"
+                  strokeLinecap="round"
+                  initial={{ pathLength: 0 }}
+                  whileInView={{ pathLength: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 1, delay: 0.4, ease: 'easeOut' }}
+                />
+              </motion.svg>
+
+              {/* Top-right corner bracket */}
+              <motion.svg
+                className="absolute top-3 right-3 z-[2] pointer-events-none"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                aria-hidden="true"
+              >
+                <motion.path
+                  d="M22 2 L22 12 L12 12"
+                  stroke="#C9A96E"
+                  strokeWidth="1.5"
+                  strokeLinecap="round"
+                  initial={{ pathLength: 0 }}
+                  whileInView={{ pathLength: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 1, delay: 0.5, ease: 'easeOut' }}
+                />
+              </motion.svg>
+
+              {/* Bottom-left corner bracket */}
+              <motion.svg
+                className="absolute bottom-3 left-3 z-[2] pointer-events-none"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                aria-hidden="true"
+              >
+                <motion.path
+                  d="M2 22 L2 12 L12 12"
+                  stroke="#C9A96E"
+                  strokeWidth="1.5"
+                  strokeLinecap="round"
+                  initial={{ pathLength: 0 }}
+                  whileInView={{ pathLength: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 1, delay: 0.6, ease: 'easeOut' }}
+                />
+              </motion.svg>
+
+              {/* Bottom-right corner bracket */}
+              <motion.svg
+                className="absolute bottom-3 right-3 z-[2] pointer-events-none"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                aria-hidden="true"
+              >
+                <motion.path
+                  d="M22 22 L22 12 L12 12"
+                  stroke="#C9A96E"
+                  strokeWidth="1.5"
+                  strokeLinecap="round"
+                  initial={{ pathLength: 0 }}
+                  whileInView={{ pathLength: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 1, delay: 0.7, ease: 'easeOut' }}
+                />
+              </motion.svg>
+
               {/* Paper texture overlay (SVG noise, mix-blend-overlay, 2% opacity) */}
               <svg
                 className="absolute inset-0 w-full h-full pointer-events-none z-[1]"

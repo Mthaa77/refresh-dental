@@ -16,7 +16,7 @@ const serviceOptions = [
   'Dental Prosthesis',
   'Crowns and Veneers',
   'Fixed Dental Prosthesis',
-  'Fillers and Neurotoxins',
+  'Fillers & Neurotoxins',
   'Other / Not Sure',
 ]
 
@@ -32,6 +32,7 @@ export default function ContactForm() {
   })
   const [submitted, setSubmitted] = useState(false)
   const [loading, setLoading] = useState(false)
+  const [focusedField, setFocusedField] = useState<string | null>(null)
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>
@@ -81,6 +82,9 @@ export default function ContactForm() {
     },
   }
 
+  const inputClassName =
+    'w-full rounded-xl border border-soft-border bg-white py-3 pl-10 pr-4 font-jost text-sm text-espresso placeholder:text-sand-muted/60 outline-none transition-all focus:border-champagne-gold focus:ring-2 focus:ring-champagne-gold/10'
+
   if (submitted) {
     return (
       <motion.div
@@ -127,7 +131,20 @@ export default function ContactForm() {
             required
             value={formData.firstName}
             onChange={handleChange}
-            className="w-full rounded-xl border border-soft-border bg-white py-3 pl-10 pr-4 font-jost text-sm text-espresso placeholder:text-sand-muted/60 outline-none transition-all focus:border-champagne-gold focus:ring-2 focus:ring-champagne-gold/10"
+            onFocus={() => setFocusedField('firstName')}
+            onBlur={() => setFocusedField(null)}
+            className={inputClassName}
+          />
+          {/* Gold underline on focus */}
+          <motion.div
+            className="absolute bottom-0 left-3 right-3 h-[2px] rounded-full bg-gradient-to-r from-champagne-gold via-gold-light to-champagne-gold"
+            initial={{ scaleX: 0, opacity: 0 }}
+            animate={{
+              scaleX: focusedField === 'firstName' ? 1 : 0,
+              opacity: focusedField === 'firstName' ? 1 : 0,
+            }}
+            transition={{ duration: 0.3, ease: [0.25, 0.46, 0.45, 0.94] }}
+            style={{ transformOrigin: 'left' }}
           />
         </div>
         <div className="relative">
@@ -139,7 +156,19 @@ export default function ContactForm() {
             required
             value={formData.lastName}
             onChange={handleChange}
-            className="w-full rounded-xl border border-soft-border bg-white py-3 pl-10 pr-4 font-jost text-sm text-espresso placeholder:text-sand-muted/60 outline-none transition-all focus:border-champagne-gold focus:ring-2 focus:ring-champagne-gold/10"
+            onFocus={() => setFocusedField('lastName')}
+            onBlur={() => setFocusedField(null)}
+            className={inputClassName}
+          />
+          <motion.div
+            className="absolute bottom-0 left-3 right-3 h-[2px] rounded-full bg-gradient-to-r from-champagne-gold via-gold-light to-champagne-gold"
+            initial={{ scaleX: 0, opacity: 0 }}
+            animate={{
+              scaleX: focusedField === 'lastName' ? 1 : 0,
+              opacity: focusedField === 'lastName' ? 1 : 0,
+            }}
+            transition={{ duration: 0.3, ease: [0.25, 0.46, 0.45, 0.94] }}
+            style={{ transformOrigin: 'left' }}
           />
         </div>
       </motion.div>
@@ -155,7 +184,19 @@ export default function ContactForm() {
             required
             value={formData.email}
             onChange={handleChange}
-            className="w-full rounded-xl border border-soft-border bg-white py-3 pl-10 pr-4 font-jost text-sm text-espresso placeholder:text-sand-muted/60 outline-none transition-all focus:border-champagne-gold focus:ring-2 focus:ring-champagne-gold/10"
+            onFocus={() => setFocusedField('email')}
+            onBlur={() => setFocusedField(null)}
+            className={inputClassName}
+          />
+          <motion.div
+            className="absolute bottom-0 left-3 right-3 h-[2px] rounded-full bg-gradient-to-r from-champagne-gold via-gold-light to-champagne-gold"
+            initial={{ scaleX: 0, opacity: 0 }}
+            animate={{
+              scaleX: focusedField === 'email' ? 1 : 0,
+              opacity: focusedField === 'email' ? 1 : 0,
+            }}
+            transition={{ duration: 0.3, ease: [0.25, 0.46, 0.45, 0.94] }}
+            style={{ transformOrigin: 'left' }}
           />
         </div>
         <div className="relative">
@@ -166,29 +207,55 @@ export default function ContactForm() {
             placeholder="Phone Number"
             value={formData.phone}
             onChange={handleChange}
-            className="w-full rounded-xl border border-soft-border bg-white py-3 pl-10 pr-4 font-jost text-sm text-espresso placeholder:text-sand-muted/60 outline-none transition-all focus:border-champagne-gold focus:ring-2 focus:ring-champagne-gold/10"
+            onFocus={() => setFocusedField('phone')}
+            onBlur={() => setFocusedField(null)}
+            className={inputClassName}
+          />
+          <motion.div
+            className="absolute bottom-0 left-3 right-3 h-[2px] rounded-full bg-gradient-to-r from-champagne-gold via-gold-light to-champagne-gold"
+            initial={{ scaleX: 0, opacity: 0 }}
+            animate={{
+              scaleX: focusedField === 'phone' ? 1 : 0,
+              opacity: focusedField === 'phone' ? 1 : 0,
+            }}
+            transition={{ duration: 0.3, ease: [0.25, 0.46, 0.45, 0.94] }}
+            style={{ transformOrigin: 'left' }}
           />
         </div>
       </motion.div>
 
       {/* Service Select */}
       <motion.div variants={itemVariants}>
-        <select
-          name="service"
-          value={formData.service}
-          onChange={handleChange}
-          required
-          className="w-full appearance-none rounded-xl border border-soft-border bg-white py-3 px-4 font-jost text-sm text-espresso outline-none transition-all focus:border-champagne-gold focus:ring-2 focus:ring-champagne-gold/10 [&>option]:text-espresso [&>option]:font-jost"
-        >
-          <option value="" disabled>
-            Select a Service
-          </option>
-          {serviceOptions.map((s) => (
-            <option key={s} value={s}>
-              {s}
+        <div className="relative">
+          <select
+            name="service"
+            value={formData.service}
+            onChange={handleChange}
+            onFocus={() => setFocusedField('service')}
+            onBlur={() => setFocusedField(null)}
+            required
+            className="w-full appearance-none rounded-xl border border-soft-border bg-white py-3 px-4 font-jost text-sm text-espresso outline-none transition-all focus:border-champagne-gold focus:ring-2 focus:ring-champagne-gold/10 [&>option]:text-espresso [&>option]:font-jost"
+          >
+            <option value="" disabled>
+              Select a Service
             </option>
-          ))}
-        </select>
+            {serviceOptions.map((s) => (
+              <option key={s} value={s}>
+                {s}
+              </option>
+            ))}
+          </select>
+          <motion.div
+            className="absolute bottom-0 left-3 right-3 h-[2px] rounded-full bg-gradient-to-r from-champagne-gold via-gold-light to-champagne-gold"
+            initial={{ scaleX: 0, opacity: 0 }}
+            animate={{
+              scaleX: focusedField === 'service' ? 1 : 0,
+              opacity: focusedField === 'service' ? 1 : 0,
+            }}
+            transition={{ duration: 0.3, ease: [0.25, 0.46, 0.45, 0.94] }}
+            style={{ transformOrigin: 'left' }}
+          />
+        </div>
       </motion.div>
 
       {/* Preferred Date */}
@@ -200,7 +267,19 @@ export default function ContactForm() {
             name="preferredDate"
             value={formData.preferredDate}
             onChange={handleChange}
-            className="w-full rounded-xl border border-soft-border bg-white py-3 pl-10 pr-4 font-jost text-sm text-espresso outline-none transition-all focus:border-champagne-gold focus:ring-2 focus:ring-champagne-gold/10"
+            onFocus={() => setFocusedField('preferredDate')}
+            onBlur={() => setFocusedField(null)}
+            className={inputClassName}
+          />
+          <motion.div
+            className="absolute bottom-0 left-3 right-3 h-[2px] rounded-full bg-gradient-to-r from-champagne-gold via-gold-light to-champagne-gold"
+            initial={{ scaleX: 0, opacity: 0 }}
+            animate={{
+              scaleX: focusedField === 'preferredDate' ? 1 : 0,
+              opacity: focusedField === 'preferredDate' ? 1 : 0,
+            }}
+            transition={{ duration: 0.3, ease: [0.25, 0.46, 0.45, 0.94] }}
+            style={{ transformOrigin: 'left' }}
           />
         </div>
       </motion.div>
@@ -215,7 +294,19 @@ export default function ContactForm() {
             rows={4}
             value={formData.message}
             onChange={handleChange}
+            onFocus={() => setFocusedField('message')}
+            onBlur={() => setFocusedField(null)}
             className="w-full resize-none rounded-xl border border-soft-border bg-white py-3 pl-10 pr-4 font-jost text-sm text-espresso placeholder:text-sand-muted/60 outline-none transition-all focus:border-champagne-gold focus:ring-2 focus:ring-champagne-gold/10"
+          />
+          <motion.div
+            className="absolute bottom-0 left-3 right-3 h-[2px] rounded-full bg-gradient-to-r from-champagne-gold via-gold-light to-champagne-gold"
+            initial={{ scaleX: 0, opacity: 0 }}
+            animate={{
+              scaleX: focusedField === 'message' ? 1 : 0,
+              opacity: focusedField === 'message' ? 1 : 0,
+            }}
+            transition={{ duration: 0.3, ease: [0.25, 0.46, 0.45, 0.94] }}
+            style={{ transformOrigin: 'left' }}
           />
         </div>
       </motion.div>

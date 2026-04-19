@@ -138,7 +138,7 @@ export default function GallerySection() {
         </motion.div>
 
         {/* Gallery Grid Container with parallax */}
-        <div className="relative">
+        <div className="relative overflow-hidden">
           {/* Decorative "Our Practice" watermark */}
           <div className="pointer-events-none absolute inset-0 flex items-center justify-center overflow-hidden">
             <span className="font-cormorant text-[clamp(6rem,15vw,14rem)] font-medium text-ivory/5 select-none -rotate-6 whitespace-nowrap">
