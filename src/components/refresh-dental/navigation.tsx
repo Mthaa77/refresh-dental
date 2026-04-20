@@ -222,9 +222,9 @@ export default function Navigation() {
               Book Appointment
             </motion.a>
 
-            {/* Hamburger — visible on mobile */}
+            {/* Hamburger — visible on mobile, 44px touch target */}
             <button
-              className="relative z-[60] md:hidden"
+              className="relative z-[60] flex h-11 w-11 items-center justify-center md:hidden"
               onClick={() => setMobileOpen(!mobileOpen)}
               aria-label={mobileOpen ? 'Close menu' : 'Open menu'}
             >
@@ -321,7 +321,7 @@ export default function Navigation() {
             {/* Phone badge */}
             <motion.a
               href="tel:+27614164649"
-              className="mb-4 flex items-center gap-2 rounded-full border border-champagne-gold/20 bg-champagne-gold/10 px-4 py-2 font-jost text-sm text-champagne-gold"
+              className="mb-4 flex min-h-[44px] items-center gap-2 rounded-full border border-champagne-gold/20 bg-champagne-gold/10 px-5 py-2.5 font-jost text-sm text-champagne-gold"
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.4, delay: 0.35 }}
@@ -354,7 +354,7 @@ export default function Navigation() {
                     <a
                       href={link.href}
                       onClick={(e) => handleNavClick(e, link.href)}
-                      className={`relative block pl-4 font-cormorant text-4xl font-light tracking-wide transition-colors duration-300 hover:text-gold-light ${
+                      className={`relative block min-h-[44px] cursor-pointer pl-4 font-cormorant text-4xl font-light leading-[44px] tracking-wide transition-colors duration-300 hover:text-gold-light ${
                         isActive ? 'text-gold-light' : 'text-champagne-gold'
                       }`}
                     >
@@ -415,7 +415,7 @@ export default function Navigation() {
                   aria-label={social.label}
                   whileHover={{ scale: 1.15 }}
                   transition={{ duration: 0.25 }}
-                  className="flex h-9 w-9 items-center justify-center rounded-full border border-ivory/20 text-ivory/55 transition-colors duration-300 hover:border-champagne-gold/30 hover:text-champagne-gold"
+                  className="flex h-11 w-11 items-center justify-center rounded-full border border-ivory/20 text-ivory/55 transition-colors duration-300 hover:border-champagne-gold/30 hover:text-champagne-gold"
                 >
                   <social.icon className="h-4 w-4" />
                 </motion.a>

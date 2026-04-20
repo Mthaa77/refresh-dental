@@ -83,7 +83,7 @@ export default function ContactForm() {
   }
 
   const inputClassName =
-    'w-full rounded-xl border border-soft-border bg-white py-3 pl-10 pr-4 font-jost text-sm text-espresso placeholder:text-sand-muted/60 outline-none transition-all focus:border-champagne-gold focus:ring-2 focus:ring-champagne-gold/10'
+    'w-full rounded-xl border border-soft-border bg-white py-3.5 pl-10 pr-4 font-jost text-sm text-espresso placeholder:text-sand-muted/60 outline-none transition-all focus:border-champagne-gold focus:ring-2 focus:ring-champagne-gold/10'
 
   if (submitted) {
     return (
@@ -123,7 +123,7 @@ export default function ContactForm() {
       {/* Name Row */}
       <motion.div variants={itemVariants} className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div className="relative">
-          <User className="absolute left-3 top-3.5 h-4 w-4 text-sand-muted" />
+          <User className="absolute left-3 top-4 h-4 w-4 text-sand-muted" />
           <input
             type="text"
             name="firstName"
@@ -148,7 +148,7 @@ export default function ContactForm() {
           />
         </div>
         <div className="relative">
-          <User className="absolute left-3 top-3.5 h-4 w-4 text-sand-muted" />
+          <User className="absolute left-3 top-4 h-4 w-4 text-sand-muted" />
           <input
             type="text"
             name="lastName"
@@ -176,7 +176,7 @@ export default function ContactForm() {
       {/* Email & Phone */}
       <motion.div variants={itemVariants} className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div className="relative">
-          <Mail className="absolute left-3 top-3.5 h-4 w-4 text-sand-muted" />
+          <Mail className="absolute left-3 top-4 h-4 w-4 text-sand-muted" />
           <input
             type="email"
             name="email"
@@ -200,7 +200,7 @@ export default function ContactForm() {
           />
         </div>
         <div className="relative">
-          <Phone className="absolute left-3 top-3.5 h-4 w-4 text-sand-muted" />
+          <Phone className="absolute left-3 top-4 h-4 w-4 text-sand-muted" />
           <input
             type="tel"
             name="phone"
@@ -234,7 +234,7 @@ export default function ContactForm() {
             onFocus={() => setFocusedField('service')}
             onBlur={() => setFocusedField(null)}
             required
-            className="w-full appearance-none rounded-xl border border-soft-border bg-white py-3 px-4 font-jost text-sm text-espresso outline-none transition-all focus:border-champagne-gold focus:ring-2 focus:ring-champagne-gold/10 [&>option]:text-espresso [&>option]:font-jost"
+            className="w-full appearance-none rounded-xl border border-soft-border bg-white py-3.5 px-4 font-jost text-sm text-espresso outline-none transition-all focus:border-champagne-gold focus:ring-2 focus:ring-champagne-gold/10 [&>option]:text-espresso [&>option]:font-jost"
           >
             <option value="" disabled>
               Select a Service
@@ -261,7 +261,7 @@ export default function ContactForm() {
       {/* Preferred Date */}
       <motion.div variants={itemVariants}>
         <div className="relative">
-          <Calendar className="absolute left-3 top-3.5 h-4 w-4 text-sand-muted" />
+          <Calendar className="absolute left-3 top-4 h-4 w-4 text-sand-muted" />
           <input
             type="date"
             name="preferredDate"
@@ -287,7 +287,7 @@ export default function ContactForm() {
       {/* Message */}
       <motion.div variants={itemVariants}>
         <div className="relative">
-          <MessageSquare className="absolute left-3 top-3.5 h-4 w-4 text-sand-muted" />
+          <MessageSquare className="absolute left-3 top-4 h-4 w-4 text-sand-muted" />
           <textarea
             name="message"
             placeholder="Tell us about your concern or what you need..."
@@ -296,7 +296,7 @@ export default function ContactForm() {
             onChange={handleChange}
             onFocus={() => setFocusedField('message')}
             onBlur={() => setFocusedField(null)}
-            className="w-full resize-none rounded-xl border border-soft-border bg-white py-3 pl-10 pr-4 font-jost text-sm text-espresso placeholder:text-sand-muted/60 outline-none transition-all focus:border-champagne-gold focus:ring-2 focus:ring-champagne-gold/10"
+            className="w-full resize-none rounded-xl border border-soft-border bg-white py-3.5 pl-10 pr-4 font-jost text-sm text-espresso placeholder:text-sand-muted/60 outline-none transition-all focus:border-champagne-gold focus:ring-2 focus:ring-champagne-gold/10"
           />
           <motion.div
             className="absolute bottom-0 left-3 right-3 h-[2px] rounded-full bg-gradient-to-r from-champagne-gold via-gold-light to-champagne-gold"
@@ -316,7 +316,7 @@ export default function ContactForm() {
         <button
           type="submit"
           disabled={loading}
-          className="group flex w-full items-center justify-center gap-2 rounded-xl bg-[#B89830] py-3.5 font-jost text-sm font-semibold uppercase tracking-wider text-white transition-all duration-300 hover:bg-[#A07D1A] hover:shadow-lg hover:shadow-champagne-gold/20 disabled:opacity-60 disabled:cursor-not-allowed"
+          className="group flex w-full min-h-[44px] items-center justify-center gap-2 rounded-xl bg-[#B89830] py-4 font-jost text-sm font-semibold uppercase tracking-wider text-white transition-all duration-300 hover:bg-[#A07D1A] hover:shadow-lg hover:shadow-champagne-gold/20 disabled:opacity-60 disabled:cursor-not-allowed"
         >
           {loading ? (
             <motion.div

@@ -96,9 +96,9 @@ function ServiceCard({ service, idx, onSelect }: { service: typeof services[numb
       variants={cardVariants}
       layout
       onClick={() => onSelect(service.name)}
-      className={`${service.span} group cursor-pointer overflow-hidden rounded-2xl bg-white shadow-premium shadow-inner-gold ${
+      className={`${isLarge ? 'sm:col-span-2 sm:row-span-2' : ''} group cursor-pointer overflow-hidden rounded-2xl bg-white shadow-premium shadow-inner-gold ${
         isLarge
-          ? "relative min-h-[280px] sm:min-h-[320px] md:min-h-[360px] shadow-elevated"
+          ? "relative min-h-[220px] sm:min-h-[320px] md:min-h-[360px] shadow-elevated"
           : "min-h-[160px] md:min-h-[180px]"
       }`}
       style={{
@@ -173,7 +173,7 @@ function ServiceCard({ service, idx, onSelect }: { service: typeof services[numb
         )
       })()}
 
-      <div className="relative flex h-full flex-col justify-between p-5 md:p-6 z-[15]">
+      <div className="relative flex h-full flex-col justify-between p-4 sm:p-5 md:p-6 z-[15]">
         {/* Top content */}
         <div>
           {/* Duration Badge + Category Badge */}
@@ -269,7 +269,7 @@ export default function ServicesGrid() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-60px" }}
           transition={{ duration: 0.5, delay: 0.15 }}
-          className="mb-12 flex flex-wrap justify-center gap-2"
+          className="mb-12 flex gap-2 overflow-x-auto scrollbar-hide px-4 -mx-4 sm:flex-wrap sm:justify-center sm:overflow-visible sm:px-0 sm:mx-0"
         >
           {categories.map((cat) => (
             <motion.button
@@ -277,7 +277,7 @@ export default function ServicesGrid() {
               onClick={() => setActiveCategory(cat)}
               whileHover={{ scale: 1.04 }}
               whileTap={{ scale: 0.97 }}
-              className={`rounded-full px-5 py-2.5 text-xs font-semibold uppercase tracking-wider transition-all duration-300 ${
+              className={`shrink-0 rounded-full px-5 py-3 text-xs font-semibold uppercase tracking-wider transition-all duration-300 sm:shrink ${
                 activeCategory === cat
                   ? "chrome-gold-bg text-white shadow-gold-strong"
                   : "bg-white/70 backdrop-blur-sm border border-soft-border text-brown-warm hover:bg-champagne-gold/10 hover:text-espresso hover:border-champagne-gold/30"

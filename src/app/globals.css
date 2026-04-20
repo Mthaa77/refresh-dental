@@ -117,6 +117,8 @@
   body {
     @apply bg-ivory text-espresso;
     font-weight: 400;
+    overflow-x: hidden;
+    position: relative;
   }
   html {
     scroll-behavior: smooth;
@@ -524,4 +526,112 @@
 /* Blue-red gradient divider */
 .accent-divider {
   background: linear-gradient(90deg, transparent, rgba(59, 111, 160, 0.3), rgba(184, 152, 48, 0.4), rgba(166, 61, 64, 0.3), transparent);
+}
+
+/* ============================================
+   MOBILE OPTIMIZATIONS
+   ============================================ */
+
+/* Safe area insets for notched devices */
+.safe-area-top { padding-top: env(safe-area-inset-top); }
+.safe-area-bottom { padding-bottom: env(safe-area-inset-bottom); }
+.safe-area-left { padding-left: env(safe-area-inset-left); }
+.safe-area-right { padding-right: env(safe-area-inset-right); }
+
+/* Touch target minimum sizing */
+.touch-target {
+  min-width: 44px;
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Prevent text size adjust on orientation change */
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+/* Improve tap highlight on mobile */
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Smooth scrolling with momentum on iOS */
+.scroll-smooth-ios {
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Prevent pull-to-refresh on horizontal scroll areas */
+.no-pull-refresh {
+  overscroll-behavior-x: contain;
+}
+
+/* Fix iOS viewport height bug */
+.h-screen-safe {
+  min-height: 100vh;
+  min-height: 100dvh;
+}
+
+/* Mobile text rendering optimization */
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+/* Prevent horizontal overflow globally */
+html, body {
+  overflow-x: hidden;
+  max-width: 100vw;
+}
+
+/* Mobile-specific font scaling */
+@media (max-width: 640px) {
+  .mobile-text-sm {
+    font-size: 0.875rem;
+    line-height: 1.5;
+  }
+}
+
+/* ============================================
+   PERFORMANCE OPTIMIZATIONS
+   ============================================ */
+
+/* GPU acceleration for animated elements */
+.gpu-accelerate {
+  transform: translateZ(0);
+  will-change: transform;
+  backface-visibility: hidden;
+}
+
+/* Respect reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Contain paint for heavy sections */
+.contain-paint {
+  contain: paint;
+}
+
+/* Contain layout for static sections */
+.contain-layout {
+  contain: layout paint;
+}
+
+/* Font display optimization */
+.font-display-optimize {
+  font-display: swap;
+}
+
+/* Image optimization for native img tags */
+img {
+  content-visibility: auto;
 }

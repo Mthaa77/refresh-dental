@@ -168,6 +168,7 @@ export default function TeamSection() {
                   alt="Dr. Lebogang Malunga — Principal Dentist at Refresh Dental"
                   className="absolute inset-0 h-full w-full object-cover object-top transition-transform duration-700 ease-out group-hover:scale-[1.03]"
                   loading="lazy"
+                  decoding="async"
                 />
                 {/* Gold accent line */}
                 <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-champagne-gold via-champagne-gold/60 to-transparent" />

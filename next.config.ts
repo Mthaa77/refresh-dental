@@ -2,6 +2,19 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   output: "standalone",
+
+  // Performance optimizations
+  compress: true,
+  poweredByHeader: false,
+
+  // Performance optimizations
+  experimental: {
+    optimizePackageImports: [
+      'framer-motion',
+      'lucide-react',
+    ],
+  },
+
   images: {
     remotePatterns: [
       {

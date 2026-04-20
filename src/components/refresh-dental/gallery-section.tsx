@@ -176,6 +176,7 @@ export default function GallerySection() {
                     alt={image.alt}
                     className="absolute inset-0 h-full w-full object-cover transition-all duration-700 ease-out group-hover:scale-[1.05] group-hover:brightness-110"
                     loading="lazy"
+                    decoding="async"
                   />
                 </div>
 

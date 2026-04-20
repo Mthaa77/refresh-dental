@@ -376,7 +376,7 @@ export default function EmergencyDental() {
                 href="https://wa.me/27123456789"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-3 rounded-full bg-[#25D366]/90 px-6 py-3 font-jost text-sm font-semibold text-white shadow-lg transition-colors duration-300 hover:bg-[#25D366] hover:shadow-xl"
+                className="inline-flex items-center gap-3 rounded-full bg-[#25D366]/90 px-6 py-3.5 font-jost text-sm font-semibold text-white shadow-lg transition-colors duration-300 hover:bg-[#25D366] hover:shadow-xl min-h-[44px]"
                 whileHover={{ scale: 1.03, y: -2 }}
                 whileTap={{ scale: 0.97 }}
               >
@@ -387,7 +387,7 @@ export default function EmergencyDental() {
               {/* Call Now CTA — chrome gold bg with shimmer sweep */}
               <motion.a
                 href="tel:0123456789"
-                className="relative inline-flex items-center gap-3 overflow-hidden rounded-full bg-champagne-gold px-8 py-3.5 font-jost text-sm font-semibold text-espresso shadow-lg transition-colors duration-300 hover:bg-champagne-gold/90 hover:shadow-xl sm:px-10 sm:py-4 sm:text-base"
+                className="relative inline-flex items-center gap-3 overflow-hidden rounded-full bg-champagne-gold px-8 py-4 font-jost text-sm font-semibold text-espresso shadow-lg transition-colors duration-300 hover:bg-champagne-gold/90 hover:shadow-xl min-h-[44px] sm:px-10 sm:py-4 sm:text-base"
                 whileHover={{ scale: 1.03, y: -2 }}
                 whileTap={{ scale: 0.97 }}
               >

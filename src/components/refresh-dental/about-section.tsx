@@ -93,8 +93,9 @@ export default function AboutSection() {
                 src="/images/dr-lebo-hero.png"
                 alt="Dr. Lebogang Malunga — Principal Dentist at Refresh Dental"
                 className="absolute inset-0 w-full h-full object-cover object-center"
+                loading="lazy"
+                decoding="async"
               />
-              {/* Subtle decorative frame */}
               <div className="absolute inset-0 border-2 border-champagne-gold/20 rounded-2xl pointer-events-none" />
             </motion.div>
           </div>

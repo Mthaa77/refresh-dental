@@ -373,6 +373,8 @@ export default function Hero() {
               src="/images/dr-lebo-hero.png"
               alt="Dr. Lebogang Malunga — Refresh Dental"
               className="absolute inset-0 w-full h-full object-cover object-top rounded-2xl shadow-elevated"
+              loading="eager"
+              decoding="async"
             />
             {/* Gradient overlays */}
             <div className="absolute inset-0 rounded-2xl bg-gradient-to-l from-espresso/30 via-transparent to-espresso/20 lg:from-espresso/40 lg:via-transparent lg:to-espresso/30" />
@@ -385,9 +387,9 @@ export default function Hero() {
             variants={cardVariants}
             initial="hidden"
             animate="visible"
-            className="absolute bottom-8 right-4 sm:bottom-12 sm:right-8 lg:bottom-16 lg:right-[-1rem] z-30"
+            className="absolute bottom-6 right-2 left-2 sm:bottom-12 sm:right-8 sm:left-auto lg:bottom-16 lg:right-[-1rem] z-30"
           >
-            <div className="relative rounded-2xl shadow-elevated p-5 max-w-[260px] glass-card" style={{ border: '1px solid rgba(200, 187, 170, 0.4)' }}>
+            <div className="relative rounded-2xl shadow-elevated p-4 sm:p-5 max-w-[260px] sm:max-w-[280px] glass-card" style={{ border: '1px solid rgba(200, 187, 170, 0.4)' }}>
               {/* Gold gradient top border */}
               <div className="absolute top-0 left-6 right-6 h-[2px] bg-gradient-to-r from-transparent via-champagne-gold to-transparent rounded-full" />
 

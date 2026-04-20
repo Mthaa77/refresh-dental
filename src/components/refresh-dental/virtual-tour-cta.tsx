@@ -195,6 +195,7 @@ export default function VirtualTourCta() {
                 alt="Refresh Dental clinic interior"
                 className="w-full h-full object-cover"
                 loading="lazy"
+                decoding="async"
               />
 
               {/* Dark overlay for depth */}

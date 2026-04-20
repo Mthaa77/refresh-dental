@@ -68,8 +68,10 @@ export default function Footer() {
               src="/images/refresh-dental-logo.jpg"
               alt="Refresh Dental Logo"
               className="w-12 h-12 rounded-full object-cover ring-1 ring-champagne-gold/20"
-              width={40}
-              height={40}
+              width={48}
+              height={48}
+              loading="lazy"
+              decoding="async"
             />
             <span className="font-cormorant text-2xl gold-gradient-text">
               Refresh Dental
@@ -80,7 +82,7 @@ export default function Footer() {
           </p>
 
           {/* Social Icons with hover glow */}
-          <div className="flex items-center gap-4 pt-2">
+          <div className="flex items-center gap-3 pt-2">
             {socialLinks.map((social) => (
               <motion.a
                 key={social.label}
@@ -95,7 +97,7 @@ export default function Footer() {
                     : '0 0 16px rgba(184, 152, 48, 0.5)',
                 }}
                 transition={{ duration: 0.25 }}
-                className={`flex items-center justify-center w-9 h-9 rounded-full border border-ivory/25 text-ivory/65 transition-all duration-300 hover-lift ${
+                className={`flex items-center justify-center h-11 w-11 rounded-full border border-ivory/25 text-ivory/65 transition-all duration-300 hover-lift ${
                   social.isBlueHover
                     ? 'hover:text-accent-blue hover:border-accent-blue/40'
                     : 'hover:text-champagne-gold hover:border-champagne-gold/40'
@@ -110,7 +112,7 @@ export default function Footer() {
         {/* Column 2 — Quick Links */}
         <div className="space-y-4">
           <h4 className="font-dm-serif text-ivory text-lg">Quick Links</h4>
-          <ul className="space-y-2.5">
+          <ul className="space-y-3">
             {quickLinks.map((link) => (
               <li key={link.label}>
                 <a
@@ -127,7 +129,7 @@ export default function Footer() {
         {/* Column 3 — Services */}
         <div className="space-y-4">
           <h4 className="font-dm-serif text-soft-blue text-lg">Services</h4>
-          <ul className="space-y-2.5">
+          <ul className="space-y-3">
             {services.map((service) => (
               <li key={service}>
                 <a href="#services" className="text-ivory/75 hover:text-champagne-gold transition-colors text-[15px] hover:underline hover:underline-offset-4 hover:decoration-champagne-gold/50">
@@ -201,7 +203,7 @@ export default function Footer() {
             transition={{
               y: { duration: 1.8, repeat: Infinity, ease: 'easeInOut' },
             }}
-            className="flex items-center gap-1.5 text-ivory/55 hover:text-champagne-gold transition-colors rounded-full px-3 py-1.5 hover:bg-ivory/5"
+            className="flex items-center gap-1.5 text-ivory/55 hover:text-champagne-gold transition-colors rounded-full px-3 py-2 hover:bg-ivory/5 min-h-[44px]"
           >
             <span className="text-xs font-jost tracking-wider uppercase">Back to Top</span>
             <ArrowUp className="w-3.5 h-3.5" />

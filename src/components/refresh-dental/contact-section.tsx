@@ -186,7 +186,7 @@ export default function ContactSection() {
                 aria-hidden="true"
               />
               {/* Inner mask to create border effect */}
-              <div className="relative z-[1] rounded-2xl overflow-hidden h-[300px] bg-card">
+              <div className="relative z-[1] rounded-2xl overflow-hidden h-[240px] sm:h-[300px] bg-card">
                 <iframe
                   src="https://maps.google.com/maps?q=153+River+Road,+Centurion,+Pretoria+0157&output=embed"
                   width="100%"
@@ -404,7 +404,7 @@ export default function ContactSection() {
               </p>
               <a
                 href="tel:0614164649"
-                className="relative inline-flex items-center gap-2 mt-2 bg-champagne-gold text-white font-jost font-semibold rounded-full px-5 py-2 text-sm hover:bg-[#A07D1A] transition-colors"
+                className="relative inline-flex items-center justify-center gap-2 mt-2 min-h-[44px] bg-champagne-gold text-white font-jost font-semibold rounded-full px-6 py-2.5 text-sm hover:bg-[#A07D1A] transition-colors"
               >
                 <Phone className="w-3.5 h-3.5" />
                 061 416 4649
