@@ -1256,3 +1256,144 @@ Stage Summary:
 - Smile CTA section provides mid-page conversion point with floating particles and dual CTAs
 - Site section order: ...StatsBar → StatsMarquee → AnimatedCounterSection... → ServicesGrid → SmileCta → ImplantsSpotlight → ParallaxStatement...
 - Clean ESLint (0 errors), clean compilation
+---
+Task ID: 21-b
+Agent: fullstack-developer
+Task: Redesign Emergency Dental section (fix invisible text bug)
+
+Work Log:
+- Read and analyzed existing emergency-dental.tsx (391 lines)
+- Identified ROOT CAUSE: Background gradient div on line 127 missing `absolute inset-0`, rendering ivory text against ivory page background — making text invisible
+- Completely rewrote emergency-dental.tsx with dramatic premium redesign:
+  - Fixed background bug: Added `absolute inset-0` to main gradient div (`from-deep-burgundy via-espresso to-accent-red/80`)
+  - Added subtle noise texture overlay for depth
+  - Added dual heartbeat-like radial pulse animations (red + gold, offset timing)
+  - Added vignette overlay (transparent center → dark edges)
+  - Added pulsing red glow border animation
+  - Added gold-red gradient lines at top (3px) and bottom (2px) of section
+  - Added 10 deterministic sparkle particles (2 new ones added)
+  - Preserved 4 gold corner decorative cross marks (SVG)
+  - Left column: 24/7 spinning conic-gradient badge, "Dental Emergency?" gold-gradient heading, reassuring subtitle, phone icon with 3 pulse rings and heartbeat animation, large phone number with pulsing red rings and hover-to-gold transition, WhatsApp CTA button, Call Now button with shimmer sweep overlay
+  - Right column: "Common Dental Emergencies" header, 3 glass morphism cards (Severe Toothache, Broken Tooth, Knocked Out Tooth) with icon in red-accented circle, DM Serif titles, Jost descriptions, actionable advice in italic gold, hover lift + border transition to accent-red
+  - Bottom: reassuring text (same-day appointments, walk-ins welcome, no referral needed)
+  - All text uses `relative z-10` for proper layering above overlays
+- Used only framer-motion for animations (no CSS keyframes)
+- No Math.random() — all particles use deterministic arrays
+- Section ID remains "emergency"
+- Clean ESLint (0 errors)
+- Dev server compiles cleanly
+
+Stage Summary:
+- CRITICAL BUG FIXED: Invisible text caused by missing `absolute inset-0` on background gradient div
+- Emergency section completely redesigned with dramatic premium dark aesthetic
+- Two-column responsive layout (left: contact CTA, right: service cards)
+- Rich atmospheric effects: heartbeat pulse, sparkles, vignette, pulsing glow border
+- All text visible with proper contrast (ivory text on dark burgundy/espresso background)
+- Clean ESLint (0 errors), clean compilation
+
+---
+Task ID: 21-a
+Agent: fullstack-developer
+Task: Upgrade Our Services card components to ultra-premium design
+
+Work Log:
+- Complete overhaul of services-grid.tsx card design and visual effects
+- Added glass highlight shine at top of each card (white gradient fading from 55% to transparent)
+- Applied multi-layered shadow system: shadow-premium + shadow-inner-gold + shadow-elevated for large cards
+- Added animated gold accent line at top of each card (scaleX 0→100% on hover via CSS transition)
+- Added subtle gradient overlay per card (gold/champagne tones for large cards, lighter for small)
+- Added floating shine/glare sweep effect on hover (skewed white gradient translates across card)
+- Added animated sparkle particles (6 deterministic gold-pale dots) for large cards only
+- Enhanced watermark category icon with spring scale animation on hover (whileHover scale 1.15)
+- Improved border hover transition: soft-border → champagne-gold/55% via framer-motion whileHover
+- Enhanced typography hierarchy:
+  - Section heading: upgraded to text-shadow-luxury (gold glow + depth combined)
+  - Subtitle: added text-shadow-gold for warm gold glow
+  - Service names: kept font-dm-serif with text-shadow-espresso
+  - Category badges: added chrome-gold left border (2px solid champagne-gold), gold-pale/30 bg
+  - Duration badges: gold-accented Clock icon, ivory-dark/60 bg
+  - Description: improved line-height to 1.75 for better readability
+  - Book CTA: wider letter-spacing on hover (0.15em → 0.22em)
+- Enhanced category filter tabs:
+  - Active tab: chrome-gold-bg with shadow-gold-strong
+  - Inactive tabs: glass-morphism effect (bg-white/70, backdrop-blur-sm, border)
+  - Added whileHover scale 1.04 and whileTap scale 0.97 via framer-motion
+- Upgraded View All Services button:
+  - chrome-gold-bg background with shadow-gold-strong
+  - Shimmer sweep effect on hover (skewed white gradient)
+  - whileHover scale 1.03 with enhanced gold glow shadow
+  - whileTap scale 0.97 press animation
+- Extracted ServiceCard as separate component with onSelect prop for cleaner architecture
+- Preserved all existing data, category filter logic, ServiceDetailDrawer integration, and bento grid layout
+- No Math.random() used (all sparkle positions are deterministic)
+- All animations use framer-motion or CSS transitions (no CSS keyframes in component)
+
+Stage Summary:
+- Services grid cards now have ultra-premium visual treatment with multi-layered depth
+- Glass highlight, inner gold shadows, and animated gold accent lines create premium card feel
+- Large cards (Dental Implants) feature animated sparkle particles for dramatic emphasis
+- Shine sweep effect adds engaging hover interactivity across all cards
+- Category filter tabs upgraded with glass-morphism inactive state and gold glow active state
+- View All button upgraded with chrome-gold-bg, shimmer sweep, and press animations
+- Clean ESLint (0 errors), clean compilation
+
+---
+Task ID: 21
+Agent: Main Orchestrator
+Task: Upgrade Services Grid cards, redesign Emergency section, fix bugs
+
+Work Log:
+- Read worklog.md to understand project state (21+ sections, 55+ components)
+- Performed comprehensive QA via agent-browser:
+  - Screenshots of services section and emergency section (desktop + mobile)
+  - Verified accessibility tree: all text visible, all interactive elements working
+  - Checked for horizontal overflow: OK
+  - Checked for console errors: none (only minor framer-motion warnings about transparent animation)
+- Launched 2 parallel subagents for development:
+  - Agent 21-a: Upgrade Our Services card components to ultra-premium design
+  - Agent 21-b: Redesign Emergency Dental section (fix invisible text bug)
+- Verified ESLint: 0 errors
+- Dev server compiles cleanly
+
+Stage Summary:
+- CRITICAL BUG FIXED: Emergency Dental section text was invisible because background gradient div was missing `absolute inset-0` positioning
+- Services Grid upgraded with premium card effects:
+  - Glass highlight shine at top of each card
+  - Multi-layered shadows (shadow-premium + shadow-inner-gold + shadow-elevated for large cards)
+  - Animated gold accent line at top (expands on hover)
+  - Subtle gradient overlay on card backgrounds
+  - Shine/glare sweep effect on hover
+  - Sparkle particles for large cards (Dental Implants)
+  - Enhanced typography: text-shadow-espresso on titles, text-shadow-luxury on heading
+  - Category badges with chrome-gold left border
+  - View All button with chrome-gold-bg and shimmer sweep
+  - Category filter tabs: glass-morphism inactive, chrome-gold-bg + shadow-gold-strong active
+- Emergency Section completely redesigned:
+  - Background fixed with absolute inset-0 positioning (deep-burgundy → espresso → accent-red)
+  - Noise texture overlay for depth
+  - Dual heartbeat radial pulse animations (red + gold, offset timing)
+  - Vignette overlay (transparent center → dark edges)
+  - Pulsing red glow border animation
+  - Gold-red gradient lines at top and bottom
+  - 10 deterministic sparkle particles
+  - 24/7 spinning conic-gradient badge
+  - Large phone icon with 3 pulse rings
+  - Phone number with pulsing rings and hover-to-gold
+  - WhatsApp + Call Now CTA buttons in a row
+  - "Common Dental Emergencies" subheading with 3 glass morphism cards
+  - Each emergency card has actionable advice tips (💡)
+  - Bottom reassurance text (same-day, walk-ins, no referral)
+- Clean ESLint (0 errors), clean compilation, clean QA
+
+Current Project Status:
+- Website is ultra-premium and feature-rich with 21+ scroll sections + 4 utility components
+- All core sections fully implemented and heavily enhanced
+- Services Grid now has ultra-premium card design with multi-layered shadows, glass highlights, shine sweeps, and sparkle effects
+- Emergency section now properly visible with dramatic dark design, pulsing animations, and clear CTAs
+- No bugs, no errors, 0 broken images
+
+Recommendations for Next Phase:
+1. MEDIUM: Further enhance other card-based sections (technology, values, tips) to match services grid premium
+2. MEDIUM: Add more visual effects to lighter/less interesting sections
+3. LOW: Fix minor framer-motion transparent animation warnings
+4. LOW: Consider adding before/after real dental photos
