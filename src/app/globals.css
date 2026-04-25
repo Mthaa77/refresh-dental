@@ -414,14 +414,14 @@
 .section-heading {
   font-family: var(--font-cormorant);
   font-weight: 300;
-  line-height: 1.1;
-  letter-spacing: -0.02em;
+  line-height: 1.08;
+  letter-spacing: -0.025em;
 }
 
 .section-subheading {
   font-family: var(--font-dm-serif);
   color: #2A2018;
-  line-height: 1.4;
+  line-height: 1.45;
   font-weight: 400;
 }
 

@@ -5,7 +5,6 @@ import dynamic from 'next/dynamic'
 // ── Eager imports: critical above-the-fold ──
 import ScrollProgress from '@/components/refresh-dental/scroll-progress'
 import Navigation from '@/components/refresh-dental/navigation'
-import PromoBanner from '@/components/refresh-dental/promo-banner'
 import Hero from '@/components/refresh-dental/hero'
 
 // ── Already dynamic ──
@@ -38,13 +37,9 @@ const ScrollToTop = dynamic(
   () => import('@/components/refresh-dental/scroll-to-top'),
   { ssr: false }
 )
-const QuickActionsFab = dynamic(
-  () => import('@/components/refresh-dental/quick-actions-fab'),
-  { ssr: false }
-)
-const AppointmentQuickBook = dynamic(
-  () => import('@/components/refresh-dental/appointment-quick-book'),
-  { ssr: false }
+const TrustTicker = dynamic(
+  () => import('@/components/refresh-dental/trust-ticker'),
+  { ssr: false, loading: () => <div className="h-10 animate-pulse bg-espresso/80" /> }
 )
 const AccessibilityPanel = dynamic(
   () => import('@/components/refresh-dental/theme-toggle'),
@@ -58,13 +53,6 @@ const CookieConsent = dynamic(
 // ── Dynamic imports: visible in-page sections with skeleton loading ──
 
 // Top-of-page sections (above the fold area)
-const MarqueeBanner = dynamic(
-  () => import('@/components/refresh-dental/marquee-banner'),
-  {
-    ssr: false,
-    loading: () => <div className="h-10 animate-pulse bg-ivory/50" />,
-  }
-)
 
 // Stats & counters
 const StatsBar = dynamic(
@@ -404,10 +392,9 @@ export default function Home() {
       <PageSectionsNav />
       <ScrollProgress />
       <Navigation />
-      <PromoBanner />
-      <MarqueeBanner />
       <main className="min-h-screen">
         <Hero />
+        <TrustTicker />
         <StatsBar />
         <StatsMarquee />
         <AnimatedCounterSection />
@@ -454,8 +441,6 @@ export default function Home() {
       <Footer />
       <WhatsAppButton />
       <ScrollToTop />
-      <QuickActionsFab />
-      <AppointmentQuickBook />
       <AccessibilityPanel />
       <CookieConsent />
     </>

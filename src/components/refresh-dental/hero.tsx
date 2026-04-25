@@ -194,7 +194,7 @@ export default function Hero() {
               {/* --- EYEBROW --- */}
               <motion.div variants={fadeSlideUp} className="mb-5">
                 <span className="font-jost text-xs sm:text-sm tracking-[0.25em] text-champagne-gold uppercase font-medium">
-                  Premium Dental Care · Centurion, Pretoria
+                  Where Science Meets the Art of Smiling
                 </span>
                 <motion.div
                   variants={lineExpand}
@@ -211,17 +211,22 @@ export default function Hero() {
                   Your Smile,
                 </span>
                 <span className="block text-[clamp(3.2rem,8.5vw,8.5rem)] tracking-tight">
-                  <span className="shimmer-text text-shadow-gold-strong">Refreshed.</span>
+                  <span className="shimmer-text text-shadow-gold-strong">Our Passion.</span>
                 </span>
               </motion.h1>
 
               {/* --- DESCRIPTION --- */}
               <motion.p
                 variants={fadeSlideUp}
-                className="font-jost font-normal text-ivory/80 text-lg sm:text-xl max-w-[540px] leading-relaxed mb-4"
+                className="font-jost font-normal text-ivory/80 text-lg sm:text-xl max-w-[540px] leading-relaxed mb-3"
               >
-                Experience world-class dentistry crafted around your comfort.
-                Where artistry meets science — for smiles that inspire lasting confidence.
+                Discover exceptional dental care tailored to your unique needs — where cutting-edge technology meets compassionate artistry.
+              </motion.p>
+              <motion.p
+                variants={fadeSlideUp}
+                className="font-jost font-normal text-ivory/60 text-base sm:text-lg max-w-[520px] leading-relaxed mb-4"
+              >
+                Every smile tells a story. Let us help you write your most confident chapter yet.
               </motion.p>
 
               {/* --- DR. NAME --- */}

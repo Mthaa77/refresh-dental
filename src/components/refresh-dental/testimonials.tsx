@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useRef, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Star, ChevronLeft, ChevronRight, BadgeCheck } from 'lucide-react'
+import { Star, ChevronLeft, ChevronRight, BadgeCheck, ArrowRight, MessageCircle } from 'lucide-react'
 
 const testimonials = [
   {
@@ -360,6 +360,40 @@ export default function Testimonials() {
             </button>
           ))}
         </div>
+
+        {/* CTA Section */}
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-60px' }}
+          transition={{ duration: 0.6, delay: 0.2 }}
+          className="mt-14 text-center"
+        >
+          <h3 className="font-cormorant text-2xl md:text-3xl font-light text-espresso mb-3">
+            Ready to Transform Your Smile?
+          </h3>
+          <p className="font-jost text-sm text-brown-muted mb-6 max-w-md mx-auto leading-relaxed">
+            Take the first step towards the smile you&apos;ve always dreamed of.
+          </p>
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
+            <a
+              href="#contact"
+              className="inline-flex items-center gap-2 bg-gradient-to-r from-champagne-gold to-gold-light text-espresso font-jost font-semibold text-sm tracking-wider uppercase rounded-full px-8 py-3.5 shadow-gold transition-all duration-300 hover:shadow-gold-strong hover:scale-[1.03]"
+            >
+              Book Your Consultation
+              <ArrowRight className="w-4 h-4" />
+            </a>
+            <a
+              href="https://wa.me/27614164649"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 border-2 border-sage-teal text-sage-teal font-jost font-medium text-sm tracking-wider uppercase rounded-full px-8 py-3.5 transition-all duration-300 hover:bg-sage-teal hover:text-white"
+            >
+              <MessageCircle className="w-4 h-4" />
+              Chat on WhatsApp
+            </a>
+          </div>
+        </motion.div>
       </div>
     </section>
   )

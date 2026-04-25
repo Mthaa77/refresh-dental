@@ -2,7 +2,7 @@
 
 import { useRef, useState } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
-import { Linkedin, ArrowRight, ChevronDown } from 'lucide-react';
+import { Linkedin, ArrowRight, ChevronDown, Phone, MessageCircle, Calendar } from 'lucide-react';
 
 const credentials = [
   { label: 'BDS', desc: 'Bachelor of Dental Surgery' },
@@ -259,6 +259,39 @@ export default function AboutSection() {
             </motion.div>
           </motion.div>
         </div>
+
+        {/* Inline CTA Bar */}
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-40px' }}
+          transition={{ duration: 0.6, delay: 0.2 }}
+          className="mt-16 flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4"
+        >
+          <a
+            href="tel:+27614164649"
+            className="inline-flex items-center gap-2 bg-sage-teal text-white font-jost text-sm font-medium tracking-wider uppercase rounded-full px-6 py-3 transition-all duration-300 hover:bg-sage-teal/90 hover:shadow-teal"
+          >
+            <Phone className="w-4 h-4" />
+            Call Us
+          </a>
+          <a
+            href="https://wa.me/27614164649"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 bg-green-600 text-white font-jost text-sm font-medium tracking-wider uppercase rounded-full px-6 py-3 transition-all duration-300 hover:bg-green-700 hover:shadow-lg"
+          >
+            <MessageCircle className="w-4 h-4" />
+            WhatsApp
+          </a>
+          <a
+            href="#contact"
+            className="inline-flex items-center gap-2 bg-champagne-gold text-espresso font-jost text-sm font-semibold tracking-wider uppercase rounded-full px-6 py-3 transition-all duration-300 hover:bg-champagne-gold/90 hover:shadow-gold"
+          >
+            <Calendar className="w-4 h-4" />
+            Book Now
+          </a>
+        </motion.div>
       </div>
     </section>
   );

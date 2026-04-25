@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import { motion } from 'framer-motion'
-import { Clock, ArrowRight, Heart, Sparkles, Shield, Star } from 'lucide-react'
+import { Clock, ArrowRight, Heart, Sparkles, Shield, Star, Phone, MessageCircle } from 'lucide-react'
 import ServiceDetailDrawer from './service-detail-drawer'
 
 const services = [
@@ -329,6 +329,57 @@ export default function ServicesGrid() {
               <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
             </span>
           </motion.button>
+        </motion.div>
+
+        {/* Quick Booking Card */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-40px' }}
+          transition={{ duration: 0.6, delay: 0.3 }}
+          className="mt-12 flex justify-center"
+        >
+          <div
+            className="relative max-w-xl w-full rounded-2xl p-6 md:p-8 text-center"
+            style={{
+              background: 'rgba(250, 247, 242, 0.6)',
+              backdropFilter: 'blur(20px)',
+              WebkitBackdropFilter: 'blur(20px)',
+              border: '1px solid rgba(184, 152, 48, 0.2)',
+              boxShadow: '0 8px 32px rgba(15, 13, 10, 0.08), 0 0 0 1px rgba(184, 152, 48, 0.08)',
+            }}
+          >
+            <div
+              className="absolute top-0 left-8 right-8 h-[1.5px] rounded-full"
+              style={{
+                background: 'linear-gradient(90deg, transparent, rgba(184, 152, 48, 0.5), transparent)',
+              }}
+            />
+            <h3 className="font-cormorant text-2xl md:text-3xl font-light text-espresso mb-2">
+              Need Help Choosing?
+            </h3>
+            <p className="font-jost text-sm text-brown-muted mb-6 leading-relaxed">
+              Chat with us for a personalised recommendation
+            </p>
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
+              <a
+                href="tel:+27614164649"
+                className="inline-flex items-center gap-2 bg-sage-teal text-white font-jost text-sm font-medium tracking-wider uppercase rounded-full px-6 py-3 transition-all duration-300 hover:bg-sage-teal/90 hover:shadow-teal"
+              >
+                <Phone className="w-4 h-4" />
+                Call Now
+              </a>
+              <a
+                href="https://wa.me/27614164649"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 bg-green-600 text-white font-jost text-sm font-medium tracking-wider uppercase rounded-full px-6 py-3 transition-all duration-300 hover:bg-green-700 hover:shadow-lg"
+              >
+                <MessageCircle className="w-4 h-4" />
+                WhatsApp Us
+              </a>
+            </div>
+          </div>
         </motion.div>
       </div>
     </section>
