@@ -1,7 +1,7 @@
 'use client'
 
-import { useState, useRef, useEffect } from 'react'
-import { motion, useScroll, useTransform } from 'framer-motion'
+import { useState } from 'react'
+import { motion } from 'framer-motion'
 import { Calendar, Stethoscope, ClipboardList, Heart, PartyPopper } from 'lucide-react'
 
 const steps = [
@@ -95,19 +95,9 @@ function StepCard({
       >
         {/* Numbered circle with icon */}
         <div className="relative mb-5">
-          {/* Pulsing ring */}
-          <motion.div
+          {/* Static ring */}
+          <div
             className="absolute inset-0 rounded-full border-2 border-champagne-gold/20"
-            animate={{
-              scale: [1, 1.15, 1],
-              opacity: [0.3, 0.6, 0.3],
-            }}
-            transition={{
-              duration: 3,
-              repeat: Infinity,
-              ease: 'easeInOut',
-              delay: step.number * 0.3,
-            }}
             style={{ margin: '-4px' }}
           />
           {/* Outer gold ring */}
@@ -175,60 +165,17 @@ function StepCard({
 }
 
 function MobileTimeline() {
-  const timelineRef = useRef<HTMLDivElement>(null)
-  const [timelineHeight, setTimelineHeight] = useState(0)
-
-  const { scrollYProgress } = useScroll({
-    target: timelineRef,
-    offset: ['start end', 'end start'],
-  })
-
-  const lineScale = useTransform(scrollYProgress, [0.1, 0.8], [0, 1])
-  const dotY = useTransform(scrollYProgress, [0.1, 0.8], [0, timelineHeight * 0.8])
-
-  useEffect(() => {
-    const el = timelineRef.current
-    if (el) {
-      setTimelineHeight(el.scrollHeight)
-      const observer = new ResizeObserver(() => {
-        setTimelineHeight(el.scrollHeight)
-      })
-      observer.observe(el)
-      return () => observer.disconnect()
-    }
-  }, [])
-
   return (
-    <div className="lg:hidden relative pl-10" ref={timelineRef}>
-      {/* Vertical connecting line with scroll-driven animation */}
-      <div className="absolute left-[18px] top-5 bottom-5 w-px origin-top">
-        <motion.div
-          className="h-full w-full bg-gradient-to-b from-accent-blue/60 via-champagne-gold/30 to-accent-blue/60"
-          style={{ scaleY: lineScale }}
-        />
+    <div className="lg:hidden relative pl-10">
+      {/* Static vertical connecting line */}
+      <div className="absolute left-[18px] top-5 bottom-5 w-px">
+        <div className="h-full w-full bg-gradient-to-b from-accent-blue/60 via-champagne-gold/30 to-accent-blue/60" />
       </div>
 
-      {/* Glowing dot that travels along the mobile timeline */}
-      <motion.div
-        className="absolute left-[14px] top-5 z-20"
-        style={{ y: dotY }}
-      >
-        <motion.div
-          className="h-[9px] w-[9px] rounded-full bg-champagne-gold"
-          animate={{
-            boxShadow: [
-              '0 0 4px rgba(184, 152, 48, 0.4)',
-              '0 0 12px rgba(184, 152, 48, 0.8), 0 0 24px rgba(184, 152, 48, 0.3)',
-              '0 0 4px rgba(184, 152, 48, 0.4)',
-            ],
-          }}
-          transition={{
-            duration: 2,
-            repeat: Infinity,
-            ease: 'easeInOut',
-          }}
-        />
-      </motion.div>
+      {/* Static glowing dot */}
+      <div className="absolute left-[14px] top-5 z-20">
+        <div className="h-[9px] w-[9px] rounded-full bg-champagne-gold shadow-[0_0_4px_rgba(184,152,48,0.4)]" />
+      </div>
 
       <motion.div
         variants={containerVariants}
@@ -243,20 +190,6 @@ function MobileTimeline() {
             <motion.div key={step.number} variants={stepVariants} className="relative flex gap-5">
               {/* Icon circle on the line */}
               <div className="absolute -left-10 top-0 flex h-9 w-9 items-center justify-center rounded-full border-2 border-champagne-gold/40 bg-ivory z-10">
-                {/* Pulsing ring for mobile */}
-                <motion.div
-                  className="absolute inset-[-3px] rounded-full border-2 border-champagne-gold/15"
-                  animate={{
-                    scale: [1, 1.2, 1],
-                    opacity: [0.2, 0.5, 0.2],
-                  }}
-                  transition={{
-                    duration: 3,
-                    repeat: Infinity,
-                    ease: 'easeInOut',
-                    delay: step.number * 0.3,
-                  }}
-                />
                 <div className="flex h-6 w-6 items-center justify-center rounded-full bg-card">
                   <Icon className="h-3.5 w-3.5 text-sage-teal" strokeWidth={1.5} />
                 </div>
@@ -291,17 +224,8 @@ function MobileTimeline() {
 }
 
 function DesktopTimeline() {
-  const gridRef = useRef<HTMLDivElement>(null)
-
-  const { scrollYProgress } = useScroll({
-    target: gridRef,
-    offset: ['start end', 'end start'],
-  })
-
-  const dotX = useTransform(scrollYProgress, [0.1, 0.7], [0, 100])
-
   return (
-    <div className="relative" ref={gridRef}>
+    <div className="relative">
       <motion.div
         variants={containerVariants}
         initial="hidden"
@@ -316,30 +240,6 @@ function DesktopTimeline() {
             isLast={index === steps.length - 1}
           />
         ))}
-      </motion.div>
-
-      {/* Glowing dot that travels along the desktop timeline */}
-      <motion.div
-        className="hidden lg:block absolute top-10 z-30 pointer-events-none"
-        style={{
-          left: useTransform(dotX, [0, 100], ['8%', '92%']),
-        }}
-      >
-        <motion.div
-          className="h-[10px] w-[10px] rounded-full bg-champagne-gold -translate-x-1/2 -translate-y-1/2"
-          animate={{
-            boxShadow: [
-              '0 0 4px rgba(184, 152, 48, 0.4)',
-              '0 0 14px rgba(184, 152, 48, 0.8), 0 0 28px rgba(184, 152, 48, 0.3)',
-              '0 0 4px rgba(184, 152, 48, 0.4)',
-            ],
-          }}
-          transition={{
-            duration: 2,
-            repeat: Infinity,
-            ease: 'easeInOut',
-          }}
-        />
       </motion.div>
     </div>
   )
@@ -362,28 +262,17 @@ export default function TreatmentProcess() {
 
       <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {/* Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: '-80px' }}
-          transition={{ duration: 0.6 }}
-          className="mb-16 md:mb-20 text-center"
-        >
+        <div className="mb-16 md:mb-20 text-center animate-fade-in-up">
           <span className="mb-4 inline-block text-xs font-semibold uppercase tracking-[0.2em] text-champagne-gold">
             How It Works
           </span>
           <h2 className="font-cormorant text-4xl md:text-5xl lg:text-6xl section-heading text-shadow-espresso gold-gradient-text">
             Your Journey to a Refreshed Smile
           </h2>
-          <motion.p
-            initial={{ opacity: 0, y: 15 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="font-jost text-base md:text-lg text-brown-muted max-w-2xl mx-auto text-center leading-relaxed mt-4 mb-12"
-          >
+          <p className="font-jost text-base md:text-lg text-brown-muted max-w-2xl mx-auto text-center leading-relaxed mt-4 mb-12 animate-fade-in-up" style={{ animationDelay: '0.1s' }}>
             From your very first phone call to the moment you walk out with a confident new smile — we&rsquo;ve designed every step to feel seamless, comfortable, and uniquely yours.
-          </motion.p>
-        </motion.div>
+          </p>
+        </div>
 
         {/* Mobile Timeline */}
         <MobileTimeline />

@@ -1,7 +1,5 @@
 'use client';
 
-import { motion } from 'framer-motion';
-
 const row1Items = [
   '★ 5.0 Google Rating',
   '500+ Happy Patients',
@@ -27,6 +25,27 @@ function buildRow(items: string[], separator: string) {
 export default function TrustTicker() {
   return (
     <div className="relative bg-espresso overflow-hidden py-3 sm:py-4">
+      {/* CSS-only marquee animations */}
+      <style>{`
+        @keyframes marquee-left {
+          from { transform: translateX(0); }
+          to { transform: translateX(-50%); }
+        }
+        @keyframes marquee-right {
+          from { transform: translateX(-50%); }
+          to { transform: translateX(0); }
+        }
+        .marquee-left {
+          animation: marquee-left 30s linear infinite;
+        }
+        .marquee-right {
+          animation: marquee-right 35s linear infinite;
+        }
+        .marquee-left-slow {
+          animation: marquee-left 45s linear infinite;
+        }
+      `}</style>
+
       {/* Gold gradient top border */}
       <div
         className="absolute top-0 left-0 right-0 h-[1px]"
@@ -57,17 +76,7 @@ export default function TrustTicker() {
 
       {/* Row 1 — scrolls left */}
       <div className="flex items-center gap-2 mb-1 sm:mb-2">
-        <motion.div
-          className="flex shrink-0 whitespace-nowrap"
-          animate={{ x: ['0%', '-50%'] }}
-          transition={{
-            x: {
-              duration: 30,
-              repeat: Infinity,
-              ease: 'linear',
-            },
-          }}
-        >
+        <div className="flex shrink-0 whitespace-nowrap marquee-left">
           <span className="font-jost text-xs sm:text-sm tracking-wider uppercase">
             {buildRow(row1Items, separator).split('').map((char, i) => (
               <span
@@ -82,22 +91,12 @@ export default function TrustTicker() {
               </span>
             ))}
           </span>
-        </motion.div>
+        </div>
       </div>
 
       {/* Row 2 — scrolls right (desktop only, merged into single row on mobile) */}
       <div className="hidden sm:flex items-center gap-2">
-        <motion.div
-          className="flex shrink-0 whitespace-nowrap"
-          animate={{ x: ['-50%', '0%'] }}
-          transition={{
-            x: {
-              duration: 35,
-              repeat: Infinity,
-              ease: 'linear',
-            },
-          }}
-        >
+        <div className="flex shrink-0 whitespace-nowrap marquee-right">
           <span className="font-jost text-xs sm:text-sm tracking-wider uppercase">
             {buildRow(row2Items, separator).split('').map((char, i) => (
               <span
@@ -112,22 +111,12 @@ export default function TrustTicker() {
               </span>
             ))}
           </span>
-        </motion.div>
+        </div>
       </div>
 
       {/* Mobile: single row with all items scrolling left */}
       <div className="flex sm:hidden items-center gap-2 mt-1">
-        <motion.div
-          className="flex shrink-0 whitespace-nowrap"
-          animate={{ x: ['0%', '-50%'] }}
-          transition={{
-            x: {
-              duration: 45,
-              repeat: Infinity,
-              ease: 'linear',
-            },
-          }}
-        >
+        <div className="flex shrink-0 whitespace-nowrap marquee-left-slow">
           <span className="font-jost text-xs tracking-wider uppercase">
             {buildRow(
               [...row1Items, ...row2Items],
@@ -147,7 +136,7 @@ export default function TrustTicker() {
                 </span>
               ))}
           </span>
-        </motion.div>
+        </div>
       </div>
     </div>
   );

@@ -72,28 +72,17 @@ export default function TeamSection() {
     <section id="team" className="bg-ivory py-20 md:py-28">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {/* Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: '-80px' }}
-          transition={{ duration: 0.6 }}
-          className="mb-16 text-center"
-        >
+        <div className="mb-16 text-center animate-fade-in-up">
           <span className="mb-4 inline-block text-xs font-semibold uppercase tracking-[0.2em] text-champagne-gold">
             Our Team
           </span>
           <h2 className="section-heading text-4xl md:text-5xl lg:text-6xl gold-gradient-text text-shadow-luxury">
             The People Behind Your Smile
           </h2>
-          <motion.p
-            initial={{ opacity: 0, y: 15 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="font-jost text-base md:text-lg text-brown-muted max-w-2xl mx-auto text-center leading-relaxed mt-4 mb-12"
-          >
+          <p className="font-jost text-base md:text-lg text-brown-muted max-w-2xl mx-auto text-center leading-relaxed mt-4 mb-12 animate-fade-in-up" style={{ animationDelay: '0.1s' }}>
             A dedicated team of professionals who share one mission — helping you achieve the smile you&rsquo;ve always dreamed of, in an environment that feels like home.
-          </motion.p>
-        </motion.div>
+          </p>
+        </div>
 
         {/* Team Grid */}
         <motion.div
@@ -112,13 +101,13 @@ export default function TeamSection() {
               y: -6,
               transition: { duration: 0.35 },
             }}
-            animate={{
+            style={{
               boxShadow: hoveredCard === 'dr-lebo'
-                ? ['0 20px 50px -12px rgba(184, 152, 48, 0.25)', '0 20px 60px -12px rgba(184, 152, 48, 0.40)', '0 20px 50px -12px rgba(184, 152, 48, 0.25)']
+                ? '0 8px 30px rgba(15,13,10,0.12)'
                 : '0 4px 12px -2px rgba(0, 0, 0, 0.06)',
+              transition: 'box-shadow 0.3s ease',
             }}
-            transition={{ duration: 2, repeat: hoveredCard === 'dr-lebo' ? Infinity : 0, ease: 'easeInOut' }}
-            className="group sm:col-span-2 rounded-2xl border border-soft-border bg-card overflow-hidden shadow-elevated shadow-inner-gold transition-colors duration-300 hover:border-champagne-gold/40"
+            className="group sm:col-span-2 rounded-2xl border border-soft-border bg-card overflow-hidden shadow-elevated shadow-inner-gold transition-all duration-300 hover:border-champagne-gold/40"
           >
             {/* Animated gold accent line at top — expands 0→100% on hover */}
             <div className="absolute top-0 left-0 right-0 h-[2px] z-20 overflow-hidden">
@@ -144,22 +133,6 @@ export default function TeamSection() {
               </div>
             </div>
 
-            {/* Subtle gold glow pulse animation */}
-            <motion.div
-              className="absolute inset-0 pointer-events-none z-[1] rounded-2xl"
-              animate={{
-                opacity: hoveredCard === 'dr-lebo' ? [0, 0.5, 0] : 0,
-              }}
-              transition={{
-                duration: 2,
-                repeat: hoveredCard === 'dr-lebo' ? Infinity : 0,
-                ease: 'easeInOut',
-              }}
-              style={{
-                boxShadow: 'inset 0 0 40px rgba(184, 152, 48, 0.08)',
-              }}
-            />
-
             <div className="flex flex-col md:flex-row">
               {/* Portrait */}
               <div className="relative w-full md:w-2/5 aspect-square md:aspect-auto flex-shrink-0">
@@ -181,21 +154,10 @@ export default function TeamSection() {
 
                 <span className="relative mb-2 inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-[0.15em] text-champagne-gold">
                   Principal Dentist &amp; Founder
-                  {/* Animated sparkle icon */}
-                  <motion.span
-                    animate={{
-                      rotate: [0, 15, -15, 10, -10, 0],
-                      scale: [1, 1.2, 1, 1.15, 1],
-                    }}
-                    transition={{
-                      duration: 3,
-                      repeat: Infinity,
-                      ease: "easeInOut",
-                    }}
-                    className="inline-block"
-                  >
+                  {/* Static sparkle icon */}
+                  <span className="inline-block">
                     <Sparkles className="h-3.5 w-3.5 text-champagne-gold" />
-                  </motion.span>
+                  </span>
                 </span>
                 <h3 className="relative font-dm-serif text-xl md:text-2xl text-espresso text-shadow-espresso mb-1">
                   Dr. Lebogang Malunga
@@ -249,10 +211,8 @@ export default function TeamSection() {
                   <span className="font-jost text-xs font-medium text-brown-muted">
                     HPCSA Registered
                   </span>
-                  {/* Verified badge — glass effect + gold border */}
-                  <motion.span
-                    animate={{ scale: [1, 1.08, 1] }}
-                    transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
+                  {/* Verified badge — static */}
+                  <span
                     className="inline-flex items-center gap-1 ml-1 rounded-full px-2 py-0.5"
                     style={{
                       background: 'rgba(45, 107, 92, 0.10)',
@@ -262,23 +222,17 @@ export default function TeamSection() {
                   >
                     <BadgeCheck className="h-3.5 w-3.5 text-sage-teal" />
                     <span className="font-jost text-[10px] font-semibold uppercase tracking-wider text-sage-teal">Verified</span>
-                  </motion.span>
+                  </span>
                 </div>
 
-                {/* LinkedIn icon — slides in from bottom on hover */}
-                <motion.div
-                  className="absolute bottom-4 right-4"
-                  initial={{ y: 20, opacity: 0 }}
-                  animate={{
-                    y: hoveredCard === 'dr-lebo' ? 0 : 20,
-                    opacity: hoveredCard === 'dr-lebo' ? 1 : 0,
-                  }}
-                  transition={{ duration: 0.35, ease: 'easeOut' }}
+                {/* LinkedIn icon — slides in from bottom on hover (CSS) */}
+                <div
+                  className="absolute bottom-4 right-4 translate-y-5 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300 ease-out"
                 >
                   <div className="flex h-8 w-8 items-center justify-center rounded-full bg-sage-teal/10 transition-colors hover:bg-sage-teal/20">
                     <Linkedin className="h-4 w-4 text-sage-teal" />
                   </div>
-                </motion.div>
+                </div>
               </div>
             </div>
           </motion.div>
@@ -295,13 +249,13 @@ export default function TeamSection() {
                 scale: 1.02,
                 transition: { duration: 0.35 },
               }}
-              animate={{
+              style={{
                 boxShadow: hoveredCard === member.name
-                  ? ['0 16px 40px -10px rgba(184, 152, 48, 0.20)', '0 16px 48px -10px rgba(184, 152, 48, 0.35)', '0 16px 40px -10px rgba(184, 152, 48, 0.20)']
+                  ? '0 8px 30px rgba(15,13,10,0.12)'
                   : '0 2px 8px -2px rgba(0, 0, 0, 0.05)',
+                transition: 'box-shadow 0.3s ease',
               }}
-              transition={{ duration: 2, repeat: hoveredCard === member.name ? Infinity : 0, ease: 'easeInOut', delay: i * 0.1 }}
-              className="group relative overflow-hidden rounded-2xl border border-soft-border bg-card p-6 shadow-elevated shadow-inner-gold transition-colors duration-300 hover:border-champagne-gold/40"
+              className="group relative overflow-hidden rounded-2xl border border-soft-border bg-card p-6 shadow-elevated shadow-inner-gold transition-all duration-300 hover:border-champagne-gold/40"
             >
               {/* Animated gold accent line at top */}
               <div className="absolute top-0 left-0 right-0 h-[2px] z-20 overflow-hidden">
@@ -332,10 +286,10 @@ export default function TeamSection() {
 
               {/* Content */}
               <div className="relative z-[15]">
-                {/* Initials Avatar with animated gold ring on hover */}
+                {/* Initials Avatar with CSS gold ring on hover */}
                 <div className="relative mb-5 flex items-center gap-4">
                   <div className="relative">
-                    {/* Gold ring — pulses on hover */}
+                    {/* Gold ring — CSS transition on hover */}
                     <div className="absolute -inset-1.5 rounded-full border-2 border-champagne-gold/0 transition-all duration-700 ease-out group-hover:border-champagne-gold/40 group-hover:scale-110" />
                     <div className="absolute -inset-3 rounded-full border border-champagne-gold/0 transition-all duration-1000 ease-out delay-100 group-hover:border-champagne-gold/15 group-hover:scale-115" />
                     <div
@@ -390,15 +344,9 @@ export default function TeamSection() {
                 <div className="mt-5 h-[1px] w-10 bg-champagne-gold/40 transition-all duration-500 group-hover:w-full group-hover:bg-champagne-gold" />
               </div>
 
-              {/* LinkedIn icon — slides in from bottom on hover */}
-              <motion.div
-                className="absolute bottom-3 right-3 z-[15]"
-                initial={{ y: 20, opacity: 0 }}
-                animate={{
-                  y: hoveredCard === member.name ? 0 : 20,
-                  opacity: hoveredCard === member.name ? 1 : 0,
-                }}
-                transition={{ duration: 0.35, ease: 'easeOut' }}
+              {/* LinkedIn icon — slides in from bottom on hover (CSS) */}
+              <div
+                className="absolute bottom-3 right-3 z-[15] translate-y-5 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300 ease-out"
               >
                 <div className={`flex h-7 w-7 items-center justify-center rounded-full transition-colors ${
                   i === 0 ? 'bg-accent-blue/10 hover:bg-accent-blue/20' :
@@ -411,19 +359,13 @@ export default function TeamSection() {
                     'text-sage-teal'
                   }`} />
                 </div>
-              </motion.div>
+              </div>
             </motion.div>
           ))}
         </motion.div>
 
         {/* Join Our Team CTA */}
-        <motion.div
-          initial={{ opacity: 0, y: 16 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: '-40px' }}
-          transition={{ duration: 0.5, delay: 0.4 }}
-          className="mt-14 text-center"
-        >
+        <div className="mt-14 text-center animate-fade-in-up" style={{ animationDelay: '0.2s' }}>
           <a
             href="#contact"
             className="group/link inline-flex items-center gap-2 font-jost text-sm text-brown-muted shadow-gold rounded-full px-6 py-2.5 transition-all duration-300 hover:text-champagne-gold"
@@ -431,7 +373,7 @@ export default function TeamSection() {
             Interested in joining our team?
             <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover/link:translate-x-1" />
           </a>
-        </motion.div>
+        </div>
       </div>
     </section>
   )

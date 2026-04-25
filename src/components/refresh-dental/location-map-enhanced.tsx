@@ -116,7 +116,7 @@ export default function LocationMapEnhanced() {
           transition={{ duration: 0.6 }}
           className="relative rounded-2xl overflow-hidden shadow-lg border border-champagne-gold/15 mb-10"
         >
-          {/* Animated bouncing marker pin */}
+          {/* Static marker pin — no bounce animation */}
           <motion.div
             initial={{ y: -20, opacity: 0 }}
             whileInView={{ y: 0, opacity: 1 }}
@@ -124,30 +124,17 @@ export default function LocationMapEnhanced() {
             transition={{ delay: 0.5, type: 'spring', stiffness: 200 }}
             className="absolute top-6 left-6 z-10"
           >
-            <motion.div
-              animate={{ y: [0, -6, 0] }}
-              transition={{ duration: 1.8, repeat: Infinity, ease: 'easeInOut' }}
-            >
-              <div className="flex flex-col items-center">
-                <div className="relative">
-                  <div className="h-10 w-10 rounded-full bg-champagne-gold shadow-lg flex items-center justify-center">
-                    <MapPin className="h-5 w-5 text-white" />
-                  </div>
-                  {/* Pulsing ring */}
-                  <motion.span
-                    className="absolute inset-0 rounded-full border-2 border-champagne-gold"
-                    animate={{ scale: [1, 1.8], opacity: [0.5, 0] }}
-                    transition={{ duration: 1.8, repeat: Infinity, ease: 'easeOut' }}
-                  />
+            <div className="flex flex-col items-center">
+              <div className="relative">
+                <div className="h-10 w-10 rounded-full bg-champagne-gold shadow-lg flex items-center justify-center">
+                  <MapPin className="h-5 w-5 text-white" />
                 </div>
-                <div className="h-2 w-0.5 bg-champagne-gold/60 -mt-0.5" />
-                <motion.span
-                  className="h-1 w-1 rounded-full bg-champagne-gold"
-                  animate={{ scale: [1, 1.5], opacity: [0.4, 0] }}
-                  transition={{ duration: 1.8, repeat: Infinity, ease: 'easeOut', delay: 0.3 }}
-                />
               </div>
-            </motion.div>
+              <div className="h-2 w-0.5 bg-champagne-gold/60 -mt-0.5" />
+              <span
+                className="h-1 w-1 rounded-full bg-champagne-gold"
+              />
+            </div>
           </motion.div>
 
           <iframe

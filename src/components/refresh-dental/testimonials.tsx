@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect, useRef, useCallback } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { motion, AnimatePresence, useInView } from 'framer-motion'
 import {
   Star,
@@ -62,11 +62,10 @@ const staggerContainer = {
 }
 
 const fadeSlideUp = {
-  hidden: { opacity: 0, y: 30, filter: 'blur(4px)' },
+  hidden: { opacity: 0, y: 30 },
   visible: {
     opacity: 1,
     y: 0,
-    filter: 'blur(0px)',
     transition: { duration: 0.8, ease: [0.22, 1, 0.36, 1] },
   },
 }
@@ -91,19 +90,6 @@ const lineExpand = {
     transition: { duration: 1.0, delay: 0.3, ease: [0.22, 1, 0.36, 1] },
   },
 }
-
-/* ========================================
-   FLOATING PARTICLES
-   ======================================== */
-
-const particles = [
-  { left: '5%', top: '20%', size: 3, duration: 7 },
-  { left: '15%', top: '75%', size: 2, duration: 9 },
-  { left: '88%', top: '15%', size: 4, duration: 6 },
-  { left: '92%', top: '65%', size: 2.5, duration: 8 },
-  { left: '50%', top: '10%', size: 2, duration: 10 },
-  { left: '35%', top: '85%', size: 3, duration: 7.5 },
-]
 
 /* ========================================
    TESTIMONIAL CARD COMPONENT
@@ -131,12 +117,14 @@ function TestimonialCard({
       <motion.div
         className="relative overflow-hidden rounded-3xl bg-card p-7 sm:p-8"
         animate={{
-          boxShadow: isActive
-            ? '0 8px 40px rgba(15,13,10,0.1), 0 0 0 1px rgba(184,152,48,0.1), 0 0 50px rgba(184,152,48,0.08), inset 0 1px 0 rgba(184,152,48,0.2)'
-            : '0 4px 20px rgba(15,13,10,0.06), 0 0 0 1px rgba(184,152,48,0.05), inset 0 1px 0 rgba(184,152,48,0.15)',
-          y: isHovered ? -8 : 0,
+          boxShadow: isHovered
+            ? '0 12px 40px rgba(15,13,10,0.12), 0 0 0 1px rgba(184,152,48,0.15)'
+            : isActive
+              ? '0 8px 32px rgba(15,13,10,0.08), 0 0 0 1px rgba(184,152,48,0.1)'
+              : '0 4px 20px rgba(15,13,10,0.06), 0 0 0 1px rgba(184,152,48,0.05)',
+          y: isHovered ? -6 : 0,
         }}
-        transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+        transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
       >
         {/* Animated gold border on hover */}
         <motion.div
@@ -184,34 +172,10 @@ function TestimonialCard({
             />
           </div>
 
-          {/* Star rating */}
+          {/* Star rating — static */}
           <div className="flex items-center gap-1">
             {Array.from({ length: testimonial.rating }).map((_, si) => (
-              <motion.div
-                key={si}
-                animate={{
-                  scale: [1, 1.12, 1],
-                  filter: isHovered
-                    ? [
-                        'drop-shadow(0 0 3px rgba(184, 152, 48, 0.4))',
-                        'drop-shadow(0 0 8px rgba(184, 152, 48, 0.6))',
-                        'drop-shadow(0 0 3px rgba(184, 152, 48, 0.4))',
-                      ]
-                    : [
-                        'drop-shadow(0 0 2px rgba(184, 152, 48, 0.2))',
-                        'drop-shadow(0 0 4px rgba(184, 152, 48, 0.3))',
-                        'drop-shadow(0 0 2px rgba(184, 152, 48, 0.2))',
-                      ],
-                }}
-                transition={{
-                  duration: 2.5,
-                  repeat: Infinity,
-                  delay: si * 0.25,
-                  ease: 'easeInOut',
-                }}
-              >
-                <Star className="w-4 h-4 fill-gold-pale text-gold-pale" />
-              </motion.div>
+              <Star key={si} className="w-4 h-4 fill-gold-pale text-gold-pale" />
             ))}
           </div>
         </div>
@@ -359,31 +323,6 @@ export default function Testimonials() {
           )`,
         }}
       />
-
-      {/* Floating gold particles */}
-      {particles.map((p, i) => (
-        <motion.span
-          key={i}
-          className="absolute rounded-full pointer-events-none"
-          style={{
-            left: p.left,
-            top: p.top,
-            width: p.size,
-            height: p.size,
-            background: 'radial-gradient(circle, rgba(184,152,48,0.4) 0%, rgba(184,152,48,0) 70%)',
-          }}
-          animate={{
-            y: [-12, 12, -12],
-            opacity: [0.3, 0.7, 0.3],
-          }}
-          transition={{
-            duration: p.duration,
-            repeat: Infinity,
-            ease: 'easeInOut',
-            delay: i * 0.7,
-          }}
-        />
-      ))}
 
       {/* Top edge gradient fade */}
       <div
@@ -563,20 +502,10 @@ export default function Testimonials() {
             {/* Primary CTA */}
             <motion.a
               href="#contact"
-              whileHover={{ scale: 1.04, boxShadow: '0 0 50px rgba(184,152,48,0.35)' }}
+              whileHover={{ scale: 1.04 }}
               whileTap={{ scale: 0.97 }}
-              className="relative inline-flex items-center gap-2 bg-gradient-to-r from-champagne-gold to-gold-light text-espresso font-jost font-semibold text-sm tracking-[0.12em] uppercase rounded-full px-9 py-4 shadow-gold overflow-hidden group"
+              className="relative inline-flex items-center gap-2 bg-gradient-to-r from-champagne-gold to-gold-light text-espresso font-jost font-semibold text-sm tracking-[0.12em] uppercase rounded-full px-9 py-4 shadow-gold overflow-hidden group transition-shadow duration-300 hover:shadow-[0_0_50px_rgba(184,152,48,0.35)]"
             >
-              <motion.span
-                className="absolute inset-0 bg-gradient-to-r from-transparent via-white/25 to-transparent"
-                animate={{ x: ['-110%', '210%'] }}
-                transition={{
-                  duration: 3.0,
-                  repeat: Infinity,
-                  repeatDelay: 2.5,
-                  ease: 'easeInOut',
-                }}
-              />
               <span className="relative z-10">Book Your Consultation</span>
               <ArrowRight className="relative z-10 w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
             </motion.a>

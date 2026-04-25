@@ -159,7 +159,7 @@ export default function DentalTipsSection() {
                 aria-hidden="true"
               />
 
-              {/* Numbered gold corner badge — animated reveal on scroll */}
+              {/* Numbered gold corner badge */}
               <motion.span
                 className="absolute top-4 right-4 font-cormorant text-3xl font-semibold leading-none select-none md:text-4xl z-[5]"
                 style={{ color: 'rgba(184, 152, 48, 0.12)' }}
@@ -173,24 +173,15 @@ export default function DentalTipsSection() {
 
               {/* Content */}
               <div className="relative z-[15]">
-                {/* Icon with pulsing glow animation on hover */}
-                <motion.div
-                  animate={{
-                    y: [0, -3, 0],
-                  }}
-                  transition={{
-                    duration: 3,
-                    repeat: Infinity,
-                    delay: idx * 0.4,
-                    ease: "easeInOut",
-                  }}
+                {/* Icon — no floating animation */}
+                <div
                   whileHover={{
                     scale: 1.12,
                   }}
-                  className={`mb-4 inline-flex h-11 w-11 items-center justify-center rounded-xl ${tip.accent} shadow-sm`}
+                  className={`mb-4 inline-flex h-11 w-11 items-center justify-center rounded-xl transition-transform duration-300 ${tip.accent} shadow-sm`}
                 >
                   <tip.icon className="h-5 w-5" />
-                </motion.div>
+                </div>
 
                 {/* Title */}
                 <h3 className="font-dm-serif text-xl text-espresso text-shadow-espresso mb-1">
@@ -217,22 +208,16 @@ export default function DentalTipsSection() {
                 </p>
 
                 {/* Hover: "Learn More" reveal */}
-                <motion.div
+                <div
                   className="mt-4 overflow-hidden border-t border-soft-border/0 pt-0 transition-all duration-500 group-hover:border-soft-border group-hover:pt-3"
                 >
-                  <motion.span
+                  <span
                     className="inline-flex items-center gap-1 font-jost text-xs font-medium text-champagne-gold opacity-0 transition-opacity duration-300 group-hover:opacity-100"
                   >
                     Learn More
-                    <motion.span
-                      className="inline-block"
-                      animate={undefined}
-                      whileHover={{ x: 3 }}
-                    >
-                      <ArrowRight className="h-3 w-3" />
-                    </motion.span>
-                  </motion.span>
-                </motion.div>
+                    <ArrowRight className="h-3 w-3" />
+                  </span>
+                </div>
               </div>
 
               {/* Gold accent line — bottom */}
@@ -252,7 +237,7 @@ export default function DentalTipsSection() {
           <motion.a
             href="#contact"
             className="group/btn relative inline-flex items-center gap-2 rounded-full px-8 py-3.5 font-jost text-sm font-semibold uppercase tracking-widest text-white overflow-hidden chrome-gold-bg shadow-gold-strong"
-            whileHover={{ scale: 1.03, boxShadow: '0 8px 32px rgba(184, 152, 48, 0.35), 0 0 60px rgba(184, 152, 48, 0.15)' }}
+            whileHover={{ scale: 1.03, boxShadow: '0 8px 32px rgba(184, 152, 48, 0.35)' }}
             whileTap={{ scale: 0.97 }}
             transition={{ duration: 0.3 }}
           >

@@ -117,8 +117,6 @@ function CounterCard({
   index: number;
   isInView: boolean;
 }) {
-  const [pulseDone, setPulseDone] = useState(false);
-
   return (
     <motion.div
       initial={{ opacity: 0, y: 30 }}
@@ -154,18 +152,9 @@ function CounterCard({
             suffix={item.suffix}
             decimals={item.decimals}
             isInView={isInView}
-            onComplete={() => setPulseDone(true)}
+            onComplete={() => {}}
           />
         </div>
-        {/* Gold pulse glow when counting finishes */}
-        {pulseDone && (
-          <motion.div
-            initial={{ opacity: 0.6, scale: 0.8 }}
-            animate={{ opacity: 0, scale: 1.5 }}
-            transition={{ duration: 1.4, ease: 'easeOut' }}
-            className="absolute inset-0 -z-10 rounded-full bg-champagne-gold/25 blur-2xl"
-          />
-        )}
       </div>
 
       {/* Label */}

@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useRef, useEffect } from 'react'
-import { motion, AnimatePresence, useScroll, useTransform } from 'framer-motion'
+import { motion, AnimatePresence } from 'framer-motion'
 import { X, Clock, ArrowRight, CheckCircle, Star, Shield, Heart, Sparkles, Zap, Smile } from 'lucide-react'
 
 interface Service {
@@ -454,32 +454,32 @@ export default function ServiceDetailDrawer({ serviceKey, isOpen, onClose }: Ser
             transition={{ type: 'spring', damping: 30, stiffness: 300 }}
             className="fixed top-0 right-0 z-[70] h-full w-full max-w-lg overflow-hidden bg-ivory shadow-2xl"
           >
-            {/* Parallax background gradient */}
-            <DrawerBackground />
+            {/* Static background gradient */}
+            <div
+              className="absolute inset-0 z-[0] pointer-events-none"
+              aria-hidden="true"
+            >
+              <div
+                className="absolute -top-32 -left-32 w-64 h-64 rounded-full"
+                style={{
+                  background: 'radial-gradient(circle, rgba(184, 152, 48, 0.08) 0%, transparent 70%)',
+                }}
+              />
+              <div
+                className="absolute -bottom-48 -right-48 w-80 h-80 rounded-full"
+                style={{
+                  background: 'radial-gradient(circle, rgba(45, 107, 92, 0.05) 0%, transparent 70%)',
+                }}
+              />
+            </div>
 
             <div ref={drawerContentRef} className="relative h-full overflow-y-auto">
-              {/* Shimmer drawer handle/grip at top */}
+              {/* Drawer handle/grip at top */}
               <div className="sticky top-0 z-20 flex justify-center pt-3 pb-1 bg-ivory/90 backdrop-blur-sm">
-                <motion.div
-                  className="h-1 w-16 rounded-full overflow-hidden bg-champagne-gold/15 relative"
+                <div
+                  className="h-1 w-16 rounded-full bg-champagne-gold/20"
                   aria-hidden="true"
-                >
-                  <motion.div
-                    className="absolute inset-0 rounded-full"
-                    style={{
-                      background: 'linear-gradient(90deg, transparent, #B89830, #D4C08A, transparent)',
-                    }}
-                    animate={{
-                      x: ['-100%', '100%'],
-                    }}
-                    transition={{
-                      duration: 2,
-                      repeat: Infinity,
-                      ease: 'easeInOut',
-                      repeatDelay: 1,
-                    }}
-                  />
-                </motion.div>
+                />
               </div>
 
               {/* Header */}
@@ -514,7 +514,7 @@ export default function ServiceDetailDrawer({ serviceKey, isOpen, onClose }: Ser
                   </p>
                 </motion.div>
 
-                {/* What to Expect — Animated Step Indicators */}
+                {/* What to Expect — Step Indicators */}
                 <motion.div
                   initial={{ opacity: 0, y: 12 }}
                   animate={{ opacity: 1, y: 0 }}
@@ -614,7 +614,7 @@ export default function ServiceDetailDrawer({ serviceKey, isOpen, onClose }: Ser
                   </motion.div>
                 )}
 
-                {/* Pulsing "Book Now" CTA */}
+                {/* "Book Now" CTA */}
                 <motion.div
                   initial={{ opacity: 0, y: 12 }}
                   animate={{ opacity: 1, y: 0 }}
@@ -624,18 +624,6 @@ export default function ServiceDetailDrawer({ serviceKey, isOpen, onClose }: Ser
                   <motion.a
                     href="#contact"
                     onClick={onClose}
-                    animate={{
-                      boxShadow: [
-                        '0 0 0 0 rgba(184, 152, 48, 0.4)',
-                        '0 0 0 10px rgba(184, 152, 48, 0)',
-                        '0 0 0 0 rgba(184, 152, 48, 0)',
-                      ],
-                    }}
-                    transition={{
-                      duration: 2,
-                      repeat: Infinity,
-                      ease: 'easeInOut',
-                    }}
                     whileHover={{ scale: 1.02, boxShadow: '0 8px 30px -4px rgba(184, 152, 48, 0.4)' }}
                     whileTap={{ scale: 0.98 }}
                     className="flex w-full items-center justify-center gap-2 rounded-xl bg-[#B89830] py-4 font-jost text-sm font-semibold uppercase tracking-wider text-white transition-all duration-300 hover:bg-[#A07D1A]"
@@ -697,49 +685,6 @@ function StepTimeline({ steps }: { steps: string[] }) {
           </div>
         </motion.div>
       ))}
-    </div>
-  )
-}
-
-// Subtle parallax background gradient for the drawer
-function DrawerBackground() {
-  return (
-    <div
-      className="absolute inset-0 z-[0] pointer-events-none"
-      aria-hidden="true"
-    >
-      {/* Top-left subtle gold glow */}
-      <motion.div
-        className="absolute -top-32 -left-32 w-64 h-64 rounded-full"
-        style={{
-          background: 'radial-gradient(circle, rgba(184, 152, 48, 0.08) 0%, transparent 70%)',
-        }}
-        animate={{
-          y: [0, -15, 0],
-          x: [0, 10, 0],
-        }}
-        transition={{
-          duration: 8,
-          repeat: Infinity,
-          ease: 'easeInOut',
-        }}
-      />
-      {/* Bottom-right subtle teal glow */}
-      <motion.div
-        className="absolute -bottom-48 -right-48 w-80 h-80 rounded-full"
-        style={{
-          background: 'radial-gradient(circle, rgba(45, 107, 92, 0.05) 0%, transparent 70%)',
-        }}
-        animate={{
-          y: [0, 12, 0],
-          x: [0, -8, 0],
-        }}
-        transition={{
-          duration: 10,
-          repeat: Infinity,
-          ease: 'easeInOut',
-        }}
-      />
     </div>
   )
 }

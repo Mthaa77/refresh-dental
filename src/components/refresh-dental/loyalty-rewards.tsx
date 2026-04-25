@@ -93,35 +93,17 @@ function TierCard({ tier }: { tier: RewardTier }) {
       animate={{
         y: isHovered ? -4 : 0,
         boxShadow: isHovered
-          ? tier.isGold
-            ? '0 16px 48px -8px rgba(184, 152, 48, 0.3)'
-            : '0 12px 32px -8px rgba(0, 0, 0, 0.1)'
+          ? '0 8px 24px -4px rgba(0, 0, 0, 0.1)'
           : '0 2px 8px -2px rgba(0, 0, 0, 0.05)',
       }}
       transition={{ duration: 0.3 }}
     >
-      {/* Shimmer sweep animation on hover */}
-      <motion.div
-        className="pointer-events-none absolute inset-0 z-10"
-        animate={{ x: ['-100%', '100%'] }}
-        transition={{
-          duration: 1.2,
-          repeat: isHovered ? Infinity : 0,
-          repeatDelay: 0.8,
-          ease: 'linear',
-        }}
-        style={{
-          background: 'linear-gradient(90deg, transparent 0%, rgba(184, 152, 48, 0.08) 50%, transparent 100%)',
-        }}
-      />
-
-      {/* Gold border glow for Gold tier on hover */}
+      {/* Gold border glow for Gold tier on hover (CSS transition) */}
       {tier.isGold && (
-        <motion.div
-          className="pointer-events-none absolute inset-0 rounded-xl"
-          animate={{ opacity: isHovered ? 1 : 0 }}
-          transition={{ duration: 0.4 }}
+        <div
+          className="pointer-events-none absolute inset-0 rounded-xl transition-opacity duration-300"
           style={{
+            opacity: isHovered ? 1 : 0,
             padding: '1px',
             background:
               'linear-gradient(135deg, rgba(201,169,110,0.7) 0%, rgba(232,213,176,0.3) 50%, rgba(201,169,110,0.7) 100%)',
@@ -177,45 +159,12 @@ function TierCard({ tier }: { tier: RewardTier }) {
 }
 
 export default function LoyaltyRewards() {
-  // Deterministic floating coin/star positions
-  const floatingCoins = [
-    { x: '8%', y: '15%', delay: 0, icon: Star },
-    { x: '92%', y: '20%', delay: 1.0, icon: Gem },
-    { x: '5%', y: '80%', delay: 2.0, icon: Star },
-    { x: '90%', y: '75%', delay: 0.5, icon: Gem },
-    { x: '15%', y: '50%', delay: 1.5, icon: Star },
-    { x: '85%', y: '45%', delay: 2.5, icon: Gem },
-  ]
-
   return (
     <section
       id="rewards"
       className="relative overflow-hidden py-20 md:py-28"
       style={{ backgroundColor: '#E3DACA' }}
     >
-      {/* Floating gold coin/star icons that float up on scroll reveal */}
-      {floatingCoins.map((coin, i) => {
-        const Icon = coin.icon
-        return (
-          <motion.div
-            key={i}
-            className="absolute pointer-events-none z-[1]"
-            style={{ left: coin.x, top: coin.y }}
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: [0, 0.5, 0.3, 0.5, 0], y: [30, 10, 20, 5, -10] }}
-            viewport={{ once: false, margin: '-40px' }}
-            transition={{
-              duration: 4,
-              delay: coin.delay,
-              ease: 'easeInOut',
-              times: [0, 0.25, 0.5, 0.75, 1],
-            }}
-          >
-            <Icon className="h-4 w-4 text-champagne-gold/30" />
-          </motion.div>
-        )
-      })}
-
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <motion.div
@@ -273,7 +222,7 @@ export default function LoyaltyRewards() {
               ))}
             </motion.div>
 
-            {/* CTA */}
+            {/* CTA + Progress */}
             <motion.div
               initial={{ opacity: 0, y: 16 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -321,10 +270,10 @@ export default function LoyaltyRewards() {
                         viewport={{ once: true }}
                         transition={{ duration: 0.3, delay: 0.8 + visit * 0.1, ease: 'easeOut' }}
                       >
-                    <Star
-                      className={`h-3 w-3 ${visit <= 1 ? 'fill-white text-white' : 'text-champagne-gold/40'}`}
-                    />
-                  </motion.div>
+                        <Star
+                          className={`h-3 w-3 ${visit <= 1 ? 'fill-white text-white' : 'text-champagne-gold/40'}`}
+                        />
+                      </motion.div>
                     ))}
                   </div>
                   <span className="font-jost text-[10px] font-medium text-sage-teal">
@@ -441,19 +390,10 @@ export default function LoyaltyRewards() {
 
                   {/* Bottom row */}
                   <div className="flex items-end justify-between">
-                    {/* Gem icon */}
-                    <motion.div
-                      animate={{
-                        rotate: [0, 10, -10, 0],
-                      }}
-                      transition={{
-                        duration: 4,
-                        repeat: Infinity,
-                        ease: 'easeInOut',
-                      }}
-                    >
+                    {/* Static gem icon (removed infinite rotation) */}
+                    <div>
                       <Gem className="h-10 w-10 text-espresso/30" />
-                    </motion.div>
+                    </div>
 
                     {/* Card number decorative */}
                     <div className="font-jost text-xs font-light tracking-[0.3em] text-espresso/40">
@@ -469,7 +409,6 @@ export default function LoyaltyRewards() {
                 style={{
                   background:
                     'linear-gradient(180deg, rgba(201,169,110,0.15) 0%, transparent 100%)',
-                  filter: 'blur(8px)',
                 }}
                 aria-hidden="true"
               />

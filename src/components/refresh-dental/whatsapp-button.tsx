@@ -2,14 +2,12 @@
 
 import { motion, AnimatePresence, useScroll, useMotionValueEvent } from 'framer-motion'
 import { MessageCircle } from 'lucide-react'
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect } from 'react'
 
 export default function WhatsAppButton() {
   const [isHovered, setIsHovered] = useState(false)
   const [isVisible, setIsVisible] = useState(false)
-  const [isIdleBouncing, setIsIdleBouncing] = useState(false)
   const [showNotification, setShowNotification] = useState(true)
-  const idleTimerRef = useRef<NodeJS.Timeout | null>(null)
 
   const { scrollY } = useScroll()
 
@@ -19,18 +17,6 @@ export default function WhatsAppButton() {
       setIsVisible(true)
     }
   })
-
-  /* Idle bounce after 5 seconds of visibility */
-  useEffect(() => {
-    if (isVisible) {
-      idleTimerRef.current = setTimeout(() => {
-        setIsIdleBouncing(true)
-      }, 5000)
-    }
-    return () => {
-      if (idleTimerRef.current) clearTimeout(idleTimerRef.current)
-    }
-  }, [isVisible])
 
   /* Hide notification dot after 10 seconds */
   useEffect(() => {
@@ -69,7 +55,7 @@ export default function WhatsAppButton() {
             )}
           </AnimatePresence>
 
-          {/* Button container with pulse rings */}
+          {/* Button container */}
           <motion.a
             href="https://wa.me/27614164649"
             target="_blank"
@@ -80,17 +66,6 @@ export default function WhatsAppButton() {
             onHoverStart={() => setIsHovered(true)}
             onHoverEnd={() => setIsHovered(false)}
             aria-label="Chat on WhatsApp"
-            /* Idle bounce animation when visible >5s */
-            animate={
-              isIdleBouncing && !isHovered
-                ? { y: [0, -4, 0] }
-                : { y: 0 }
-            }
-            transition={
-              isIdleBouncing && !isHovered
-                ? { duration: 3, repeat: Infinity, ease: 'easeInOut' }
-                : { type: 'spring', stiffness: 300, damping: 15 }
-            }
           >
             {/* Green background with glass-morphism */}
             <div
@@ -114,63 +89,7 @@ export default function WhatsAppButton() {
               }}
             />
 
-            {/* Pulsing gold ring (outer) */}
-            <motion.div
-              className="absolute inset-0 rounded-full"
-              style={{ border: '2px solid rgba(184, 152, 48, 0.5)' }}
-              animate={{
-                scale: [1, 1.7],
-                opacity: [0.6, 0],
-              }}
-              transition={{
-                duration: 2.5,
-                repeat: Infinity,
-                ease: 'easeOut',
-              }}
-            />
-            {/* Pulsing gold ring (inner) */}
-            <motion.div
-              className="absolute inset-0 rounded-full"
-              style={{ border: '1.5px solid rgba(184, 152, 48, 0.35)' }}
-              animate={{
-                scale: [1, 1.5],
-                opacity: [0.5, 0],
-              }}
-              transition={{
-                duration: 2.5,
-                repeat: Infinity,
-                ease: 'easeOut',
-                delay: 0.5,
-              }}
-            />
-            {/* Green concentric pulse rings */}
-            <motion.div
-              className="absolute inset-0 rounded-full border-2 border-[#25D366]/50"
-              animate={{
-                scale: [1, 1.6],
-                opacity: [0.6, 0],
-              }}
-              transition={{
-                duration: 2,
-                repeat: Infinity,
-                ease: 'easeOut',
-              }}
-            />
-            <motion.div
-              className="absolute inset-0 rounded-full border-2 border-[#25D366]/30"
-              animate={{
-                scale: [1, 1.8],
-                opacity: [0.4, 0],
-              }}
-              transition={{
-                duration: 2,
-                repeat: Infinity,
-                ease: 'easeOut',
-                delay: 0.7,
-              }}
-            />
-
-            {/* Notification dot (small red circle, top-right, pulsing) */}
+            {/* Notification dot (small red circle, top-right) */}
             <AnimatePresence>
               {showNotification && (
                 <motion.span
@@ -181,13 +100,6 @@ export default function WhatsAppButton() {
                   transition={{ type: 'spring', stiffness: 400, damping: 15 }}
                 >
                   <span className="relative flex h-3.5 w-3.5">
-                    {/* Pulsing ring behind dot */}
-                    <motion.span
-                      className="absolute inset-0 rounded-full bg-red-500"
-                      animate={{ scale: [1, 1.8], opacity: [0.6, 0] }}
-                      transition={{ duration: 1.5, repeat: Infinity, ease: 'easeOut' }}
-                    />
-                    {/* Solid red dot */}
                     <span className="relative inline-flex h-3.5 w-3.5 rounded-full bg-red-500 border-2 border-white" />
                   </span>
                 </motion.span>

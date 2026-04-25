@@ -1,7 +1,6 @@
 'use client';
 
-import { useRef, useState } from 'react';
-import { motion, useScroll, useTransform } from 'framer-motion';
+import { useState } from 'react';
 import { Linkedin, ArrowRight, ChevronDown, Phone, MessageCircle, Calendar } from 'lucide-react';
 
 const credentials = [
@@ -10,83 +9,22 @@ const credentials = [
 ];
 
 export default function AboutSection() {
-  const sectionRef = useRef<HTMLElement>(null);
-  const imageRef = useRef<HTMLDivElement>(null);
   const [showMore, setShowMore] = useState(false);
-
-  const { scrollYProgress } = useScroll({
-    target: sectionRef,
-    offset: ['start end', 'end start'],
-  });
-
-  const imageY = useTransform(scrollYProgress, [0, 1], [60, -60]);
-  const imageScale = useTransform(scrollYProgress, [0, 0.5, 1], [1.05, 1, 1.02]);
-
-  // Gold accent line width based on scroll
-  const accentLineWidth = useTransform(scrollYProgress, [0.1, 0.4], ['0%', '100%']);
-
-  const textContainerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.12,
-        delayChildren: 0.2,
-      },
-    },
-  };
-
-  const textItemVariants = {
-    hidden: { opacity: 0, x: 40 },
-    visible: {
-      opacity: 1,
-      x: 0,
-      transition: {
-        duration: 0.8,
-        ease: [0.25, 0.4, 0.25, 1],
-      },
-    },
-  };
-
-  const credentialVariants = {
-    hidden: { opacity: 0, scale: 0.85 },
-    visible: (i: number) => ({
-      opacity: 1,
-      scale: 1,
-      transition: {
-        delay: 0.8 + i * 0.15,
-        duration: 0.5,
-        ease: [0.25, 0.4, 0.25, 1],
-      },
-    }),
-  };
 
   return (
     <section
       id="about"
-      ref={sectionRef}
       className="relative bg-ivory py-24 overflow-hidden"
     >
       <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-16 xl:px-24 overflow-hidden">
         <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-20">
           {/* Left — Portrait Image with gold glow */}
           <div className="relative w-full lg:w-[45%] flex-shrink-0 lg:-ml-12 xl:-ml-20 overflow-hidden">
-            {/* Gold glow behind portrait */}
-            <motion.div
+            {/* Static gold glow behind portrait */}
+            <div
               className="absolute -inset-4 rounded-3xl bg-champagne-gold/10 blur-2xl pointer-events-none"
-              animate={{
-                opacity: [0.3, 0.6, 0.3],
-                scale: [1, 1.02, 1],
-              }}
-              transition={{
-                duration: 6,
-                repeat: Infinity,
-                ease: 'easeInOut',
-              }}
             />
-            <motion.div
-              ref={imageRef}
-              style={{ y: imageY, scale: imageScale }}
+            <div
               className="relative w-full aspect-[3/4] rounded-2xl overflow-hidden"
             >
               <img
@@ -97,96 +35,81 @@ export default function AboutSection() {
                 decoding="async"
               />
               <div className="absolute inset-0 border-2 border-champagne-gold/20 rounded-2xl pointer-events-none" />
-            </motion.div>
+            </div>
           </div>
 
           {/* Right — Content */}
-          <motion.div
-            variants={textContainerVariants}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: '-80px' }}
-            className="w-full lg:w-[55%] lg:py-8 shadow-elevated rounded-3xl bg-card border-soft-border p-6 md:p-10"
-          >
+          <div className="w-full lg:w-[55%] lg:py-8 shadow-elevated rounded-3xl bg-card border-soft-border p-6 md:p-10 animate-fade-in-up">
             {/* Gold label with blue accent dot */}
-            <motion.div variants={textItemVariants} className="flex items-center mb-6">
+            <div className="flex items-center mb-6">
               <span className="inline-block w-1.5 h-1.5 rounded-full bg-accent-blue mr-2" />
               <span className="inline-block font-jost text-xs tracking-[0.15em] text-champagne-gold uppercase">
                 Meet Your Dentist
               </span>
-            </motion.div>
+            </div>
 
-            <motion.p className="font-jost text-base text-brown-muted max-w-md leading-relaxed mb-6">
+            <p className="font-jost text-base text-brown-muted max-w-md leading-relaxed mb-6">
               Transforming lives through exceptional dental care — one smile at a time.
-            </motion.p>
+            </p>
 
-            {/* Animated gold accent line */}
-            <motion.div
-              style={{ width: accentLineWidth }}
-              className="h-[2px] bg-gradient-to-r from-champagne-gold to-champagne-gold/20 mb-6 origin-left"
+            {/* Static gold accent line */}
+            <div
+              className="h-[2px] bg-gradient-to-r from-champagne-gold to-champagne-gold/20 mb-6 origin-left w-full"
             />
 
             {/* H2 Name */}
-            <motion.h2
-              variants={textItemVariants}
-              className="font-cormorant font-light text-4xl md:text-5xl lg:text-6xl leading-tight mb-6 gold-gradient-text text-shadow-espresso"
+            <h2
+              className="font-cormorant font-light text-4xl md:text-5xl lg:text-6xl leading-tight mb-6 gold-gradient-text text-shadow-espresso animate-fade-in-up"
+              style={{ animationDelay: '0.1s' }}
             >
               Dr. Lebogang Malunga
-            </motion.h2>
+            </h2>
 
             {/* Credential badges */}
-            <motion.div
-              className="flex flex-wrap gap-2 mb-6"
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, margin: '-80px' }}
-            >
+            <div className="flex flex-wrap gap-2 mb-6 animate-fade-in-up" style={{ animationDelay: '0.2s' }}>
               {credentials.map((cred, i) => (
-                <motion.span
+                <span
                   key={cred.label}
-                  custom={i}
-                  variants={credentialVariants}
                   title={cred.desc}
                   className="inline-flex items-center gap-1.5 bg-champagne-gold/10 border border-champagne-gold/25 text-champagne-gold rounded-full px-3.5 py-1 font-jost text-xs tracking-wider uppercase cursor-default hover-lift"
+                  style={{ animationDelay: `${0.8 + i * 0.15}s` }}
                 >
                   <span className="font-semibold">{cred.label}</span>
                   <span className="hidden sm:inline text-champagne-gold/60 text-[10px]">{cred.desc}</span>
-                </motion.span>
+                </span>
               ))}
-            </motion.div>
+            </div>
 
             {/* Pull Quote */}
-            <motion.blockquote
-              variants={textItemVariants}
-              className="font-cormorant italic text-xl md:text-2xl text-sage-teal text-shadow-teal mb-8 leading-relaxed"
+            <blockquote
+              className="font-cormorant italic text-xl md:text-2xl text-sage-teal text-shadow-teal mb-8 leading-relaxed animate-fade-in-up"
+              style={{ animationDelay: '0.3s' }}
             >
               &ldquo;A revitalised smile doesn&rsquo;t just change your appearance
               — it changes your life.&rdquo;
-            </motion.blockquote>
+            </blockquote>
 
             {/* Subtitle */}
-            <motion.p
-              variants={textItemVariants}
-              className="text-lg md:text-xl section-subheading mb-6"
+            <p
+              className="text-lg md:text-xl section-subheading mb-6 animate-fade-in-up"
+              style={{ animationDelay: '0.35s' }}
             >
               Founder & Principal Dentist, Refresh Dental
-            </motion.p>
+            </p>
 
             {/* Bio Paragraph */}
-            <motion.div variants={textItemVariants}>
+            <div className="animate-fade-in-up" style={{ animationDelay: '0.4s' }}>
               <p className="font-jost font-light text-brown-warm leading-relaxed mb-4 max-w-lg">
                 Dr. Lebogang Malunga founded Refresh Dental with a bold vision — to transform dental care from a clinical necessity into a life-changing experience that celebrates each patient&rsquo;s unique journey to confidence.
               </p>
 
               {/* Expandable read more section */}
-              <motion.div
-                initial={false}
-                animate={{
-                  height: showMore ? 'auto' : 0,
+              <div
+                className="overflow-hidden transition-all duration-500 ease-out"
+                style={{
+                  maxHeight: showMore ? '600px' : '0px',
                   opacity: showMore ? 1 : 0,
                 }}
-                transition={{ duration: 0.5, ease: [0.25, 0.4, 0.25, 1] }}
-                className="overflow-hidden"
               >
                 <p className="font-jost font-light text-brown-warm leading-relaxed mb-4 max-w-lg">
                   With over a decade of expertise in cosmetic and restorative dentistry, Dr. Malunga combines artistry with cutting-edge science to deliver results that go beyond expectations.
@@ -198,7 +121,7 @@ export default function AboutSection() {
                   approach is rooted in the belief that everyone deserves access to
                   compassionate, high-quality dental care.
                 </p>
-              </motion.div>
+              </div>
 
               {/* Gold "Read More" toggle */}
               <button
@@ -206,19 +129,19 @@ export default function AboutSection() {
                 className="group inline-flex items-center gap-1.5 text-champagne-gold font-jost text-sm font-medium tracking-wider uppercase mb-8 hover:text-[#A07D1A] transition-colors duration-300"
               >
                 {showMore ? 'Read Less' : 'Read More'}
-                <motion.span
-                  animate={{ rotate: showMore ? 180 : 0 }}
-                  transition={{ duration: 0.3 }}
+                <span
+                  className="transition-transform duration-300"
+                  style={{ transform: showMore ? 'rotate(180deg)' : 'rotate(0deg)' }}
                 >
                   <ChevronDown className="w-4 h-4" />
-                </motion.span>
+                </span>
               </button>
-            </motion.div>
+            </div>
 
             {/* Contact Info */}
-            <motion.div
-              variants={textItemVariants}
-              className="font-jost text-sm text-brown-warm mb-8 space-y-1"
+            <div
+              className="font-jost text-sm text-brown-warm mb-8 space-y-1 animate-fade-in-up"
+              style={{ animationDelay: '0.45s' }}
             >
               <a
                 href="mailto:drlebo@refreshdental.co.za"
@@ -232,10 +155,10 @@ export default function AboutSection() {
               >
                 061 416 4649
               </a>
-            </motion.div>
+            </div>
 
             {/* CTA Button */}
-            <motion.div variants={textItemVariants} className="mb-8">
+            <div className="mb-8 animate-fade-in-up" style={{ animationDelay: '0.5s' }}>
               <a
                 href="#contact"
                 className="inline-flex items-center gap-2 border-2 border-sage-teal text-sage-teal hover:bg-sage-teal hover:text-white font-jost font-medium text-sm tracking-wider uppercase rounded-full px-8 py-3 transition-all duration-300 shadow-gold"
@@ -243,12 +166,12 @@ export default function AboutSection() {
                 Book Your Consultation
                 <ArrowRight className="w-4 h-4" />
               </a>
-            </motion.div>
+            </div>
 
             {/* Trust Row */}
-            <motion.div
-              variants={textItemVariants}
-              className="flex items-center gap-3"
+            <div
+              className="flex items-center gap-3 animate-fade-in-up"
+              style={{ animationDelay: '0.55s' }}
             >
               <div className="flex items-center justify-center w-9 h-9 rounded-full bg-sand border border-soft-border">
                 <Linkedin className="w-4 h-4 text-brown-warm" />
@@ -256,23 +179,17 @@ export default function AboutSection() {
               <span className="font-jost text-sm text-brown-warm">
                 HPCSA Registered
               </span>
-            </motion.div>
-          </motion.div>
+            </div>
+          </div>
         </div>
 
         {/* Inline CTA Bar */}
-        <motion.div
-          initial={{ opacity: 0, y: 24 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: '-40px' }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-          className="mt-16 flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4"
-        >
+        <div className="mt-16 flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 animate-fade-in-up" style={{ animationDelay: '0.2s' }}>
           <a
             href="tel:+27614164649"
             className="inline-flex items-center gap-2 bg-sage-teal text-white font-jost text-sm font-medium tracking-wider uppercase rounded-full px-6 py-3 transition-all duration-300 hover:bg-sage-teal/90 hover:shadow-teal"
           >
-            <Phone className="w-4 h-4" />
+            <Phone className="w-4 w-4" />
             Call Us
           </a>
           <a
@@ -281,17 +198,17 @@ export default function AboutSection() {
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 bg-green-600 text-white font-jost text-sm font-medium tracking-wider uppercase rounded-full px-6 py-3 transition-all duration-300 hover:bg-green-700 hover:shadow-lg"
           >
-            <MessageCircle className="w-4 h-4" />
+            <MessageCircle className="w-4 w-4" />
             WhatsApp
           </a>
           <a
             href="#contact"
             className="inline-flex items-center gap-2 bg-champagne-gold text-espresso font-jost text-sm font-semibold tracking-wider uppercase rounded-full px-6 py-3 transition-all duration-300 hover:bg-champagne-gold/90 hover:shadow-gold"
           >
-            <Calendar className="w-4 h-4" />
+            <Calendar className="w-4 w-4" />
             Book Now
           </a>
-        </motion.div>
+        </div>
       </div>
     </section>
   );

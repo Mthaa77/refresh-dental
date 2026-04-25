@@ -76,7 +76,7 @@ function TechnologyCard({ tech, idx }: { tech: (typeof technologies)[number]; id
         className="relative rounded-2xl border border-champagne-gold/10 bg-white p-6 shadow-premium hover-lift hover:shadow-gold transition-all duration-300 hover:-translate-y-1"
         style={{
           boxShadow: isHovered
-            ? '0 0 0 1px rgba(184, 152, 48, 0.3), 0 12px 40px -8px rgba(184, 152, 48, 0.12), 0 8px 32px -4px rgba(59, 111, 160, 0.08)'
+            ? '0 0 0 1px rgba(184, 152, 48, 0.3), 0 12px 40px -8px rgba(184, 152, 48, 0.12)'
             : undefined,
           borderColor: isHovered ? 'rgba(184, 152, 48, 0.3)' : undefined,
         }}
@@ -84,32 +84,31 @@ function TechnologyCard({ tech, idx }: { tech: (typeof technologies)[number]; id
         {/* Gold accent line on hover */}
         <div className="absolute left-0 top-0 h-[2px] w-0 rounded-full bg-gradient-to-r from-champagne-gold to-champagne-gold-light transition-all duration-500 group-hover:w-full" />
 
-        {/* Icon with glow ring */}
+        {/* Icon with static glow ring on hover */}
         <div className="mb-4 relative">
-          {/* Animated glow ring — gold + subtle blue on hover */}
-          <motion.div
-            className="absolute inset-0 rounded-full"
-            animate={{
+          {/* Glow ring — CSS transition only */}
+          <div
+            className="absolute inset-0 rounded-full transition-shadow duration-500"
+            style={{
               boxShadow: isHovered
-                ? '0 0 20px rgba(184, 152, 48, 0.2), 0 0 40px rgba(184, 152, 48, 0.1), 0 0 30px rgba(59, 111, 160, 0.08)'
-                : '0 0 0px rgba(184, 152, 48, 0)',
+                ? '0 0 20px rgba(184, 152, 48, 0.2), 0 0 40px rgba(184, 152, 48, 0.1)'
+                : 'none',
             }}
-            transition={{ duration: 0.5, ease: 'easeOut' }}
           />
-          <motion.div
-            className="flex h-14 w-14 items-center justify-center rounded-full bg-champagne-gold/8 transition-transform duration-300 group-hover:scale-110"
-            animate={{
+          <div
+            className="flex h-14 w-14 items-center justify-center rounded-full bg-champagne-gold/8 transition-all duration-300 group-hover:scale-110"
+            style={{
               boxShadow: isHovered
-                ? '0 0 0 4px rgba(184, 152, 48, 0.08), 0 0 0 8px rgba(184, 152, 48, 0.04), 0 0 0 6px rgba(59, 111, 160, 0.05)'
-                : '0 0 0 0px rgba(184, 152, 48, 0)',
+                ? '0 0 0 4px rgba(184, 152, 48, 0.08), 0 0 0 8px rgba(184, 152, 48, 0.04)'
+                : 'none',
+              transition: 'box-shadow 0.4s ease, transform 0.3s ease',
             }}
-            transition={{ duration: 0.4, ease: 'easeOut' }}
           >
             <Icon
               className="h-6 w-6 text-champagne-gold"
               strokeWidth={1.5}
             />
-          </motion.div>
+          </div>
         </div>
 
         {/* Content */}
@@ -201,32 +200,24 @@ export default function TechnologySection() {
             Our Technology
           </span>
           <div className="flex items-center justify-center gap-3">
-            {/* Animated settings gear icon */}
-            <motion.div
-              animate={{ rotate: 360 }}
-              transition={{ duration: 20, repeat: Infinity, ease: 'linear' }}
-              className="text-champagne-gold/40"
-            >
+            {/* Static settings gear icon */}
+            <div className="text-champagne-gold/40">
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
                 <circle cx="12" cy="12" r="3" />
                 <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z" />
               </svg>
-            </motion.div>
+            </div>
             <h2 className="section-heading text-4xl md:text-5xl lg:text-6xl gold-gradient-text text-shadow-espresso">
               Advanced Technology, Gentle Care
             </h2>
-            {/* Animated chip icon on right */}
-            <motion.div
-              animate={{ rotate: -360 }}
-              transition={{ duration: 25, repeat: Infinity, ease: 'linear' }}
-              className="text-champagne-gold/40"
-            >
+            {/* Static chip icon on right */}
+            <div className="text-champagne-gold/40">
               <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
                 <rect x="4" y="4" width="16" height="16" rx="2" />
                 <rect x="9" y="9" width="6" height="6" />
                 <path d="M15 2v2" /><path d="M15 20v2" /><path d="M2 15h2" /><path d="M2 9h2" /><path d="M20 15h2" /><path d="M20 9h2" /><path d="M9 2v2" /><path d="M9 20v2" />
               </svg>
-            </motion.div>
+            </div>
           </div>
           <motion.p
             initial={{ opacity: 0, y: 15 }}

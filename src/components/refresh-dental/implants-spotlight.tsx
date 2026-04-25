@@ -143,7 +143,7 @@ export default function ImplantsSpotlight() {
                 href="#contact"
                 whileHover={{
                   scale: 1.05,
-                  boxShadow: '0 0 35px rgba(184, 152, 48, 0.25)',
+                  boxShadow: '0 12px 24px rgba(184, 152, 48, 0.2)',
                 }}
                 whileTap={{ scale: 0.97 }}
                 className="inline-flex items-center gap-2 rounded-full border-2 border-champagne-gold/70 text-champagne-gold px-8 py-4 font-jost text-sm font-semibold tracking-wider uppercase transition-all duration-300 hover:bg-champagne-gold hover:text-espresso"

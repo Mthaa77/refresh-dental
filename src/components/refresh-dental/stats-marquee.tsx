@@ -1,7 +1,5 @@
 'use client'
 
-import { motion } from 'framer-motion'
-
 const marqueeItems = [
   { text: '★ 5.0 Google Rating', color: 'gold' as const },
   { text: '500+ Happy Patients', color: 'gold' as const },
@@ -38,6 +36,17 @@ export default function StatsMarquee() {
 
   return (
     <section className="relative overflow-hidden bg-espresso py-5">
+      {/* CSS-only marquee animation */}
+      <style>{`
+        @keyframes marquee-left {
+          from { transform: translateX(0); }
+          to { transform: translateX(-50%); }
+        }
+        .stats-marquee-track {
+          animation: marquee-left 30s linear infinite;
+        }
+      `}</style>
+
       {/* Grain texture overlay */}
       <div className="pointer-events-none absolute inset-0 opacity-[0.04]"
         style={{
@@ -61,17 +70,7 @@ export default function StatsMarquee() {
         }}
       />
 
-      <motion.div
-        className="flex items-center gap-8 whitespace-nowrap"
-        animate={{ x: ['0%', '-50%'] }}
-        transition={{
-          x: {
-            duration: 30,
-            repeat: Infinity,
-            ease: 'linear',
-          },
-        }}
-      >
+      <div className="flex items-center gap-8 whitespace-nowrap stats-marquee-track">
         {items.map((item, i) => (
           <div key={i} className="flex items-center gap-8 font-jost text-sm tracking-wide">
             <span className="uppercase">
@@ -80,7 +79,7 @@ export default function StatsMarquee() {
             <span className="text-champagne-gold/40 text-xs">◆</span>
           </div>
         ))}
-      </motion.div>
+      </div>
     </section>
   )
 }

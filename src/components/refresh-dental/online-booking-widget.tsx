@@ -181,25 +181,23 @@ export default function OnlineBookingWidget() {
                   </h3>
                 </div>
                 <div className="flex items-center gap-2">
-                  <motion.button
+                  <button
                     onClick={handlePrevMonth}
                     className="flex h-8 w-8 items-center justify-center rounded-lg border border-soft-border bg-white/80 text-brown-warm hover:border-champagne-gold hover:text-champagne-gold transition-colors"
-                    whileTap={{ scale: 0.92 }}
                     aria-label="Previous month"
                   >
                     <ChevronLeft className="h-4 w-4" />
-                  </motion.button>
+                  </button>
                   <span className="font-jost text-sm font-medium text-espresso min-w-[140px] text-center">
                     {MONTHS[currentMonth]} {currentYear}
                   </span>
-                  <motion.button
+                  <button
                     onClick={handleNextMonth}
                     className="flex h-8 w-8 items-center justify-center rounded-lg border border-soft-border bg-white/80 text-brown-warm hover:border-champagne-gold hover:text-champagne-gold transition-colors"
-                    whileTap={{ scale: 0.92 }}
                     aria-label="Next month"
                   >
                     <ChevronRight className="h-4 w-4" />
-                  </motion.button>
+                  </button>
                 </div>
               </div>
 
@@ -226,7 +224,7 @@ export default function OnlineBookingWidget() {
                   const isSelected = selectedDate === item.day && item.isCurrentMonth
 
                   return (
-                    <motion.button
+                    <button
                       key={idx}
                       onClick={() => handleDateSelect(item.day, item.isCurrentMonth)}
                       disabled={!available && item.isCurrentMonth}
@@ -238,13 +236,12 @@ export default function OnlineBookingWidget() {
                         ${isSelected ? 'bg-champagne-gold text-white shadow-md' : ''}
                         ${todayDate && !isSelected ? 'ring-1 ring-champagne-gold/40' : ''}
                       `}
-                      whileTap={available ? { scale: 0.9 } : undefined}
                     >
                       {item.day}
                       {todayDate && !isSelected && (
                         <span className="absolute bottom-0.5 left-1/2 -translate-x-1/2 h-1 w-1 rounded-full bg-champagne-gold" />
                       )}
-                    </motion.button>
+                    </button>
                   )
                 })}
               </div>
@@ -280,7 +277,7 @@ export default function OnlineBookingWidget() {
                       const isFull = slot.status === 'full'
 
                       return (
-                        <motion.button
+                        <button
                           key={slot.time}
                           onClick={() => {
                             if (!isFull) setSelectedTime(slot.time)
@@ -295,7 +292,6 @@ export default function OnlineBookingWidget() {
                                 : 'border-soft-border bg-white/80 hover:border-champagne-gold/50 hover:bg-champagne-gold/[0.04] cursor-pointer'
                             }
                           `}
-                          whileTap={!isFull ? { scale: 0.95 } : undefined}
                         >
                           <span
                             className={`font-jost text-sm font-semibold ${
@@ -320,15 +316,11 @@ export default function OnlineBookingWidget() {
                             {isFull ? 'Full' : slot.status === 'limited' ? 'Limited' : 'Available'}
                           </span>
                           {isSelectedTime && (
-                            <motion.div
-                              initial={{ scale: 0 }}
-                              animate={{ scale: 1 }}
-                              className="absolute top-1.5 right-1.5"
-                            >
+                            <div className="absolute top-1.5 right-1.5">
                               <Check className="h-3.5 w-3.5 text-champagne-gold" strokeWidth={3} />
-                            </motion.div>
+                            </div>
                           )}
-                        </motion.button>
+                        </button>
                       )
                     })}
                   </div>
@@ -371,15 +363,13 @@ export default function OnlineBookingWidget() {
                       </div>
 
                       {/* Confirm Button */}
-                      <motion.a
+                      <a
                         href={confirmUrl}
                         className="flex items-center justify-center gap-2 w-full rounded-xl bg-champagne-gold px-5 py-3 font-jost text-sm font-semibold text-white shadow-md hover:bg-champagne-gold/90 transition-colors"
-                        whileHover={{ scale: 1.02 }}
-                        whileTap={{ scale: 0.98 }}
                       >
                         <Check className="h-4 w-4" strokeWidth={2.5} />
                         Confirm Booking
-                      </motion.a>
+                      </a>
 
                       <p className="font-jost text-[11px] text-brown-muted/70 text-center">
                         You&apos;ll be redirected to our contact form to complete your booking

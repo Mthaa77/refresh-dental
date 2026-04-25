@@ -16,33 +16,15 @@ export default function VideoCtaSection() {
         background: 'linear-gradient(180deg, #2C1810 0%, #0f0c08 50%, #2C1810 100%)',
       }}
     >
-      {/* Floating gold orbs — decorative background */}
+      {/* Static gold orbs — no floating animation */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
-        <motion.div
-          animate={{
-            x: [0, 30, -20, 0],
-            y: [0, -40, 20, 0],
-            scale: [1, 1.1, 0.95, 1],
-          }}
-          transition={{ duration: 18, repeat: Infinity, ease: 'easeInOut' }}
+        <div
           className="absolute top-[10%] left-[15%] h-64 w-64 rounded-full bg-champagne-gold/[0.07] blur-3xl"
         />
-        <motion.div
-          animate={{
-            x: [0, -25, 35, 0],
-            y: [0, 30, -15, 0],
-            scale: [1, 0.95, 1.1, 1],
-          }}
-          transition={{ duration: 22, repeat: Infinity, ease: 'easeInOut' }}
+        <div
           className="absolute top-[40%] right-[10%] h-80 w-80 rounded-full bg-champagne-gold/[0.05] blur-3xl"
         />
-        <motion.div
-          animate={{
-            x: [0, 20, -30, 0],
-            y: [0, -20, 40, 0],
-            scale: [1, 1.05, 0.9, 1],
-          }}
-          transition={{ duration: 15, repeat: Infinity, ease: 'easeInOut' }}
+        <div
           className="absolute bottom-[10%] left-[50%] h-56 w-56 rounded-full bg-champagne-gold/[0.06] blur-3xl"
         />
       </div>
@@ -102,20 +84,18 @@ export default function VideoCtaSection() {
             href="#contact"
             className="group relative inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-champagne-gold to-[#A07D1A] px-8 py-4 font-jost text-sm font-semibold uppercase tracking-wider text-white shadow-gold transition-all duration-300 hover:shadow-gold-strong hover:-translate-y-0.5 active:scale-[0.97] overflow-hidden"
           >
-            {/* Shimmer overlay */}
-            <motion.div
-              className="absolute inset-0 pointer-events-none"
-              animate={{ x: ['-100%', '200%'] }}
-              transition={{ duration: 3, repeat: Infinity, ease: 'linear', repeatDelay: 2 }}
-            >
-              <div
-                className="h-full w-1/3"
-                style={{
-                  background:
-                    'linear-gradient(90deg, transparent, rgba(255,255,255,0.25), transparent)',
-                }}
-              />
-            </motion.div>
+            {/* CSS shimmer overlay on hover */}
+            <div className="absolute inset-0 pointer-events-none">
+              <div className="-translate-x-[120%] group-hover:translate-x-[400%] transition-transform duration-[700ms] ease-[cubic-bezier(0.25,0.4,0.25,1)]">
+                <div
+                  className="h-full w-1/3"
+                  style={{
+                    background:
+                      'linear-gradient(90deg, transparent, rgba(255,255,255,0.25), transparent)',
+                  }}
+                />
+              </div>
+            </div>
             <span className="relative z-10">Book Your Free Consultation</span>
             <ArrowRight className="relative z-10 h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
           </a>

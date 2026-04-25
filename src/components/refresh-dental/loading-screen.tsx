@@ -7,31 +7,6 @@ const LOGO_URL = '/images/refresh-dental-logo.jpg';
 
 const SESSION_KEY = 'refresh-dental-loading-seen';
 
-// Deterministic sparkle positions around the logo
-const sparkleParticles = [
-  { x: '30%', y: '25%', size: 6, delay: 0, duration: 3.5 },
-  { x: '70%', y: '22%', size: 4, delay: 0.5, duration: 4.2 },
-  { x: '22%', y: '60%', size: 5, delay: 1.0, duration: 3.8 },
-  { x: '78%', y: '58%', size: 4, delay: 0.8, duration: 4.5 },
-  { x: '45%', y: '18%', size: 3, delay: 1.5, duration: 3.2 },
-  { x: '55%', y: '72%', size: 5, delay: 0.3, duration: 4.0 },
-  { x: '18%', y: '40%', size: 4, delay: 1.8, duration: 3.6 },
-  { x: '82%', y: '38%', size: 3, delay: 2.0, duration: 4.3 },
-];
-
-const sparkleFloat = (p: { delay: number; duration: number }) => ({
-  opacity: [0, 0.7, 0.3, 0.7, 0],
-  scale: [0, 1, 0.6, 1, 0],
-  y: [0, -10, -5, -14, -8],
-  transition: {
-    duration: p.duration,
-    delay: p.delay,
-    repeat: Infinity,
-    repeatDelay: 2,
-    ease: 'easeInOut',
-  },
-});
-
 // Diamond SVG ornament for gold line
 function DiamondOrnament() {
   return (
@@ -105,24 +80,11 @@ export default function LoadingScreen() {
             }}
           />
 
-          {/* Floating sparkle particles */}
-          <div className="pointer-events-none absolute inset-0 z-0">
-            {sparkleParticles.map((p, i) => (
-              <motion.div
-                key={i}
-                className="absolute rounded-full bg-champagne-gold/60"
-                style={{ left: p.x, top: p.y, width: p.size, height: p.size }}
-                animate={sparkleFloat(p)}
-              />
-            ))}
-          </div>
-
           {/* Radial gradient glow behind logo */}
           <motion.div
             className="pointer-events-none absolute z-0 h-48 w-48 rounded-full"
             style={{
               background: 'radial-gradient(circle, rgba(184, 152, 48, 0.12) 0%, rgba(184, 152, 48, 0.05) 40%, transparent 70%)',
-              filter: 'blur(24px)',
             }}
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}

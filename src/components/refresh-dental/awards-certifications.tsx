@@ -53,33 +53,6 @@ const certifications: Certification[] = [
   },
 ]
 
-// Deterministic floating gold particle positions
-const goldParticles = [
-  { x: '12%', y: '18%', size: 4, delay: 0, duration: 6 },
-  { x: '88%', y: '25%', size: 3, delay: 1.2, duration: 7 },
-  { x: '25%', y: '72%', size: 5, delay: 0.8, duration: 5.5 },
-  { x: '78%', y: '68%', size: 3, delay: 2.0, duration: 6.5 },
-  { x: '45%', y: '12%', size: 4, delay: 1.6, duration: 7.5 },
-  { x: '65%', y: '82%', size: 3, delay: 0.4, duration: 5 },
-]
-
-const particleDrift = {
-  hidden: { opacity: 0, scale: 0 },
-  visible: (i: number) => ({
-    opacity: [0, 0.4, 0.15, 0.35, 0],
-    scale: [0, 1, 0.7, 1, 0],
-    y: [0, -20, -10, -25, -15],
-    x: [0, 5, -3, 8, 2],
-    transition: {
-      duration: goldParticles[i].duration,
-      delay: goldParticles[i].delay,
-      repeat: Infinity,
-      repeatDelay: 3,
-      ease: 'easeInOut',
-    },
-  }),
-}
-
 const staggerContainer = {
   hidden: {},
   visible: {
@@ -120,8 +93,8 @@ function CertificationCard({
         className={`flex h-16 w-16 items-center justify-center rounded-full border-2 ${cert.borderColor} transition-all duration-300 group-hover:scale-110`}
         whileHover={{
           boxShadow: isGoldBorder
-            ? '0 0 24px rgba(184, 152, 48, 0.3)'
-            : '0 0 24px rgba(45, 107, 92, 0.25)',
+            ? '0 0 16px rgba(184, 152, 48, 0.2)'
+            : '0 0 16px rgba(45, 107, 92, 0.15)',
         }}
         transition={{ duration: 0.3 }}
       >
@@ -152,27 +125,7 @@ export default function AwardsCertifications() {
       className="relative overflow-hidden py-20 md:py-28"
       style={{ backgroundColor: '#0F0D0A' }}
     >
-      {/* Floating gold particles */}
-      {goldParticles.map((p, i) => (
-        <motion.div
-          key={i}
-          custom={i}
-          variants={particleDrift}
-          initial="hidden"
-          animate="visible"
-          className="pointer-events-none absolute rounded-full"
-          style={{
-            left: p.x,
-            top: p.y,
-            width: p.size,
-            height: p.size,
-            backgroundColor: '#B89830',
-          }}
-          aria-hidden="true"
-        />
-      ))}
-
-      {/* Subtle radial gradient glow in center */}
+      {/* Subtle radial gradient glow in center — static */}
       <div
         className="pointer-events-none absolute left-1/2 top-1/2 h-[300px] w-[300px] -translate-x-1/2 -translate-y-1/2 rounded-full sm:h-[450px] sm:w-[450px] md:h-[600px] md:w-[600px]"
         style={{

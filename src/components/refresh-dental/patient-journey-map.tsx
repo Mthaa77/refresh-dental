@@ -1,7 +1,7 @@
 'use client'
 
-import { useState, useRef, useEffect } from 'react'
-import { motion, useInView, AnimatePresence, useScroll, useTransform } from 'framer-motion'
+import { useState, useRef } from 'react'
+import { motion, useInView, AnimatePresence } from 'framer-motion'
 import { Phone, CalendarCheck, ClipboardList, HeartPulse, Smile, RefreshCw } from 'lucide-react'
 
 /* ──────────────────────────────────────────────
@@ -164,12 +164,10 @@ function DesktopJourney({
               >
                 {/* Stage node circle */}
                 <div className="relative mb-4">
-                  {/* Pulsing ring for active stage */}
+                  {/* Active ring — static border highlight instead of pulsing */}
                   {isActive && (
-                    <motion.div
+                    <div
                       className="absolute -inset-2 rounded-full border-2 border-champagne-gold/30"
-                      animate={{ scale: [1, 1.2, 1], opacity: [0.3, 0.6, 0.3] }}
-                      transition={{ duration: 2.5, repeat: Infinity, ease: 'easeInOut' }}
                     />
                   )}
 
@@ -455,27 +453,6 @@ export default function PatientJourneyMap() {
   const ref = useRef<HTMLElement>(null)
   const isInView = useInView(ref, { once: true, margin: '-60px' })
   const [activeStage, setActiveStage] = useState<number | null>(null)
-
-  // Auto-advance stages as user scrolls
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ['start end', 'end center'],
-  })
-
-  useEffect(() => {
-    if (!isInView) return
-    const unsubscribe = scrollYProgress.on('change', (v) => {
-      // Map scroll progress to stage index
-      const stageIndex = Math.min(
-        Math.floor(v * stages.length),
-        stages.length - 1
-      )
-      if (v > 0.05 && v < 0.95) {
-        setActiveStage(stageIndex)
-      }
-    })
-    return () => unsubscribe()
-  }, [isInView, scrollYProgress])
 
   return (
     <section

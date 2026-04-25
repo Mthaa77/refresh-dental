@@ -57,51 +57,6 @@ const comparisons: ComparisonItem[] = [
   },
 ]
 
-// Deterministic floating particle positions per card
-const cardParticles = [
-  [
-    { x: '20%', y: '25%', size: 5, delay: 0, duration: 3.5 },
-    { x: '70%', y: '70%', size: 4, delay: 0.7, duration: 4.2 },
-    { x: '45%', y: '15%', size: 3, delay: 1.4, duration: 3.8 },
-  ],
-  [
-    { x: '75%', y: '20%', size: 4, delay: 0.3, duration: 4.0 },
-    { x: '30%', y: '65%', size: 5, delay: 1.0, duration: 3.6 },
-    { x: '55%', y: '80%', size: 3, delay: 1.8, duration: 4.5 },
-  ],
-  [
-    { x: '25%', y: '75%', size: 5, delay: 0.5, duration: 3.9 },
-    { x: '65%', y: '30%', size: 4, delay: 1.2, duration: 4.3 },
-    { x: '40%', y: '50%', size: 3, delay: 0.9, duration: 3.7 },
-  ],
-]
-
-const shimmerVariants = {
-  hidden: { x: '-100%' },
-  visible: {
-    x: '200%',
-    transition: {
-      duration: 2.5,
-      ease: 'easeInOut',
-      repeat: Infinity,
-      repeatDelay: 3,
-    },
-  },
-}
-
-const particleFloat = (p: { delay: number; duration: number }) => ({
-  opacity: [0, 0.6, 0.2, 0.6, 0],
-  scale: [0, 1, 0.5, 1, 0],
-  y: [0, -10, -5, -15, -8],
-  transition: {
-    duration: p.duration,
-    delay: p.delay,
-    repeat: Infinity,
-    repeatDelay: 2,
-    ease: 'easeInOut',
-  },
-})
-
 const containerVariants = {
   hidden: {},
   visible: {
@@ -118,7 +73,7 @@ const cardVariants = {
   },
 }
 
-function ComparisonSlider({ item, cardIndex }: { item: ComparisonItem; cardIndex: number }) {
+function ComparisonSlider({ item }: { item: ComparisonItem; cardIndex: number }) {
   const [sliderPosition, setSliderPosition] = useState(50)
   const [isHovered, setIsHovered] = useState(false)
   const [titleHovered, setTitleHovered] = useState(false)
@@ -155,31 +110,18 @@ function ComparisonSlider({ item, cardIndex }: { item: ComparisonItem; cardIndex
     [handleMove]
   )
 
-  const particles = cardParticles[cardIndex] || cardParticles[0]
-
   return (
-    <motion.div
+    <div
       className="group relative overflow-hidden rounded-2xl bg-card shadow-elevated hover-lift"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      {/* Animated gold gradient border on hover — rotates via framer-motion */}
-      <motion.div
-        className="pointer-events-none absolute inset-0 rounded-2xl"
-        animate={{
-          opacity: isHovered ? 1 : 0,
-          background: isHovered
-            ? [
-                'linear-gradient(0deg, #B89830 0%, #D4C08A 50%, #B89830 100%)',
-                'linear-gradient(90deg, #B89830 0%, #D4C08A 50%, #B89830 100%)',
-                'linear-gradient(180deg, #B89830 0%, #D4C08A 50%, #B89830 100%)',
-                'linear-gradient(270deg, #B89830 0%, #D4C08A 50%, #B89830 100%)',
-                'linear-gradient(360deg, #B89830 0%, #D4C08A 50%, #B89830 100%)',
-              ]
-            : 'transparent',
-        }}
-        transition={{ duration: 3, repeat: isHovered ? Infinity : 0, ease: 'linear' }}
+      {/* CSS border on hover (replaces animated rotating gradient) */}
+      <div
+        className="pointer-events-none absolute inset-0 rounded-2xl transition-opacity duration-300"
         style={{
+          opacity: isHovered ? 1 : 0,
+          background: 'linear-gradient(90deg, #B89830 0%, #D4C08A 50%, #B89830 100%)',
           padding: '2px',
           WebkitMask: 'linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)',
           WebkitMaskComposite: 'xor',
@@ -229,14 +171,6 @@ function ComparisonSlider({ item, cardIndex }: { item: ComparisonItem; cardIndex
           <div className="pointer-events-none absolute bottom-3 right-4 z-10 font-cormorant text-6xl font-bold leading-none text-champagne-gold/[0.06]">
             After
           </div>
-
-          {/* Gold shimmer sweep across After side */}
-          <motion.div
-            className="absolute inset-y-0 z-10 w-1/3 bg-gradient-to-r from-transparent via-champagne-gold/[0.08] to-transparent pointer-events-none"
-            variants={shimmerVariants}
-            initial="hidden"
-            animate="visible"
-          />
         </div>
 
         {/* Before (Clipped) */}
@@ -266,30 +200,20 @@ function ComparisonSlider({ item, cardIndex }: { item: ComparisonItem; cardIndex
           </div>
         </div>
 
-        {/* Floating sparkle / tooth particles */}
-        {particles.map((p, i) => (
-          <motion.div
-            key={i}
-            className="pointer-events-none absolute z-20 rounded-full bg-champagne-gold/50"
-            style={{ left: p.x, top: p.y, width: p.size, height: p.size }}
-            animate={particleFloat(p)}
-          />
-        ))}
-
         {/* Slider Handle */}
         <div
           className="absolute top-0 bottom-0 z-10 w-0.5 bg-champagne-gold shadow-lg"
           style={{ left: `${sliderPosition}%`, transform: 'translateX(-50%)' }}
         >
-          {/* Center knob with animated glow ring */}
-          <motion.div
+          {/* Center knob with glow ring */}
+          <div
             className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
-            animate={{
+            style={{
               boxShadow: isHovered
                 ? '0 0 0 6px rgba(184, 152, 48, 0.3), 0 0 20px rgba(184, 152, 48, 0.4)'
                 : '0 0 0 3px rgba(184, 152, 48, 0.15), 0 0 12px rgba(184, 152, 48, 0.2)',
+              transition: 'box-shadow 0.3s ease',
             }}
-            transition={{ duration: 0.3 }}
           >
             <div className="flex h-10 w-10 items-center justify-center rounded-full border-2 border-white chrome-gold-bg shadow-lg">
               <div className="flex gap-[3px]">
@@ -325,10 +249,10 @@ function ComparisonSlider({ item, cardIndex }: { item: ComparisonItem; cardIndex
                 </svg>
               </div>
             </div>
-          </motion.div>
+          </div>
         </div>
 
-        {/* Animated step indicator dots — gold dots showing slider position */}
+        {/* Step indicator dots */}
         <div className="pointer-events-none absolute bottom-3 left-0 right-0 z-20 flex justify-center gap-2">
           {[0, 25, 50, 75, 100].map((pos, dotIdx) => {
             const isActive = Math.abs(sliderPosition - pos) < 15
@@ -352,14 +276,14 @@ function ComparisonSlider({ item, cardIndex }: { item: ComparisonItem; cardIndex
           })}
         </div>
 
-        {/* Before Label — premium typography */}
+        {/* Before Label */}
         <div className="pointer-events-none absolute top-4 left-4 z-20">
           <span className="rounded-full bg-espresso/70 px-3.5 py-1.5 font-dm-serif text-[11px] font-semibold uppercase tracking-widest text-brown-muted backdrop-blur-sm border border-white/10">
             Before
           </span>
           <div className="mx-auto mt-1.5 h-px w-6 bg-gradient-to-r from-espresso/40 to-transparent" />
         </div>
-        {/* After Label — premium typography */}
+        {/* After Label */}
         <div className="pointer-events-none absolute top-4 right-4 z-20">
           <span className="rounded-full bg-champagne-gold/90 px-3.5 py-1.5 font-dm-serif text-[11px] font-semibold uppercase tracking-widest text-white backdrop-blur-sm border border-gold-light/30 gold-gradient-text">
             After
@@ -368,18 +292,11 @@ function ComparisonSlider({ item, cardIndex }: { item: ComparisonItem; cardIndex
         </div>
       </div>
 
-      {/* Card Footer with gold accent line */}
+      {/* Card Footer */}
       <div className="relative">
-        {/* Gold accent line at top of footer */}
-        <motion.div
-          className="h-px bg-gradient-to-r from-transparent via-champagne-gold/60 to-transparent"
-          animate={{
-            opacity: isHovered ? 1 : 0.4,
-          }}
-          transition={{ duration: 0.3 }}
-        />
+        <div className="h-px bg-gradient-to-r from-transparent via-champagne-gold/60 to-transparent transition-opacity duration-300" style={{ opacity: isHovered ? 1 : 0.4 }} />
         <div className="p-5">
-          {/* Card title with procedure details tooltip */}
+          {/* Card title with tooltip */}
           <div className="relative">
             <h3
               className="font-dm-serif text-lg text-espresso mb-1 cursor-default"
@@ -388,7 +305,7 @@ function ComparisonSlider({ item, cardIndex }: { item: ComparisonItem; cardIndex
             >
               {item.title}
             </h3>
-            {/* Tooltip — appears on hover over card title */}
+            {/* Tooltip */}
             <motion.div
               className="absolute left-0 top-full z-50 mt-1 max-w-xs rounded-lg bg-espresso/90 px-3 py-2 shadow-lg backdrop-blur-sm"
               initial={{ opacity: 0, y: 4 }}
@@ -402,27 +319,24 @@ function ComparisonSlider({ item, cardIndex }: { item: ComparisonItem; cardIndex
               <p className="font-jost text-[11px] leading-relaxed text-ivory/90">
                 {procedureDetails[item.title] || item.description}
               </p>
-              {/* Tooltip arrow */}
               <div className="absolute -top-1 left-4 h-2 w-2 rotate-45 bg-espresso/90" />
             </motion.div>
           </div>
           <p className="font-jost text-xs font-light leading-relaxed text-brown-muted/90">
             {item.description}
           </p>
-          <motion.a
+          <a
             href={item.treatmentLink}
-            className="mt-3 inline-flex items-center gap-1.5 font-jost text-xs font-medium uppercase tracking-wider text-champagne-gold"
-            whileHover={{ x: 3 }}
-            transition={{ duration: 0.2 }}
+            className="mt-3 inline-flex items-center gap-1.5 font-jost text-xs font-medium uppercase tracking-wider text-champagne-gold hover:translate-x-[3px] transition-transform duration-200"
           >
             View Treatment
             <svg width="12" height="12" viewBox="0 0 12 12" fill="none" className="text-champagne-gold">
               <path d="M3 6H9M9 6L6.5 3.5M9 6L6.5 8.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
             </svg>
-          </motion.a>
+          </a>
         </div>
       </div>
-    </motion.div>
+    </div>
   )
 }
 
@@ -431,13 +345,7 @@ export default function BeforeAfterSection() {
     <section className="bg-sand py-20 md:py-28">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {/* Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: '-80px' }}
-          transition={{ duration: 0.6 }}
-          className="mb-16 text-center"
-        >
+        <div className="mb-16 text-center animate-fade-in-up">
           <span className="mb-4 inline-block text-xs font-semibold uppercase tracking-[0.2em] text-champagne-gold">
             Transformations
           </span>
@@ -448,7 +356,7 @@ export default function BeforeAfterSection() {
             Real results from our cosmetic dental treatments. Drag the slider to
             see the difference.
           </p>
-        </motion.div>
+        </div>
 
         {/* Comparisons Grid */}
         <motion.div
@@ -466,17 +374,11 @@ export default function BeforeAfterSection() {
         </motion.div>
 
         {/* CTA */}
-        <motion.div
-          initial={{ opacity: 0, y: 16 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: '-40px' }}
-          transition={{ duration: 0.5, delay: 0.4 }}
-          className="mt-12 text-center"
-        >
+        <div className="mt-12 text-center animate-fade-in-up" style={{ animationDelay: '0.2s' }}>
           <p className="font-jost text-sm text-brown-muted">
             Ready to transform your smile?
           </p>
-        </motion.div>
+        </div>
       </div>
     </section>
   )

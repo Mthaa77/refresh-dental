@@ -62,40 +62,24 @@ function AnimatedCounter({
 
 function DiamondIcon({ isInView }: { isInView: boolean }) {
   return (
-    <motion.svg
-      viewBox="0 0 16 16"
-      className="h-3 w-3 mx-auto mb-2"
-      fill="currentColor"
-      initial={{ opacity: 0.4 }}
-      animate={
-        isInView
-          ? {
-              opacity: [0.4, 0.8, 0.5, 0.9, 0.4],
-              filter: [
-                'drop-shadow(0 0 1px rgba(184, 152, 48, 0.2))',
-                'drop-shadow(0 0 4px rgba(184, 152, 48, 0.6))',
-                'drop-shadow(0 0 2px rgba(184, 152, 48, 0.3))',
-                'drop-shadow(0 0 5px rgba(184, 152, 48, 0.7))',
-                'drop-shadow(0 0 1px rgba(184, 152, 48, 0.2))',
-              ],
-            }
-          : {}
-      }
-      transition={{
-        duration: 3,
-        repeat: Infinity,
-        ease: 'easeInOut',
+    <div
+      className="mx-auto mb-2"
+      style={{
+        width: 12,
+        height: 12,
+        color: 'rgba(184, 152, 48, 0.6)',
+        opacity: isInView ? 0.8 : 0.4,
+        transition: 'opacity 0.5s ease',
       }}
-      style={{ color: 'rgba(184, 152, 48, 0.6)' }}
     >
-      <path d="M8 0L10 6L8 16L6 6Z" />
-    </motion.svg>
+      <svg viewBox="0 0 16 16" fill="currentColor" width="100%" height="100%">
+        <path d="M8 0L10 6L8 16L6 6Z" />
+      </svg>
+    </div>
   );
 }
 
 function StatItem({ value, suffix, label, delay, isInView, index, total }: StatItemProps) {
-  const [countingDone, setCountingDone] = useState(false);
-
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
@@ -111,48 +95,23 @@ function StatItem({ value, suffix, label, delay, isInView, index, total }: StatI
         backdropFilter: 'blur(16px)',
         WebkitBackdropFilter: 'blur(16px)',
         border: '1px solid rgba(184, 152, 48, 0.15)',
-        boxShadow: '0 8px 32px rgba(15, 13, 10, 0.3), 0 0 30px rgba(184, 152, 48, 0.12)',
+        boxShadow: '0 8px 32px rgba(15, 13, 10, 0.3)',
       }}
     >
-      {/* Diamond icon above number with shimmer */}
+      {/* Diamond icon above number */}
       <DiamondIcon isInView={isInView} />
 
-      {/* Stat number with gentle pulse animation after counting */}
-      <motion.div
+      {/* Stat number */}
+      <div
         className="font-cormorant text-4xl md:text-5xl text-[#D4C08A] mb-2 relative text-shadow-gold-strong"
-        animate={
-          countingDone
-            ? {
-                scale: [1, 1.02, 1],
-              }
-            : {}
-        }
-        transition={
-          countingDone
-            ? {
-                duration: 2.5,
-                repeat: Infinity,
-                ease: 'easeInOut',
-              }
-            : {}
-        }
       >
         <AnimatedCounter
           value={value}
           suffix={suffix}
           isInView={isInView}
-          onComplete={() => setCountingDone(true)}
+          onComplete={() => {}}
         />
-        {/* Pulsing glow when counting finishes */}
-        {countingDone && (
-          <motion.div
-            initial={{ opacity: 0.8, scale: 0.9 }}
-            animate={{ opacity: 0, scale: 1.4 }}
-            transition={{ duration: 1.2, ease: 'easeOut' }}
-            className="absolute inset-0 rounded-full bg-champagne-gold/20 blur-xl -z-10"
-          />
-        )}
-      </motion.div>
+      </div>
       <div className="font-jost uppercase tracking-[0.18em] text-xs text-[#F0EBE1]/60">
         {label}
       </div>

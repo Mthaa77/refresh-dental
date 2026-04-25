@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useEffect, useRef, useMemo } from 'react'
-import { motion, AnimatePresence, useInView, useSpring } from 'framer-motion'
+import { motion, AnimatePresence, useInView } from 'framer-motion'
 import { ArrowRight, ArrowLeft, RotateCcw, Sparkles, Calendar, Heart, Smile, Star, Shield } from 'lucide-react'
 
 // ── Types ──────────────────────────────────────────────
@@ -165,29 +165,13 @@ function getScoreCategory(score: number): { label: string; color: string; gradie
   return { label: 'Needs Attention', color: '#A63D40', gradient: 'url(#redGradient)' }
 }
 
-// ── Animated Score Ring ────────────────────────────────
+// ── Score Ring (no useSpring, static SVG transition) ────────────────
 function ScoreRing({ score, category }: { score: number; category: ReturnType<typeof getScoreCategory> }) {
   const radius = 80
   const stroke = 8
   const normalizedRadius = radius - stroke / 2
   const circumference = normalizedRadius * 2 * Math.PI
   const offset = circumference - (score / 100) * circumference
-
-  const animatedScore = useSpring(0, {
-    stiffness: 40,
-    damping: 20,
-    mass: 1,
-  })
-
-  useEffect(() => {
-    animatedScore.set(score)
-  }, [animatedScore, score])
-
-  const displayScore = useSpring(score, {
-    stiffness: 40,
-    damping: 20,
-    mass: 1,
-  })
 
   return (
     <div className="relative mx-auto flex items-center justify-center">
@@ -415,7 +399,7 @@ export default function SmileScoreCalculator() {
               {/* Step Dots */}
               <div className="mb-8 flex items-center justify-center gap-2">
                 {questions.map((_, i) => (
-                  <motion.div
+                  <div
                     key={i}
                     className={`h-2 rounded-full transition-all duration-300 ${
                       i < currentQuestion
@@ -424,10 +408,6 @@ export default function SmileScoreCalculator() {
                           ? 'w-2 border border-champagne-gold bg-transparent'
                           : 'w-2 bg-ivory/20'
                     }`}
-                    initial={false}
-                    animate={{
-                      scale: i === currentQuestion ? 1.2 : 1,
-                    }}
                   />
                 ))}
               </div>
@@ -443,19 +423,8 @@ export default function SmileScoreCalculator() {
                   exit="exit"
                 >
                   <div className="mb-8 flex items-center gap-3">
+                    {/* Step number — static glow */}
                     <div className="relative">
-                      <motion.div
-                        className="absolute inset-0 rounded-xl bg-champagne-gold/20 blur-md"
-                        animate={{
-                          opacity: [0.3, 0.6, 0.3],
-                          scale: [0.9, 1.1, 0.9],
-                        }}
-                        transition={{
-                          duration: 2,
-                          repeat: Infinity,
-                          ease: 'easeInOut',
-                        }}
-                      />
                       <div className="relative flex h-10 w-10 items-center justify-center rounded-xl bg-champagne-gold/10">
                         <CurrentIcon className="h-5 w-5 text-champagne-gold" />
                       </div>

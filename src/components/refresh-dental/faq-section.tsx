@@ -2,7 +2,7 @@
 
 import { useState, useMemo } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Plus, Minus, Search, ThumbsUp, ThumbsDown, MessageCircle, ArrowRight } from 'lucide-react'
+import { Plus, Search, ThumbsUp, ThumbsDown, MessageCircle, ArrowRight } from 'lucide-react'
 
 type Category = 'Payment' | 'General' | 'Emergency' | 'Cosmetic' | 'Aesthetics'
 
@@ -106,37 +106,20 @@ export default function FAQSection() {
     <section className="bg-ivory py-20 md:py-28 overflow-hidden">
       <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
         {/* Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: '-80px' }}
-          transition={{ duration: 0.6 }}
-          className="mb-14 text-center"
-        >
+        <div className="mb-14 text-center animate-fade-in-up">
           <span className="mb-4 inline-block text-xs font-semibold uppercase tracking-[0.2em] text-champagne-gold">
             Common Questions
           </span>
           <h2 className="font-cormorant text-4xl md:text-5xl lg:text-6xl section-heading text-shadow-espresso gold-gradient-text">
             Frequently Asked Questions
           </h2>
-          <motion.p
-            initial={{ opacity: 0, y: 15 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="font-jost text-base md:text-lg text-brown-muted max-w-2xl mx-auto text-center leading-relaxed mt-4 mb-12"
-          >
+          <p className="font-jost text-base md:text-lg text-brown-muted max-w-2xl mx-auto text-center leading-relaxed mt-4 mb-12 animate-fade-in-up" style={{ animationDelay: '0.1s' }}>
             Got questions? We&rsquo;ve got answers. If you don&rsquo;t find what you&rsquo;re looking for, our friendly team is just a phone call away.
-          </motion.p>
-        </motion.div>
+          </p>
+        </div>
 
         {/* Search/Filter Input */}
-        <motion.div
-          initial={{ opacity: 0, y: 12 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: '-40px' }}
-          transition={{ duration: 0.5, delay: 0.1 }}
-          className="mb-8"
-        >
+        <div className="mb-8 animate-fade-in-up" style={{ animationDelay: '0.15s' }}>
           <div className="relative">
             <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-sand-muted" />
             <input
@@ -147,50 +130,34 @@ export default function FAQSection() {
               className="w-full rounded-xl border border-soft-border bg-card py-3 pl-11 pr-4 font-jost text-sm text-espresso placeholder:text-sand-muted/60 outline-none transition-all focus:border-champagne-gold focus:ring-2 focus:ring-champagne-gold/10"
             />
             {searchQuery && (
-              <motion.span
-                initial={{ opacity: 0, scale: 0.8 }}
-                animate={{ opacity: 1, scale: 1 }}
-                className="absolute right-4 top-1/2 -translate-y-1/2 text-xs font-jost text-brown-muted/80"
-              >
+              <span className="absolute right-4 top-1/2 -translate-y-1/2 text-xs font-jost text-brown-muted/80">
                 {filteredFaqs.length} result{filteredFaqs.length !== 1 ? 's' : ''}
-              </motion.span>
+              </span>
             )}
           </div>
-        </motion.div>
+        </div>
 
         {/* Expanded counter */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          className="mb-4 flex items-center justify-between"
-        >
+        <div className="mb-4 flex items-center justify-between animate-fade-in-up" style={{ animationDelay: '0.18s' }}>
           <span className="font-jost text-xs text-brown-muted/80 uppercase tracking-wider">
             {filteredFaqs.length} question{filteredFaqs.length !== 1 ? 's' : ''}
           </span>
           {expandedCount > 0 && (
-            <motion.span
-              initial={{ opacity: 0, x: 8 }}
-              animate={{ opacity: 1, x: 0 }}
-              className="flex items-center gap-1.5 text-xs font-jost text-champagne-gold"
-            >
+            <span className="flex items-center gap-1.5 text-xs font-jost text-champagne-gold">
               <span className="inline-block h-1.5 w-1.5 rounded-full bg-champagne-gold" />
               1 expanded
-            </motion.span>
+            </span>
           )}
-        </motion.div>
+        </div>
 
         {/* FAQ Items */}
         <div className="space-y-3">
           {filteredFaqs.map((faq, i) => (
-            <motion.div
+            <div
               key={i}
-              initial={{ opacity: 0, y: 12 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: '-40px' }}
-              transition={{ duration: 0.4, delay: i * 0.05 }}
-              className="overflow-hidden rounded-2xl border border-soft-border bg-card transition-all duration-300 relative shadow-premium hover-glow hover:border-champagne-gold/30"
+              className="overflow-hidden rounded-2xl border border-soft-border bg-card transition-all duration-300 relative shadow-premium hover-glow animate-fade-in-up"
               style={{
+                animationDelay: `${i * 0.05}s`,
                 boxShadow:
                   openIndex === i
                     ? '0 8px 32px -4px rgba(184, 152, 48, 0.15)'
@@ -202,12 +169,12 @@ export default function FAQSection() {
               }}
             >
               {/* Animated gradient left border based on category */}
-              <motion.div
-                className={`absolute left-0 top-0 bottom-0 w-[3px] rounded-l-2xl bg-gradient-to-b ${categoryGradients[faq.category]}`}
-                initial={{ scaleY: 0 }}
-                animate={{ scaleY: openIndex === i ? 1 : 0 }}
-                transition={{ duration: 0.3, ease: [0.25, 0.46, 0.45, 0.94] }}
-                style={{ transformOrigin: 'top' }}
+              <div
+                className={`absolute left-0 top-0 bottom-0 w-[3px] rounded-l-2xl bg-gradient-to-b ${categoryGradients[faq.category]} transition-transform duration-300 ease-out`}
+                style={{
+                  transformOrigin: 'top',
+                  transform: openIndex === i ? 'scaleY(1)' : 'scaleY(0)',
+                }}
               />
 
               <button
@@ -216,34 +183,32 @@ export default function FAQSection() {
               >
                 <span className="flex items-center gap-3 pr-4">
                   {/* Number circle */}
-                  <motion.span
+                  <span
                     className="flex-shrink-0 flex items-center justify-center w-7 h-7 rounded-full text-[11px] font-jost font-semibold transition-all duration-300"
-                    animate={{
+                    style={{
                       backgroundColor: openIndex === i ? (i % 2 === 0 ? '#B89830' : '#3B6FA0') : (i % 2 === 0 ? 'rgba(184, 152, 48, 0.1)' : 'rgba(59, 111, 160, 0.1)'),
                       color: openIndex === i ? '#FFFFFF' : (i % 2 === 0 ? '#B89830' : '#3B6FA0'),
                     }}
-                    transition={{ duration: 0.3 }}
                   >
                     {String(i + 1).padStart(2, '0')}
-                  </motion.span>
+                  </span>
                   <span className="font-dm-serif text-lg md:text-xl text-espresso">
                     {faq.question}
                   </span>
                 </span>
-                <motion.div
-                  animate={{ rotate: openIndex === i ? 45 : 0 }}
-                  transition={{ duration: 0.2 }}
-                  className="flex-shrink-0"
+                <div
+                  className="flex-shrink-0 transition-transform duration-200"
+                  style={{ transform: openIndex === i ? 'rotate(45deg)' : 'rotate(0deg)' }}
                 >
                   <Plus className="h-5 w-5 text-champagne-gold" />
-                </motion.div>
+                </div>
               </button>
               <AnimatePresence initial={false}>
                 {openIndex === i && (
                   <motion.div
-                    initial={{ height: 0, opacity: 0, scale: 0.98 }}
-                    animate={{ height: 'auto', opacity: 1, scale: 1 }}
-                    exit={{ height: 0, opacity: 0, scale: 0.98 }}
+                    initial={{ height: 0, opacity: 0 }}
+                    animate={{ height: 'auto', opacity: 1 }}
+                    exit={{ height: 0, opacity: 0 }}
                     transition={{
                       duration: 0.35,
                       ease: [0.25, 0.46, 0.45, 0.94],
@@ -257,21 +222,14 @@ export default function FAQSection() {
                       </p>
 
                       {/* "Did this answer your question?" feedback row */}
-                      <motion.div
-                        initial={{ opacity: 0, y: 8 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.3, delay: 0.15 }}
-                        className="mt-5 flex items-center gap-3"
-                      >
+                      <div className="mt-5 flex items-center gap-3">
                         <span className="font-jost text-xs text-brown-muted/80">
                           Did this answer your question?
                         </span>
                         <div className="flex items-center gap-1.5">
-                          <motion.button
+                          <button
                             onClick={() => handleFeedback(i, 'up')}
-                            whileHover={{ scale: 1.1 }}
-                            whileTap={{ scale: 0.9 }}
-                            className={`flex items-center gap-1 rounded-full px-2.5 py-1 text-xs font-jost transition-colors ${
+                            className={`flex items-center gap-1 rounded-full px-2.5 py-1 text-xs font-jost transition-all duration-200 hover:scale-110 active:scale-90 ${
                               feedback[i] === 'up'
                                 ? 'bg-sage-teal/10 text-sage-teal'
                                 : 'bg-sand/50 text-brown-muted/80 hover:text-sage-teal'
@@ -279,12 +237,10 @@ export default function FAQSection() {
                           >
                             <ThumbsUp className="h-3 w-3" />
                             Yes
-                          </motion.button>
-                          <motion.button
+                          </button>
+                          <button
                             onClick={() => handleFeedback(i, 'down')}
-                            whileHover={{ scale: 1.1 }}
-                            whileTap={{ scale: 0.9 }}
-                            className={`flex items-center gap-1 rounded-full px-2.5 py-1 text-xs font-jost transition-colors ${
+                            className={`flex items-center gap-1 rounded-full px-2.5 py-1 text-xs font-jost transition-all duration-200 hover:scale-110 active:scale-90 ${
                               feedback[i] === 'down'
                                 ? 'bg-warm-blush/10 text-warm-blush'
                                 : 'bg-sand/50 text-brown-muted/80 hover:text-warm-blush'
@@ -292,31 +248,23 @@ export default function FAQSection() {
                           >
                             <ThumbsDown className="h-3 w-3" />
                             No
-                          </motion.button>
+                          </button>
                         </div>
                         {feedback[i] && (
-                          <motion.span
-                            initial={{ opacity: 0, x: -4 }}
-                            animate={{ opacity: 1, x: 0 }}
-                            className="font-jost text-[10px] text-sage-teal/70"
-                          >
+                          <span className="font-jost text-[10px] text-sage-teal/70">
                             Thank you for your feedback!
-                          </motion.span>
+                          </span>
                         )}
-                      </motion.div>
+                      </div>
                     </div>
                   </motion.div>
                 )}
               </AnimatePresence>
-            </motion.div>
+            </div>
           ))}
 
           {filteredFaqs.length === 0 && (
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              className="py-12 text-center"
-            >
+            <div className="py-12 text-center">
               <Search className="mx-auto h-8 w-8 text-sand-muted/40 mb-3" />
               <p className="font-jost text-sm text-brown-muted/80">
                 No questions match &ldquo;{searchQuery}&rdquo;
@@ -327,23 +275,13 @@ export default function FAQSection() {
               >
                 Clear search
               </button>
-            </motion.div>
+            </div>
           )}
         </div>
 
         {/* "Still have questions?" CTA Card */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: '-40px' }}
-          transition={{ duration: 0.5, delay: 0.3 }}
-          className="mt-12"
-        >
-          <motion.div
-            whileHover={{ y: -2 }}
-            transition={{ duration: 0.2 }}
-            className="relative overflow-hidden rounded-2xl border border-champagne-gold/20 bg-gradient-to-br from-champagne-gold/5 via-card to-gold-light/5 p-8 text-center"
-          >
+        <div className="mt-12 animate-fade-in-up" style={{ animationDelay: '0.2s' }}>
+          <div className="relative overflow-hidden rounded-2xl border border-champagne-gold/20 bg-gradient-to-br from-champagne-gold/5 via-card to-gold-light/5 p-8 text-center transition-transform duration-200 hover:-translate-y-0.5">
             {/* Decorative corner accents */}
             <svg className="absolute top-3 left-3 pointer-events-none" width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
               <path d="M2 2 L2 10 L10 10" stroke="#B89830" strokeWidth="1" strokeLinecap="round" opacity="0.3" />
@@ -358,30 +296,24 @@ export default function FAQSection() {
               <path d="M18 18 L18 10 L10 10" stroke="#B89830" strokeWidth="1" strokeLinecap="round" opacity="0.3" />
             </svg>
 
-            <motion.div
-              className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-champagne-gold/10"
-              animate={{ scale: [1, 1.05, 1] }}
-              transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
-            >
+            <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-champagne-gold/10">
               <MessageCircle className="h-5 w-5 text-champagne-gold" />
-            </motion.div>
+            </div>
             <h3 className="font-dm-serif text-xl text-espresso mb-2">
               Still Have Questions?
             </h3>
             <p className="font-jost text-sm text-brown-muted mb-6 max-w-sm mx-auto">
               We&apos;d love to hear from you. Get in touch with our friendly team and we&apos;ll help you with anything you need.
             </p>
-            <motion.a
+            <a
               href="#contact"
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
-              className="inline-flex items-center gap-2 rounded-full bg-champagne-gold px-7 py-3 font-jost text-sm font-semibold uppercase tracking-wider text-white transition-colors hover:bg-[#A07D1A] hover:shadow-lg hover:shadow-champagne-gold/20"
+              className="inline-flex items-center gap-2 rounded-full bg-champagne-gold px-7 py-3 font-jost text-sm font-semibold uppercase tracking-wider text-white transition-all duration-200 hover:bg-[#A07D1A] hover:shadow-lg hover:shadow-champagne-gold/20 hover:scale-[1.02] active:scale-[0.98]"
             >
               Get in Touch
               <ArrowRight className="h-4 w-4" />
-            </motion.a>
-          </motion.div>
-        </motion.div>
+            </a>
+          </div>
+        </div>
       </div>
     </section>
   )

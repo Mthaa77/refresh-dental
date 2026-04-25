@@ -319,10 +319,9 @@ export default function ContactForm() {
           className="group flex w-full min-h-[44px] items-center justify-center gap-2 rounded-xl bg-[#B89830] py-4 font-jost text-sm font-semibold uppercase tracking-wider text-white transition-all duration-300 hover:bg-[#A07D1A] hover:shadow-lg hover:shadow-champagne-gold/20 disabled:opacity-60 disabled:cursor-not-allowed"
         >
           {loading ? (
-            <motion.div
-              animate={{ rotate: 360 }}
-              transition={{ repeat: Infinity, duration: 1, ease: 'linear' }}
-              className="h-5 w-5 rounded-full border-2 border-white/30 border-t-white"
+            <span
+              className="inline-block h-5 w-5 rounded-full border-2 border-white/30 border-t-white"
+              style={{ animation: 'spin 1s linear infinite' }}
             />
           ) : (
             <>
@@ -331,6 +330,12 @@ export default function ContactForm() {
             </>
           )}
         </button>
+        {/* CSS spinner keyframe */}
+        <style>{`
+          @keyframes spin {
+            to { transform: rotate(360deg); }
+          }
+        `}</style>
       </motion.div>
     </motion.form>
   )

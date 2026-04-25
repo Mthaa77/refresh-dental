@@ -1,51 +1,8 @@
 'use client'
 
 import { motion, useInView } from 'framer-motion'
-import { useRef, useMemo } from 'react'
+import { useRef } from 'react'
 import { ArrowRight, Sparkles } from 'lucide-react'
-
-function FloatingParticles() {
-  const particles = useMemo(
-    () =>
-      Array.from({ length: 20 }, (_, i) => ({
-        id: i,
-        x: Math.random() * 100,
-        y: Math.random() * 100,
-        size: Math.random() * 4 + 2,
-        duration: Math.random() * 6 + 4,
-        delay: Math.random() * 3,
-        opacity: Math.random() * 0.5 + 0.2,
-      })),
-    []
-  )
-
-  return (
-    <div className="pointer-events-none absolute inset-0 overflow-hidden">
-      {particles.map((p) => (
-        <motion.div
-          key={p.id}
-          className="absolute rounded-full bg-champagne-gold"
-          style={{
-            left: `${p.x}%`,
-            top: `${p.y}%`,
-            width: p.size,
-            height: p.size,
-          }}
-          animate={{
-            y: [0, -20, 0],
-            opacity: [p.opacity, p.opacity * 0.3, p.opacity],
-          }}
-          transition={{
-            duration: p.duration,
-            repeat: Infinity,
-            ease: 'easeInOut',
-            delay: p.delay,
-          }}
-        />
-      ))}
-    </div>
-  )
-}
 
 export default function SmileCta() {
   const ref = useRef(null)
@@ -64,9 +21,6 @@ export default function SmileCta() {
             'radial-gradient(ellipse at 30% 50%, rgba(184, 152, 48, 0.06) 0%, transparent 60%), radial-gradient(ellipse at 70% 50%, rgba(45, 107, 92, 0.04) 0%, transparent 60%)',
         }}
       />
-
-      {/* Floating gold particles */}
-      <FloatingParticles />
 
       {/* Subtle grain texture */}
       <div
@@ -144,7 +98,7 @@ export default function SmileCta() {
           {/* Primary CTA — Gold filled */}
           <motion.a
             href="#contact"
-            whileHover={{ scale: 1.03, boxShadow: '0 8px 30px rgba(184, 152, 48, 0.3)' }}
+            whileHover={{ scale: 1.03, boxShadow: '0 8px 24px rgba(184, 152, 48, 0.3)' }}
             whileTap={{ scale: 0.97 }}
             className="inline-flex items-center gap-2 rounded-full bg-champagne-gold px-8 py-4 font-jost text-sm font-semibold uppercase tracking-widest text-espresso transition-colors duration-300 hover:bg-champagne-gold-light"
           >

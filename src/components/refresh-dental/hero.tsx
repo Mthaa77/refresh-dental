@@ -30,11 +30,10 @@ const staggerContainer = {
 };
 
 const fadeSlideUp = {
-  hidden: { opacity: 0, y: 32, filter: 'blur(4px)' },
+  hidden: { opacity: 0, y: 32 },
   visible: {
     opacity: 1,
     y: 0,
-    filter: 'blur(0px)',
     transition: { duration: 0.9, ease: [0.22, 1, 0.36, 1] },
   },
 };
@@ -67,15 +66,23 @@ const lineExpand = {
 
 const badgePop = {
   hidden: { opacity: 0, scale: 0.8 },
-  visible: (i: number) => ({
+  visible: {
     opacity: 1,
     scale: 1,
     transition: {
-      delay: 1.2 + i * 0.1,
       duration: 0.5,
       ease: [0.22, 1, 0.36, 1],
     },
-  }),
+  },
+};
+
+const badgeSection = {
+  hidden: {},
+  visible: {
+    transition: {
+      staggerChildren: 0.08,
+    },
+  },
 };
 
 const scrollFadeIn = {
@@ -106,9 +113,7 @@ export default function Hero() {
   });
 
   const bgScale = useTransform(scrollYProgress, [0, 1], [1, 1.12]);
-  const bgY = useTransform(scrollYProgress, [0, 1], ['0%', '15%']);
   const contentOpacity = useTransform(scrollYProgress, [0, 0.35], [1, 0]);
-  const contentY = useTransform(scrollYProgress, [0, 0.35], [0, -60]);
 
   return (
     <section
@@ -118,7 +123,7 @@ export default function Hero() {
     >
       {/* ============ BACKGROUND IMAGE + OVERLAY ============ */}
       <motion.div
-        style={{ scale: bgScale, y: bgY }}
+        style={{ scale: bgScale }}
         className="absolute inset-0 z-0"
       >
         <img
@@ -167,7 +172,7 @@ export default function Hero() {
 
       {/* ============ MAIN CONTENT ============ */}
       <motion.div
-        style={{ opacity: contentOpacity, y: contentY }}
+        style={{ opacity: contentOpacity }}
         className="relative z-10 w-full min-h-screen flex items-center"
       >
         <div className="w-full px-6 sm:px-10 lg:px-16 xl:px-24 py-32 lg:py-0">
@@ -182,7 +187,6 @@ export default function Hero() {
               <motion.div variants={fadeSlideUp} className="mb-8">
                 <span className="inline-flex items-center gap-2.5 bg-sage-teal/15 border border-sage-teal/30 backdrop-blur-md rounded-full pl-3 pr-4 py-1.5">
                   <span className="relative flex h-2.5 w-2.5">
-                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-sage-teal opacity-60" />
                     <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-sage-teal" />
                   </span>
                   <span className="font-jost text-xs font-semibold tracking-[0.18em] text-teal-light uppercase">
@@ -252,9 +256,10 @@ export default function Hero() {
                   className="relative inline-flex items-center justify-center gap-2 bg-gradient-to-r from-champagne-gold to-gold-light text-espresso font-jost font-semibold text-sm tracking-[0.12em] uppercase rounded-full px-8 py-4 shadow-gold overflow-hidden group"
                 >
                   <motion.span
-                    className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent"
-                    animate={{ x: ['-110%', '210%'] }}
-                    transition={{ duration: 2.8, repeat: Infinity, repeatDelay: 2.0, ease: 'easeInOut' }}
+                    className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent pointer-events-none"
+                    initial={{ x: '-100%' }}
+                    whileHover={{ x: '100%' }}
+                    transition={{ duration: 0.6, ease: 'easeInOut' }}
                   />
                   <span className="relative z-10">Book Your Transformation</span>
                   <ArrowRight className="relative z-10 w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
@@ -273,14 +278,11 @@ export default function Hero() {
               </motion.div>
 
               {/* --- TRUST BADGES --- */}
-              <motion.div variants={fadeSlideUp} className="flex flex-wrap gap-3 mb-10">
-                {trustBadges.map((badge, i) => (
+              <motion.div variants={badgeSection} className="flex flex-wrap gap-3 mb-10">
+                {trustBadges.map((badge) => (
                   <motion.span
                     key={badge.label}
-                    custom={i}
                     variants={badgePop}
-                    initial="hidden"
-                    animate="visible"
                     className="inline-flex items-center gap-1.5 backdrop-blur-md bg-ivory/8 border border-ivory/12 rounded-full px-3.5 py-1.5"
                   >
                     <badge.icon className={`w-3.5 h-3.5 ${badge.accent}`} />
@@ -396,12 +398,9 @@ export default function Hero() {
         <span className="font-jost text-[10px] tracking-[0.25em] text-ivory/40 uppercase">
           Scroll to Explore
         </span>
-        <motion.div
-          animate={{ y: [0, 8, 0] }}
-          transition={{ duration: 1.6, repeat: Infinity, ease: 'easeInOut' }}
-        >
+        <div className="animate-bounce">
           <ChevronDown className="w-5 h-5 text-champagne-gold/60" strokeWidth={1.5} />
-        </motion.div>
+        </div>
       </motion.div>
 
       {/* ============ BOTTOM TRANSITION ============ */}

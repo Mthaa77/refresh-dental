@@ -1,7 +1,7 @@
 'use client'
 
-import { useState, useEffect, useRef, useMemo } from 'react'
-import { motion, AnimatePresence, useInView, useSpring } from 'framer-motion'
+import { useState, useMemo } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
 import {
   ArrowRight,
   Minus,
@@ -99,15 +99,6 @@ const headerVariants = {
   },
 }
 
-const cardVariants = {
-  hidden: { opacity: 0, y: 20 },
-  visible: (i: number) => ({
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.4, delay: i * 0.06, ease: [0.25, 0.46, 0.45, 0.94] },
-  }),
-}
-
 // ── Custom Checkbox ────────────────────────────────────
 function GoldCheckbox({ checked, onClick }: { checked: boolean; onClick: () => void }) {
   return (
@@ -120,13 +111,15 @@ function GoldCheckbox({ checked, onClick }: { checked: boolean; onClick: () => v
       }}
       aria-label={checked ? 'Deselect' : 'Select'}
     >
-      <motion.div
-        initial={false}
-        animate={{ scale: checked ? 1 : 0, opacity: checked ? 1 : 0 }}
-        transition={{ duration: 0.2, type: 'spring', stiffness: 300, damping: 20 }}
+      <div
+        className="transition-all duration-200"
+        style={{
+          transform: checked ? 'scale(1)' : 'scale(0)',
+          opacity: checked ? 1 : 0,
+        }}
       >
         <Check className="h-3 w-3 text-white" strokeWidth={3} />
-      </motion.div>
+      </div>
     </button>
   )
 }
@@ -141,17 +134,6 @@ export default function DentalCostEstimator() {
     })
     return initial
   })
-
-  const sectionRef = useRef<HTMLElement>(null)
-  const isInView = useInView(sectionRef, { once: true, margin: '-80px' })
-  const [headerVisible, setHeaderVisible] = useState(false)
-
-  useEffect(() => {
-    if (isInView) {
-      const timer = setTimeout(() => setHeaderVisible(true), 200)
-      return () => clearTimeout(timer)
-    }
-  }, [isInView])
 
   // Toggle treatment selection
   const toggleTreatment = (id: string) => {
@@ -200,20 +182,15 @@ export default function DentalCostEstimator() {
   const monthly3 = subtotal > 0 ? Math.ceil(subtotal / 3) : 0
   const monthly6 = subtotal > 0 ? Math.ceil(subtotal / 6) : 0
 
-  // Animated total using spring
-  const animatedTotal = useSpring(0, { stiffness: 50, damping: 25 })
-  useEffect(() => {
-    animatedTotal.set(subtotal)
-  }, [animatedTotal, subtotal])
-
   return (
-    <section id="cost-estimator" ref={sectionRef} className="relative overflow-hidden bg-ivory blue-tint py-20 md:py-28">
+    <section id="cost-estimator" className="relative overflow-hidden bg-ivory blue-tint py-20 md:py-28">
       <div className="relative mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <motion.div
           initial="hidden"
-          animate={headerVisible ? 'visible' : 'hidden'}
+          whileInView="visible"
           variants={headerVariants}
+          viewport={{ once: true, margin: '-80px' }}
           className="mb-14 text-center"
         >
           <span className="mb-4 inline-block text-xs font-semibold uppercase tracking-[0.2em] text-champagne-gold">
@@ -232,19 +209,14 @@ export default function DentalCostEstimator() {
           {/* Left Column — Treatment Selector */}
           <div className="lg:col-span-3">
             <div className="space-y-3">
-              {treatments.map((treatment, i) => {
+              {treatments.map((treatment) => {
                 const isSelected = selectedIds.has(treatment.id)
                 const qty = quantities[treatment.id] ?? 1
 
                 return (
-                  <motion.div
+                  <div
                     key={treatment.id}
-                    custom={i}
-                    variants={cardVariants}
-                    initial="hidden"
-                    animate={headerVisible ? 'visible' : 'hidden'}
-                    whileTap={{ scale: 0.985 }}
-                    className={`rounded-xl border p-4 transition-all duration-300 ${
+                    className={`rounded-xl border p-4 transition-all duration-300 active:scale-[0.985] ${
                       isSelected
                         ? 'border-champagne-gold/50 bg-champagne-gold/5 shadow-gold'
                         : 'border-soft-border/30 bg-card hover:border-champagne-gold/30'
@@ -275,13 +247,9 @@ export default function DentalCostEstimator() {
 
                         {/* Quantity Controls */}
                         {treatment.hasQuantity && (
-                          <motion.div
-                            initial={{ opacity: 0, height: 0 }}
-                            animate={{
-                              opacity: isSelected ? 1 : 0.4,
-                              height: 'auto',
-                            }}
-                            className="mt-3 flex items-center gap-2"
+                          <div
+                            className="mt-3 flex items-center gap-2 transition-opacity duration-200"
+                            style={{ opacity: isSelected ? 1 : 0.4 }}
                           >
                             <span className="font-jost text-xs text-brown-muted">
                               Quantity:
@@ -310,11 +278,11 @@ export default function DentalCostEstimator() {
                             <span className="ml-auto font-jost text-xs font-medium text-champagne-gold">
                               {formatZAR(treatment.price * qty)}
                             </span>
-                          </motion.div>
+                          </div>
                         )}
                       </div>
                     </div>
-                  </motion.div>
+                  </div>
                 )
               })}
             </div>
@@ -325,8 +293,9 @@ export default function DentalCostEstimator() {
             <div className="lg:sticky lg:top-24">
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
-                animate={headerVisible ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.6, delay: 0.4 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.2 }}
+                viewport={{ once: true, margin: '-80px' }}
                 className="glass-card rounded-2xl p-6"
               >
                 <h3 className="mb-4 font-dm-serif text-lg text-espresso">
@@ -405,12 +374,7 @@ export default function DentalCostEstimator() {
 
                 {/* Payment Options */}
                 {subtotal > 0 && (
-                  <motion.div
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.4, delay: 0.1 }}
-                    className="mb-6 rounded-xl border border-soft-border/20 bg-ivory/50 p-4"
-                  >
+                  <div className="mb-6 rounded-xl border border-soft-border/20 bg-ivory/50 p-4">
                     <div className="mb-3 flex items-center gap-2">
                       <CreditCard className="h-4 w-4 text-champagne-gold" />
                       <span className="font-dm-serif text-sm text-espresso">
@@ -441,7 +405,7 @@ export default function DentalCostEstimator() {
                         0% Interest with Athena
                       </span>
                     </div>
-                  </motion.div>
+                  </div>
                 )}
 
                 {/* Disclaimer */}

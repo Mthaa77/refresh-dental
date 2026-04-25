@@ -193,16 +193,12 @@ export default function Footer() {
               Privacy Policy
             </a>
           </div>
-          {/* Animated back to top arrow — right aligned */}
+          {/* Back to top arrow — right aligned */}
           <motion.a
             href="#home"
             aria-label="Back to top"
             whileHover={{ y: -3, scale: 1.1 }}
             whileTap={{ scale: 0.95 }}
-            animate={{ y: [0, -4, 0] }}
-            transition={{
-              y: { duration: 1.8, repeat: Infinity, ease: 'easeInOut' },
-            }}
             className="flex items-center gap-1.5 text-ivory/55 hover:text-champagne-gold transition-colors rounded-full px-3 py-2 hover:bg-ivory/5 min-h-[44px]"
           >
             <span className="text-xs font-jost tracking-wider uppercase">Back to Top</span>

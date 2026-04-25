@@ -1,7 +1,6 @@
 'use client'
 
 import { useState, useEffect, useRef } from 'react'
-import { motion, useInView } from 'framer-motion'
 import { Building2, Heart, CheckCircle, ArrowRight, Diamond } from 'lucide-react'
 
 const corporateBenefits = [
@@ -38,49 +37,44 @@ const stats = [
   { value: 25, suffix: '+', label: 'Workshops' },
 ]
 
-const staggerContainer = {
-  hidden: {},
-  visible: {
-    transition: {
-      staggerChildren: 0.08,
-    },
-  },
-}
-
-const listFadeUp = {
-  hidden: { opacity: 0, x: -12 },
-  visible: {
-    opacity: 1,
-    x: 0,
-    transition: { duration: 0.4, ease: 'easeOut' },
-  },
-}
-
 function AnimatedCounter({ target, suffix }: { target: number; suffix: string }) {
   const [count, setCount] = useState(0)
   const ref = useRef<HTMLSpanElement>(null)
-  const isInView = useInView(ref, { once: true, margin: '-60px' })
+  const hasAnimated = useRef(false)
 
   useEffect(() => {
-    if (!isInView) return
-    const duration = 2000
-    const steps = 60
-    const stepTime = duration / steps
-    let current = 0
-    const increment = target / steps
+    const el = ref.current
+    if (!el || hasAnimated.current) return
 
-    const timer = setInterval(() => {
-      current += increment
-      if (current >= target) {
-        setCount(target)
-        clearInterval(timer)
-      } else {
-        setCount(Math.floor(current))
-      }
-    }, stepTime)
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting && !hasAnimated.current) {
+          hasAnimated.current = true
+          const duration = 2000
+          const steps = 60
+          const stepTime = duration / steps
+          let current = 0
+          const increment = target / steps
 
-    return () => clearInterval(timer)
-  }, [isInView, target])
+          const timer = setInterval(() => {
+            current += increment
+            if (current >= target) {
+              setCount(target)
+              clearInterval(timer)
+            } else {
+              setCount(Math.floor(current))
+            }
+          }, stepTime)
+
+          observer.disconnect()
+        }
+      },
+      { margin: '-60px' },
+    )
+
+    observer.observe(el)
+    return () => observer.disconnect()
+  }, [target])
 
   return (
     <span ref={ref}>
@@ -104,57 +98,70 @@ function FlipCard({
 }) {
   const [isFlipped, setIsFlipped] = useState(false)
   const cardRef = useRef<HTMLDivElement>(null)
-  const isInView = useInView(cardRef, { once: true, margin: '-60px' })
   const [progress, setProgress] = useState(0)
+  const hasRevealed = useRef(false)
 
   useEffect(() => {
-    if (!isInView) return
-    const timer = setTimeout(() => setProgress(100), delay * 1000 + 300)
-    return () => clearTimeout(timer)
-  }, [isInView, delay])
+    const el = cardRef.current
+    if (!el || hasRevealed.current) return
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting && !hasRevealed.current) {
+          hasRevealed.current = true
+          const timer = setTimeout(() => setProgress(100), delay * 1000 + 300)
+          observer.disconnect()
+        }
+      },
+      { margin: '-60px' },
+    )
+
+    observer.observe(el)
+    return () => observer.disconnect()
+  }, [delay])
 
   return (
-    <motion.div
+    <div
       ref={cardRef}
-      initial={{ opacity: 0, y: 40, rotate: -2 }}
-      whileInView={{ opacity: 1, y: 0, rotate: 0 }}
-      viewport={{ once: true, margin: '-60px' }}
-      transition={{ duration: 0.7, delay, ease: [0.25, 0.46, 0.45, 0.94] }}
-      className="group relative"
-      style={{ perspective: '1200px' }}
+      className="group relative animate-fade-in-up"
+      style={{ animationDelay: `${delay}s`, perspective: '1200px' }}
       onMouseEnter={() => setIsFlipped(true)}
       onMouseLeave={() => setIsFlipped(false)}
       onTouchStart={() => setIsFlipped((prev) => !prev)}
     >
       {/* Gold progress bar at top — fills on scroll reveal */}
       <div className="absolute top-0 left-0 right-0 z-20 h-[3px] overflow-hidden rounded-t-2xl">
-        <motion.div
-          className="h-full bg-gradient-to-r from-champagne-gold via-gold-light to-champagne-gold"
-          initial={{ width: '0%' }}
-          animate={{ width: `${progress}%` }}
-          transition={{ duration: 1.2, ease: [0.25, 0.46, 0.45, 0.94] }}
+        <div
+          className="h-full bg-gradient-to-r from-champagne-gold via-gold-light to-champagne-gold transition-all duration-[1200ms] ease-out"
+          style={{ width: `${progress}%` }}
         />
       </div>
 
       <div className="relative w-full transition-transform duration-700" style={{ transformStyle: 'preserve-3d' }}>
-        <motion.div
-          animate={{ rotateY: isFlipped ? 180 : 0 }}
-          transition={{ duration: 0.6, ease: [0.25, 0.46, 0.45, 0.94] }}
-          className={`relative w-full rounded-2xl border border-soft-border bg-card p-8 shadow-elevated overflow-hidden shadow-inner-gold ${accent === 'blue' ? 'blue-accent-border' : 'red-accent-border'}`}
-          style={{ backfaceVisibility: 'hidden' }}
+        <div
+          className={`relative w-full rounded-2xl border border-soft-border bg-card p-8 shadow-elevated overflow-hidden shadow-inner-gold transition-transform duration-600 ${accent === 'blue' ? 'blue-accent-border' : 'red-accent-border'}`}
+          style={{
+            backfaceVisibility: 'hidden',
+            transform: isFlipped ? 'rotateY(180deg)' : 'rotateY(0deg)',
+            transitionDuration: '600ms',
+            transitionTimingFunction: 'cubic-bezier(0.25, 0.46, 0.45, 0.94)',
+          }}
         >
           {frontContent}
-        </motion.div>
-        <motion.div
-          animate={{ rotateY: isFlipped ? 0 : -180 }}
-          transition={{ duration: 0.6, ease: [0.25, 0.46, 0.45, 0.94] }}
+        </div>
+        <div
           className="absolute inset-0 rounded-2xl border border-champagne-gold/30 bg-gradient-to-br from-champagne-gold/5 to-gold-light/5 p-8 shadow-elevated overflow-hidden shadow-inner-gold"
-          style={{ backfaceVisibility: 'hidden', transform: 'rotateY(180deg)' }}
+          style={{
+            backfaceVisibility: 'hidden',
+            transform: isFlipped ? 'rotateY(0deg)' : 'rotateY(-180deg)',
+            transitionDuration: '600ms',
+            transitionTimingFunction: 'cubic-bezier(0.25, 0.46, 0.45, 0.94)',
+          }}
         >
           {backContent}
-        </motion.div>
+        </div>
       </div>
-    </motion.div>
+    </div>
   )
 }
 
@@ -175,49 +182,30 @@ export default function CorporateWellnessSection() {
         <rect width="100%" height="100%" fill="url(#corporate-grid)" />
       </svg>
 
-      {/* Floating Building SVG watermark in background */}
-      <motion.div
+      {/* Static Building SVG watermark in background */}
+      <div
         className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none z-[0]"
-        animate={{ y: [0, -12, 0] }}
-        transition={{ duration: 7, repeat: Infinity, ease: 'easeInOut' }}
         aria-hidden="true"
       >
         <Building2 className="w-[280px] h-[280px] text-champagne-gold opacity-[0.04]" strokeWidth={0.8} />
-      </motion.div>
+      </div>
 
       <div className="relative z-[1] mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {/* Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: '-80px' }}
-          transition={{ duration: 0.6 }}
-          className="mb-16 text-center"
-        >
+        <div className="mb-16 text-center animate-fade-in-up">
           <span className="mb-4 inline-block text-xs font-semibold uppercase tracking-[0.2em] text-champagne-gold">
             Community Impact
           </span>
           <h2 className="section-heading text-4xl md:text-5xl lg:text-6xl gold-gradient-text text-shadow-espresso">
             Corporate Wellness &amp; Outreach
           </h2>
-          <motion.p
-            initial={{ opacity: 0, y: 15 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="font-jost text-base md:text-lg text-brown-muted max-w-2xl mx-auto text-center leading-relaxed mt-4 mb-12"
-          >
+          <p className="font-jost text-base md:text-lg text-brown-muted max-w-2xl mx-auto text-center leading-relaxed mt-4 mb-12 animate-fade-in-up" style={{ animationDelay: '0.1s' }}>
             Elevate your team&rsquo;s wellbeing with on-site dental care that reduces absenteeism, boosts morale, and shows your people you genuinely care.
-          </motion.p>
-        </motion.div>
+          </p>
+        </div>
 
         {/* Stats Row */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: '-60px' }}
-          transition={{ duration: 0.6, delay: 0.1 }}
-          className="mb-14 grid grid-cols-1 gap-6 sm:grid-cols-3 sm:gap-0"
-        >
+        <div className="mb-14 grid grid-cols-1 gap-6 sm:grid-cols-3 sm:gap-0 animate-fade-in-up" style={{ animationDelay: '0.15s' }}>
           {stats.map((stat, i) => (
             <div
               key={stat.label}
@@ -235,7 +223,7 @@ export default function CorporateWellnessSection() {
               </span>
             </div>
           ))}
-        </motion.div>
+        </div>
 
         {/* Two-Column Cards with Flip Effect */}
         <div className="relative grid grid-cols-1 gap-6 md:grid-cols-2 md:gap-8">
@@ -265,48 +253,30 @@ export default function CorporateWellnessSection() {
                   A healthier team is a more productive, happier team — and it starts with a healthy smile.
                 </p>
 
-                <motion.ul
-                  variants={staggerContainer}
-                  initial="hidden"
-                  whileInView="visible"
-                  viewport={{ once: true, margin: '-40px' }}
-                  className="space-y-3"
-                >
+                <ul className="space-y-3">
                   {corporateBenefits.map((item, i) => (
-                    <motion.li
+                    <li
                       key={i}
-                      variants={listFadeUp}
-                      className="flex items-start gap-3"
+                      className="flex items-start gap-3 animate-fade-in-up"
+                      style={{ animationDelay: `${0.2 + i * 0.08}s` }}
                     >
-                      <motion.span
-                        whileHover={{
-                          scale: [1, 1.2, 1],
-                          transition: { duration: 0.4, ease: "easeInOut" },
-                        }}
-                        className="mt-0.5 flex-shrink-0"
-                      >
+                      <span className="mt-0.5 flex-shrink-0">
                         <CheckCircle className="h-4 w-4 text-sage-teal" />
-                      </motion.span>
+                      </span>
                       <span className="font-jost text-sm text-brown-muted">
                         {item.text}
                       </span>
-                    </motion.li>
+                    </li>
                   ))}
-                </motion.ul>
+                </ul>
               </>
             }
             backContent={
               <>
                 <div className="flex flex-col items-center justify-center h-full text-center py-4">
-                  <motion.div
-                    initial={{ scale: 0 }}
-                    whileInView={{ scale: 1 }}
-                    viewport={{ once: true }}
-                    transition={{ type: 'spring', stiffness: 200, damping: 15, delay: 0.2 }}
-                    className="mb-6 flex h-16 w-16 items-center justify-center rounded-full bg-champagne-gold/10"
-                  >
+                  <div className="mb-6 flex h-16 w-16 items-center justify-center rounded-full bg-champagne-gold/10">
                     <Building2 className="h-8 w-8 text-champagne-gold" />
-                  </motion.div>
+                  </div>
                   <h3 className="font-dm-serif text-xl text-espresso mb-3">
                     {corporateBack.title}
                   </h3>
@@ -360,48 +330,30 @@ export default function CorporateWellnessSection() {
                   with local organisations, we extend quality dental care to those who need it most.
                 </p>
 
-                <motion.ul
-                  variants={staggerContainer}
-                  initial="hidden"
-                  whileInView="visible"
-                  viewport={{ once: true, margin: '-40px' }}
-                  className="space-y-3"
-                >
+                <ul className="space-y-3">
                   {communityItems.map((item, i) => (
-                    <motion.li
+                    <li
                       key={i}
-                      variants={listFadeUp}
-                      className="flex items-start gap-3"
+                      className="flex items-start gap-3 animate-fade-in-up"
+                      style={{ animationDelay: `${0.35 + i * 0.08}s` }}
                     >
-                      <motion.span
-                        whileHover={{
-                          scale: [1, 1.2, 1],
-                          transition: { duration: 0.4, ease: "easeInOut" },
-                        }}
-                        className="mt-0.5 flex-shrink-0"
-                      >
+                      <span className="mt-0.5 flex-shrink-0">
                         <CheckCircle className="h-4 w-4 text-sage-teal" />
-                      </motion.span>
+                      </span>
                       <span className="font-jost text-sm text-brown-muted">
                         {item.text}
                       </span>
-                    </motion.li>
+                    </li>
                   ))}
-                </motion.ul>
+                </ul>
               </>
             }
             backContent={
               <>
                 <div className="flex flex-col items-center justify-center h-full text-center py-4">
-                  <motion.div
-                    initial={{ scale: 0 }}
-                    whileInView={{ scale: 1 }}
-                    viewport={{ once: true }}
-                    transition={{ type: 'spring', stiffness: 200, damping: 15, delay: 0.2 }}
-                    className="mb-6 flex h-16 w-16 items-center justify-center rounded-full bg-warm-blush/20"
-                  >
+                  <div className="mb-6 flex h-16 w-16 items-center justify-center rounded-full bg-warm-blush/20">
                     <Heart className="h-8 w-8 text-warm-blush" />
-                  </motion.div>
+                  </div>
                   <h3 className="font-dm-serif text-xl text-espresso mb-3">
                     {communityBack.title}
                   </h3>
@@ -423,13 +375,7 @@ export default function CorporateWellnessSection() {
         </div>
 
         {/* CTA */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: '-40px' }}
-          transition={{ duration: 0.5, delay: 0.3 }}
-          className="mt-14 text-center"
-        >
+        <div className="mt-14 text-center animate-fade-in-up" style={{ animationDelay: '0.2s' }}>
           <p className="mb-6 font-jost text-base text-espresso/80">
             Interested in Corporate Wellness?
           </p>
@@ -440,7 +386,7 @@ export default function CorporateWellnessSection() {
             Contact Dr. Malunga
             <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
           </a>
-        </motion.div>
+        </div>
       </div>
     </section>
   )

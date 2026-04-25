@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect, useCallback, useRef } from 'react';
-import { motion, AnimatePresence, useScroll, useMotionValueEvent } from 'framer-motion';
+import { AnimatePresence, motion } from 'framer-motion';
 import { Menu, X, Phone, Instagram, Facebook, Linkedin, Music } from 'lucide-react';
 
 const LOGO_URL = '/images/refresh-dental-logo.jpg';
@@ -20,12 +20,15 @@ export default function Navigation() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState('home');
-  const { scrollY } = useScroll();
   const observerRef = useRef<IntersectionObserver | null>(null);
 
-  useMotionValueEvent(scrollY, 'change', (latest) => {
-    setScrolled(latest > 40);
-  });
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 40);
+    };
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   // Track which section is currently in viewport
   useEffect(() => {
@@ -35,7 +38,6 @@ export default function Navigation() {
       (entries) => {
         const visible = entries.filter((e) => e.isIntersecting);
         if (visible.length > 0) {
-          // Pick the one with the highest intersection ratio
           visible.sort((a, b) => b.intersectionRatio - a.intersectionRatio);
           setActiveSection(visible[0].target.id);
         }
@@ -113,17 +115,15 @@ export default function Navigation() {
   };
 
   const mobileLinkVariants = {
-    hidden: { opacity: 0, y: 20, filter: 'blur(6px)' },
+    hidden: { opacity: 0, y: 20 },
     visible: {
       opacity: 1,
       y: 0,
-      filter: 'blur(0px)',
       transition: { duration: 0.4, ease: [0.25, 0.46, 0.45, 0.94] },
     },
     exit: {
       opacity: 0,
       y: -15,
-      filter: 'blur(4px)',
       transition: { duration: 0.2, ease: 'easeIn' },
     },
   };
@@ -138,29 +138,26 @@ export default function Navigation() {
   return (
     <>
       {/* Desktop / Mobile Nav Bar */}
-      <motion.header
-        className={`fixed top-0 left-0 right-0 z-50 transition-colors duration-500 ${
+      <header
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
           scrolled ? 'border-b border-champagne-gold/10' : ''
         }`}
-        animate={{
+        style={{
           backgroundColor: scrolled ? '#F0EBE1' : 'rgba(15, 13, 10, 0)',
           boxShadow: scrolled
             ? '0 1px 20px rgba(15, 13, 10, 0.08)'
             : '0 0px 0px rgba(15, 13, 10, 0)',
         }}
-        transition={{ duration: 0.4, ease: 'easeInOut' }}
       >
         <nav className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4 lg:px-8">
           {/* Logo + Brand Name */}
           <a href="#home" onClick={(e) => handleNavClick(e, '#home')} className="flex items-center gap-3">
-            <motion.img
+            <img
               src={LOGO_URL}
               alt="Refresh Dental"
               width={44}
               height={44}
-              className="h-11 w-11 rounded-full object-cover ring-1 ring-champagne-gold/20"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
+              className="h-11 w-11 rounded-full object-cover ring-1 ring-champagne-gold/20 transition-transform duration-200 hover:scale-105 active:scale-95"
             />
             {/* Brand name — hidden on mobile */}
             <span
@@ -184,23 +181,19 @@ export default function Navigation() {
                     style={{ color: isActive ? '#B89830' : scrolled ? '#0F0D0A' : '#F0EBE1' }}
                   >
                     {link.label}
-                    {/* Gold underline animation */}
-                    <motion.span
-                      className="absolute -bottom-1 left-0 h-[2px] bg-gradient-to-r from-champagne-gold to-gold-light"
-                      initial={false}
-                      animate={{ width: isActive ? '100%' : '0%' }}
-                      transition={{ duration: 0.35, ease: [0.25, 0.46, 0.45, 0.94] }}
+                    {/* Gold underline */}
+                    <span
+                      className="absolute -bottom-1 left-0 h-[2px] bg-gradient-to-r from-champagne-gold to-gold-light transition-all duration-350"
+                      style={{ width: isActive ? '100%' : '0%' }}
                     />
                     {/* Small dot indicator */}
-                    <motion.span
-                      className="absolute -bottom-[6px] left-1/2 h-[4px] w-[4px] rounded-full bg-champagne-gold"
-                      initial={false}
-                      animate={{
+                    <span
+                      className="absolute -bottom-[6px] left-1/2 h-[4px] w-[4px] rounded-full bg-champagne-gold transition-all duration-300"
+                      style={{
+                        marginLeft: -2,
                         opacity: isActive ? 1 : 0,
-                        scale: isActive ? 1 : 0,
+                        transform: isActive ? 'scale(1)' : 'scale(0)',
                       }}
-                      transition={{ duration: 0.3, ease: 'easeOut' }}
-                      style={{ marginLeft: -2 }}
                     />
                   </a>
                 </li>
@@ -215,7 +208,7 @@ export default function Navigation() {
               href="#contact"
               onClick={handleBookAppointment}
               className="hidden items-center gap-2 rounded-full bg-gradient-to-r from-champagne-gold to-[#A07D1A] px-6 py-2.5 font-jost text-sm font-semibold tracking-wide text-white shadow-gold transition-colors duration-300 md:inline-flex"
-              whileHover={{ scale: 1.05, boxShadow: '0 0 24px rgba(160, 125, 26, 0.35)' }}
+              whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.97 }}
             >
               <Phone className="h-3.5 w-3.5" />
@@ -257,7 +250,7 @@ export default function Navigation() {
             </button>
           </div>
         </nav>
-      </motion.header>
+      </header>
 
       {/* Mobile Full-Screen Overlay */}
       <AnimatePresence>
@@ -269,13 +262,12 @@ export default function Navigation() {
             animate="visible"
             exit="exit"
           >
-            {/* Decorative gold particle dots + subtle blue accent dot */}
+            {/* Static decorative dots */}
             <div className="pointer-events-none absolute inset-0 overflow-hidden">
               <div className="absolute top-[12%] left-[15%] h-1.5 w-1.5 rounded-full bg-champagne-gold/20" />
               <div className="absolute top-[25%] right-[10%] h-1 w-1 rounded-full bg-champagne-gold/15" />
               <div className="absolute bottom-[30%] left-[8%] h-1 w-1 rounded-full bg-champagne-gold/10" />
               <div className="absolute bottom-[20%] right-[20%] h-2 w-2 rounded-full bg-champagne-gold/10" />
-              {/* Subtle blue accent dot */}
               <div className="absolute top-[18%] right-[30%] h-1.5 w-1.5 rounded-full bg-accent-blue/15" />
             </div>
 
@@ -331,12 +323,7 @@ export default function Navigation() {
             </motion.a>
 
             {/* Gold divider line */}
-            <motion.div
-              className="mb-6 h-px w-32 bg-gradient-to-r from-transparent via-champagne-gold/30 to-transparent"
-              initial={{ scaleX: 0 }}
-              animate={{ scaleX: 1 }}
-              transition={{ duration: 0.6, delay: 0.35 }}
-            />
+            <div className="mb-6 h-px w-32 bg-gradient-to-r from-transparent via-champagne-gold/30 to-transparent" />
 
             {/* Nav Links */}
             <motion.ul
@@ -359,15 +346,13 @@ export default function Navigation() {
                       }`}
                     >
                       {/* Gold left border indicator for active link */}
-                      <motion.span
-                        className="absolute left-0 top-0 h-full w-[3px] rounded-full bg-gradient-to-b from-champagne-gold to-gold-light"
-                        initial={false}
-                        animate={{
+                      <span
+                        className="absolute left-0 top-0 h-full w-[3px] rounded-full bg-gradient-to-b from-champagne-gold to-gold-light transition-all duration-300"
+                        style={{
                           scaleY: isActive ? 1 : 0,
                           opacity: isActive ? 1 : 0,
+                          originY: 0.5,
                         }}
-                        transition={{ duration: 0.3, ease: 'easeOut' }}
-                        style={{ originY: 0.5 }}
                       />
                       {link.label}
                     </a>
@@ -377,12 +362,7 @@ export default function Navigation() {
             </motion.ul>
 
             {/* Gold divider line */}
-            <motion.div
-              className="mt-6 mb-6 h-px w-32 bg-gradient-to-r from-transparent via-champagne-gold/30 to-transparent"
-              initial={{ scaleX: 0 }}
-              animate={{ scaleX: 1 }}
-              transition={{ duration: 0.6, delay: 0.6 }}
-            />
+            <div className="mt-6 mb-6 h-px w-32 bg-gradient-to-r from-transparent via-champagne-gold/30 to-transparent" />
 
             {/* Book Appointment CTA */}
             <motion.a
@@ -392,7 +372,7 @@ export default function Navigation() {
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.4, delay: 0.8 }}
-              whileHover={{ scale: 1.05, boxShadow: '0 0 24px rgba(160, 125, 26, 0.35)' }}
+              whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.97 }}
             >
               <Phone className="h-4 w-4" />
@@ -400,27 +380,23 @@ export default function Navigation() {
             </motion.a>
 
             {/* Social Icons Row */}
-            <motion.div
-              className="flex items-center gap-5"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.4, delay: 0.9 }}
+            <div
+              className="flex items-center gap-5 animate-fade-in-up"
+              style={{ animationDelay: '0.9s' }}
             >
               {socialLinks.map((social) => (
-                <motion.a
+                <a
                   key={social.label}
                   href={social.href}
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={social.label}
-                  whileHover={{ scale: 1.15 }}
-                  transition={{ duration: 0.25 }}
-                  className="flex h-11 w-11 items-center justify-center rounded-full border border-ivory/20 text-ivory/55 transition-colors duration-300 hover:border-champagne-gold/30 hover:text-champagne-gold"
+                  className="flex h-11 w-11 items-center justify-center rounded-full border border-ivory/20 text-ivory/55 transition-all duration-200 hover:scale-[1.15] hover:border-champagne-gold/30 hover:text-champagne-gold"
                 >
                   <social.icon className="h-4 w-4" />
-                </motion.a>
+                </a>
               ))}
-            </motion.div>
+            </div>
           </motion.div>
         )}
       </AnimatePresence>

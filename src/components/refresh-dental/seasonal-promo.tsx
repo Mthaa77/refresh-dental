@@ -109,18 +109,14 @@ export default function SeasonalPromo() {
     <section id="promotions" className="relative overflow-hidden bg-[#F0EBE1]">
       {/* Decorative gold gradient top border */}
       <div className="h-px bg-gradient-to-r from-transparent via-champagne-gold/60 to-transparent" />
-      {/* Gold decorative background elements */}
-      <motion.div
+      {/* Static gold decorative background elements */}
+      <div
         className="absolute -top-8 -right-8 h-32 w-32 rounded-full opacity-[0.04] sm:-top-16 sm:-right-16 sm:h-48 sm:w-48 md:-top-32 md:-right-32 md:h-64 md:w-64"
         style={{ backgroundColor: '#B89830' }}
-        animate={{ scale: [1, 1.1, 1] }}
-        transition={{ duration: 8, repeat: Infinity, ease: 'easeInOut' }}
       />
-      <motion.div
+      <div
         className="absolute -bottom-6 -left-6 h-24 w-24 rounded-full opacity-[0.03] sm:-bottom-12 sm:-left-12 sm:h-36 sm:w-36 md:-bottom-24 md:-left-24 md:h-48 md:w-48"
         style={{ backgroundColor: '#B89830' }}
-        animate={{ scale: [1, 1.15, 1] }}
-        transition={{ duration: 10, repeat: Infinity, ease: 'easeInOut', delay: 2 }}
       />
 
       <div className="relative mx-auto max-w-5xl px-4 py-20 sm:px-6 md:py-28 lg:px-8">
@@ -189,16 +185,15 @@ export default function SeasonalPromo() {
                   </motion.span>
                 )}
               </AnimatePresence>
-              {/* Active indicator with glow transition */}
+              {/* Active indicator — positioned div with CSS transition instead of layoutId */}
               {activeTab === index && (
-                <motion.div
+                <div
                   className="absolute bottom-0 left-0 right-0 h-0.5"
                   style={{
                     backgroundColor: '#B89830',
                     boxShadow: '0 0 8px rgba(184, 152, 48, 0.4)',
+                    animation: 'fadeIn 0.2s ease',
                   }}
-                  layoutId="promo-tab-indicator"
-                  transition={{ type: 'spring', stiffness: 400, damping: 30 }}
                 />
               )}
             </button>
@@ -241,53 +236,44 @@ export default function SeasonalPromo() {
                   <h3 className="font-dm-serif text-2xl text-espresso">
                     {activeOffer.title}
                   </h3>
-                  {/* Limited Time urgency badge with pulsing dot */}
-                  <motion.span
+                  {/* Limited Time urgency badge — static dot */}
+                  <span
                     className="inline-flex items-center gap-1.5 rounded-full border border-champagne-gold/30 bg-champagne-gold/5 px-2.5 py-0.5 font-jost text-[10px] font-semibold uppercase tracking-wider text-champagne-gold"
-                    initial={{ opacity: 0, scale: 0.8 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    transition={{ duration: 0.4 }}
                   >
-                    <motion.span
+                    <span
                       className="inline-block h-1.5 w-1.5 rounded-full bg-champagne-gold"
-                      animate={{ opacity: [1, 0.3, 1], scale: [1, 0.8, 1] }}
-                      transition={{ duration: 1.5, repeat: Infinity, ease: 'easeInOut' }}
                     />
                     Limited Time
-                  </motion.span>
+                  </span>
                 </div>
                 <p className="font-jost text-sm leading-relaxed text-brown-muted">
                   {activeOffer.description}
                 </p>
-                {/* Price with animated gold sparkles */}
+                {/* Price with static sparkle SVGs */}
                 <div className="flex items-baseline gap-3 justify-center md:justify-start">
-                  {/* Sparkle left of price */}
-                  <motion.svg
+                  {/* Sparkle left of price — static */}
+                  <svg
                     width="14"
                     height="14"
                     viewBox="0 0 14 14"
                     className="text-champagne-gold flex-shrink-0"
                     aria-hidden="true"
-                    animate={{ opacity: [0.4, 1, 0.4], scale: [0.8, 1.1, 0.8] }}
-                    transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
                   >
                     <path d="M7 0L8.5 5.5L14 7L8.5 8.5L7 14L5.5 8.5L0 7L5.5 5.5Z" fill="currentColor" />
-                  </motion.svg>
+                  </svg>
                   <span className="font-cormorant text-4xl font-semibold text-champagne-gold">
                     {activeOffer.price}
                   </span>
-                  {/* Sparkle right of price */}
-                  <motion.svg
+                  {/* Sparkle right of price — static */}
+                  <svg
                     width="10"
                     height="10"
                     viewBox="0 0 14 14"
                     className="text-champagne-gold flex-shrink-0"
                     aria-hidden="true"
-                    animate={{ opacity: [0.3, 0.9, 0.3], scale: [0.7, 1, 0.7] }}
-                    transition={{ duration: 2.5, repeat: Infinity, ease: 'easeInOut', delay: 0.8 }}
                   >
                     <path d="M7 0L8.5 5.5L14 7L8.5 8.5L7 14L5.5 8.5L0 7L5.5 5.5Z" fill="currentColor" />
-                  </motion.svg>
+                  </svg>
                   {activeOffer.originalPrice && (
                     <span className="font-jost text-base text-brown-muted/70 line-through">
                       {activeOffer.originalPrice}
@@ -314,7 +300,7 @@ export default function SeasonalPromo() {
                     transition={{ duration: 0.3, delay: i * 0.06 }}
                     className="flex items-center gap-3"
                   >
-                    {/* Animated check mark with stroke-dashoffset */}
+                    {/* Static check mark */}
                     <div className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-sage-teal/10">
                       <svg
                         width="14"
@@ -323,29 +309,21 @@ export default function SeasonalPromo() {
                         className="text-sage-teal"
                         aria-hidden="true"
                       >
-                        <motion.circle
+                        <circle
                           cx="7"
                           cy="7"
                           r="6"
                           fill="none"
                           stroke="currentColor"
                           strokeWidth="1"
-                          strokeDasharray="38"
-                          initial={{ strokeDashoffset: 38 }}
-                          animate={{ strokeDashoffset: 0 }}
-                          transition={{ duration: 0.4, delay: i * 0.06 + 0.1, ease: 'easeOut' }}
                         />
-                        <motion.path
+                        <path
                           d="M4 7L6.5 9.5L10 5"
                           fill="none"
                           stroke="currentColor"
                           strokeWidth="1.5"
                           strokeLinecap="round"
                           strokeLinejoin="round"
-                          strokeDasharray="14"
-                          initial={{ strokeDashoffset: 14 }}
-                          animate={{ strokeDashoffset: 0 }}
-                          transition={{ duration: 0.3, delay: i * 0.06 + 0.3, ease: 'easeOut' }}
                         />
                       </svg>
                     </div>

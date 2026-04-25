@@ -83,7 +83,6 @@ export default function InstagramFeed() {
       }
       return next
     })
-    // Trigger heart popup animation
     setHeartPopups((prev) => ({ ...prev, [index]: true }))
     setTimeout(() => {
       setHeartPopups((prev) => ({ ...prev, [index]: false }))
@@ -94,13 +93,7 @@ export default function InstagramFeed() {
     <section className="relative bg-sand py-20 md:py-28 overflow-hidden">
       <div className="relative z-[1] mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {/* Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: '-80px' }}
-          transition={{ duration: 0.6 }}
-          className="mb-12 text-center"
-        >
+        <div className="mb-12 text-center animate-fade-in-up">
           <span className="mb-4 inline-block text-xs font-semibold uppercase tracking-[0.2em] text-champagne-gold">
             Connect With Us
           </span>
@@ -108,24 +101,17 @@ export default function InstagramFeed() {
             Follow Us on Instagram
           </h2>
           {/* Gradient gold underline */}
-          <motion.div
-            initial={{ scaleX: 0 }}
-            whileInView={{ scaleX: 1 }}
-            viewport={{ once: true, margin: '-40px' }}
-            transition={{ duration: 0.8, delay: 0.3, ease: [0.25, 0.46, 0.45, 0.94] }}
-            className="mx-auto mt-3 h-[2px] w-24 origin-center bg-gradient-to-r from-transparent via-champagne-gold to-transparent"
-          />
-          <motion.a
+          <div className="mx-auto mt-3 h-[2px] w-24 origin-center bg-gradient-to-r from-transparent via-champagne-gold to-transparent animate-scale-x-full" />
+          <a
             href={INSTAGRAM_URL}
             target="_blank"
             rel="noopener noreferrer"
-            whileHover={{ scale: 1.02 }}
-            className="mt-4 inline-flex items-center gap-2 font-jost text-sm text-brown-muted/90 transition-colors duration-300 hover:text-champagne-gold"
+            className="mt-4 inline-flex items-center gap-2 font-jost text-sm text-brown-muted/90 transition-all duration-300 hover:text-champagne-gold hover:scale-[1.02]"
           >
             <Instagram className="h-4 w-4" strokeWidth={1.5} />
             @refresh_dental
-          </motion.a>
-        </motion.div>
+          </a>
+        </div>
 
         {/* Image Grid */}
         <motion.div
@@ -140,7 +126,6 @@ export default function InstagramFeed() {
               key={idx}
               variants={itemVariants}
               className="group relative block overflow-hidden bg-card"
-              onMouseEnter={() => {}}
             >
               <div className={`relative w-full ${image.aspect} overflow-hidden`}>
                 <img
@@ -154,48 +139,22 @@ export default function InstagramFeed() {
 
               {/* "Latest Post" badge on first image */}
               {idx === 0 && (
-                <motion.div
-                  initial={{ opacity: 0, y: 8 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: 0.5 }}
-                  className="absolute top-3 left-3 z-10"
-                >
+                <div className="absolute top-3 left-3 z-10">
                   <span className="inline-flex items-center gap-1 rounded-full bg-champagne-gold px-2.5 py-1 text-[10px] font-jost font-semibold uppercase tracking-wider text-white shadow-sm">
-                    <motion.span
-                      className="inline-block h-1.5 w-1.5 rounded-full bg-white"
-                      animate={{ opacity: [1, 0.4, 1] }}
-                      transition={{ duration: 1.5, repeat: Infinity, ease: 'easeInOut' }}
-                    />
+                    <span className="inline-block h-1.5 w-1.5 rounded-full bg-white" />
                     Latest Post
                   </span>
-                </motion.div>
+                </div>
               )}
 
-              {/* Gold gradient border sweep on hover */}
-              <motion.div
-                className="absolute inset-0 pointer-events-none z-[5]"
-                initial={{ opacity: 0 }}
-                whileHover={{ opacity: 1 }}
-              >
-                <motion.div
-                  className="absolute inset-0"
-                  style={{
-                    background: 'conic-gradient(from 0deg, transparent 60%, rgba(184, 152, 48, 0.6) 75%, rgba(232, 213, 176, 0.8) 80%, rgba(184, 152, 48, 0.6) 85%, transparent 100%)',
-                    mask: 'linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)',
-                    maskComposite: 'exclude',
-                    WebkitMaskComposite: 'xor',
-                    padding: '2px',
-                    borderRadius: '0px',
-                  }}
-                  animate={{ rotate: 360 }}
-                  transition={{
-                    duration: 4,
-                    repeat: Infinity,
-                    ease: 'linear',
-                  }}
-                />
-              </motion.div>
+              {/* Hover border effect (CSS-only via opacity) */}
+              <div
+                className="absolute inset-0 pointer-events-none z-[5] opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                style={{
+                  border: '2px solid rgba(184, 152, 48, 0.4)',
+                  borderRadius: '0',
+                }}
+              />
 
               {/* Heart popup animation on click */}
               <AnimatePresence>
@@ -213,12 +172,7 @@ export default function InstagramFeed() {
               </AnimatePresence>
 
               {/* Hover Overlay */}
-              <motion.div
-                initial={{ opacity: 0 }}
-                whileHover={{ opacity: 1 }}
-                transition={{ duration: 0.3 }}
-                className="absolute inset-0 z-[10] flex flex-col items-center justify-center bg-espresso/70 backdrop-blur-[2px]"
-              >
+              <div className="absolute inset-0 z-[10] flex flex-col items-center justify-center bg-espresso/70 backdrop-blur-[2px] opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                 {/* Like and comment counters */}
                 <div className="mb-4 flex items-center gap-5">
                   <div className="flex items-center gap-1.5">
@@ -238,15 +192,13 @@ export default function InstagramFeed() {
                 {/* Action buttons */}
                 <div className="flex items-center gap-3">
                   {/* Like button */}
-                  <motion.button
+                  <button
                     onClick={(e) => {
                       e.preventDefault()
                       e.stopPropagation()
                       handleLike(idx)
                     }}
-                    whileHover={{ scale: 1.15 }}
-                    whileTap={{ scale: 0.9 }}
-                    className="flex h-10 w-10 items-center justify-center rounded-full bg-white/15 backdrop-blur-sm transition-colors hover:bg-white/25"
+                    className="flex h-10 w-10 items-center justify-center rounded-full bg-white/15 backdrop-blur-sm transition-all duration-200 hover:bg-white/25 hover:scale-[1.15] active:scale-[0.9]"
                   >
                     <Heart
                       className={`h-5 w-5 transition-colors ${
@@ -255,29 +207,27 @@ export default function InstagramFeed() {
                           : 'text-white'
                       }`}
                     />
-                  </motion.button>
+                  </button>
 
                   {/* Instagram icon */}
-                  <motion.a
+                  <a
                     href={INSTAGRAM_URL}
                     target="_blank"
                     rel="noopener noreferrer"
                     onClick={(e) => e.stopPropagation()}
-                    whileHover={{ scale: 1.15 }}
-                    className="flex h-10 w-10 items-center justify-center rounded-full bg-white/15 backdrop-blur-sm transition-colors hover:bg-white/25"
+                    className="flex h-10 w-10 items-center justify-center rounded-full bg-white/15 backdrop-blur-sm transition-all duration-200 hover:bg-white/25 hover:scale-[1.15]"
                   >
                     <Instagram className="h-5 w-5 text-white" strokeWidth={1.5} />
-                  </motion.a>
+                  </a>
 
                   {/* Zoom icon */}
-                  <motion.div
-                    whileHover={{ scale: 1.15 }}
-                    className="flex h-10 w-10 items-center justify-center rounded-full bg-white/15 backdrop-blur-sm transition-colors hover:bg-white/25"
+                  <div
+                    className="flex h-10 w-10 items-center justify-center rounded-full bg-white/15 backdrop-blur-sm transition-all duration-200 hover:bg-white/25 hover:scale-[1.15]"
                   >
                     <ZoomIn className="h-5 w-5 text-white/70" strokeWidth={1.5} />
-                  </motion.div>
+                  </div>
                 </div>
-              </motion.div>
+              </div>
 
               {/* Clickable overlay for the link */}
               <a
@@ -292,70 +242,34 @@ export default function InstagramFeed() {
         </motion.div>
 
         {/* CTA Button */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: '-40px' }}
-          transition={{ duration: 0.6, delay: 0.3 }}
-          className="mt-10 text-center"
-        >
-          <motion.a
+        <div className="mt-10 text-center animate-fade-in-up" style={{ animationDelay: '0.2s' }}>
+          <a
             href={INSTAGRAM_URL}
             target="_blank"
             rel="noopener noreferrer"
-            whileHover={{
-              boxShadow: '0 8px 30px -4px rgba(184, 152, 48, 0.25)',
-            }}
-            transition={{ duration: 0.3 }}
             className="relative inline-flex items-center gap-2.5 rounded-full border border-champagne-gold/40 chrome-gold-bg px-7 py-3 font-jost text-sm font-semibold uppercase tracking-wider text-white transition-all duration-300 hover:shadow-gold"
           >
             <Instagram size={16} strokeWidth={1.5} />
             Follow @refresh_dental
-          </motion.a>
-        </motion.div>
+          </a>
+        </div>
       </div>
 
-      {/* Subtle wave animation at bottom of section */}
+      {/* Static wave at bottom of section */}
       <div className="absolute bottom-0 left-0 right-0 z-[2] pointer-events-none overflow-hidden" aria-hidden="true">
         <svg
           viewBox="0 0 1440 100"
           className="w-full h-auto"
           preserveAspectRatio="none"
         >
-          <motion.path
+          <path
             d="M0,40 C240,80 480,0 720,40 C960,80 1200,0 1440,40 L1440,100 L0,100 Z"
             fill="#F0EBE1"
-            initial={{ d: 'M0,40 C240,80 480,0 720,40 C960,80 1200,0 1440,40 L1440,100 L0,100 Z' }}
-            animate={{
-              d: [
-                'M0,40 C240,80 480,0 720,40 C960,80 1200,0 1440,40 L1440,100 L0,100 Z',
-                'M0,50 C240,10 480,70 720,30 C960,10 1200,70 1440,30 L1440,100 L0,100 Z',
-                'M0,40 C240,80 480,0 720,40 C960,80 1200,0 1440,40 L1440,100 L0,100 Z',
-              ],
-            }}
-            transition={{
-              duration: 6,
-              repeat: Infinity,
-              ease: 'easeInOut',
-            }}
           />
-          <motion.path
+          <path
             d="M0,60 C240,30 480,80 720,50 C960,30 1200,80 1440,50 L1440,100 L0,100 Z"
             fill="#F0EBE1"
             opacity="0.5"
-            initial={{ d: 'M0,60 C240,30 480,80 720,50 C960,30 1200,80 1440,50 L1440,100 L0,100 Z' }}
-            animate={{
-              d: [
-                'M0,60 C240,30 480,80 720,50 C960,30 1200,80 1440,50 L1440,100 L0,100 Z',
-                'M0,45 C240,75 480,35 720,65 C960,75 1200,35 1440,65 L1440,100 L0,100 Z',
-                'M0,60 C240,30 480,80 720,50 C960,30 1200,80 1440,50 L1440,100 L0,100 Z',
-              ],
-            }}
-            transition={{
-              duration: 8,
-              repeat: Infinity,
-              ease: 'easeInOut',
-            }}
           />
         </svg>
       </div>

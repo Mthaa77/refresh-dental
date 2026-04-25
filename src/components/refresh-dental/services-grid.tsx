@@ -29,16 +29,6 @@ const categoryIcons: Record<string, React.ElementType> = {
 
 const categories = ["All", "General", "Cosmetic", "Specialised", "Aesthetics"]
 
-/* Deterministic sparkle positions for large card corner effect */
-const sparkles = [
-  { x: '5%', y: '8%', size: 4, delay: 0 },
-  { x: '12%', y: '3%', size: 3, delay: 0.4 },
-  { x: '8%', y: '14%', size: 5, delay: 0.8 },
-  { x: '18%', y: '6%', size: 3, delay: 1.2 },
-  { x: '3%', y: '18%', size: 4, delay: 0.6 },
-  { x: '15%', y: '12%', size: 3, delay: 1.0 },
-]
-
 const containerVariants = {
   hidden: {},
   visible: {
@@ -57,36 +47,6 @@ const cardVariants = {
   },
 }
 
-function LargeCardSparkles() {
-  return (
-    <div className="absolute inset-0 pointer-events-none overflow-hidden z-[6]">
-      {sparkles.map((s, i) => (
-        <motion.div
-          key={i}
-          className="absolute rounded-full bg-gold-pale"
-          style={{
-            left: s.x,
-            top: s.y,
-            width: s.size,
-            height: s.size,
-          }}
-          animate={{
-            opacity: [0, 0.8, 0],
-            scale: [0.5, 1.2, 0.5],
-          }}
-          transition={{
-            duration: 2.4,
-            delay: s.delay,
-            repeat: Infinity,
-            repeatDelay: 1.8,
-            ease: 'easeInOut',
-          }}
-        />
-      ))}
-    </div>
-  )
-}
-
 function ServiceCard({ service, idx, onSelect }: { service: typeof services[number]; idx: number; onSelect: (name: string) => void }) {
   const isLarge = service.span.includes("row-span-2")
   const Icon = categoryIcons[service.category]
@@ -94,7 +54,6 @@ function ServiceCard({ service, idx, onSelect }: { service: typeof services[numb
   return (
     <motion.div
       variants={cardVariants}
-      layout
       onClick={() => onSelect(service.name)}
       className={`${isLarge ? 'sm:col-span-2 sm:row-span-2' : ''} group cursor-pointer overflow-hidden rounded-2xl bg-white shadow-premium shadow-inner-gold ${
         isLarge
@@ -106,8 +65,7 @@ function ServiceCard({ service, idx, onSelect }: { service: typeof services[numb
       }}
       whileHover={{
         y: -6,
-        boxShadow:
-          "0 16px 48px -8px rgba(184, 152, 48, 0.22), 0 8px 24px -4px rgba(15, 13, 10, 0.1), inset 0 1px 0 rgba(184, 152, 48, 0.2)",
+        boxShadow: '0 8px 30px rgba(15,13,10,0.12)',
         borderColor: 'rgba(184, 152, 48, 0.55)',
         transition: { duration: 0.4, ease: [0.25, 0.4, 0.25, 1] },
       }}
@@ -151,25 +109,13 @@ function ServiceCard({ service, idx, onSelect }: { service: typeof services[numb
         </div>
       </div>
 
-      {/* Sparkle effect for large cards */}
-      {isLarge && <LargeCardSparkles />}
-
-      {/* Watermark icon in top-right */}
+      {/* Watermark icon in top-right (static) */}
       {Icon && (() => {
         const iconSize = isLarge ? 'h-12 w-12' : 'h-8 w-8'
         return (
-          <motion.div
-            className={`absolute top-3 right-3 md:top-4 md:right-4 pointer-events-none z-[5] ${iconSize}`}
-            animate={{ rotate: [0, 360] }}
-            transition={{ rotate: { duration: 40, repeat: Infinity, ease: 'linear' } }}
-          >
-            <motion.div
-              whileHover={{ scale: 1.15 }}
-              transition={{ duration: 0.4, type: 'spring', stiffness: 300 }}
-            >
-              <Icon className="h-full w-full text-champagne-gold/[0.08] transition-colors duration-500 group-hover:text-champagne-gold/[0.20]" />
-            </motion.div>
-          </motion.div>
+          <div className={`absolute top-3 right-3 md:top-4 md:right-4 pointer-events-none z-[5] ${iconSize}`}>
+            <Icon className="h-full w-full text-champagne-gold/[0.08] transition-colors duration-500 group-hover:text-champagne-gold/[0.20]" />
+          </div>
         )
       })()}
 
@@ -210,13 +156,9 @@ function ServiceCard({ service, idx, onSelect }: { service: typeof services[numb
           <span className="font-jost text-xs font-semibold uppercase tracking-[0.15em] text-champagne-gold transition-all duration-300 group-hover:tracking-[0.22em]">
             Book This Service
           </span>
-          <motion.div
-            className="inline-flex text-champagne-gold"
-            whileHover={{ x: 4 }}
-            transition={{ duration: 0.3, ease: 'easeOut' }}
-          >
+          <div className="inline-flex text-champagne-gold">
             <ArrowRight className="h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-1.5" />
-          </motion.div>
+          </div>
         </div>
       </div>
     </motion.div>
@@ -240,53 +182,34 @@ export default function ServicesGrid() {
 
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-80px" }}
-          transition={{ duration: 0.6 }}
-          className="mb-16 text-center"
-        >
+        <div className="mb-16 text-center animate-fade-in-up">
           <span className="mb-4 inline-block text-xs font-semibold uppercase tracking-[0.2em] text-champagne-gold text-shadow-gold">
             What We Offer
           </span>
           <h2 className="font-cormorant text-4xl md:text-5xl lg:text-6xl section-heading text-shadow-luxury gold-gradient-text">
             Everything Your Smile Needs
           </h2>
-          <motion.p
-            initial={{ opacity: 0, y: 15 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="font-jost text-base md:text-lg text-brown-muted max-w-2xl mx-auto text-center leading-relaxed mt-4 mb-12"
-          >
+          <p className="font-jost text-base md:text-lg text-brown-muted max-w-2xl mx-auto text-center leading-relaxed mt-4 mb-12 animate-fade-in-up" style={{ animationDelay: '0.1s' }}>
             From routine check-ups to complete smile makeovers — every treatment is delivered with precision, care, and a commitment to exceeding your expectations.
-          </motion.p>
-        </motion.div>
+          </p>
+        </div>
 
         {/* Category Filter Tabs */}
-        <motion.div
-          initial={{ opacity: 0, y: 12 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-60px" }}
-          transition={{ duration: 0.5, delay: 0.15 }}
-          className="mb-12 flex gap-2 overflow-x-auto scrollbar-hide px-4 -mx-4 sm:flex-wrap sm:justify-center sm:overflow-visible sm:px-0 sm:mx-0"
-        >
+        <div className="mb-12 flex gap-2 overflow-x-auto scrollbar-hide px-4 -mx-4 sm:flex-wrap sm:justify-center sm:overflow-visible sm:px-0 sm:mx-0 animate-fade-in-up" style={{ animationDelay: '0.15s' }}>
           {categories.map((cat) => (
-            <motion.button
+            <button
               key={cat}
               onClick={() => setActiveCategory(cat)}
-              whileHover={{ scale: 1.04 }}
-              whileTap={{ scale: 0.97 }}
-              className={`shrink-0 rounded-full px-5 py-3 text-xs font-semibold uppercase tracking-wider transition-all duration-300 sm:shrink ${
+              className={`shrink-0 rounded-full px-5 py-3 text-xs font-semibold uppercase tracking-wider transition-all duration-300 sm:shrink hover:scale-[1.04] active:scale-[0.97] ${
                 activeCategory === cat
                   ? "chrome-gold-bg text-white shadow-gold-strong"
                   : "bg-white/70 backdrop-blur-sm border border-soft-border text-brown-warm hover:bg-champagne-gold/10 hover:text-espresso hover:border-champagne-gold/30"
               }`}
             >
               {cat}
-            </motion.button>
+            </button>
           ))}
-        </motion.div>
+        </div>
 
         {/* Bento Grid */}
         <motion.div
@@ -302,18 +225,9 @@ export default function ServicesGrid() {
         </motion.div>
 
         {/* View All Button */}
-        <motion.div
-          initial={{ opacity: 0, y: 16 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-40px" }}
-          transition={{ duration: 0.5, delay: 0.3 }}
-          className="mt-14 flex justify-center"
-        >
-          <motion.button
-            className="group relative inline-flex items-center gap-2 rounded-full px-8 py-3.5 font-jost text-sm font-semibold uppercase tracking-widest text-white overflow-hidden chrome-gold-bg shadow-gold-strong"
-            whileHover={{ scale: 1.03, boxShadow: '0 8px 32px rgba(184, 152, 48, 0.35), 0 0 60px rgba(184, 152, 48, 0.15)' }}
-            whileTap={{ scale: 0.97 }}
-            transition={{ duration: 0.3 }}
+        <div className="mt-14 flex justify-center animate-fade-in-up" style={{ animationDelay: '0.2s' }}>
+          <button
+            className="group relative inline-flex items-center gap-2 rounded-full px-8 py-3.5 font-jost text-sm font-semibold uppercase tracking-widest text-white overflow-hidden chrome-gold-bg shadow-gold-strong hover:scale-[1.03] active:scale-[0.97] transition-all duration-300"
           >
             {/* Shimmer sweep on hover */}
             <div className="absolute top-0 left-0 h-full w-full overflow-hidden pointer-events-none">
@@ -328,17 +242,11 @@ export default function ServicesGrid() {
             <span className="relative z-10">
               <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
             </span>
-          </motion.button>
-        </motion.div>
+          </button>
+        </div>
 
         {/* Quick Booking Card */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: '-40px' }}
-          transition={{ duration: 0.6, delay: 0.3 }}
-          className="mt-12 flex justify-center"
-        >
+        <div className="mt-12 flex justify-center animate-fade-in-up" style={{ animationDelay: '0.25s' }}>
           <div
             className="relative max-w-xl w-full rounded-2xl p-6 md:p-8 text-center"
             style={{
@@ -380,7 +288,7 @@ export default function ServicesGrid() {
               </a>
             </div>
           </div>
-        </motion.div>
+        </div>
       </div>
     </section>
     <ServiceDetailDrawer

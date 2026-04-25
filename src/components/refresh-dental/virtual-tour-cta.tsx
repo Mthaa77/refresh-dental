@@ -211,35 +211,6 @@ export default function VirtualTourCta() {
                   whileHover={{ scale: 1.1 }}
                   whileTap={{ scale: 0.95 }}
                 >
-                  {/* Outer pulsing ring */}
-                  <motion.div
-                    className="absolute -inset-4 rounded-full"
-                    style={{ border: '2px solid rgba(201,169,110,0.3)' }}
-                    animate={{
-                      scale: [1, 1.3, 1],
-                      opacity: [0.4, 0, 0.4],
-                    }}
-                    transition={{
-                      duration: 3,
-                      repeat: Infinity,
-                      ease: 'easeInOut',
-                    }}
-                  />
-                  {/* Second ring */}
-                  <motion.div
-                    className="absolute -inset-2 rounded-full"
-                    style={{ border: '1px solid rgba(201,169,110,0.2)' }}
-                    animate={{
-                      scale: [1, 1.5, 1],
-                      opacity: [0.3, 0, 0.3],
-                    }}
-                    transition={{
-                      duration: 3,
-                      repeat: Infinity,
-                      ease: 'easeInOut',
-                      delay: 0.5,
-                    }}
-                  />
                   {/* Main play button */}
                   <div
                     className="relative flex h-16 w-16 md:h-20 md:w-20 items-center justify-center rounded-full cursor-pointer"

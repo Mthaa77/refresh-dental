@@ -109,34 +109,6 @@ function getRecommendation(answers: string[]): TreatmentResult {
   return base
 }
 
-// Confetti / sparkle burst particles
-const confettiParticles = [
-  { x: '15%', y: '20%', size: 8, color: '#B89830', delay: 0, duration: 1.2, yEnd: -40 },
-  { x: '80%', y: '15%', size: 6, color: '#D4C08A', delay: 0.05, duration: 1.0, yEnd: -35 },
-  { x: '50%', y: '10%', size: 7, color: '#2D6B5C', delay: 0.1, duration: 1.4, yEnd: -45 },
-  { x: '25%', y: '25%', size: 5, color: '#B89830', delay: 0.15, duration: 1.1, yEnd: -30 },
-  { x: '70%', y: '18%', size: 6, color: '#F0EBE1', delay: 0.08, duration: 1.3, yEnd: -38 },
-  { x: '40%', y: '22%', size: 5, color: '#B89830', delay: 0.12, duration: 1.0, yEnd: -32 },
-  { x: '60%', y: '12%', size: 7, color: '#D4C08A', delay: 0.03, duration: 1.5, yEnd: -42 },
-  { x: '35%', y: '28%', size: 4, color: '#2D6B5C', delay: 0.18, duration: 1.2, yEnd: -28 },
-  { x: '55%', y: '16%', size: 6, color: '#F0EBE1', delay: 0.07, duration: 1.1, yEnd: -36 },
-  { x: '85%', y: '24%', size: 5, color: '#B89830', delay: 0.14, duration: 1.3, yEnd: -34 },
-  { x: '10%', y: '30%', size: 4, color: '#D4C08A', delay: 0.2, duration: 1.0, yEnd: -26 },
-  { x: '75%', y: '20%', size: 6, color: '#B89830', delay: 0.06, duration: 1.4, yEnd: -40 },
-]
-
-const confettiBurst = (p: { delay: number; duration: number; yEnd: number }) => ({
-  opacity: [0, 1, 1, 0],
-  scale: [0, 1.2, 0.8, 0],
-  y: [0, p.yEnd * 0.3, p.yEnd * 0.7, p.yEnd],
-  rotate: [0, 90, 200, 360],
-  transition: {
-    duration: p.duration,
-    delay: p.delay,
-    ease: 'easeOut',
-  },
-})
-
 const slideVariants = {
   enter: (direction: number) => ({
     x: direction > 0 ? 300 : -300,
@@ -252,14 +224,9 @@ export default function SmileAssessment() {
 
   return (
     <section id="smile-assessment" ref={sectionRef} className="relative overflow-hidden bg-sand py-20 md:py-28">
-      {/* Tooth watermark background */}
+      {/* Tooth watermark background — static, no rotation */}
       <div className="pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
-        <motion.div
-          animate={{ rotate: 360 }}
-          transition={{ duration: 120, repeat: Infinity, ease: 'linear' }}
-        >
-          <ToothWatermark />
-        </motion.div>
+        <ToothWatermark />
       </div>
 
       <div className="relative mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
@@ -292,7 +259,13 @@ export default function SmileAssessment() {
           <AnimatePresence>
             {showConfetti && (
               <div className="pointer-events-none absolute inset-0 z-50">
-                {confettiParticles.map((p, i) => (
+                {[
+                  { x: '15%', y: '20%', size: 8, color: '#B89830', delay: 0, duration: 1.2, yEnd: -40 },
+                  { x: '80%', y: '15%', size: 6, color: '#D4C08A', delay: 0.05, duration: 1.0, yEnd: -35 },
+                  { x: '50%', y: '10%', size: 7, color: '#2D6B5C', delay: 0.1, duration: 1.4, yEnd: -45 },
+                  { x: '25%', y: '25%', size: 5, color: '#B89830', delay: 0.15, duration: 1.1, yEnd: -30 },
+                  { x: '70%', y: '18%', size: 6, color: '#F0EBE1', delay: 0.08, duration: 1.3, yEnd: -38 },
+                ].map((p, i) => (
                   <motion.div
                     key={i}
                     className="absolute rounded-full"
@@ -304,7 +277,17 @@ export default function SmileAssessment() {
                       backgroundColor: p.color,
                     }}
                     initial={{ opacity: 0, scale: 0, y: 0 }}
-                    animate={confettiBurst(p)}
+                    animate={{
+                      opacity: [0, 1, 1, 0],
+                      scale: [0, 1.2, 0.8, 0],
+                      y: [0, p.yEnd * 0.3, p.yEnd * 0.7, p.yEnd],
+                      rotate: [0, 90, 200, 360],
+                    }}
+                    transition={{
+                      duration: p.duration,
+                      delay: p.delay,
+                      ease: 'easeOut',
+                    }}
                   />
                 ))}
               </div>
@@ -346,20 +329,8 @@ export default function SmileAssessment() {
                   exit="exit"
                 >
                   <div className="mb-8 flex items-center gap-3">
-                    {/* Step number with pulsing glow */}
+                    {/* Step number — static glow */}
                     <div className="relative">
-                      <motion.div
-                        className="absolute inset-0 rounded-xl bg-champagne-gold/20 blur-md"
-                        animate={{
-                          opacity: [0.3, 0.6, 0.3],
-                          scale: [0.9, 1.1, 0.9],
-                        }}
-                        transition={{
-                          duration: 2,
-                          repeat: Infinity,
-                          ease: 'easeInOut',
-                        }}
-                      />
                       <div className="relative flex h-10 w-10 items-center justify-center rounded-xl bg-champagne-gold/10">
                         <CurrentIcon className="h-5 w-5 text-champagne-gold" />
                       </div>
@@ -486,7 +457,7 @@ export default function SmileAssessment() {
                 {result.description}
               </motion.p>
 
-              {/* Animated treatment benefit icons */}
+              {/* Treatment benefit icons */}
               <motion.div
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}

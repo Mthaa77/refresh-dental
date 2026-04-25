@@ -46,47 +46,6 @@ function AnimatedRating({
 }
 
 /* ──────────────────────────────────────────────
-   Deterministic sparkle positions (no Math.random)
-   ────────────────────────────────────────────── */
-const sparkles = [
-  { x: 8, y: 12, size: 6, delay: 0 },
-  { x: 85, y: 18, size: 5, delay: 0.8 },
-  { x: 15, y: 75, size: 7, delay: 1.6 },
-  { x: 90, y: 65, size: 4, delay: 0.4 },
-  { x: 50, y: 8, size: 5, delay: 1.2 },
-  { x: 72, y: 82, size: 6, delay: 2.0 },
-  { x: 30, y: 90, size: 4, delay: 0.6 },
-  { x: 95, y: 40, size: 5, delay: 1.4 },
-]
-
-function Sparkle({ x, y, size, delay }: (typeof sparkles)[number]) {
-  return (
-    <motion.div
-      className="absolute pointer-events-none"
-      style={{ left: `${x}%`, top: `${y}%` }}
-      animate={{
-        opacity: [0, 1, 0],
-        scale: [0.5, 1.2, 0.5],
-        rotate: [0, 90, 0],
-      }}
-      transition={{
-        duration: 3,
-        repeat: Infinity,
-        delay,
-        ease: 'easeInOut',
-      }}
-    >
-      <svg width={size} height={size} viewBox="0 0 10 10" fill="none">
-        <path
-          d="M5 0L5.8 4.2L10 5L5.8 5.8L5 10L4.2 5.8L0 5L4.2 4.2Z"
-          fill="#B89830"
-        />
-      </svg>
-    </motion.div>
-  )
-}
-
-/* ──────────────────────────────────────────────
    Star Rating Bar – 5 stars, last one partially filled
    ────────────────────────────────────────────── */
 function StarRating({ rating }: { rating: number }) {
@@ -173,11 +132,6 @@ export default function ReviewsSummary() {
                 border: '1px solid rgba(201,169,110,0.25)',
               }}
             >
-              {/* Sparkles */}
-              {sparkles.map((s, i) => (
-                <Sparkle key={i} {...s} />
-              ))}
-
               {/* Inner subtle pattern */}
               <div className="absolute inset-0 opacity-[0.03] pointer-events-none">
                 <svg className="h-full w-full" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" viewBox="0 0 200 200">

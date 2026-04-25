@@ -103,18 +103,13 @@ export default function ScrollToTop() {
               />
             </svg>
 
-            {/* Arrow icon with subtle bounce when visible */}
+            {/* Arrow icon */}
             <motion.div
               animate={{ rotate: scrollPercent * 1.8 }}
               transition={{ duration: 0.15, ease: 'linear' }}
               className="text-espresso"
             >
-              <motion.div
-                animate={{ y: [0, -2, 0] }}
-                transition={{ duration: 1.5, repeat: Infinity, ease: 'easeInOut' }}
-              >
-                <ArrowUp className="h-5 w-5" />
-              </motion.div>
+              <ArrowUp className="h-5 w-5" />
             </motion.div>
           </motion.button>
         </motion.div>

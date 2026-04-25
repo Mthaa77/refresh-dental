@@ -11,15 +11,6 @@ const EXPERIENCE_OPTIONS = [
   { emoji: '😕', label: 'Poor', value: 'poor' },
 ]
 
-// Deterministic sparkle particles
-const SPARKLES = Array.from({ length: 12 }, (_, i) => ({
-  x: (i * 37 + 13) % 100,
-  y: (i * 53 + 7) % 100,
-  size: (i % 3) + 1,
-  delay: (i * 0.4) % 5,
-  duration: 3 + (i % 3),
-}))
-
 export default function PageSurvey() {
   const [rating, setRating] = useState(0)
   const [hoverRating, setHoverRating] = useState(0)
@@ -46,30 +37,6 @@ export default function PageSurvey() {
     >
       {/* Gold border frame */}
       <div className="absolute inset-4 md:inset-8 rounded-3xl border border-champagne-gold/15 pointer-events-none" />
-
-      {/* Deterministic sparkle particles */}
-      {SPARKLES.map((sp, i) => (
-        <motion.span
-          key={i}
-          className="absolute rounded-full bg-champagne-gold pointer-events-none"
-          style={{
-            left: `${sp.x}%`,
-            top: `${sp.y}%`,
-            width: sp.size,
-            height: sp.size,
-          }}
-          animate={{
-            opacity: [0, 0.6, 0],
-            scale: [0.5, 1.2, 0.5],
-          }}
-          transition={{
-            duration: sp.duration,
-            repeat: Infinity,
-            delay: sp.delay,
-            ease: 'easeInOut',
-          }}
-        />
-      ))}
 
       <div className="max-w-2xl mx-auto px-6 relative z-10">
         {/* Section Header */}
@@ -153,46 +120,31 @@ export default function PageSurvey() {
                 </label>
                 <div className="flex justify-center gap-3">
                   {[1, 2, 3, 4, 5].map((star) => (
-                    <motion.button
+                    <button
                       key={star}
                       onClick={() => setRating(star)}
                       onMouseEnter={() => setHoverRating(star)}
                       onMouseLeave={() => setHoverRating(0)}
                       className="relative"
-                      whileHover={{ scale: 1.15 }}
-                      whileTap={{ scale: 0.9 }}
-                      aria-label={`${star} star${star > 1 ? 's' : ''}`}
                     >
                       <Star
-                        className={`h-8 w-8 md:h-10 md:w-10 transition-colors duration-200 ${
+                        className={`h-8 w-8 md:h-10 md:w-10 transition-transform duration-200 ${
                           star <= displayRating
-                            ? 'text-champagne-gold fill-champagne-gold'
+                            ? 'text-champagne-gold fill-champagne-gold scale-110'
                             : 'text-[#F0EBE1]/20'
                         }`}
                       />
-                      {star <= displayRating && (
-                        <motion.span
-                          className="absolute inset-0 rounded-full bg-champagne-gold/20"
-                          initial={{ scale: 0, opacity: 0 }}
-                          animate={{ scale: 1.3, opacity: 0 }}
-                          transition={{ duration: 0.4 }}
-                        />
-                      )}
-                    </motion.button>
+                    </button>
                   ))}
                 </div>
                 {rating > 0 && (
-                  <motion.p
-                    initial={{ opacity: 0, y: -5 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    className="font-jost text-xs text-champagne-gold mt-2"
-                  >
+                  <p className="font-jost text-xs text-champagne-gold mt-2">
                     {rating === 1 && 'We\'re sorry to hear that'}
                     {rating === 2 && 'We\'ll work to improve'}
                     {rating === 3 && 'Thanks for your feedback'}
                     {rating === 4 && 'Glad you had a good visit!'}
                     {rating === 5 && 'Wonderful! We\'re thrilled!'}
-                  </motion.p>
+                  </p>
                 )}
               </motion.div>
 
@@ -209,7 +161,7 @@ export default function PageSurvey() {
                 </label>
                 <div className="flex justify-center gap-3 md:gap-4">
                   {EXPERIENCE_OPTIONS.map((opt) => (
-                    <motion.button
+                    <button
                       key={opt.value}
                       onClick={() => setExperience(opt.value)}
                       className={`
@@ -219,8 +171,6 @@ export default function PageSurvey() {
                           : 'border-[#F0EBE1]/10 bg-[#F0EBE1]/[0.03] hover:border-[#F0EBE1]/20 hover:bg-[#F0EBE1]/[0.06]'
                         }
                       `}
-                      whileHover={{ scale: 1.05 }}
-                      whileTap={{ scale: 0.95 }}
                     >
                       <span className="text-2xl md:text-3xl">{opt.emoji}</span>
                       <span
@@ -232,7 +182,7 @@ export default function PageSurvey() {
                       >
                         {opt.label}
                       </span>
-                    </motion.button>
+                    </button>
                   ))}
                 </div>
               </motion.div>
@@ -249,9 +199,9 @@ export default function PageSurvey() {
                   Would you recommend us?
                 </label>
                 <div className="flex justify-center">
-                  <div className="inline-flex rounded-xl border border-[#F0EBE1]/10 bg-[#F0EBE1]/[0.03] p-1">
+                  <div className="inline-flex rounded-xl border border-[#F0EBE1]/10 bg-[#F0EBE1]/[0.03] p-1 relative">
                     {(['yes', 'no'] as const).map((option) => (
-                      <motion.button
+                      <button
                         key={option}
                         onClick={() => setRecommend(option)}
                         className={`
@@ -261,17 +211,14 @@ export default function PageSurvey() {
                             : 'text-[#F0EBE1]/40 hover:text-[#F0EBE1]/60'
                           }
                         `}
-                        whileTap={{ scale: 0.95 }}
                       >
                         {recommend === option && (
-                          <motion.span
-                            className="absolute inset-0 rounded-lg bg-champagne-gold"
-                            layoutId="recommend-pill"
-                            transition={{ type: 'spring', stiffness: 400, damping: 30 }}
+                          <span
+                            className="absolute inset-0 rounded-lg bg-champagne-gold transition-all duration-300"
                           />
                         )}
                         <span className="relative z-10 capitalize">{option}</span>
-                      </motion.button>
+                      </button>
                     ))}
                   </div>
                 </div>
@@ -323,7 +270,7 @@ export default function PageSurvey() {
                 transition={{ duration: 0.4, delay: 0.5 }}
                 className="text-center pt-2"
               >
-                <motion.button
+                <button
                   onClick={handleSubmit}
                   disabled={!canSubmit}
                   className={`
@@ -333,12 +280,10 @@ export default function PageSurvey() {
                       : 'bg-champagne-gold/20 text-champagne-gold/40 cursor-not-allowed'
                     }
                   `}
-                  whileHover={canSubmit ? { scale: 1.03 } : undefined}
-                  whileTap={canSubmit ? { scale: 0.97 } : undefined}
                 >
                   <Send className="h-4 w-4" />
                   Submit Feedback
-                </motion.button>
+                </button>
                 {!canSubmit && (
                   <p className="font-jost text-[11px] text-[#F0EBE1]/20 mt-3">
                     Please complete all required fields to submit

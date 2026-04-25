@@ -155,14 +155,12 @@ export default function InsurancePartners() {
           transition={{ duration: 0.8, delay: 0.2 }}
         />
 
-        {/* Subtle pulsing glow behind the grid */}
-        <motion.div
+        {/* Static subtle glow behind the grid */}
+        <div
           className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 h-[250px] w-[300px] rounded-full pointer-events-none sm:h-[400px] sm:w-[500px] md:h-[500px] md:w-[600px]"
           style={{
             background: 'radial-gradient(ellipse, rgba(184, 152, 48, 0.03) 0%, transparent 70%)',
           }}
-          animate={{ opacity: [0.5, 1, 0.5], scale: [0.95, 1.05, 0.95] }}
-          transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut' }}
           aria-hidden="true"
         />
 
@@ -187,12 +185,9 @@ export default function InsurancePartners() {
               onMouseEnter={() => setHoveredBadge(aid.name)}
               onMouseLeave={() => setHoveredBadge(null)}
             >
-              {/* Gradient shine sweep on hover */}
-              <motion.div
-                className="absolute inset-0 pointer-events-none z-[2]"
-                initial={{ x: '-100%' }}
-                whileHover={{ x: '100%' }}
-                transition={{ duration: 0.6, ease: 'easeInOut' }}
+              {/* Gradient shine sweep on hover — CSS only */}
+              <div
+                className="absolute inset-0 pointer-events-none z-[2] opacity-0 group-hover:opacity-100 transition-opacity duration-600"
                 style={{
                   background: 'linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.10) 50%, transparent 100%)',
                 }}
@@ -244,7 +239,7 @@ export default function InsurancePartners() {
             </motion.div>
           ))}
 
-          {/* Decorative diamond ornaments between rows */}
+          {/* Decorative static diamond ornaments between rows */}
           {diamondOrnaments.map((pos, i) => (
             <div
               key={`diamond-${i}`}
@@ -252,16 +247,15 @@ export default function InsurancePartners() {
               style={{ left: pos.left, top: pos.top }}
               aria-hidden="true"
             >
-              <motion.svg
+              <svg
                 width="12"
                 height="12"
                 viewBox="0 0 12 12"
                 className="text-champagne-gold"
-                animate={{ opacity: [0.3, 0.7, 0.3], rotate: [0, 90, 0] }}
-                transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut', delay: i * 1.5 }}
+                style={{ opacity: 0.3 }}
               >
                 <path d="M6 0L12 6L6 12L0 6Z" fill="currentColor" />
-              </motion.svg>
+              </svg>
             </div>
           ))}
         </motion.div>
