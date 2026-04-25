@@ -137,7 +137,7 @@ export default function TeamSection() {
               {/* Portrait */}
               <div className="relative w-full md:w-2/5 aspect-square md:aspect-auto flex-shrink-0">
                 <img
-                  src="/images/dr-lebo-hero.png"
+                  src="/images/clinic/dr-malunga-portrait.jpg"
                   alt="Dr. Lebogang Malunga — Principal Dentist at Refresh Dental"
                   className="absolute inset-0 h-full w-full object-cover object-top transition-transform duration-700 ease-out group-hover:scale-[1.03]"
                   loading="lazy"

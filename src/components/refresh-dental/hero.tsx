@@ -127,7 +127,7 @@ export default function Hero() {
         className="absolute inset-0 z-0"
       >
         <img
-          src="/images/hero-dental-bg.jpg"
+          src="/images/clinic/clinic-reception.jpg"
           alt="Refresh Dental — Premium Dental Clinic in Centurion"
           className="w-full h-full object-cover"
           loading="eager"

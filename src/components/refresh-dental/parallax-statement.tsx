@@ -7,7 +7,7 @@ export default function ParallaxStatement() {
       <div className="absolute inset-0">
         <div
           className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-          style={{ backgroundImage: 'url("/images/dental-clinic-interior.png")' }}
+          style={{ backgroundImage: 'url("/images/clinic/dental-treatment-room.jpg")' }}
         />
       </div>
 

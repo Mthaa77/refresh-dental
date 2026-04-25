@@ -6,12 +6,12 @@ import { ChevronLeft, ChevronRight } from 'lucide-react'
 import ImageLightbox from './image-lightbox'
 
 const galleryImages = [
-  { src: '/images/dr-lebo-hero.png', alt: 'Dr. Lebo Malunga — Refresh Dental', caption: 'Dr. Lebo Malunga', span: 'md:col-span-1 md:row-span-2', aspect: 'aspect-[3/4]' },
-  { src: '/images/dental-clinic-interior.png', alt: 'Refresh Dental clinic interior', caption: 'Welcome to Refresh Dental', span: 'md:col-span-1', aspect: 'aspect-[4/3]' },
-  { src: '/images/dental-smile-hero.jpg', alt: 'Professional dental care and beautiful smiles', caption: 'Your Smile, Our Passion', span: 'md:col-span-1', aspect: 'aspect-square' },
-  { src: '/images/dental-smile-hero.jpg', alt: 'Advanced dental technology', caption: 'Advanced Technology', span: 'md:col-span-1', aspect: 'aspect-[4/3]' },
-  { src: '/images/dental-clinic-interior.png', alt: 'Modern dental treatment room', caption: 'Modern Treatment Rooms', span: 'md:col-span-1', aspect: 'aspect-square' },
-  { src: '/images/dr-lebo-hero.png', alt: 'Refresh Dental team', caption: 'Experience Excellence', span: 'md:col-span-1 md:row-span-2', aspect: 'aspect-[3/4]' },
+  { src: '/images/clinic/dr-malunga-portrait.jpg', alt: 'Dr. Lebo Malunga — Refresh Dental', caption: 'Dr. Lebo Malunga', span: 'md:col-span-1 md:row-span-2', aspect: 'aspect-[3/4]' },
+  { src: '/images/clinic/clinic-reception.jpg', alt: 'Refresh Dental clinic reception', caption: 'Welcome to Refresh Dental', span: 'md:col-span-1', aspect: 'aspect-[4/3]' },
+  { src: '/images/clinic/beautiful-smile.jpg', alt: 'Professional dental care and beautiful smiles', caption: 'Your Smile, Our Passion', span: 'md:col-span-1', aspect: 'aspect-square' },
+  { src: '/images/clinic/dental-technology.jpg', alt: 'Advanced dental technology', caption: 'Advanced Technology', span: 'md:col-span-1', aspect: 'aspect-[4/3]' },
+  { src: '/images/clinic/dental-treatment-room.jpg', alt: 'Modern dental treatment room', caption: 'Modern Treatment Rooms', span: 'md:col-span-1', aspect: 'aspect-square' },
+  { src: '/images/clinic/dental-team.jpg', alt: 'Refresh Dental team', caption: 'Experience Excellence', span: 'md:col-span-1 md:row-span-2', aspect: 'aspect-[3/4]' },
 ]
 
 const containerVariants = {
