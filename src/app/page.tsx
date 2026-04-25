@@ -170,20 +170,7 @@ const Testimonials = dynamic(
     loading: () => <SectionSkeleton height="h-96" />,
   }
 )
-const VideoTestimonial = dynamic(
-  () => import('@/components/refresh-dental/video-testimonial'),
-  {
-    ssr: false,
-    loading: () => <SectionSkeleton height="h-80" />,
-  }
-)
-const PatientStories = dynamic(
-  () => import('@/components/refresh-dental/patient-stories'),
-  {
-    ssr: false,
-    loading: () => <SectionSkeleton height="h-80" />,
-  }
-)
+// VideoTestimonial and PatientStories removed per redesign
 
 // Before/after & emergency
 const BeforeAfterSection = dynamic(
@@ -410,8 +397,6 @@ export default function Home() {
         <ImplantsSpotlight />
         <ParallaxStatement />
         <Testimonials />
-        <VideoTestimonial />
-        <PatientStories />
         <BeforeAfterSection />
         <EmergencyDental />
         <PaymentSection />
