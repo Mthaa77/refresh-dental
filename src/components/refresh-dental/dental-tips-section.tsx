@@ -175,10 +175,7 @@ export default function DentalTipsSection() {
               <div className="relative z-[15]">
                 {/* Icon — no floating animation */}
                 <div
-                  whileHover={{
-                    scale: 1.12,
-                  }}
-                  className={`mb-4 inline-flex h-11 w-11 items-center justify-center rounded-xl transition-transform duration-300 ${tip.accent} shadow-sm`}
+                  className={`mb-4 inline-flex h-11 w-11 items-center justify-center rounded-xl transition-transform duration-300 hover:scale-110 ${tip.accent} shadow-sm`}
                 >
                   <tip.icon className="h-5 w-5" />
                 </div>
