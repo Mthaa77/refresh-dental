@@ -596,6 +596,35 @@ html, body {
 }
 
 /* ============================================
+   HERO ENHANCEMENTS
+   ============================================ */
+
+/* Diagonal grid texture overlay for hero */
+@keyframes orb-drift {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33%       { transform: translate(20px, -25px) scale(1.06); }
+  66%       { transform: translate(-14px, 18px) scale(0.97); }
+}
+
+/* Bounce-in for scroll indicator */
+@keyframes bounce-soft {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(8px); }
+}
+
+.animate-bounce-soft {
+  animation: bounce-soft 1.6s ease-in-out infinite;
+}
+
+/* Double chevron stacked scroll cue */
+.scroll-cue {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: -8px;
+}
+
+/* ============================================
    PERFORMANCE OPTIMIZATIONS
    ============================================ */
 
