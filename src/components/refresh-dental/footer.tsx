@@ -55,12 +55,13 @@ const socialLinks = [
 
 export default function Footer() {
   return (
-    <footer className="bg-espresso relative">
+    <footer className="bg-espresso relative" role="contentinfo">
       {/* Gold gradient line at top of footer */}
-      <div className="h-[2px] w-full bg-gradient-to-r from-transparent via-champagne-gold to-transparent shadow-elevated" />
+      <div className="h-[2px] w-full bg-gradient-to-r from-transparent via-champagne-gold to-transparent shadow-elevated" aria-hidden="true" />
+
 
       {/* Main Footer */}
-      <div className="max-w-6xl mx-auto px-6 py-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 shadow-inner-gold rounded-t-2xl">
+      <div className="max-w-6xl mx-auto px-6 py-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 shadow-inner-gold rounded-t-2xl" itemScope itemType="https://schema.org/Dentist">
         {/* Column 1 — Brand */}
         <div className="space-y-4">
           <div className="flex items-center gap-3">
@@ -73,11 +74,11 @@ export default function Footer() {
               loading="lazy"
               decoding="async"
             />
-            <span className="font-cormorant text-2xl gold-gradient-text">
+            <span className="font-cormorant text-2xl gold-gradient-text" itemProp="name">
               Refresh Dental
             </span>
           </div>
-          <p className="text-ivory/65 italic text-sm leading-relaxed">
+          <p className="text-ivory/65 italic text-sm leading-relaxed" itemProp="slogan">
             &ldquo;Refreshed smiles, refreshed lives.&rdquo;
           </p>
 
@@ -144,20 +145,24 @@ export default function Footer() {
         <div className="space-y-4">
           <h4 className="font-dm-serif text-ivory text-lg">Contact</h4>
           <ul className="space-y-3">
-            <li className="flex items-start gap-2.5">
-              <MapPin className="w-4 h-4 text-champagne-gold mt-0.5 shrink-0" />
+            <li className="flex items-start gap-2.5" itemProp="address" itemScope itemType="https://schema.org/PostalAddress">
+              <MapPin className="w-4 h-4 text-champagne-gold mt-0.5 shrink-0" aria-hidden="true" />
               <span className="text-ivory/75 text-[15px]">
-                153 River Road, Centurion
+                <span itemProp="streetAddress">153 River Road</span>, <span itemProp="addressLocality">Centurion</span>, <span itemProp="addressRegion">Gauteng</span> <span itemProp="postalCode">0157</span>
               </span>
             </li>
             <li className="flex items-start gap-2.5">
-              <Phone className="w-4 h-4 text-champagne-gold mt-0.5 shrink-0" />
-              <span className="text-ivory/75 text-[15px]">
-                061 416 4649 / 012 883 3636
-              </span>
+              <Phone className="w-4 h-4 text-champagne-gold mt-0.5 shrink-0" aria-hidden="true" />
+              <a href="tel:+27614164649" className="text-ivory/75 hover:text-champagne-gold transition-colors text-[15px]" itemProp="telephone">
+                061 416 4649
+              </a>
+              <span className="text-ivory/40"> / </span>
+              <a href="tel:+27128833636" className="text-ivory/75 hover:text-champagne-gold transition-colors text-[15px]">
+                012 883 3636
+              </a>
             </li>
             <li className="flex items-start gap-2.5">
-              <Mail className="w-4 h-4 text-champagne-gold mt-0.5 shrink-0" />
+              <Mail className="w-4 h-4 text-champagne-gold mt-0.5 shrink-0" aria-hidden="true" />
               <a
                 href="mailto:admin@refreshdental.co.za"
                 className="text-ivory/75 hover:text-champagne-gold transition-colors text-[15px]"
@@ -166,7 +171,7 @@ export default function Footer() {
               </a>
             </li>
             <li className="flex items-start gap-2.5">
-              <Mail className="w-4 h-4 text-champagne-gold mt-0.5 shrink-0" />
+              <Mail className="w-4 h-4 text-champagne-gold mt-0.5 shrink-0" aria-hidden="true" />
               <a
                 href="mailto:drlebo@refreshdental.co.za"
                 className="text-ivory/75 hover:text-champagne-gold transition-colors text-[15px]"

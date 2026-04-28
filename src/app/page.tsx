@@ -238,7 +238,7 @@ export default function Home() {
       <PageSectionsNav />
       <ScrollProgress />
       <Navigation />
-      <main className="min-h-screen">
+      <main className="min-h-screen" role="main" id="main-content">
         {/* ═══════════════════════════════════════════════
             ACT 1 — FIRST IMPRESSION & CREDENTIALS
             Hook the visitor, build immediate trust

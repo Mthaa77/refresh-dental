@@ -1,0 +1,22 @@
+/* TEAM */
+Team Lead: Dr. Lebogang Malunga
+Position: Principal Dentist & Founder
+Qualifications: BDS (Wits), PDD (Wits)
+Registration: HPCSA Registered
+Membership: South African Dental Association (SADA)
+
+/* SITE */
+Last update: 2025/04/29
+Language: English (South Africa)
+Doctype: HTML5
+Framework: Next.js 16
+CSS: Tailwind CSS 4
+Fonts: Cormorant Garamond, DM Serif Display, Jost, Playfair Display
+
+/* DESIGN & DEVELOPMENT */
+Design & Development: Carter Digitals
+Contact: hello@carterdigitals.com
+
+/* LOCATION */
+Address: 153 River Road, Centurion, Gauteng, 0157, South Africa
+Coordinates: -25.8600, 28.1800

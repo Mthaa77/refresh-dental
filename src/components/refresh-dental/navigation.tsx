@@ -97,6 +97,7 @@ export default function Navigation() {
     <>
       {/* ========== NAVBAR ========== */}
       <header
+        role="banner"
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
           scrolled ? 'border-b border-champagne-gold/10' : ''
         }`}
@@ -108,9 +109,9 @@ export default function Navigation() {
         }}
       >
         {/* Thin gold accent line at top of navbar */}
-        <div className="h-[2px] bg-gradient-to-r from-transparent via-champagne-gold/60 to-transparent" />
+        <div className="h-[2px] bg-gradient-to-r from-transparent via-champagne-gold/60 to-transparent" aria-hidden="true" />
 
-        <nav className="mx-auto flex max-w-7xl items-center justify-between px-6 py-3.5 lg:px-8">
+        <nav aria-label="Main navigation" className="mx-auto flex max-w-7xl items-center justify-between px-6 py-3.5 lg:px-8">
           {/* Logo + Brand + Dentist Name */}
           <a href="#home" onClick={(e) => handleNavClick(e, '#home')} className="flex items-center gap-3.5">
             <img
@@ -135,14 +136,15 @@ export default function Navigation() {
           </a>
 
           {/* Desktop Nav Links */}
-          <ul className="hidden items-center gap-5 xl:flex xl:gap-7">
+          <ul role="menubar" className="hidden items-center gap-5 xl:flex xl:gap-7">
             {NAV_LINKS.map((link) => {
               const sectionId = link.href.replace('#', '');
               const isActive = activeSection === sectionId;
               return (
-                <li key={link.href} className="relative">
+                <li key={link.href} className="relative" role="none">
                   <a
                     href={link.href}
+                    role="menuitem"
                     onClick={(e) => handleNavClick(e, link.href)}
                     className="relative font-jost text-[13px] font-medium tracking-[0.08em] uppercase transition-colors duration-300 hover:text-[#A07D1A]"
                     style={{ color: isActive ? '#B89830' : scrolled ? '#0F0D0A' : '#F0EBE1' }}
@@ -221,6 +223,9 @@ export default function Navigation() {
       <AnimatePresence>
         {mobileOpen && (
           <motion.div
+            role="dialog"
+            aria-modal="true"
+            aria-label="Mobile navigation menu"
             className="fixed inset-0 z-50 flex flex-col items-center bg-gradient-to-b from-espresso via-[#0a0d18] to-espresso md:hidden"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}

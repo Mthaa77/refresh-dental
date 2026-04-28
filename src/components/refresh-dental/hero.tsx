@@ -119,6 +119,7 @@ export default function Hero() {
     <section
       ref={sectionRef}
       id="home"
+      aria-label="Welcome to Refresh Dental — Premium Dental Care in Centurion by Dr. Lebogang Malunga"
       className="relative min-h-screen flex items-center overflow-hidden"
     >
       {/* ============ BACKGROUND IMAGE + OVERLAY ============ */}
@@ -174,6 +175,8 @@ export default function Hero() {
       <motion.div
         style={{ opacity: contentOpacity }}
         className="relative z-10 w-full min-h-screen flex items-center"
+        itemScope
+        itemType="https://schema.org/Dentist"
       >
         <div className="w-full px-6 sm:px-10 lg:px-16 xl:px-24 py-32 lg:py-0">
           <div className="max-w-3xl">
@@ -184,7 +187,7 @@ export default function Hero() {
               className="flex flex-col gap-0"
             >
               {/* --- AVAILABILITY BADGE --- */}
-              <motion.div variants={fadeSlideUp} className="mb-8">
+              <motion.div variants={fadeSlideUp} className="mb-8" role="status">
                 <span className="inline-flex items-center gap-2.5 bg-sage-teal/15 border border-sage-teal/30 backdrop-blur-md rounded-full pl-3 pr-4 py-1.5">
                   <span className="relative flex h-2.5 w-2.5">
                     <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-sage-teal" />
@@ -210,6 +213,7 @@ export default function Hero() {
               <motion.h1
                 variants={fadeSlideUp}
                 className="font-cormorant font-light text-ivory leading-[0.92] mb-4"
+                itemProp="name"
               >
                 <span className="block text-[clamp(2.4rem,6.5vw,6.5rem)] tracking-tight">
                   Confidence
@@ -223,6 +227,7 @@ export default function Hero() {
               <motion.h2
                 variants={fadeSlideUp}
                 className="mb-8"
+                itemProp="founder"
               >
                 <span className="block text-[clamp(2.6rem,7.5vw,7.5rem)] font-cormorant font-semibold tracking-tight leading-[0.95] gold-gradient-text text-shadow-gold-strong">
                   Dr. Lebogang Malunga
@@ -285,7 +290,7 @@ export default function Hero() {
               </motion.div>
 
               {/* --- TRUST BADGES --- */}
-              <motion.div variants={badgeSection} className="flex flex-wrap gap-3 mb-10">
+              <motion.div variants={badgeSection} className="flex flex-wrap gap-3 mb-10" aria-label="Trust indicators">
                 {trustBadges.map((badge) => (
                   <motion.span
                     key={badge.label}
@@ -375,24 +380,24 @@ export default function Hero() {
           </div>
 
           {/* Quick info */}
-          <div className="space-y-2.5 pt-3 border-t border-ivory/10">
+          <ul className="space-y-2.5 pt-3 border-t border-ivory/10" aria-label="Practice highlights">
             {[
               { icon: Clock, label: '30-Min Consultations' },
               { icon: Shield, label: 'All Medical Aids Accepted' },
               { icon: Sparkles, label: 'Interest-Free Payment Plans' },
             ].map((item) => (
-              <div key={item.label} className="flex items-center gap-2.5">
+              <li key={item.label} className="flex items-center gap-2.5">
                 <div className="flex-shrink-0 w-8 h-8 rounded-full bg-sage-teal/15 flex items-center justify-center border border-sage-teal/20">
-                  <item.icon className="w-3.5 h-3.5 text-teal-light" />
+                  <item.icon className="w-3.5 h-3.5 text-teal-light" aria-hidden="true" />
                 </div>
                 <span className="font-jost text-xs text-ivory/80">{item.label}</span>
-              </div>
+              </li>
             ))}
-          </div>
+          </ul>
+        </div>
 
           {/* Bottom gold accent */}
-          <div className="absolute bottom-0 left-8 right-8 h-[1.5px] bg-gradient-to-r from-transparent via-champagne-gold/30 to-transparent rounded-full" />
-        </div>
+          <div className="absolute bottom-0 left-8 right-8 h-[1.5px] bg-gradient-to-r from-transparent via-champagne-gold/30 to-transparent rounded-full" aria-hidden="true" />
       </motion.div>
 
       {/* ============ SCROLL INDICATOR ============ */}
