@@ -1,23 +1,23 @@
 'use client'
 
-import { useState } from 'react'
-import { motion } from 'framer-motion'
-import { Clock, ArrowRight, Heart, Sparkles, Shield, Star, Phone, MessageCircle } from 'lucide-react'
+import { useState, useCallback } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
+import { Clock, ArrowRight, Heart, Sparkles, Shield, Star, Phone, MessageCircle, ChevronRight } from 'lucide-react'
 import ServiceDetailDrawer from './service-detail-drawer'
 
 const services = [
-  { name: "Dental Implants", duration: "1 hr 30 min", category: "Specialised", desc: "Titanium-rooted, natural-looking tooth replacements built to last a lifetime", span: "col-span-2 row-span-2" },
-  { name: "Teeth Whitening", duration: "1 hr", category: "Cosmetic", desc: "In-chair and take-home whitening systems for a brilliantly luminous smile", span: "col-span-2" },
-  { name: "Fillers & Neurotoxins", duration: "1 hr", category: "Aesthetics", desc: "Non-surgical facial aesthetics designed to harmonise with your new smile", span: "col-span-2" },
-  { name: "Aligners / Slimming Wires", duration: "30 min", category: "Cosmetic", desc: "Nearly invisible orthodontic solutions for discreet, comfortable alignment", span: "col-span-2" },
-  { name: "Dental Consultation", duration: "30 min", category: "General", desc: "Thorough 30-minute oral assessment with personalised treatment planning", span: "" },
-  { name: "Scaling and Polishing", duration: "30 min", category: "General", desc: "Professional deep cleaning to protect gums and maintain oral health", span: "" },
-  { name: "Restorations", duration: "30 min", category: "General", desc: "Mercury-free, tooth-coloured restorations that blend seamlessly with your natural teeth", span: "" },
-  { name: "Root Canal Therapy", duration: "1 hr 30 min", category: "Specialised", desc: "Gentle, advanced endodontic therapy to save and restore compromised teeth", span: "" },
-  { name: "Wisdom Teeth Removal", duration: "1 hr", category: "Specialised", desc: "Safe, comfortable wisdom tooth extraction with minimal recovery time", span: "" },
-  { name: "Dental Prosthesis", duration: "30 min", category: "Specialised", desc: "Precision-crafted dentures designed for comfort, function, and a natural appearance", span: "" },
-  { name: "Crowns and Veneers", duration: "1 hr", category: "Cosmetic", desc: "Handcrafted porcelain crowns and veneers for a picture-perfect finish", span: "" },
-  { name: "Fixed Dental Prosthesis", duration: "1 hr 30 min", category: "Specialised", desc: "Custom permanent bridges and prosthetics that restore full dental function", span: "" },
+  { name: "Dental Implants", duration: "1 hr 30 min", category: "Specialised", desc: "Titanium-rooted, natural-looking tooth replacements built to last a lifetime", featured: true, color: '#B89830' },
+  { name: "Teeth Whitening", duration: "1 hr", category: "Cosmetic", desc: "In-chair and take-home whitening systems for a brilliantly luminous smile", featured: false, color: '#C4907C' },
+  { name: "Fillers & Neurotoxins", duration: "1 hr", category: "Aesthetics", desc: "Non-surgical facial aesthetics designed to harmonise with your new smile", featured: false, color: '#A63D40' },
+  { name: "Aligners / Slimming Wires", duration: "30 min", category: "Cosmetic", desc: "Nearly invisible orthodontic solutions for discreet, comfortable alignment", featured: false, color: '#2D6B5C' },
+  { name: "Dental Consultation", duration: "30 min", category: "General", desc: "Thorough 30-minute oral assessment with personalised treatment planning", featured: false, color: '#3B6FA0' },
+  { name: "Scaling and Polishing", duration: "30 min", category: "General", desc: "Professional deep cleaning to protect gums and maintain oral health", featured: false, color: '#2D6B5C' },
+  { name: "Restorations", duration: "30 min", category: "General", desc: "Mercury-free, tooth-coloured restorations that blend seamlessly with your natural teeth", featured: false, color: '#B89830' },
+  { name: "Root Canal Therapy", duration: "1 hr 30 min", category: "Specialised", desc: "Gentle, advanced endodontic therapy to save and restore compromised teeth", featured: false, color: '#A63D40' },
+  { name: "Wisdom Teeth Removal", duration: "1 hr", category: "Specialised", desc: "Safe, comfortable wisdom tooth extraction with minimal recovery time", featured: false, color: '#3B6FA0' },
+  { name: "Dental Prosthesis", duration: "30 min", category: "Specialised", desc: "Precision-crafted dentures designed for comfort, function, and a natural appearance", featured: false, color: '#B89830' },
+  { name: "Crowns and Veneers", duration: "1 hr", category: "Cosmetic", desc: "Handcrafted porcelain crowns and veneers for a picture-perfect finish", featured: true, color: '#C4907C' },
+  { name: "Fixed Dental Prosthesis", duration: "1 hr 30 min", category: "Specialised", desc: "Custom permanent bridges and prosthetics that restore full dental function", featured: false, color: '#2D6B5C' },
 ]
 
 const categoryIcons: Record<string, React.ElementType> = {
@@ -31,140 +31,178 @@ const categories = ["All", "General", "Cosmetic", "Specialised", "Aesthetics"]
 
 const containerVariants = {
   hidden: {},
-  visible: {
-    transition: {
-      staggerChildren: 0.06,
-    },
-  },
+  visible: { transition: { staggerChildren: 0.05 } },
 }
 
 const cardVariants = {
-  hidden: { opacity: 0, y: 24 },
+  hidden: { opacity: 0, y: 30 },
   visible: {
-    opacity: 1,
-    y: 0,
+    opacity: 1, y: 0,
     transition: { duration: 0.5, ease: [0.25, 0.46, 0.45, 0.94] },
   },
 }
 
-function ServiceCard({ service, idx, onSelect }: { service: typeof services[number]; idx: number; onSelect: (name: string) => void }) {
-  const isLarge = service.span.includes("row-span-2")
+/* ── 3D Tilt Hook ── */
+function useTilt() {
+  const [tilt, setTilt] = useState({ x: 0, y: 0, active: false })
+
+  const onMouseMove = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
+    const rect = e.currentTarget.getBoundingClientRect()
+    const x = (e.clientX - rect.left) / rect.width - 0.5
+    const y = (e.clientY - rect.top) / rect.height - 0.5
+    setTilt({ x: y * -8, y: x * 8, active: true })
+  }, [])
+
+  const onMouseLeave = useCallback(() => {
+    setTilt({ x: 0, y: 0, active: false })
+  }, [])
+
+  return { tilt, onMouseMove, onMouseLeave }
+}
+
+/* ── Service Card ── */
+function ServiceCard({ service, onSelect }: { service: typeof services[number]; onSelect: (name: string) => void }) {
+  const { tilt, onMouseMove, onMouseLeave } = useTilt()
   const Icon = categoryIcons[service.category]
+  const isFeatured = service.featured
 
   return (
     <motion.div
       variants={cardVariants}
-      onClick={() => onSelect(service.name)}
-      className={`${isLarge ? 'sm:col-span-2 sm:row-span-2' : ''} group cursor-pointer overflow-hidden rounded-2xl bg-white shadow-premium shadow-inner-gold ${
-        isLarge
-          ? "relative min-h-[220px] sm:min-h-[320px] md:min-h-[360px] shadow-elevated"
-          : "min-h-[160px] md:min-h-[180px]"
-      }`}
-      style={{
-        border: '1px solid var(--color-soft-border)',
-      }}
-      whileHover={{
-        y: -6,
-        boxShadow: '0 8px 30px rgba(15,13,10,0.12)',
-        borderColor: 'rgba(184, 152, 48, 0.55)',
-        transition: { duration: 0.4, ease: [0.25, 0.4, 0.25, 1] },
-      }}
+      className={`${isFeatured ? 'md:col-span-2' : ''}`}
+      style={{ perspective: '800px' }}
     >
-      {/* Animated gold accent line at top — expands 0→100% on hover */}
-      <div className="absolute top-0 left-0 right-0 h-[2px] z-20 overflow-hidden">
-        <div className="h-full bg-gradient-to-r from-gold-rich via-champagne-gold to-gold-light origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-400 ease-[cubic-bezier(0.25,0.4,0.25,1)]" />
-      </div>
-
-      {/* Glass highlight shine at top of card */}
       <div
-        className="absolute top-0 left-0 right-0 h-24 pointer-events-none z-10"
+        onClick={() => onSelect(service.name)}
+        onMouseMove={onMouseMove}
+        onMouseLeave={onMouseLeave}
+        className={`group relative cursor-pointer overflow-hidden rounded-2xl transition-all duration-300 ease-out ${
+          isFeatured
+            ? 'min-h-[200px] md:min-h-[260px] p-6 md:p-8'
+            : 'min-h-[180px] p-5 md:p-6'
+        }`}
         style={{
-          background: 'linear-gradient(180deg, rgba(255,255,255,0.55) 0%, rgba(255,255,255,0.12) 40%, transparent 100%)',
-          borderRadius: '1rem 1rem 0 0',
+          transform: `rotateX(${tilt.x}deg) rotateY(${tilt.y}deg) ${tilt.active ? 'translateY(-6px)' : 'translateY(0)'}`,
+          background: tilt.active
+            ? 'linear-gradient(135deg, #FFFFFF 0%, #FAFAF5 100%)'
+            : '#FFFFFF',
+          border: `1px solid ${tilt.active ? `${service.color}30` : 'var(--color-soft-border)'}`,
+          boxShadow: tilt.active
+            ? `0 20px 40px rgba(0,0,0,0.08), 0 0 20px ${service.color}15`
+            : '0 2px 8px rgba(0,0,0,0.04)',
+          transition: 'transform 0.2s ease-out, box-shadow 0.3s ease, border-color 0.3s ease, background 0.3s ease',
         }}
-      />
-
-      {/* Subtle gradient overlay on card */}
-      <div
-        className="absolute inset-0 pointer-events-none z-0"
-        style={{
-          background: isLarge
-            ? 'linear-gradient(135deg, rgba(184,152,48,0.04) 0%, transparent 30%, rgba(196,144,124,0.05) 70%, rgba(184,152,48,0.02) 100%)'
-            : 'linear-gradient(135deg, rgba(184,152,48,0.02) 0%, transparent 40%, rgba(240,235,225,0.3) 100%)',
-        }}
-      />
-
-      {/* Large card warm gradient overlay */}
-      {isLarge && (
-        <div className="absolute inset-0 bg-gradient-to-br from-champagne-gold/5 via-sand/40 to-warm-blush/20 pointer-events-none z-0" />
-      )}
-
-      {/* Floating shine/glare sweep effect on hover */}
-      <div className="absolute top-0 left-0 h-full w-full overflow-hidden pointer-events-none z-10 rounded-2xl">
-        <div className="-translate-x-[120%] group-hover:translate-x-[400%] transition-transform duration-[800ms] ease-[cubic-bezier(0.25,0.4,0.25,1)]">
-          <div className="w-[60%] h-full" style={{
-            background: 'linear-gradient(90deg, transparent, rgba(255,255,255,0.3), rgba(255,255,255,0.05), transparent)',
-            transform: 'skewX(-15deg)',
-          }} />
+      >
+        {/* Animated top accent line */}
+        <div className="absolute top-0 left-0 right-0 h-[2px] z-20 overflow-hidden">
+          <div
+            className="h-full origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-500 ease-out"
+            style={{ background: `linear-gradient(90deg, ${service.color}80, ${service.color}, ${service.color}40)` }}
+          />
         </div>
-      </div>
 
-      {/* Watermark icon in top-right (static) */}
-      {Icon && (() => {
-        const iconSize = isLarge ? 'h-12 w-12' : 'h-8 w-8'
-        return (
-          <div className={`absolute top-3 right-3 md:top-4 md:right-4 pointer-events-none z-[5] ${iconSize}`}>
-            <Icon className="h-full w-full text-champagne-gold/[0.08] transition-colors duration-500 group-hover:text-champagne-gold/[0.20]" />
+        {/* Floating glow orb */}
+        <div
+          className="absolute pointer-events-none rounded-full transition-all duration-200 ease-out"
+          style={{
+            width: '200px',
+            height: '200px',
+            top: '20%',
+            right: '-40px',
+            transform: `translate(${tilt.y * 3}px, ${tilt.x * 3}px)`,
+            background: `radial-gradient(circle, ${service.color}08, transparent 70%)`,
+            opacity: tilt.active ? 1 : 0,
+          }}
+        />
+
+        {/* Corner icon watermark */}
+        {Icon && (
+          <div className={`absolute top-4 right-4 pointer-events-none z-[5] ${isFeatured ? 'h-14 w-14' : 'h-10 w-10'}`}>
+            <Icon
+              className={`h-full w-full transition-colors duration-500 ${tilt.active ? '' : ''}`}
+              style={{ color: `${service.color}12`, transition: `color 0.5s` }}
+            />
           </div>
-        )
-      })()}
+        )}
 
-      <div className="relative flex h-full flex-col justify-between p-4 sm:p-5 md:p-6 z-[15]">
-        {/* Top content */}
-        <div>
-          {/* Duration Badge + Category Badge */}
-          <div className="mb-3 flex items-center gap-1.5">
-            <span className="inline-flex items-center gap-1.5 rounded-full bg-ivory-dark/60 px-3 py-1 text-[10px] font-medium tracking-wide text-brown-warm">
-              <Clock className="h-3 w-3 text-champagne-gold" />
-              {service.duration}
-            </span>
+        {/* Content */}
+        <div className="relative flex h-full flex-col justify-between z-10">
+          <div>
+            {/* Badges */}
+            <div className="mb-3 flex items-center gap-2 flex-wrap">
+              <span className="inline-flex items-center gap-1.5 rounded-full bg-ivory-dark/60 px-3 py-1 text-[10px] font-medium tracking-wide text-brown-warm">
+                <Clock className="h-3 w-3" style={{ color: service.color }} />
+                {service.duration}
+              </span>
+              <span
+                className="inline-flex items-center rounded-full px-3 py-1 text-[10px] font-semibold tracking-wide uppercase"
+                style={{
+                  background: `${service.color}12`,
+                  color: service.color,
+                  borderLeft: `2px solid ${service.color}`,
+                }}
+              >
+                {service.category}
+              </span>
+            </div>
+
+            {/* Service Name */}
+            <h3 className={`font-dm-serif leading-snug text-espresso ${
+              isFeatured ? 'text-2xl md:text-3xl' : 'text-xl md:text-2xl'
+            }`}>
+              {service.name}
+            </h3>
+
+            {/* Description */}
+            <p className={`mt-2 font-jost font-light leading-[1.75] text-brown-muted ${
+              isFeatured ? 'text-sm md:text-base' : 'text-xs md:text-sm'
+            }`}>
+              {service.desc}
+            </p>
+          </div>
+
+          {/* CTA */}
+          <div className="mt-auto flex items-center gap-2 pt-4">
             <span
-              className="inline-flex items-center rounded-full bg-gold-pale/30 px-3 py-1 text-[10px] font-semibold tracking-wide text-gold-rich uppercase"
-              style={{ borderLeft: '2px solid var(--color-champagne-gold)' }}
+              className="font-jost text-xs font-semibold uppercase tracking-[0.15em] transition-all duration-300 group-hover:tracking-[0.22em]"
+              style={{ color: service.color }}
             >
-              {service.category}
+              Book This Service
+            </span>
+            <ChevronRight
+              className="h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-1.5"
+              style={{ color: service.color }}
+            />
+          </div>
+        </div>
+
+        {/* Shine sweep on hover */}
+        <div className="absolute inset-0 overflow-hidden pointer-events-none z-20 rounded-2xl">
+          <div className="-translate-x-[120%] group-hover:translate-x-[400%] transition-transform duration-[800ms] ease-[cubic-bezier(0.25,0.4,0.25,1)]">
+            <div className="w-[60%] h-full" style={{
+              background: 'linear-gradient(90deg, transparent, rgba(255,255,255,0.4), rgba(255,255,255,0.05), transparent)',
+              transform: 'skewX(-15deg)',
+            }} />
+          </div>
+        </div>
+
+        {/* Featured ribbon */}
+        {isFeatured && (
+          <div className="absolute top-3 left-3 md:top-4 md:left-4 z-[5]">
+            <span className="inline-flex items-center gap-1 rounded-full px-2.5 py-1 text-[9px] font-bold uppercase tracking-wider"
+              style={{ background: service.color, color: '#FFFFFF' }}
+            >
+              <Star className="h-2.5 w-2.5" fill="currentColor" />
+              Popular
             </span>
           </div>
-
-          {/* Service Name */}
-          <h3
-            className={`font-dm-serif text-xl md:text-2xl leading-snug text-espresso text-shadow-espresso ${
-              isLarge ? "text-2xl md:text-3xl lg:text-4xl" : ""
-            }`}
-          >
-            {service.name}
-          </h3>
-
-          {/* Description */}
-          <p className="mt-2 font-jost text-sm font-light leading-[1.75] text-brown-muted">
-            {service.desc}
-          </p>
-        </div>
-
-        {/* Book CTA */}
-        <div className="mt-auto flex items-center gap-2 pt-4">
-          <span className="font-jost text-xs font-semibold uppercase tracking-[0.15em] text-champagne-gold transition-all duration-300 group-hover:tracking-[0.22em]">
-            Book This Service
-          </span>
-          <div className="inline-flex text-champagne-gold">
-            <ArrowRight className="h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-1.5" />
-          </div>
-        </div>
+        )}
       </div>
     </motion.div>
   )
 }
 
+/* ── Main Section ── */
 export default function ServicesGrid() {
   const [activeCategory, setActiveCategory] = useState("All")
   const [selectedService, setSelectedService] = useState<string | null>(null)
@@ -173,6 +211,8 @@ export default function ServicesGrid() {
     activeCategory === "All"
       ? services
       : services.filter((s) => s.category === activeCategory)
+
+  const activeIcon = activeCategory !== "All" ? categoryIcons[activeCategory] : null
 
   return (
     <>
@@ -196,20 +236,45 @@ export default function ServicesGrid() {
 
         {/* Category Filter Tabs */}
         <div className="mb-12 flex gap-2 overflow-x-auto scrollbar-hide px-4 -mx-4 sm:flex-wrap sm:justify-center sm:overflow-visible sm:px-0 sm:mx-0 animate-fade-in-up" style={{ animationDelay: '0.15s' }}>
-          {categories.map((cat) => (
-            <button
-              key={cat}
-              onClick={() => setActiveCategory(cat)}
-              className={`shrink-0 rounded-full px-5 py-3 text-xs font-semibold uppercase tracking-wider transition-all duration-300 sm:shrink hover:scale-[1.04] active:scale-[0.97] ${
-                activeCategory === cat
-                  ? "chrome-gold-bg text-white shadow-gold-strong"
-                  : "bg-white/70 backdrop-blur-sm border border-soft-border text-brown-warm hover:bg-champagne-gold/10 hover:text-espresso hover:border-champagne-gold/30"
-              }`}
-            >
-              {cat}
-            </button>
-          ))}
+          {categories.map((cat) => {
+            const Icon = categoryIcons[cat]
+            const isActive = activeCategory === cat
+            return (
+              <button
+                key={cat}
+                onClick={() => setActiveCategory(cat)}
+                className={`shrink-0 flex items-center gap-2 rounded-full px-5 py-3 text-xs font-semibold uppercase tracking-wider transition-all duration-300 sm:shrink hover:scale-[1.04] active:scale-[0.97] ${
+                  isActive
+                    ? "chrome-gold-bg text-white shadow-gold-strong"
+                    : "bg-white/70 backdrop-blur-sm border border-soft-border text-brown-warm hover:bg-champagne-gold/10 hover:text-espresso hover:border-champagne-gold/30"
+                }`}
+              >
+                {Icon && <Icon className="h-3.5 w-3.5" />}
+                {cat}
+              </button>
+            )
+          })}
         </div>
+
+        {/* Category subtitle */}
+        <AnimatePresence mode="wait">
+          {activeCategory !== "All" && (
+            <motion.div
+              key={activeCategory}
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: 10 }}
+              className="mb-8 text-center"
+            >
+              <div className="inline-flex items-center gap-2 rounded-full bg-white/60 backdrop-blur-sm border border-soft-border px-4 py-2">
+                {activeIcon && <activeIcon className="h-4 w-4 text-champagne-gold" />}
+                <span className="font-jost text-xs font-medium text-brown-muted">
+                  {filteredServices.length} {activeCategory} service{filteredServices.length !== 1 ? 's' : ''} available
+                </span>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
 
         {/* Bento Grid */}
         <motion.div
@@ -217,10 +282,10 @@ export default function ServicesGrid() {
           variants={containerVariants}
           initial="hidden"
           animate="visible"
-          className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-4 lg:gap-5"
+          className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:gap-5"
         >
-          {filteredServices.map((service, idx) => (
-            <ServiceCard key={service.name} service={service} idx={idx} onSelect={setSelectedService} />
+          {filteredServices.map((service) => (
+            <ServiceCard key={service.name} service={service} onSelect={setSelectedService} />
           ))}
         </motion.div>
 
@@ -229,7 +294,6 @@ export default function ServicesGrid() {
           <button
             className="group relative inline-flex items-center gap-2 rounded-full px-8 py-3.5 font-jost text-sm font-semibold uppercase tracking-widest text-white overflow-hidden chrome-gold-bg shadow-gold-strong hover:scale-[1.03] active:scale-[0.97] transition-all duration-300"
           >
-            {/* Shimmer sweep on hover */}
             <div className="absolute top-0 left-0 h-full w-full overflow-hidden pointer-events-none">
               <div className="-translate-x-[120%] group-hover:translate-x-[400%] transition-transform duration-[700ms] ease-[cubic-bezier(0.25,0.4,0.25,1)]">
                 <div className="w-[60%] h-full" style={{
