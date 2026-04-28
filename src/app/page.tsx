@@ -245,6 +245,7 @@ export default function Home() {
         ═══════════════════════════════════════════════ */}
         <Hero />
         <TrustTicker />
+        <SeasonalPromo />
         <StatsBar />
         <TrustIndicators />
 
@@ -280,6 +281,7 @@ export default function Home() {
             Real results, reviews, impact numbers
         ═══════════════════════════════════════════════ */}
         <ParallaxStatement />
+        <DentalTipsSection />
         <BeforeAfterSection />
         <Testimonials />
         <ReviewsSummary />
@@ -300,7 +302,6 @@ export default function Home() {
         ═══════════════════════════════════════════════ */}
         <PaymentSection />
         <InsurancePartners />
-        <SeasonalPromo />
         <EmergencyDental />
         <GuaranteeSection />
 
@@ -308,7 +309,6 @@ export default function Home() {
             ACT 8 — COMMUNITY & CONTENT
             Tips, social, referral, wellness
         ═══════════════════════════════════════════════ */}
-        <DentalTipsSection />
         <InstagramFeed />
         <ReferFriend />
         <CorporateWellnessSection />
