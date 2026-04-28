@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Cormorant_Garamond, DM_Serif_Display, Jost } from "next/font/google";
+import { Cormorant_Garamond, DM_Serif_Display, Jost, Playfair_Display } from "next/font/google";
 import "./globals.css";
 import { Toaster } from "@/components/ui/toaster";
 
@@ -21,6 +21,13 @@ const jost = Jost({
   variable: "--font-jost",
   subsets: ["latin"],
   weight: ["300", "400", "500", "600"],
+  display: "swap",
+});
+
+const playfair = Playfair_Display({
+  variable: "--font-playfair",
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700", "800", "900"],
   display: "swap",
 });
 
@@ -240,7 +247,7 @@ export default function RootLayout({
         <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
       </head>
       <body
-        className={`${cormorant.variable} ${dmSerif.variable} ${jost.variable} antialiased bg-ivory text-espresso`}
+        className={`${cormorant.variable} ${dmSerif.variable} ${jost.variable} ${playfair.variable} antialiased bg-ivory text-espresso`}
       >
         <div className="sr-only" aria-hidden="true">
           <h2>About Refresh Dental</h2>
