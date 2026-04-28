@@ -21,6 +21,7 @@ const testimonials = [
   {
     name: 'Phillimon Utla',
     initials: 'PU',
+    avatarSrc: '/images/clinic/real/dental-professional-portrait.jpg',
     avatarColor: 'from-sage-teal to-teal-light',
     rating: 5,
     date: '2 months ago',
@@ -31,6 +32,7 @@ const testimonials = [
   {
     name: 'Shaun Kleynhans',
     initials: 'SK',
+    avatarSrc: '/images/clinic/real/dental-professional-portrait.jpg',
     avatarColor: 'from-champagne-gold to-gold-light',
     rating: 5,
     date: '3 weeks ago',
@@ -41,6 +43,7 @@ const testimonials = [
   {
     name: 'Adaani Frost',
     initials: 'AF',
+    avatarSrc: '/images/clinic/real/dental-professional-portrait.jpg',
     avatarColor: 'from-warm-blush to-gold-pale',
     rating: 5,
     date: '1 week ago',
@@ -204,14 +207,12 @@ function TestimonialCard({
         {/* Bottom: Author info + Badges */}
         <div className="relative z-10 flex items-center justify-between border-t border-soft-border/60 pt-5">
           <div className="flex items-center gap-3.5">
-            {/* Avatar with gradient */}
-            <div
-              className={`flex h-11 w-11 items-center justify-center rounded-full bg-gradient-to-br ${testimonial.avatarColor} shadow-md ring-2 ring-ivory`}
-            >
-              <span className="font-cormorant text-base font-semibold text-white drop-shadow-sm">
-                {testimonial.initials}
-              </span>
-            </div>
+            {/* Avatar with real photo */}
+            <img
+              src={testimonial.avatarSrc}
+              alt={testimonial.name}
+              className="h-11 w-11 rounded-full object-cover shadow-md ring-2 ring-ivory"
+            />
             <div>
               <span className="font-jost text-sm font-semibold text-espresso tracking-wide block">
                 {testimonial.name}

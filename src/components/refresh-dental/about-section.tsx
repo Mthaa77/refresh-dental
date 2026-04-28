@@ -28,8 +28,8 @@ export default function AboutSection() {
               className="relative w-full aspect-[3/4] rounded-2xl overflow-hidden"
             >
               <img
-                src="/images/clinic/dr-malunga-portrait.jpg"
-                alt="Dr. Lebogang Malunga — Principal Dentist at Refresh Dental"
+                src="/images/clinic/real/dr-malunga-graduation.jpg"
+                alt="Dr. Lebogang Malunga at Sefako Makgatho Health Sciences University graduation"
                 className="absolute inset-0 w-full h-full object-cover object-center"
                 loading="lazy"
                 decoding="async"

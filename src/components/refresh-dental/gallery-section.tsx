@@ -6,12 +6,14 @@ import { ChevronLeft, ChevronRight } from 'lucide-react'
 import ImageLightbox from './image-lightbox'
 
 const galleryImages = [
-  { src: '/images/clinic/dr-malunga-portrait.jpg', alt: 'Dr. Lebo Malunga — Refresh Dental', caption: 'Dr. Lebo Malunga', span: 'md:col-span-1 md:row-span-2', aspect: 'aspect-[3/4]' },
-  { src: '/images/clinic/clinic-reception.jpg', alt: 'Refresh Dental clinic reception', caption: 'Welcome to Refresh Dental', span: 'md:col-span-1', aspect: 'aspect-[4/3]' },
-  { src: '/images/clinic/beautiful-smile.jpg', alt: 'Professional dental care and beautiful smiles', caption: 'Your Smile, Our Passion', span: 'md:col-span-1', aspect: 'aspect-square' },
-  { src: '/images/clinic/dental-technology.jpg', alt: 'Advanced dental technology', caption: 'Advanced Technology', span: 'md:col-span-1', aspect: 'aspect-[4/3]' },
-  { src: '/images/clinic/dental-treatment-room.jpg', alt: 'Modern dental treatment room', caption: 'Modern Treatment Rooms', span: 'md:col-span-1', aspect: 'aspect-square' },
-  { src: '/images/clinic/dental-team.jpg', alt: 'Refresh Dental team', caption: 'Experience Excellence', span: 'md:col-span-1 md:row-span-2', aspect: 'aspect-[3/4]' },
+  { src: '/images/clinic/real/dr-malunga-graduation.jpg', alt: 'Graduating from Sefako Makgatho Health Sciences University — where excellence in dentistry begins', caption: 'Dr. Lebogang Malunga', span: 'md:col-span-1 md:row-span-2', aspect: 'aspect-[3/4]' },
+  { src: '/images/clinic/real/dr-malunga-procedure.jpg', alt: 'Dr. Malunga performing a precise dental procedure with expert care', caption: 'Clinical Excellence', span: 'md:col-span-1', aspect: 'aspect-[4/3]' },
+  { src: '/images/clinic/real/child-patient-experience.jpg', alt: 'Creating positive dental experiences for our youngest patients in a warm, friendly environment', caption: 'Caring for Young Smiles', span: 'md:col-span-1', aspect: 'aspect-square' },
+  { src: '/images/clinic/real/patient-happy-moment.jpg', alt: 'Building lasting relationships through compassionate, patient-centred care', caption: 'Your Comfort Matters', span: 'md:col-span-1', aspect: 'aspect-[4/3]' },
+  { src: '/images/clinic/real/dental-professional-portrait.jpg', alt: 'Our dedicated dental professionals committed to your healthiest smile', caption: 'Expert Care Team', span: 'md:col-span-1', aspect: 'aspect-square' },
+  { src: '/images/clinic/real/dentist-performing-procedure.jpg', alt: 'State-of-the-art techniques delivered with precision and gentleness', caption: 'Modern Dental Procedures', span: 'md:col-span-1 md:row-span-2', aspect: 'aspect-[3/4]' },
+  { src: '/images/clinic/real/treatment-closeup.jpg', alt: 'Attention to detail in every procedure for optimal results', caption: 'Precision Dentistry', span: 'md:col-span-1', aspect: 'aspect-[4/3]' },
+  { src: '/images/clinic/real/orthodontics-braces.jpg', alt: 'Custom orthodontic treatments designed to give you the smile you deserve', caption: 'Orthodontic Solutions', span: 'md:col-span-1', aspect: 'aspect-square' },
 ]
 
 const containerVariants = {

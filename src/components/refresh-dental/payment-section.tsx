@@ -206,6 +206,51 @@ export default function PaymentSection() {
             </a>
           </motion.div>
         </div>
+
+        {/* AthenaPay Featured Payment Card */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-60px' }}
+          transition={{ duration: 0.7, ease: 'easeOut' }}
+          className="mt-16 max-w-3xl mx-auto"
+        >
+          <div className="bg-ivory rounded-3xl shadow-elevated border border-soft-border overflow-hidden">
+            {/* Gold accent bar */}
+            <div className="h-1 bg-gradient-to-r from-transparent via-champagne-gold/50 to-transparent" />
+
+            <div className="p-6 md:p-10">
+              {/* Image */}
+              <div className="rounded-2xl overflow-hidden ring-2 ring-champagne-gold/20">
+                <img
+                  src="/images/clinic/real/athenapay-installments.jpg"
+                  alt="AthenaPay installment payment option available at Refresh Dental, Centurion"
+                  className="w-full h-auto object-cover"
+                />
+              </div>
+
+              {/* Subtitle & description */}
+              <div className="mt-6 text-center space-y-3">
+                <div className="flex items-center justify-center gap-2">
+                  <Diamond className="h-4 w-4 text-champagne-gold/60" />
+                  <h3 className="font-dm-serif text-xl md:text-2xl text-espresso">
+                    Flexible Payment Plans with AthenaPay
+                  </h3>
+                  <Diamond className="h-4 w-4 text-champagne-gold/60" />
+                </div>
+
+                <p className="text-brown-muted leading-relaxed max-w-xl mx-auto text-sm md:text-base">
+                  Spread the cost of your dental treatment with affordable monthly
+                  installments. No hidden fees, no surprises — just the smile you
+                  deserve, on your terms.
+                </p>
+              </div>
+            </div>
+
+            {/* Gold accent bar */}
+            <div className="h-1 bg-gradient-to-r from-transparent via-champagne-gold/50 to-transparent" />
+          </div>
+        </motion.div>
       </div>
     </section>
   )

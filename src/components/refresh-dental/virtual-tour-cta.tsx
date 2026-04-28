@@ -191,8 +191,8 @@ export default function VirtualTourCta() {
             <div className="relative rounded-2xl overflow-hidden aspect-[4/3]">
               {/* Clinic interior image */}
               <img
-                src="/images/clinic/dental-treatment-room.jpg"
-                alt="Refresh Dental clinic interior"
+                src="/images/clinic/real/dental-professional-portrait.jpg"
+                alt="Step inside Refresh Dental — meet our expert care team"
                 className="w-full h-full object-cover"
                 loading="lazy"
                 decoding="async"

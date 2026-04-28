@@ -127,8 +127,8 @@ export default function Hero() {
         className="absolute inset-0 z-0"
       >
         <img
-          src="/images/clinic/clinic-reception.jpg"
-          alt="Refresh Dental — Premium Dental Clinic in Centurion"
+          src="/images/clinic/real/dr-malunga-procedure.jpg"
+          alt="Dr. Lebogang Malunga performing a dental procedure at Refresh Dental, Centurion"
           className="w-full h-full object-cover"
           loading="eager"
           decoding="async"

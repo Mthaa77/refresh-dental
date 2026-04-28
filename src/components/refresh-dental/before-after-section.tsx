@@ -13,18 +13,20 @@ interface ComparisonItem {
   afterOverlay: string
   beforeIcon: string
   afterIcon: string
+  beforeSrc: string
+  afterSrc: string
 }
 
 const procedureDetails: Record<string, string> = {
-  'Teeth Whitening': 'In-office LED-accelerated whitening achieving up to 8 shades brighter in 60 minutes',
-  'Dental Veneers': 'Custom-crafted porcelain shells bonded to correct chips, gaps, and discoloration permanently',
+  'Professional Dental Treatment': 'Comprehensive dental care combining modern techniques with personalized treatment plans for optimal oral health',
+  'Orthodontic Solutions': 'Advanced orthodontic treatments including braces and alignment correction for a perfectly balanced smile',
   'Complete Smile Makeover': 'Comprehensive multi-treatment plan combining veneers, whitening, and alignment correction',
 }
 
 const comparisons: ComparisonItem[] = [
   {
-    title: 'Teeth Whitening',
-    description: 'Professional-grade whitening for a radiant, confident smile',
+    title: 'Professional Dental Treatment',
+    description: 'Comprehensive care combining modern techniques with personalized treatment plans',
     treatmentLink: '#services',
     beforeGradient: 'from-stone-300 via-stone-400 to-amber-200/60',
     afterGradient: 'from-white via-amber-50 to-yellow-50',
@@ -32,10 +34,12 @@ const comparisons: ComparisonItem[] = [
     afterOverlay: 'bg-white/10',
     beforeIcon: '🦷',
     afterIcon: '✨',
+    beforeSrc: '/images/clinic/real/treatment-closeup.jpg',
+    afterSrc: '/images/clinic/real/orthodontics-braces.jpg',
   },
   {
-    title: 'Dental Veneers',
-    description: 'Flawless porcelain veneers for a perfect, natural look',
+    title: 'Orthodontic Solutions',
+    description: 'Advanced orthodontic treatments for a perfectly balanced, confident smile',
     treatmentLink: '#services',
     beforeGradient: 'from-stone-200 via-warm-blush/40 to-stone-300',
     afterGradient: 'from-white via-pink-50/30 to-white',
@@ -43,6 +47,8 @@ const comparisons: ComparisonItem[] = [
     afterOverlay: 'bg-white/5',
     beforeIcon: '🦷',
     afterIcon: '💎',
+    beforeSrc: '/images/clinic/real/patient-happy-moment.jpg',
+    afterSrc: '/images/clinic/real/orthodontics-braces.jpg',
   },
   {
     title: 'Complete Smile Makeover',
@@ -54,6 +60,8 @@ const comparisons: ComparisonItem[] = [
     afterOverlay: 'bg-white/8',
     beforeIcon: '🦷',
     afterIcon: '🌟',
+    beforeSrc: '/images/clinic/real/treatment-closeup.jpg',
+    afterSrc: '/images/clinic/real/patient-happy-moment.jpg',
   },
 ]
 
@@ -150,6 +158,11 @@ function ComparisonSlider({ item }: { item: ComparisonItem; cardIndex: number })
         {/* After (Full Background) */}
         <div
           className={`absolute inset-0 bg-gradient-to-br ${item.afterGradient}`}
+          style={{
+            backgroundImage: `url(${item.afterSrc})`,
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+          }}
         >
           <div
             className={`absolute inset-0 ${item.afterOverlay}`}
@@ -176,7 +189,12 @@ function ComparisonSlider({ item }: { item: ComparisonItem; cardIndex: number })
         {/* Before (Clipped) */}
         <div
           className={`absolute inset-0 bg-gradient-to-br ${item.beforeGradient}`}
-          style={{ clipPath: `inset(0 ${100 - sliderPosition}% 0 0)` }}
+          style={{
+            clipPath: `inset(0 ${100 - sliderPosition}% 0 0)`,
+            backgroundImage: `url(${item.beforeSrc})`,
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+          }}
         >
           <div
             className={`absolute inset-0 ${item.beforeOverlay}`}
