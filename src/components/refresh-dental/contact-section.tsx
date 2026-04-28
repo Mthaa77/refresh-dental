@@ -95,8 +95,14 @@ export default function ContactSection() {
               <h3 className="font-dm-serif text-lg text-espresso">Visit Us</h3>
             </div>
 
-            {/* Google Maps with static gradient border */}
-            <div className="relative p-[2px] rounded-2xl shadow-elevated animate-fade-in-up" style={{ animationDelay: '0.2s' }}>
+            {/* Location Card with Directions Link */}
+            <a
+              href="https://www.google.com/maps/dir/?api=1&destination=153+River+Road+Lyttelton+Manor+Centurion+Pretoria+0157"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="block relative p-[2px] rounded-2xl shadow-elevated animate-fade-in-up group"
+              style={{ animationDelay: '0.2s' }}
+            >
               {/* Static gradient border — champagne-gold */}
               <div
                 className="absolute inset-0 rounded-2xl"
@@ -105,20 +111,20 @@ export default function ContactSection() {
                 }}
                 aria-hidden="true"
               />
-              {/* Inner mask to create border effect */}
-              <div className="relative z-[1] rounded-2xl overflow-hidden h-[240px] sm:h-[300px] bg-card">
-                <iframe
-                  src="https://maps.google.com/maps?q=153+River+Road,+Centurion,+Pretoria+0157&output=embed"
-                  width="100%"
-                  height="100%"
-                  style={{ border: 0 }}
-                  allowFullScreen
-                  loading="lazy"
-                  referrerPolicy="no-referrer-when-downgrade"
-                  title="Refresh Dental Location"
-                />
+              <div className="relative z-[1] rounded-2xl overflow-hidden bg-card p-6 flex flex-col items-center justify-center text-center min-h-[180px]">
+                <div className="flex h-12 w-12 items-center justify-center rounded-full bg-champagne-gold/10 mb-3">
+                  <MapPin className="h-6 w-6 text-champagne-gold" />
+                </div>
+                <p className="font-dm-serif text-base text-espresso mb-1">Family Wellness Centre</p>
+                <p className="font-jost text-sm text-brown-muted leading-relaxed">
+                  153 River Road, Lyttelton Manor<br />Centurion, Pretoria 0157
+                </p>
+                <span className="inline-flex items-center gap-1.5 mt-4 font-jost text-xs font-semibold text-champagne-gold uppercase tracking-wider group-hover:gap-2.5 transition-all">
+                  Get Directions
+                  <Navigation className="h-3.5 w-3.5" />
+                </span>
               </div>
-            </div>
+            </a>
 
             {/* Trading Hours Widget */}
             <TradingHours />

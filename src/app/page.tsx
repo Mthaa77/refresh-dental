@@ -322,7 +322,6 @@ export default function Home() {
         <FAQSection />
         <LocationMapEnhanced />
         <ContactSection />
-        <OnlineBookingWidget />
 
         {/* ═══════════════════════════════════════════════
             FINAL PUSH — CTA & FEEDBACK
