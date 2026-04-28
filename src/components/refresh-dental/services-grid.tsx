@@ -6,18 +6,18 @@ import { Clock, ArrowRight, Heart, Sparkles, Shield, Star, Phone, MessageCircle 
 import ServiceDetailDrawer from './service-detail-drawer'
 
 const services = [
-  { name: "Dental Implants", duration: "1 hr 30 min", category: "Specialised", desc: "Permanent, natural-looking tooth replacement solutions", span: "col-span-2 row-span-2" },
-  { name: "Teeth Whitening", duration: "1 hr", category: "Cosmetic", desc: "Professional whitening for a brilliantly radiant smile", span: "col-span-2" },
-  { name: "Fillers & Neurotoxins", duration: "1 hr", category: "Aesthetics", desc: "Facial aesthetics to complement your refreshed smile", span: "col-span-2" },
-  { name: "Aligners / Slimming Wires", duration: "30 min", category: "Cosmetic", desc: "Invisible orthodontics for a perfectly aligned smile", span: "col-span-2" },
-  { name: "Dental Consultation", duration: "30 min", category: "General", desc: "Comprehensive oral health assessment", span: "" },
-  { name: "Scaling and Polishing", duration: "30 min", category: "General", desc: "Deep clean for optimal oral hygiene", span: "" },
-  { name: "Restorations", duration: "30 min", category: "General", desc: "Tooth-coloured fillings and restorative care", span: "" },
-  { name: "Root Canal Therapy", duration: "1 hr 30 min", category: "Specialised", desc: "Pain-free advanced endodontic treatment", span: "" },
-  { name: "Wisdom Teeth Removal", duration: "1 hr", category: "Specialised", desc: "Safe and comfortable extraction", span: "" },
-  { name: "Dental Prosthesis", duration: "30 min", category: "Specialised", desc: "Custom-crafted dentures for natural function", span: "" },
-  { name: "Crowns and Veneers", duration: "1 hr", category: "Cosmetic", desc: "Premium restorations for a flawless finish", span: "" },
-  { name: "Fixed Dental Prosthesis", duration: "1 hr 30 min", category: "Specialised", desc: "Permanent bridges and fixed prosthetic solutions", span: "" },
+  { name: "Dental Implants", duration: "1 hr 30 min", category: "Specialised", desc: "Titanium-rooted, natural-looking tooth replacements built to last a lifetime", span: "col-span-2 row-span-2" },
+  { name: "Teeth Whitening", duration: "1 hr", category: "Cosmetic", desc: "In-chair and take-home whitening systems for a brilliantly luminous smile", span: "col-span-2" },
+  { name: "Fillers & Neurotoxins", duration: "1 hr", category: "Aesthetics", desc: "Non-surgical facial aesthetics designed to harmonise with your new smile", span: "col-span-2" },
+  { name: "Aligners / Slimming Wires", duration: "30 min", category: "Cosmetic", desc: "Nearly invisible orthodontic solutions for discreet, comfortable alignment", span: "col-span-2" },
+  { name: "Dental Consultation", duration: "30 min", category: "General", desc: "Thorough 30-minute oral assessment with personalised treatment planning", span: "" },
+  { name: "Scaling and Polishing", duration: "30 min", category: "General", desc: "Professional deep cleaning to protect gums and maintain oral health", span: "" },
+  { name: "Restorations", duration: "30 min", category: "General", desc: "Mercury-free, tooth-coloured restorations that blend seamlessly with your natural teeth", span: "" },
+  { name: "Root Canal Therapy", duration: "1 hr 30 min", category: "Specialised", desc: "Gentle, advanced endodontic therapy to save and restore compromised teeth", span: "" },
+  { name: "Wisdom Teeth Removal", duration: "1 hr", category: "Specialised", desc: "Safe, comfortable wisdom tooth extraction with minimal recovery time", span: "" },
+  { name: "Dental Prosthesis", duration: "30 min", category: "Specialised", desc: "Precision-crafted dentures designed for comfort, function, and a natural appearance", span: "" },
+  { name: "Crowns and Veneers", duration: "1 hr", category: "Cosmetic", desc: "Handcrafted porcelain crowns and veneers for a picture-perfect finish", span: "" },
+  { name: "Fixed Dental Prosthesis", duration: "1 hr 30 min", category: "Specialised", desc: "Custom permanent bridges and prosthetics that restore full dental function", span: "" },
 ]
 
 const categoryIcons: Record<string, React.ElementType> = {
@@ -184,13 +184,13 @@ export default function ServicesGrid() {
         {/* Header */}
         <div className="mb-16 text-center animate-fade-in-up">
           <span className="mb-4 inline-block text-xs font-semibold uppercase tracking-[0.2em] text-champagne-gold text-shadow-gold">
-            What We Offer
+            Our Services
           </span>
           <h2 className="font-cormorant text-4xl md:text-5xl lg:text-6xl section-heading text-shadow-luxury gold-gradient-text">
-            Everything Your Smile Needs
+            Comprehensive Dental Care, Elevated
           </h2>
           <p className="font-jost text-base md:text-lg text-brown-muted max-w-2xl mx-auto text-center leading-relaxed mt-4 mb-12 animate-fade-in-up" style={{ animationDelay: '0.1s' }}>
-            From routine check-ups to complete smile makeovers — every treatment is delivered with precision, care, and a commitment to exceeding your expectations.
+            Whether you need a routine cleaning or a full smile transformation, every treatment at Refresh Dental is delivered with meticulous precision, genuine care, and unwavering attention to your comfort.
           </p>
         </div>
 
@@ -264,10 +264,10 @@ export default function ServicesGrid() {
               }}
             />
             <h3 className="font-cormorant text-2xl md:text-3xl font-light text-espresso mb-2">
-              Need Help Choosing?
+              Not Sure Where to Start?
             </h3>
             <p className="font-jost text-sm text-brown-muted mb-6 leading-relaxed">
-              Chat with us for a personalised recommendation
+              Our team is here to guide you towards the right treatment for your unique needs and budget.
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
               <a

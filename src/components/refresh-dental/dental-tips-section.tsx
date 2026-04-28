@@ -8,7 +8,7 @@ const tips = [
     icon: Sparkles,
     title: 'The Art of Brushing',
     description:
-      'Angle your soft-bristled brush at 45° to your gums and use gentle, circular motions. Spend a full two minutes — morning and night — and don\'t forget to brush your tongue for fresher breath.',
+      'Angle a soft-bristled brush at 45° to your gumline and use gentle, circular motions. Dedicate a full two minutes every morning and evening — and always brush your tongue for lasting freshness.',
     accent: 'bg-champagne-gold/10 text-champagne-gold',
     readTime: '2 min read',
   },
@@ -16,7 +16,7 @@ const tips = [
     icon: Heart,
     title: 'Flossing Matters',
     description:
-      'Flossing reaches the 40% of your tooth surfaces that brushing simply cannot. Make it a daily habit — your gums will thank you, and your breath will stay noticeably fresher.',
+      'Flossing accesses the 40% of tooth surfaces that brushing alone cannot reach. I recommend making it a non-negotiable daily habit — your gums will be healthier, and your breath will stay noticeably fresher.',
     accent: 'bg-accent-blue/10 text-accent-blue',
     readTime: '2 min read',
   },
@@ -24,7 +24,7 @@ const tips = [
     icon: UtensilsCrossed,
     title: 'Diet & Your Teeth',
     description:
-      'Swap sugary snacks for calcium-rich cheese, crunchy apples, and leafy greens. These natural foods neutralise acids, strengthen enamel, and stimulate saliva production.',
+      'Swap sugary snacks for calcium-rich cheese, crisp apples, and leafy greens. These whole foods neutralise harmful acids, remineralise enamel, and naturally stimulate saliva — your smile\'s best defence.',
     accent: 'bg-accent-red/10 text-accent-red',
     readTime: '3 min read',
   },
@@ -32,7 +32,7 @@ const tips = [
     icon: Calendar,
     title: 'Regular Check-ups',
     description:
-      'Six-month check-ups catch problems early — often before you feel any discomfort. Professional cleanings also remove tartar buildup that brushing alone cannot address.',
+      'Bi-annual check-ups detect issues early — often long before any discomfort arises. Professional cleanings also remove hardened tartar that no amount of brushing at home can eliminate.',
     accent: 'bg-champagne-gold/10 text-champagne-gold',
     readTime: '2 min read',
   },
@@ -40,7 +40,7 @@ const tips = [
     icon: Shield,
     title: 'Teeth Whitening Safety',
     description:
-      'Always consult Dr. Malunga before whitening. Professional treatments deliver stunning results safely, while over-the-counter kits risk enamel damage and uneven results.',
+      'Always consult with us before whitening. Professional-grade treatments deliver brilliant results safely and evenly, whereas unregulated over-the-counter kits can permanently compromise your enamel.',
     accent: 'bg-accent-blue/10 text-accent-blue',
     readTime: '3 min read',
   },
@@ -48,7 +48,7 @@ const tips = [
     icon: Smile,
     title: 'Kids Dental Care',
     description:
-      'Start dental visits by age one and make brushing an adventure, not a chore. Use flavoured toothpaste, reward charts, and lead by example — your child will love their smile.',
+      'Bring your little one for their first visit by age one and transform brushing into a fun daily ritual. With flavoured toothpaste, reward charts, and your own great example, they\'ll grow up loving their smile.',
     accent: 'bg-accent-red/10 text-accent-red',
     readTime: '2 min read',
   },
@@ -83,10 +83,10 @@ export default function DentalTipsSection() {
           className="mb-16 text-center"
         >
           <span className="mb-4 inline-block text-xs font-semibold uppercase tracking-[0.2em] text-champagne-gold">
-            Expert Advice
+            Oral Health Insights
           </span>
           <h2 className="section-heading text-4xl md:text-5xl lg:text-6xl gold-gradient-text text-shadow-espresso">
-            Dental Care Tips
+            Expert Tips from Dr. Malunga
           </h2>
           <motion.p
             initial={{ opacity: 0, y: 15 }}
@@ -94,7 +94,7 @@ export default function DentalTipsSection() {
             viewport={{ once: true }}
             className="font-jost text-base md:text-lg text-brown-muted max-w-2xl mx-auto text-center leading-relaxed mt-4 mb-12"
           >
-            Small daily habits that make a big difference — expert tips from Dr. Malunga to keep your smile healthy and radiant between visits.
+Practical, evidence-based guidance straight from Dr. Malunga's years of clinical experience — the small but powerful habits that protect your smile and elevate your overall well-being between appointments.
           </motion.p>
         </motion.div>
 

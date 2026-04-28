@@ -10,7 +10,7 @@ const steps = [
     icon: Calendar,
     title: 'Book Your Visit',
     description:
-      "Schedule your appointment in seconds — online, by phone, or WhatsApp. We'll find the perfect time that fits your life, not the other way around.",
+      "Book your appointment effortlessly — online, by phone, or via WhatsApp. We'll find a time that suits your schedule, because your convenience matters to us.",
     duration: '~15 min',
   },
   {
@@ -18,7 +18,7 @@ const steps = [
     icon: Stethoscope,
     title: 'Meet Dr. Malunga',
     description:
-      'Experience a thorough, unhurried consultation where we truly listen to your concerns and assess your oral health with cutting-edge precision.',
+      'Experience a thorough, unhurried consultation where we listen to your concerns, understand your goals, and assess your oral health with state-of-the-art precision.',
     duration: '~30 min',
   },
   {
@@ -26,7 +26,7 @@ const steps = [
     icon: ClipboardList,
     title: 'Custom Treatment Plan',
     description:
-      "Receive a clear, personalised roadmap with full transparency on options, costs, and timelines — empowered to make the best decision for your smile.",
+      "Receive a clear, bespoke treatment roadmap with full transparency on every option, cost, and timeline — empowering you to make the best decision for your oral health.",
     duration: '~20 min',
   },
   {
@@ -34,7 +34,7 @@ const steps = [
     icon: Heart,
     title: 'Expert Care',
     description:
-      'Relax in our capable hands as Dr. Malunga delivers gentle, meticulous treatment using the latest technology — comfortable, precise, and transformative.',
+      'Relax in the care of a trusted professional as Dr. Malunga delivers gentle, precise treatment using advanced technology — comfortable, meticulous, and designed to exceed your expectations.',
     duration: '~60 min',
   },
   {
@@ -42,7 +42,7 @@ const steps = [
     icon: PartyPopper,
     title: 'Enjoy Your Smile',
     description:
-      'Walk out with a renewed sense of confidence and a smile that lights up every room — results designed to last a lifetime.',
+      'Walk out with a renewed sense of confidence and a smile you&rsquo;ll be proud to share — results crafted to last and designed with your unique beauty in mind.',
     duration: 'Lifetime',
   },
 ]
@@ -264,13 +264,13 @@ export default function TreatmentProcess() {
         {/* Header */}
         <div className="mb-16 md:mb-20 text-center animate-fade-in-up">
           <span className="mb-4 inline-block text-xs font-semibold uppercase tracking-[0.2em] text-champagne-gold">
-            How It Works
+            Your Experience
           </span>
           <h2 className="font-cormorant text-4xl md:text-5xl lg:text-6xl section-heading text-shadow-espresso gold-gradient-text">
-            Your Journey to a Refreshed Smile
+            Your Path to a Healthier Smile
           </h2>
           <p className="font-jost text-base md:text-lg text-brown-muted max-w-2xl mx-auto text-center leading-relaxed mt-4 mb-12 animate-fade-in-up" style={{ animationDelay: '0.1s' }}>
-            From your very first phone call to the moment you walk out with a confident new smile — we&rsquo;ve designed every step to feel seamless, comfortable, and uniquely yours.
+            From your first consultation to the moment you walk out feeling confident — every step has been thoughtfully designed to deliver a seamless, comfortable, and truly personalised experience.
           </p>
         </div>
 

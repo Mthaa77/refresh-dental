@@ -198,7 +198,7 @@ export default function Hero() {
               {/* --- EYEBROW --- */}
               <motion.div variants={fadeSlideUp} className="mb-5">
                 <span className="font-jost text-xs sm:text-sm tracking-[0.25em] text-champagne-gold uppercase font-medium">
-                  Where Science Meets the Art of Smiling
+                  Centurion's Premier Dental Experience
                 </span>
                 <motion.div
                   variants={lineExpand}
@@ -212,10 +212,10 @@ export default function Hero() {
                 className="font-cormorant font-light text-ivory leading-[0.92] mb-4"
               >
                 <span className="block text-[clamp(2.4rem,6.5vw,6.5rem)] tracking-tight">
-                  Your Smile,
+                  Confidence
                 </span>
                 <span className="block text-[clamp(2.4rem,6.5vw,6.5rem)] tracking-tight">
-                  <span className="shimmer-text text-shadow-gold-strong">Our Passion.</span>
+                  <span className="shimmer-text text-shadow-gold-strong">Starts Here.</span>
                 </span>
               </motion.h1>
 
@@ -234,13 +234,13 @@ export default function Hero() {
                 variants={fadeSlideUp}
                 className="font-jost font-normal text-ivory/80 text-lg sm:text-xl max-w-[540px] leading-relaxed mb-3"
               >
-                Discover exceptional dental care tailored to your unique needs — where cutting-edge technology meets compassionate artistry.
+                Premium dental care designed around you. From routine check-ups to complete smile transformations, Dr. Malunga and her team deliver results that go beyond expectations — in a space where comfort meets clinical excellence.
               </motion.p>
               <motion.p
                 variants={fadeSlideUp}
                 className="font-jost font-normal text-ivory/60 text-base sm:text-lg max-w-[520px] leading-relaxed mb-4"
               >
-                Every smile tells a story. Let us help you write your most confident chapter yet.
+                Your journey to a healthier, more radiant smile begins with a single conversation. Let us show you what personalised, patient-first dentistry truly feels like.
               </motion.p>
 
               {/* --- CREDENTIALS --- */}

@@ -44,12 +44,12 @@ export default function AboutSection() {
             <div className="flex items-center mb-6">
               <span className="inline-block w-1.5 h-1.5 rounded-full bg-accent-blue mr-2" />
               <span className="inline-block font-jost text-xs tracking-[0.15em] text-champagne-gold uppercase">
-                Meet Your Dentist
+                About Dr. Malunga
               </span>
             </div>
 
             <p className="font-jost text-base text-brown-muted max-w-md leading-relaxed mb-6">
-              Transforming lives through exceptional dental care — one smile at a time.
+              More than a dentist — a partner in your oral health journey.
             </p>
 
             {/* Static gold accent line */}
@@ -94,7 +94,7 @@ export default function AboutSection() {
               className="text-lg md:text-xl section-subheading mb-6 animate-fade-in-up"
               style={{ animationDelay: '0.35s' }}
             >
-              Founder & Principal Dentist, Refresh Dental
+              BDS · PDD — Founder & Principal Dentist, Refresh Dental, Centurion
             </p>
 
             {/* Bio Paragraph */}
@@ -112,11 +112,11 @@ export default function AboutSection() {
                 }}
               >
                 <p className="font-jost font-light text-brown-warm leading-relaxed mb-4 max-w-lg">
-                  With over a decade of expertise in cosmetic and restorative dentistry, Dr. Malunga combines artistry with cutting-edge science to deliver results that go beyond expectations.
+                  With over a decade of hands-on experience spanning cosmetic, restorative, and specialised dentistry, Dr. Malunga has built a reputation for delivering exceptional results. Her commitment to continuous professional development ensures patients always receive the most advanced, evidence-based treatments available.
                 </p>
                 <p className="font-jost font-light text-brown-warm leading-relaxed mb-4 max-w-lg">
                   Beyond the clinic, Dr. Malunga is deeply invested in the Centurion
-                  community. She leads corporate dental wellness programmes, participates
+                  community. Dr. Malunga leads corporate dental wellness programmes, participates
                   in outreach initiatives, and mentors aspiring dental professionals. Her
                   approach is rooted in the belief that everyone deserves access to
                   compassionate, high-quality dental care.
@@ -163,7 +163,7 @@ export default function AboutSection() {
                 href="#contact"
                 className="inline-flex items-center gap-2 border-2 border-sage-teal text-sage-teal hover:bg-sage-teal hover:text-white font-jost font-medium text-sm tracking-wider uppercase rounded-full px-8 py-3 transition-all duration-300 shadow-gold"
               >
-                Book Your Consultation
+                Meet Dr. Malunga
                 <ArrowRight className="w-4 h-4" />
               </a>
             </div>

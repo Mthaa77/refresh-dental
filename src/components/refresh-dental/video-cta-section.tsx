@@ -56,9 +56,9 @@ export default function VideoCtaSection() {
           transition={{ duration: 0.8, delay: 0.15 }}
           className="font-cormorant text-4xl md:text-6xl lg:text-7xl font-light text-ivory text-shadow-ivory leading-tight mb-6"
         >
-          Ready to Transform
+          Your Best Smile Is One
           <br />
-          Your Smile?
+          Appointment Away
         </motion.h2>
 
         {/* Subtitle */}
@@ -68,8 +68,7 @@ export default function VideoCtaSection() {
           transition={{ duration: 0.7, delay: 0.25 }}
           className="font-jost text-ivory/75 text-base md:text-lg max-w-xl mx-auto mb-10 md:mb-12"
         >
-          Take the first step today. Our team is ready to craft a personalised treatment plan
-          that&apos;s as unique as your smile.
+          You deserve a smile that reflects the very best version of yourself. Let Dr. Malunga and her team create a bespoke treatment plan crafted uniquely for you.
         </motion.p>
 
         {/* CTA Buttons */}
@@ -117,7 +116,7 @@ export default function VideoCtaSection() {
           transition={{ duration: 0.6, delay: 0.5 }}
           className="font-jost text-xs md:text-sm text-ivory/55 tracking-wide"
         >
-          ✓ No obligation · ✓ Free consultation · ✓ All medical aids welcome
+          ✓ No obligation · ✓ Complimentary consultation · ✓ All medical aids accepted
         </motion.p>
       </div>
     </section>

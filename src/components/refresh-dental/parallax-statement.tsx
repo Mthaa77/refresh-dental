@@ -35,8 +35,8 @@ export default function ParallaxStatement() {
           <div className="absolute inset-[5px] rounded-lg border border-champagne-gold/10 pointer-events-none" />
 
           <blockquote className="relative font-cormorant text-3xl md:text-4xl lg:text-5xl font-light italic leading-snug text-ivory text-shadow-ivory md:leading-tight">
-            <span className="block">One refreshed smile</span>
-            <span className="block mt-1">at a time.</span>
+            <span className="block">Transforming smiles. Changing lives.</span>
+            <span className="block mt-1">One patient at a time.</span>
           </blockquote>
         </div>
 

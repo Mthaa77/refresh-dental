@@ -4,12 +4,12 @@ import { motion } from 'framer-motion'
 import { Heart, Shield, Users, Award, Sparkles, Clock } from 'lucide-react'
 
 const values = [
-  { icon: Heart, title: 'Patient Comfort', category: 'Experience', description: 'From the moment you step through our doors, every detail is crafted to dissolve anxiety and make you feel truly cared for — because your comfort is the foundation of exceptional dentistry.', accent: 'bg-warm-blush/15 text-warm-blush' },
-  { icon: Sparkles, title: 'Holistic Care', category: 'Philosophy', description: 'We treat the whole person, not just the tooth. Your oral health is intimately connected to your overall well-being — and our approach honours that powerful connection.', accent: 'bg-champagne-gold/10 text-champagne-gold' },
-  { icon: Users, title: 'Community Wellness', category: 'Outreach', description: 'Beyond our clinic walls, we are on a mission to uplift Centurion through corporate wellness programmes, outreach initiatives, and genuine partnerships that create lasting impact.', accent: 'bg-sage-teal/10 text-sage-teal' },
-  { icon: Award, title: 'Clinical Excellence', category: 'Expertise', description: 'Dr. Malunga relentlessly pursues the latest advancements in dental science, blending state-of-the-art technology with meticulous, evidence-based expertise you can trust.', accent: 'bg-accent-blue/15 text-accent-blue' },
-  { icon: Shield, title: 'Trust & Transparency', category: 'Integrity', description: 'No hidden costs, no surprise treatments, no pressure. We empower you with clear information and honest guidance so you can make confident decisions about your care.', accent: 'bg-champagne-gold/10 text-champagne-gold' },
-  { icon: Clock, title: 'Emergency Available', category: 'Support', description: "Dental emergencies don't wait — and neither do we. One call is all it takes, and we'll prioritise getting you out of pain and back to smiling the very same day.", accent: 'bg-accent-red/15 text-accent-red' },
+  { icon: Heart, title: 'Patient Comfort', category: 'Experience', description: 'From the moment you walk through our doors, every detail — from the calming ambience to the gentle touch — is designed to put you at ease, because exceptional dentistry begins with how you feel.', accent: 'bg-warm-blush/15 text-warm-blush' },
+  { icon: Sparkles, title: 'Holistic Care', category: 'Philosophy', description: 'We treat the person, not just the tooth. Your oral health is deeply connected to your overall well-being — and our approach is built around honouring that vital relationship.', accent: 'bg-champagne-gold/10 text-champagne-gold' },
+  { icon: Users, title: 'Community Wellness', category: 'Outreach', description: 'Our commitment extends beyond the clinic — through corporate wellness programmes, school outreach, and community partnerships, we are actively building a healthier Centurion.', accent: 'bg-sage-teal/10 text-sage-teal' },
+  { icon: Award, title: 'Clinical Excellence', category: 'Expertise', description: 'Dr. Malunga is committed to staying at the forefront of dental science — combining advanced technology with meticulous, evidence-based techniques that deliver consistently outstanding results.', accent: 'bg-accent-blue/15 text-accent-blue' },
+  { icon: Shield, title: 'Trust & Transparency', category: 'Integrity', description: 'No hidden fees, no surprise treatments, no pressure. We provide clear, honest information at every stage so you can make fully informed decisions about your dental care.', accent: 'bg-champagne-gold/10 text-champagne-gold' },
+  { icon: Clock, title: 'Emergency Available', category: 'Support', description: "Dental emergencies are unpredictable — and so is our readiness. One call is all it takes for us to prioritise getting you out of pain and back to smiling, often the very same day.", accent: 'bg-accent-red/15 text-accent-red' },
 ]
 
 const containerVariants = {
@@ -29,13 +29,13 @@ export default function ValuesSection() {
         {/* Header */}
         <div className="mb-16 text-center animate-fade-in-up">
           <span className="mb-4 inline-block text-xs font-semibold uppercase tracking-[0.2em] text-champagne-gold">
-            Why Choose Us
+            Our Promise to You
           </span>
           <h2 className="font-cormorant text-4xl md:text-5xl lg:text-6xl section-heading text-shadow-luxury gold-gradient-text">
-            The Refresh Dental Difference
+            Why Patients Choose Refresh Dental
           </h2>
           <p className="font-jost text-base md:text-lg text-brown-muted max-w-2xl mx-auto text-center leading-relaxed mt-4 mb-12 animate-fade-in-up" style={{ animationDelay: '0.1s' }}>
-            Six pillars that define the Refresh Dental experience — and why thousands of families trust us with their smiles.
+Six pillars that set us apart — the very reasons families across Centurion entrust their smiles to Dr. Malunga and her dedicated team.
           </p>
         </div>
 

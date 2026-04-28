@@ -14,20 +14,20 @@ const emergencyServices: EmergencyCard[] = [
   {
     icon: <Clock className="h-6 w-6" />,
     title: 'Severe Toothache',
-    description: 'Persistent or severe tooth pain that won\'t subside with over-the-counter medication.',
-    advice: 'Apply a cold compress and call us immediately',
+    description: 'Persistent, severe tooth pain that over-the-counter medication cannot relieve — this is your body signalling that professional attention is needed.',
+    advice: 'Apply a cold compress to the area and call us right away',
   },
   {
     icon: <AlertTriangle className="h-6 w-6" />,
     title: 'Broken Tooth',
-    description: 'A cracked, chipped, or fractured tooth from trauma, biting, or decay.',
-    advice: 'Save any fragments and rinse your mouth gently',
+    description: 'A cracked, chipped, or fractured tooth resulting from injury, hard biting, or advanced decay — prompt treatment prevents further damage.',
+    advice: 'Rinse gently, save any fragments, and contact us immediately',
   },
   {
     icon: <Heart className="h-6 w-6" />,
     title: 'Knocked Out Tooth',
-    description: 'A tooth completely dislodged — time is critical for re-implantation.',
-    advice: 'Keep the tooth moist in milk and get here fast',
+    description: 'A fully dislodged tooth where every minute counts — with prompt, expert care, re-implantation is often possible.',
+    advice: 'Keep the tooth moist in milk or saliva and come straight to us',
   },
 ]
 
@@ -137,13 +137,12 @@ export default function EmergencyDental() {
 
             {/* Main heading — dramatic gold gradient text */}
             <h2 className="font-cormorant text-[clamp(2.5rem,5.5vw,4.2rem)] font-medium leading-tight gold-gradient-text text-shadow-gold">
-              Dental Emergency?
+              Dental Emergency? We&rsquo;re Here for You.
             </h2>
 
             {/* Subtitle — reassuring text */}
             <p className="font-jost text-base leading-relaxed text-ivory/75 max-w-lg mx-auto lg:mx-0">
-              Don&apos;t suffer in silence. Our emergency team is standing by around the clock to provide
-              immediate relief and expert care when you need it most.
+              Pain doesn&rsquo;t wait, and neither should you. Our dedicated emergency team is available around the clock to provide swift, compassionate relief and expert care precisely when you need it most.
             </p>
 
             {/* Phone icon with static pulse rings */}
@@ -210,7 +209,7 @@ export default function EmergencyDental() {
               className="font-dm-serif text-xl text-ivory/90 mb-6 text-center lg:text-left animate-fade-in-up"
               style={{ animationDelay: '0.3s' }}
             >
-              Common Dental Emergencies
+              Common Dental Emergencies We Treat
             </h3>
 
             <div className="grid grid-cols-1 gap-4">
@@ -247,7 +246,7 @@ export default function EmergencyDental() {
           className="mt-14 text-center font-jost text-sm text-ivory/50 animate-fade-in-up"
           style={{ animationDelay: '0.7s' }}
         >
-          Same-day emergency appointments available · Walk-ins welcome · No referral needed
+          Same-day emergency appointments available · Walk-ins always welcome · No referral required
         </p>
       </div>
     </section>

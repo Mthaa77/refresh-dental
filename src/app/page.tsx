@@ -248,6 +248,8 @@ export default function Home() {
         <SeasonalPromo />
         <StatsBar />
         <TrustIndicators />
+        <OnlineBookingWidget />
+        <InsurancePartners />
 
         {/* ═══════════════════════════════════════════════
             ACT 2 — WHO WE ARE
@@ -301,7 +303,6 @@ export default function Home() {
             Payment, insurance, promos, emergency
         ═══════════════════════════════════════════════ */}
         <PaymentSection />
-        <InsurancePartners />
         <EmergencyDental />
         <GuaranteeSection />
 
@@ -328,8 +329,6 @@ export default function Home() {
             Last chance to convert + feedback loop
         ═══════════════════════════════════════════════ */}
         <VideoCtaSection />
-        <NewsletterCta />
-        <PageSurvey />
       </main>
       <Footer />
       <WhatsAppButton />

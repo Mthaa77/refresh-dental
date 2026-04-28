@@ -373,8 +373,9 @@ export default function Testimonials() {
             variants={fadeSlideUp}
             className="font-jost text-base md:text-lg text-brown-muted/80 max-w-2xl mx-auto leading-relaxed"
           >
-            Our patients don&apos;t just visit us — they become part of our family.
-            Here&apos;s what they have to say about their experience at Refresh Dental.
+            These are the unfiltered words of real patients — each one a
+            reflection of the standard, transparency, and results that define
+            every visit to Refresh Dental.
           </motion.p>
 
           {/* Google Rating Pill */}
