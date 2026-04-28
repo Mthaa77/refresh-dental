@@ -209,15 +209,25 @@ export default function Hero() {
               {/* --- MEGA HEADING --- */}
               <motion.h1
                 variants={fadeSlideUp}
-                className="font-cormorant font-light text-ivory leading-[0.92] mb-8"
+                className="font-cormorant font-light text-ivory leading-[0.92] mb-4"
               >
-                <span className="block text-[clamp(3.2rem,8.5vw,8.5rem)] tracking-tight">
+                <span className="block text-[clamp(2.4rem,6.5vw,6.5rem)] tracking-tight">
                   Your Smile,
                 </span>
-                <span className="block text-[clamp(3.2rem,8.5vw,8.5rem)] tracking-tight">
+                <span className="block text-[clamp(2.4rem,6.5vw,6.5rem)] tracking-tight">
                   <span className="shimmer-text text-shadow-gold-strong">Our Passion.</span>
                 </span>
               </motion.h1>
+
+              {/* --- DENTIST NAME — Hero Gradient Heading --- */}
+              <motion.h2
+                variants={fadeSlideUp}
+                className="mb-8"
+              >
+                <span className="block text-[clamp(2.6rem,7.5vw,7.5rem)] font-cormorant font-semibold tracking-tight leading-[0.95] gold-gradient-text text-shadow-gold-strong">
+                  Dr. Lebogang Malunga
+                </span>
+              </motion.h2>
 
               {/* --- DESCRIPTION --- */}
               <motion.p
@@ -233,13 +243,10 @@ export default function Hero() {
                 Every smile tells a story. Let us help you write your most confident chapter yet.
               </motion.p>
 
-              {/* --- DR. NAME --- */}
+              {/* --- CREDENTIALS --- */}
               <motion.div variants={fadeSlideUp} className="mb-10">
-                <p className="font-cormorant text-ivory/70 text-lg sm:text-xl italic">
-                  Dr. Lebogang Malunga
-                </p>
-                <p className="font-jost text-xs text-ivory/45 tracking-[0.15em] uppercase mt-0.5">
-                  BDS · PDD · Principal Dentist
+                <p className="font-jost text-xs text-ivory/45 tracking-[0.15em] uppercase">
+                  BDS · PDD · Principal Dentist · HPCSA Registered
                 </p>
               </motion.div>
 
