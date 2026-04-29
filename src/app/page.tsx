@@ -48,6 +48,11 @@ const CookieConsent = dynamic(
 
 // ── Dynamic imports: all homepage sections ──
 
+const WelcomeSection = dynamic(
+  () => import('@/components/refresh-dental/welcome-section'),
+  { ssr: true, loading: () => <SectionSkeleton height="h-[700px]" /> }
+)
+
 const TrustTicker = dynamic(
   () => import('@/components/refresh-dental/trust-ticker'),
   { ssr: false, loading: () => <div className="h-10 animate-pulse bg-espresso/80" /> }
@@ -244,6 +249,7 @@ export default function Home() {
             Hook the visitor, build immediate trust
         ═══════════════════════════════════════════════ */}
         <Hero />
+        <WelcomeSection />
         <TrustTicker />
         <SeasonalPromo />
         <StatsBar />
