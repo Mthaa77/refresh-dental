@@ -1,9 +1,32 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useRef } from 'react'
 import { motion } from 'framer-motion'
-import { Clock, ArrowRight, Heart, Sparkles, Shield, Star } from 'lucide-react'
+import { Clock, ArrowRight, Heart, Sparkles, Shield, Star, Crown } from 'lucide-react'
 import ServiceDetailDrawer from './service-detail-drawer'
+
+// Simple tilt effect hook
+function useTilt() {
+  const ref = useRef<HTMLDivElement>(null)
+  const [transform, setTransform] = useState({ rotateX: 0, rotateY: 0 })
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (!ref.current) return
+    const rect = ref.current.getBoundingClientRect()
+    const x = (e.clientX - rect.left) / rect.width - 0.5
+    const y = (e.clientY - rect.top) / rect.height - 0.5
+    setTransform({
+      rotateX: y * 4,
+      rotateY: -x * 4,
+    })
+  }
+
+  const handleMouseLeave = () => {
+    setTransform({ rotateX: 0, rotateY: 0 })
+  }
+
+  return { ref, transform, handleMouseMove, handleMouseLeave }
+}
 
 const services = [
   { name: "Dental Implants", duration: "1 hr 30 min", category: "Specialised", desc: "Permanent, natural-looking tooth replacement solutions", span: "col-span-2 row-span-2" },
@@ -89,13 +112,18 @@ function LargeCardSparkles() {
 
 function ServiceCard({ service, idx, onSelect }: { service: typeof services[number]; idx: number; onSelect: (name: string) => void }) {
   const isLarge = service.span.includes("row-span-2")
+  const isPopular = service.name === "Dental Implants" // Highlight implants as most popular
   const Icon = categoryIcons[service.category]
+  const { ref, transform, handleMouseMove, handleMouseLeave } = useTilt()
 
   return (
     <motion.div
+      ref={ref}
       variants={cardVariants}
       layout
       onClick={() => onSelect(service.name)}
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
       className={`${isLarge ? 'sm:col-span-2 sm:row-span-2' : ''} group cursor-pointer overflow-hidden rounded-2xl bg-white shadow-premium shadow-inner-gold ${
         isLarge
           ? "relative min-h-[220px] sm:min-h-[320px] md:min-h-[360px] shadow-elevated"
@@ -103,15 +131,32 @@ function ServiceCard({ service, idx, onSelect }: { service: typeof services[numb
       }`}
       style={{
         border: '1px solid var(--color-soft-border)',
+        perspective: '1000px',
       }}
+      animate={transform}
+      transition={{ type: 'spring', stiffness: 400, damping: 40 }}
       whileHover={{
-        y: -6,
+        y: -8,
         boxShadow:
-          "0 16px 48px -8px rgba(184, 152, 48, 0.22), 0 8px 24px -4px rgba(15, 13, 10, 0.1), inset 0 1px 0 rgba(184, 152, 48, 0.2)",
+          isPopular
+            ? "0 20px 60px -8px rgba(184, 152, 48, 0.35), 0 12px 32px -4px rgba(15, 13, 10, 0.15), inset 0 1px 0 rgba(184, 152, 48, 0.3)"
+            : "0 16px 48px -8px rgba(184, 152, 48, 0.22), 0 8px 24px -4px rgba(15, 13, 10, 0.1), inset 0 1px 0 rgba(184, 152, 48, 0.2)",
         borderColor: 'rgba(184, 152, 48, 0.55)',
         transition: { duration: 0.4, ease: [0.25, 0.4, 0.25, 1] },
       }}
     >
+      {/* Most Popular Badge */}
+      {isPopular && (
+        <motion.div
+          initial={{ opacity: 0, y: -12 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="absolute top-4 left-4 z-20 flex items-center gap-1.5 rounded-full bg-gradient-to-r from-champagne-gold/90 to-gold-pale/80 px-3.5 py-1.5 shadow-gold-strong"
+        >
+          <Crown className="h-3.5 w-3.5 text-white" />
+          <span className="font-dm-serif text-xs font-semibold text-white tracking-wide uppercase">Most Popular</span>
+        </motion.div>
+      )}
+
       {/* Animated gold accent line at top — expands 0→100% on hover */}
       <div className="absolute top-0 left-0 right-0 h-[2px] z-20 overflow-hidden">
         <div className="h-full bg-gradient-to-r from-gold-rich via-champagne-gold to-gold-light origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-400 ease-[cubic-bezier(0.25,0.4,0.25,1)]" />

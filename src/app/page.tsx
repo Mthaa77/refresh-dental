@@ -7,6 +7,7 @@ import ScrollProgress from '@/components/refresh-dental/scroll-progress'
 import Navigation from '@/components/refresh-dental/navigation'
 import PromoBanner from '@/components/refresh-dental/promo-banner'
 import Hero from '@/components/refresh-dental/hero'
+import ServicesOnboarding from '@/components/refresh-dental/services-onboarding'
 
 // ── Already dynamic ──
 const LoadingScreen = dynamic(
@@ -401,6 +402,7 @@ export default function Home() {
   return (
     <>
       <LoadingScreen />
+      <ServicesOnboarding />
       <PageSectionsNav />
       <ScrollProgress />
       <Navigation />
