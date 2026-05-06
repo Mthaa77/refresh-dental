@@ -12,6 +12,8 @@ const steps = [
     description:
       "Book your appointment effortlessly — online, by phone, or via WhatsApp. We'll find a time that suits your schedule, because your convenience matters to us.",
     duration: '~15 min',
+    image: '/images/clinic/environment/modern-operatory.jpg',
+    imageAlt: 'Refresh Dental Centurion clinic reception area with welcoming modern design',
   },
   {
     number: 2,
@@ -20,6 +22,8 @@ const steps = [
     description:
       'Experience a thorough, unhurried consultation where we listen to your concerns, understand your goals, and assess your oral health with state-of-the-art precision.',
     duration: '~30 min',
+    image: '/images/clinic/procedures/treatment-in-progress.jpg',
+    imageAlt: 'Professional dental consultation and assessment at Refresh Dental',
   },
   {
     number: 3,
@@ -28,6 +32,8 @@ const steps = [
     description:
       "Receive a clear, bespoke treatment roadmap with full transparency on every option, cost, and timeline — empowering you to make the best decision for your oral health.",
     duration: '~20 min',
+    image: '/images/clinic/team/thandi-mokoena-hygienist.jpg',
+    imageAlt: 'Dental team member discussing treatment options with patient',
   },
   {
     number: 4,
@@ -36,6 +42,8 @@ const steps = [
     description:
       'Relax in the care of a trusted professional as Dr. Malunga delivers gentle, precise treatment using advanced technology — comfortable, meticulous, and designed to exceed your expectations.',
     duration: '~60 min',
+    image: '/images/clinic/procedures/teeth-whitening-treatment.jpg',
+    imageAlt: 'Professional dental treatment procedure with advanced technology',
   },
   {
     number: 5,
@@ -44,6 +52,8 @@ const steps = [
     description:
       'Walk out with a renewed sense of confidence and a smile you&rsquo;ll be proud to share — results crafted to last and designed with your unique beauty in mind.',
     duration: 'Lifetime',
+    image: '/images/clinic/team/staff-collaboration.jpg',
+    imageAlt: 'Happy patient with Refresh Dental team showing beautiful smile results',
   },
 ]
 
@@ -91,8 +101,24 @@ function StepCard({
       {/* Step content */}
       <motion.div
         variants={stepVariants}
-        className="relative z-10 flex flex-col items-center"
+        className="relative z-10 flex flex-col items-center w-full"
       >
+        {/* Step image thumbnail */}
+        {step.image && (
+          <div className="relative mb-6 w-full">
+            <div className="relative w-32 h-32 mx-auto rounded-2xl overflow-hidden border-2 border-champagne-gold/20 shadow-sm hover:shadow-md transition-shadow">
+              <img
+                src={step.image}
+                alt={step.imageAlt}
+                className="w-full h-full object-cover object-center"
+                loading="lazy"
+                decoding="async"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/10 to-transparent" />
+            </div>
+          </div>
+        )}
+
         {/* Numbered circle with icon */}
         <div className="relative mb-5">
           {/* Static ring */}

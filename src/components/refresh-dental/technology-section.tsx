@@ -188,8 +188,11 @@ export default function TechnologySection() {
       </div>
 
       <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        {/* Header */}
-        <motion.div
+        {/* Header with sidebar image */}
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 items-start mb-12 lg:mb-16">
+          {/* Left — Text Header (2/3 width) */}
+          <div className="lg:col-span-2">
+            <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: '-80px' }}
@@ -227,7 +230,41 @@ export default function TechnologySection() {
           >
             We invest in the latest dental technology so you benefit from faster, more comfortable, and more precise treatments — because you deserve nothing but the best.
           </motion.p>
-        </motion.div>
+            </motion.div>
+          </div>
+
+          {/* Right — Sidebar Image (1/3 width) — Hidden on mobile */}
+          <motion.div
+            initial={{ opacity: 0, x: 20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="hidden lg:block lg:col-span-1"
+          >
+            <div className="relative h-full">
+              {/* Glow behind image */}
+              <div className="absolute -inset-4 rounded-3xl bg-gradient-to-br from-champagne-gold/15 via-sage-teal/10 to-champagne-gold/10 blur-2xl" />
+              {/* Image */}
+              <div className="relative rounded-2xl overflow-hidden border-2 border-champagne-gold/20 shadow-lg aspect-[3/4]">
+                <img
+                  src="/images/clinic/environment/modern-operatory.jpg"
+                  alt="Refresh Dental clinic featuring modern advanced dental technology and equipment in Centurion"
+                  className="w-full h-full object-cover object-center transition-transform duration-700 hover:scale-105"
+                  loading="lazy"
+                  decoding="async"
+                />
+                {/* Accent gradient overlay */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/5 to-transparent" />
+                {/* Bottom accent line */}
+                <div className="absolute bottom-0 left-0 right-0 h-1.5 bg-gradient-to-r from-champagne-gold via-champagne-gold/60 to-transparent" />
+              </div>
+              {/* Caption below */}
+              <p className="mt-4 font-jost text-sm text-brown-muted text-center">
+                State-of-the-art technology meets exceptional care
+              </p>
+            </div>
+          </motion.div>
+        </div>
 
         {/* Technology Grid */}
         <motion.div

@@ -6,18 +6,18 @@ import { Clock, ArrowRight, Heart, Sparkles, Shield, Star, Phone, MessageCircle,
 import ServiceDetailDrawer from './service-detail-drawer'
 
 const services = [
-  { name: "Dental Implants", duration: "1 hr 30 min", category: "Specialised", desc: "Titanium-rooted, natural-looking tooth replacements built to last a lifetime", featured: true, color: '#B89830' },
-  { name: "Teeth Whitening", duration: "1 hr", category: "Cosmetic", desc: "In-chair and take-home whitening systems for a brilliantly luminous smile", featured: false, color: '#C4907C' },
-  { name: "Fillers & Neurotoxins", duration: "1 hr", category: "Aesthetics", desc: "Non-surgical facial aesthetics designed to harmonise with your new smile", featured: false, color: '#A63D40' },
-  { name: "Aligners / Slimming Wires", duration: "30 min", category: "Cosmetic", desc: "Nearly invisible orthodontic solutions for discreet, comfortable alignment", featured: false, color: '#2D6B5C' },
-  { name: "Dental Consultation", duration: "30 min", category: "General", desc: "Thorough 30-minute oral assessment with personalised treatment planning", featured: false, color: '#3B6FA0' },
-  { name: "Scaling and Polishing", duration: "30 min", category: "General", desc: "Professional deep cleaning to protect gums and maintain oral health", featured: false, color: '#2D6B5C' },
-  { name: "Restorations", duration: "30 min", category: "General", desc: "Mercury-free, tooth-coloured restorations that blend seamlessly with your natural teeth", featured: false, color: '#B89830' },
-  { name: "Root Canal Therapy", duration: "1 hr 30 min", category: "Specialised", desc: "Gentle, advanced endodontic therapy to save and restore compromised teeth", featured: false, color: '#A63D40' },
-  { name: "Wisdom Teeth Removal", duration: "1 hr", category: "Specialised", desc: "Safe, comfortable wisdom tooth extraction with minimal recovery time", featured: false, color: '#3B6FA0' },
-  { name: "Dental Prosthesis", duration: "30 min", category: "Specialised", desc: "Precision-crafted dentures designed for comfort, function, and a natural appearance", featured: false, color: '#B89830' },
-  { name: "Crowns and Veneers", duration: "1 hr", category: "Cosmetic", desc: "Handcrafted porcelain crowns and veneers for a picture-perfect finish", featured: true, color: '#C4907C' },
-  { name: "Fixed Dental Prosthesis", duration: "1 hr 30 min", category: "Specialised", desc: "Custom permanent bridges and prosthetics that restore full dental function", featured: false, color: '#2D6B5C' },
+  { name: "Dental Implants", duration: "1 hr 30 min", category: "Specialised", desc: "Titanium-rooted, natural-looking tooth replacements built to last a lifetime", featured: true, color: '#B89830', image: '/images/clinic/procedures/treatment-in-progress.jpg' },
+  { name: "Teeth Whitening", duration: "1 hr", category: "Cosmetic", desc: "In-chair and take-home whitening systems for a brilliantly luminous smile", featured: false, color: '#C4907C', image: '/images/clinic/procedures/teeth-whitening-treatment.jpg' },
+  { name: "Fillers & Neurotoxins", duration: "1 hr", category: "Aesthetics", desc: "Non-surgical facial aesthetics designed to harmonise with your new smile", featured: false, color: '#A63D40', image: '/images/clinic/environment/modern-operatory.jpg' },
+  { name: "Aligners / Slimming Wires", duration: "30 min", category: "Cosmetic", desc: "Nearly invisible orthodontic solutions for discreet, comfortable alignment", featured: false, color: '#2D6B5C', image: '/images/clinic/procedures/teeth-whitening-treatment.jpg' },
+  { name: "Dental Consultation", duration: "30 min", category: "General", desc: "Thorough 30-minute oral assessment with personalised treatment planning", featured: false, color: '#3B6FA0', image: '/images/clinic/environment/modern-operatory.jpg' },
+  { name: "Scaling and Polishing", duration: "30 min", category: "General", desc: "Professional deep cleaning to protect gums and maintain oral health", featured: false, color: '#2D6B5C', image: '/images/clinic/procedures/teeth-whitening-treatment.jpg' },
+  { name: "Restorations", duration: "30 min", category: "General", desc: "Mercury-free, tooth-coloured restorations that blend seamlessly with your natural teeth", featured: false, color: '#B89830', image: '/images/clinic/procedures/treatment-in-progress.jpg' },
+  { name: "Root Canal Therapy", duration: "1 hr 30 min", category: "Specialised", desc: "Gentle, advanced endodontic therapy to save and restore compromised teeth", featured: false, color: '#A63D40', image: '/images/clinic/procedures/treatment-in-progress.jpg' },
+  { name: "Wisdom Teeth Removal", duration: "1 hr", category: "Specialised", desc: "Safe, comfortable wisdom tooth extraction with minimal recovery time", featured: false, color: '#3B6FA0', image: '/images/clinic/environment/modern-operatory.jpg' },
+  { name: "Dental Prosthesis", duration: "30 min", category: "Specialised", desc: "Precision-crafted dentures designed for comfort, function, and a natural appearance", featured: false, color: '#B89830', image: '/images/clinic/procedures/treatment-in-progress.jpg' },
+  { name: "Crowns and Veneers", duration: "1 hr", category: "Cosmetic", desc: "Handcrafted porcelain crowns and veneers for a picture-perfect finish", featured: true, color: '#C4907C', image: '/images/clinic/procedures/teeth-whitening-treatment.jpg' },
+  { name: "Fixed Dental Prosthesis", duration: "1 hr 30 min", category: "Specialised", desc: "Custom permanent bridges and prosthetics that restore full dental function", featured: false, color: '#2D6B5C', image: '/images/clinic/environment/modern-operatory.jpg' },
 ]
 
 const categoryIcons: Record<string, React.ElementType> = {
@@ -93,6 +93,21 @@ function ServiceCard({ service, onSelect }: { service: typeof services[number]; 
           transition: 'transform 0.2s ease-out, box-shadow 0.3s ease, border-color 0.3s ease, background 0.3s ease',
         }}
       >
+        {/* Background image overlay */}
+        {service.image && (
+          <div className="absolute inset-0 overflow-hidden rounded-2xl">
+            <img
+              src={service.image}
+              alt=""
+              className="absolute inset-0 w-full h-full object-cover opacity-8 transition-opacity duration-500 group-hover:opacity-15"
+              loading="lazy"
+              decoding="async"
+              aria-hidden="true"
+            />
+            {/* Dark gradient overlay to ensure text readability */}
+            <div className="absolute inset-0 bg-gradient-to-br from-white/95 via-white/90 to-ivory/85 group-hover:from-white/90 group-hover:via-white/85 group-hover:to-ivory/80 transition-all duration-300" />
+          </div>
+        )}
         {/* Animated top accent line */}
         <div className="absolute top-0 left-0 right-0 h-[2px] z-20 overflow-hidden">
           <div

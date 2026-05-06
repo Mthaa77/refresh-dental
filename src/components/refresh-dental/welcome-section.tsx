@@ -154,7 +154,7 @@ export default function WelcomeSection() {
                 </div>
               </motion.div>
 
-              {/* ── Right: Welcome message ── */}
+              {/* ── Center: Welcome message ── */}
               <motion.div variants={fadeUp} className="flex-1 text-center lg:text-left">
                 {/* Greeting */}
                 <div className="flex items-center justify-center lg:justify-start gap-2.5 mb-4">
@@ -214,6 +214,40 @@ export default function WelcomeSection() {
                     <span>View Services</span>
                   </a>
                 </motion.div>
+              </motion.div>
+
+              {/* ── Right: Clinic environment image ── */}
+              <motion.div variants={scaleIn} className="relative flex-shrink-0 w-full lg:w-auto hidden lg:block">
+                <div className="flex justify-center lg:justify-end">
+                  <div className="relative">
+                    {/* Glow behind image */}
+                    <div
+                      className="absolute -inset-4 rounded-3xl bg-gradient-to-br from-sage-teal/20 via-champagne-gold/10 to-sage-teal/15 blur-2xl"
+                      aria-hidden="true"
+                    />
+                    {/* Image */}
+                    <div className="relative w-64 md:w-80 aspect-[3/4] rounded-3xl overflow-hidden ring-2 ring-champagne-gold/30 shadow-lg">
+                      <img
+                        src="/images/clinic/environment/modern-operatory.jpg"
+                        alt="Modern Refresh Dental operatory in Centurion featuring comfortable patient chair and advanced dental equipment"
+                        className="w-full h-full object-cover object-center transition-transform duration-700 hover:scale-105"
+                        loading="lazy"
+                        decoding="async"
+                      />
+                      {/* Accent border at bottom */}
+                      <div className="absolute bottom-0 left-0 right-0 h-1.5 bg-gradient-to-r from-champagne-gold via-champagne-gold/60 to-transparent" />
+                    </div>
+                    {/* Caption badge */}
+                    <motion.div
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={isInView ? { opacity: 1, y: 0 } : {}}
+                      transition={{ delay: 1.1, duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+                      className="absolute -bottom-4 left-1/2 -translate-x-1/2 flex items-center gap-2 bg-card backdrop-blur-md rounded-full px-4 py-2 shadow-elevated border border-champagne-gold/20 whitespace-nowrap"
+                    >
+                      <span className="font-jost text-xs text-brown-muted">Experience modern comfort</span>
+                    </motion.div>
+                  </div>
+                </div>
               </motion.div>
             </div>
           </div>
