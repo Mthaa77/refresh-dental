@@ -10,6 +10,8 @@ const teamMembers = [
     role: 'Dental Hygienist',
     bio: 'With over a decade of experience in preventive care, Thandi transforms routine hygiene visits into deeply restorative experiences that patients actually look forward to.',
     initials: 'TM',
+    image: '/images/clinic/team/thandi-mokoena-hygienist.jpg',
+    imageAlt: 'Thandi Mokoena, Dental Hygienist at Refresh Dental, providing preventive dental care in our modern Centurion clinic',
     color: 'bg-accent-blue',
     specialties: ['Preventive Care', 'Periodontal Therapy', 'Teeth Cleaning'],
     readTime: '3 min read',
@@ -19,6 +21,8 @@ const teamMembers = [
     role: 'Dental Assistant',
     bio: 'Sarah brings warmth and precision to every procedure, ensuring patients feel safe, informed, and genuinely cared for throughout their visit.',
     initials: 'SM',
+    image: '/images/clinic/team/sarah-dental-assistant.jpg',
+    imageAlt: 'Sarah van der Merwe, Dental Assistant at Refresh Dental, ensuring patient comfort during treatment in Centurion',
     color: 'bg-warm-blush',
     specialties: ['Chairside Assistance', 'Infection Control', 'Patient Comfort'],
     readTime: '2 min read',
@@ -286,17 +290,27 @@ export default function TeamSection() {
 
               {/* Content */}
               <div className="relative z-[15]">
-                {/* Initials Avatar with CSS gold ring on hover */}
+                {/* Avatar - Photo or Initials */}
                 <div className="relative mb-5 flex items-center gap-4">
                   <div className="relative">
                     {/* Gold ring — CSS transition on hover */}
                     <div className="absolute -inset-1.5 rounded-full border-2 border-champagne-gold/0 transition-all duration-700 ease-out group-hover:border-champagne-gold/40 group-hover:scale-110" />
                     <div className="absolute -inset-3 rounded-full border border-champagne-gold/0 transition-all duration-1000 ease-out delay-100 group-hover:border-champagne-gold/15 group-hover:scale-115" />
-                    <div
-                      className={`relative flex h-14 w-14 items-center justify-center rounded-full ${member.color} text-white font-cormorant text-xl font-semibold shadow-sm`}
-                    >
-                      {member.initials}
-                    </div>
+                    {member.image ? (
+                      <img
+                        src={member.image}
+                        alt={member.imageAlt}
+                        className={`relative h-14 w-14 rounded-full object-cover object-center shadow-sm`}
+                        loading="lazy"
+                        decoding="async"
+                      />
+                    ) : (
+                      <div
+                        className={`relative flex h-14 w-14 items-center justify-center rounded-full ${member.color} text-white font-cormorant text-xl font-semibold shadow-sm`}
+                      >
+                        {member.initials}
+                      </div>
+                    )}
                   </div>
                   <div>
                     <h3 className="font-dm-serif text-lg text-espresso text-shadow-espresso leading-snug">
@@ -362,6 +376,65 @@ export default function TeamSection() {
               </div>
             </motion.div>
           ))}
+        </motion.div>
+
+        {/* Team Collaboration Section */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.2 }}
+          viewport={{ once: true }}
+          className="mt-16 rounded-3xl border border-soft-border bg-card shadow-elevated p-8 md:p-12 overflow-hidden"
+        >
+          <div className="flex flex-col lg:flex-row items-center gap-8 lg:gap-12">
+            {/* Left — Collaboration Image */}
+            <div className="relative w-full lg:w-1/2 flex-shrink-0">
+              <div className="absolute -inset-4 rounded-3xl bg-champagne-gold/10 blur-2xl pointer-events-none" />
+              <div className="relative w-full aspect-[3/4] lg:aspect-[4/5] rounded-2xl overflow-hidden border-2 border-champagne-gold/20">
+                <img
+                  src="/images/clinic/team/staff-collaboration.jpg"
+                  alt="Refresh Dental team members collaborating on patient care and education at our Centurion clinic"
+                  className="absolute inset-0 w-full h-full object-cover object-center transition-transform duration-700 hover:scale-105"
+                  loading="lazy"
+                  decoding="async"
+                />
+                <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-champagne-gold via-champagne-gold/60 to-transparent" />
+              </div>
+            </div>
+
+            {/* Right — Content */}
+            <div className="w-full lg:w-1/2">
+              <span className="inline-block mb-3 text-xs font-semibold uppercase tracking-[0.2em] text-champagne-gold">
+                Team Culture
+              </span>
+              <h3 className="font-cormorant text-4xl md:text-5xl gold-gradient-text text-shadow-luxury mb-6">
+                United by a Single Mission
+              </h3>
+              <p className="font-jost text-base text-brown-muted leading-relaxed mb-6">
+                Our team isn&rsquo;t just colleagues — we&rsquo;re partners in passion. Every member brings unique expertise, but we share one unwavering commitment: your exceptional care and the transformation of your smile.
+              </p>
+              <p className="font-jost text-base text-brown-muted leading-relaxed mb-8">
+                From the moment you step into Refresh Dental, you&rsquo;ll experience the warmth of a team that truly cares. We invest in continuous learning, modern techniques, and — most importantly — listening to what matters to you.
+              </p>
+              
+              {/* Quick Stats */}
+              <div className="grid grid-cols-2 gap-6">
+                <div>
+                  <p className="font-cormorant text-3xl md:text-4xl gold-gradient-text mb-1">20+</p>
+                  <p className="font-jost text-sm text-brown-muted">Years Combined Experience</p>
+                </div>
+                <div>
+                  <p className="font-cormorant text-3xl md:text-4xl gold-gradient-text mb-1">1000+</p>
+                  <p className="font-jost text-sm text-brown-muted">Happy Patients</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Animated gold accent line */}
+          <div className="absolute top-0 left-0 right-0 h-[2px] overflow-hidden">
+            <div className="h-full bg-gradient-to-r from-transparent via-champagne-gold to-transparent origin-left scale-x-0 animate-pulse" style={{ animationDelay: '0.5s' }} />
+          </div>
         </motion.div>
 
         {/* Join Our Team CTA */}
