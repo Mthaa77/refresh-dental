@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import { motion } from 'framer-motion'
 import { Calendar, Stethoscope, ClipboardList, Heart, PartyPopper } from 'lucide-react'
+import SectionBackground from '@/components/refresh-dental/section-background'
 
 const steps = [
   {
@@ -274,8 +275,9 @@ function DesktopTimeline() {
 export default function TreatmentProcess() {
   return (
     <section id="process" className="bg-ivory py-20 md:py-28 relative overflow-hidden">
+    <SectionBackground variant="subtle" dots orbs sparkles />
       {/* Subtle diagonal stripe pattern for texture */}
-      <div className="pointer-events-none absolute inset-0 opacity-[0.02]">
+      <div className="pointer-events-none absolute inset-0 opacity-[0.07]">
         <svg className="h-full w-full" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" viewBox="0 0 200 200">
           <defs>
             <pattern id="diagonal-stripes" patternUnits="userSpaceOnUse" width="12" height="12" patternTransform="rotate(45)">

@@ -2,6 +2,7 @@
 
 import { motion, useInView } from 'framer-motion';
 import { useRef } from 'react';
+import SectionBackground from '@/components/refresh-dental/section-background';
 import {
   Heart,
   Sparkles,
@@ -81,6 +82,7 @@ export default function WelcomeSection() {
       aria-label="Welcome message from Dr. Malunga"
       className="relative py-20 md:py-28 overflow-hidden"
     >
+      <SectionBackground variant="gold" dots sparkles />
       {/* ═══ Background treatments ═══ */}
       {/* Warm gold radial vignette */}
       <div className="absolute inset-0 bg-gradient-to-b from-ivory via-champagne-gold/[0.03] to-ivory" aria-hidden="true" />
@@ -93,7 +95,7 @@ export default function WelcomeSection() {
         variants={containerVariants}
         initial="hidden"
         animate={isInView ? 'visible' : 'hidden'}
-        className="relative max-w-6xl mx-auto px-6 sm:px-10 lg:px-16"
+        className="relative z-10 max-w-6xl mx-auto px-6 sm:px-10 lg:px-16"
       >
         {/* ═══ Top decorative line ═══ */}
         <motion.div

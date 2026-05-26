@@ -243,6 +243,47 @@
   to { transform: scaleX(1); }
 }
 
+/* NEW: Sparkle twinkle */
+@keyframes sparkle-pop {
+  0%, 100% { opacity: 0; transform: scale(0.4) rotate(0deg); }
+  30% { opacity: 1; transform: scale(1.15) rotate(15deg); }
+  60% { opacity: 0.7; transform: scale(0.9) rotate(-10deg); }
+}
+
+/* NEW: Slow continuous spin */
+@keyframes spin-slow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* NEW: Reverse slow spin */
+@keyframes spin-slow-reverse {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(-360deg); }
+}
+
+/* NEW: Gold shimmer sweep across element */
+@keyframes shimmer-sweep {
+  0% { transform: translateX(-120%) skewX(-12deg); opacity: 0; }
+  20% { opacity: 1; }
+  80% { opacity: 1; }
+  100% { transform: translateX(220%) skewX(-12deg); opacity: 0; }
+}
+
+/* NEW: Orb float with drift */
+@keyframes orb-drift {
+  0%   { transform: translate(0px, 0px) scale(1); }
+  33%  { transform: translate(18px, -14px) scale(1.06); }
+  66%  { transform: translate(-12px, 10px) scale(0.95); }
+  100% { transform: translate(0px, 0px) scale(1); }
+}
+
+/* NEW: Pattern reveal */
+@keyframes pattern-fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
 /* ============================================
    TYPOGRAPHY — Enhanced System
    ============================================ */
@@ -916,6 +957,123 @@
 /* NEW: Glow breathing */
 .glow-breathe {
   animation: glow-breathe 3s ease-in-out infinite;
+}
+
+/* NEW: Sparkle animation */
+.sparkle-pop {
+  animation: sparkle-pop 2.4s ease-in-out infinite;
+}
+.sparkle-pop-delay-1 { animation: sparkle-pop 2.4s ease-in-out 0.4s infinite; }
+.sparkle-pop-delay-2 { animation: sparkle-pop 2.4s ease-in-out 0.8s infinite; }
+.sparkle-pop-delay-3 { animation: sparkle-pop 2.4s ease-in-out 1.2s infinite; }
+.sparkle-pop-delay-4 { animation: sparkle-pop 2.4s ease-in-out 1.6s infinite; }
+.sparkle-pop-delay-5 { animation: sparkle-pop 2.4s ease-in-out 2.0s infinite; }
+
+/* NEW: Slow spin */
+.spin-slow   { animation: spin-slow 20s linear infinite; }
+.spin-slow-r { animation: spin-slow-reverse 28s linear infinite; }
+
+/* NEW: Orb drift */
+.orb-drift   { animation: orb-drift 9s ease-in-out infinite; }
+.orb-drift-2 { animation: orb-drift 12s ease-in-out 2s infinite; }
+.orb-drift-3 { animation: orb-drift 15s ease-in-out 4s infinite; }
+
+/* ============================================
+   BACKGROUND PATTERNS
+   ============================================ */
+
+/* Dot grid — brand-tinted */
+.pattern-dots {
+  background-image: radial-gradient(circle, rgba(184, 152, 48, 0.18) 1px, transparent 1px);
+  background-size: 28px 28px;
+}
+.pattern-dots-teal {
+  background-image: radial-gradient(circle, rgba(45, 107, 92, 0.14) 1px, transparent 1px);
+  background-size: 28px 28px;
+}
+.pattern-dots-subtle {
+  background-image: radial-gradient(circle, rgba(184, 152, 48, 0.10) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+/* Fine diagonal lines */
+.pattern-diagonal {
+  background-image: repeating-linear-gradient(
+    45deg,
+    rgba(184, 152, 48, 0.07) 0px,
+    rgba(184, 152, 48, 0.07) 1px,
+    transparent 1px,
+    transparent 18px
+  );
+}
+.pattern-diagonal-teal {
+  background-image: repeating-linear-gradient(
+    45deg,
+    rgba(45, 107, 92, 0.07) 0px,
+    rgba(45, 107, 92, 0.07) 1px,
+    transparent 1px,
+    transparent 18px
+  );
+}
+
+/* Fine crosshatch */
+.pattern-crosshatch {
+  background-image:
+    repeating-linear-gradient(0deg, rgba(184, 152, 48, 0.06) 0px, rgba(184, 152, 48, 0.06) 1px, transparent 1px, transparent 22px),
+    repeating-linear-gradient(90deg, rgba(184, 152, 48, 0.06) 0px, rgba(184, 152, 48, 0.06) 1px, transparent 1px, transparent 22px);
+}
+
+/* ============================================
+   GOLD SHIMMER SWEEP — for buttons & highlights
+   ============================================ */
+
+.gold-shimmer-btn {
+  position: relative;
+  overflow: hidden;
+}
+.gold-shimmer-btn::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.28) 50%, transparent 100%);
+  transform: translateX(-120%) skewX(-12deg);
+  animation: shimmer-sweep 3.5s ease-in-out 1s infinite;
+  pointer-events: none;
+}
+
+/* ============================================
+   STRONGER GOLD GRADIENT BUTTON
+   ============================================ */
+
+.btn-gold-3d {
+  background: linear-gradient(160deg, #E8D9A8 0%, #D4B84A 18%, #B89830 42%, #8B6914 70%, #A07D1A 88%, #C9A84C 100%);
+  box-shadow:
+    0 1px 0 rgba(255,255,255,0.35) inset,
+    0 -1px 0 rgba(0,0,0,0.3) inset,
+    0 4px 16px rgba(184,152,48,0.35),
+    0 1px 3px rgba(0,0,0,0.2);
+  border: 1px solid rgba(184,152,48,0.5);
+}
+.btn-gold-3d:hover {
+  background: linear-gradient(160deg, #F0E6B8 0%, #DCC55C 18%, #C9A84C 42%, #9A7820 70%, #B89030 88%, #D4C060 100%);
+  box-shadow:
+    0 1px 0 rgba(255,255,255,0.45) inset,
+    0 -1px 0 rgba(0,0,0,0.25) inset,
+    0 8px 28px rgba(184,152,48,0.45),
+    0 2px 6px rgba(0,0,0,0.2);
+}
+
+/* ============================================
+   GOLD BORDER GLOW — stronger rings
+   ============================================ */
+
+.border-gold-glow {
+  border: 1px solid rgba(184, 152, 48, 0.4);
+  box-shadow: 0 0 0 1px rgba(184, 152, 48, 0.12), inset 0 1px 0 rgba(255,255,255,0.2);
+}
+.border-gold-glow-strong {
+  border: 1px solid rgba(184, 152, 48, 0.65);
+  box-shadow: 0 0 0 3px rgba(184, 152, 48, 0.12), 0 0 20px rgba(184,152,48,0.18), inset 0 1px 0 rgba(255,255,255,0.2);
 }
 
 /* ============================================

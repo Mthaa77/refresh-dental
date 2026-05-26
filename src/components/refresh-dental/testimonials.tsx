@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef } from 'react'
 import { motion, AnimatePresence, useInView } from 'framer-motion'
+import SectionBackground from '@/components/refresh-dental/section-background'
 import {
   Star,
   ChevronLeft,
@@ -313,18 +314,16 @@ export default function Testimonials() {
         background: 'linear-gradient(180deg, #F0EBE1 0%, #E8E1D5 40%, #EDE8DE 60%, #F0EBE1 100%)',
       }}
     >
-      {/* Subtle diagonal line pattern */}
+      <SectionBackground variant="gold" dots orbs sparkles ring />
+      {/* Stronger diagonal crosshatch pattern */}
       <div
         className="pointer-events-none absolute inset-0"
         aria-hidden="true"
         style={{
-          backgroundImage: `repeating-linear-gradient(
-            45deg,
-            rgba(184, 152, 48, 0.015) 0px,
-            rgba(184, 152, 48, 0.015) 1px,
-            transparent 1px,
-            transparent 32px
-          )`,
+          backgroundImage: `
+            repeating-linear-gradient(45deg, rgba(184,152,48,0.055) 0px, rgba(184,152,48,0.055) 1px, transparent 1px, transparent 26px),
+            repeating-linear-gradient(-45deg, rgba(184,152,48,0.03) 0px, rgba(184,152,48,0.03) 1px, transparent 1px, transparent 26px)
+          `,
         }}
       />
 
@@ -336,7 +335,7 @@ export default function Testimonials() {
         }}
       />
 
-      <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {/* ============ HEADER ============ */}
         <motion.div
           variants={staggerContainer}

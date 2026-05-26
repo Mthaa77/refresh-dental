@@ -176,7 +176,7 @@ export default function Navigation() {
               <a
                 href="#contact"
                 onClick={handleBookAppointment}
-                className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-champagne-gold to-[#A07D1A] px-5 py-2.5 font-jost text-[13px] font-semibold tracking-wide text-white shadow-gold transition-all duration-300 hover:shadow-gold-strong hover:scale-[1.03] active:scale-[0.97]"
+                className="btn-gold-3d gold-shimmer-btn inline-flex items-center gap-2 rounded-full px-5 py-2.5 font-jost text-[13px] font-semibold tracking-wide text-espresso transition-all duration-300 hover:scale-[1.03] active:scale-[0.97]"
               >
                 Book Now
               </a>
@@ -319,7 +319,7 @@ export default function Navigation() {
             <motion.a
               href="#contact"
               onClick={handleBookAppointment}
-              className="mb-8 inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-champagne-gold to-[#A07D1A] px-8 py-3 font-jost text-base font-semibold tracking-wide text-white shadow-gold transition-all duration-300 hover:shadow-gold-strong hover:scale-[1.03]"
+              className="btn-gold-3d gold-shimmer-btn mb-8 inline-flex items-center gap-2 rounded-full px-8 py-3 font-jost text-base font-semibold tracking-wide text-espresso transition-all duration-300 hover:scale-[1.03]"
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.4, delay: 0.8 }}

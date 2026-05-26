@@ -4,6 +4,7 @@ import { useState, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Clock, ArrowRight, Heart, Sparkles, Shield, Star, Phone, MessageCircle, ChevronRight } from 'lucide-react'
 import ServiceDetailDrawer from './service-detail-drawer'
+import SectionBackground from '@/components/refresh-dental/section-background'
 
 const services = [
   { name: "Dental Implants", duration: "1 hr 30 min", category: "Specialised", desc: "Titanium-rooted, natural-looking tooth replacements built to last a lifetime", featured: true, color: '#B89830', image: '/images/clinic/procedures/treatment-in-progress.jpg' },
@@ -231,7 +232,8 @@ export default function ServicesGrid() {
 
   return (
     <>
-    <section id="services" className="bg-sand py-20 md:py-28 relative overflow-hidden">
+      <section id="services" className="bg-sand py-20 md:py-28 relative overflow-hidden">
+        <SectionBackground variant="teal" dots orbs sparkles />
       {/* Subtle blue tint decorative overlay */}
       <div className="pointer-events-none absolute inset-0 blue-tint" />
 

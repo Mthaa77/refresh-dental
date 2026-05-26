@@ -3,6 +3,7 @@
 import { motion, useInView } from 'framer-motion'
 import { useRef } from 'react'
 import { ArrowRight, Sparkles } from 'lucide-react'
+import SectionBackground from '@/components/refresh-dental/section-background'
 
 export default function SmileCta() {
   const ref = useRef(null)
@@ -13,14 +14,17 @@ export default function SmileCta() {
       ref={ref}
       className="relative overflow-hidden bg-espresso py-24 sm:py-32"
     >
-      {/* Gradient overlay */}
+      <SectionBackground variant="gold-dark" dots={false} orbs sparkles ring />
+      {/* Gradient overlay — stronger gold */}
       <div
         className="pointer-events-none absolute inset-0"
         style={{
           background:
-            'radial-gradient(ellipse at 30% 50%, rgba(184, 152, 48, 0.06) 0%, transparent 60%), radial-gradient(ellipse at 70% 50%, rgba(45, 107, 92, 0.04) 0%, transparent 60%)',
+            'radial-gradient(ellipse at 30% 50%, rgba(184, 152, 48, 0.14) 0%, transparent 60%), radial-gradient(ellipse at 70% 50%, rgba(45, 107, 92, 0.08) 0%, transparent 60%)',
         }}
       />
+      {/* Gold glowing top border */}
+      <div className="pointer-events-none absolute top-0 left-0 right-0 h-[2px]" style={{ background: 'linear-gradient(90deg, transparent, rgba(184,152,48,0.8), rgba(212,192,138,0.9), rgba(184,152,48,0.8), transparent)' }} />
 
       {/* Subtle grain texture */}
       <div
@@ -55,7 +59,7 @@ export default function SmileCta() {
           initial={{ scale: 0, opacity: 0 }}
           animate={isInView ? { scale: 1, opacity: 1 } : {}}
           transition={{ duration: 0.6, ease: 'easeOut' }}
-          className="mx-auto mb-8 flex h-16 w-16 items-center justify-center rounded-full border border-champagne-gold/20 bg-champagne-gold/5"
+          className="mx-auto mb-8 flex h-16 w-16 items-center justify-center rounded-full border-gold-glow-strong bg-champagne-gold/10 gold-pulse"
         >
           <Sparkles className="h-7 w-7 text-champagne-gold" />
         </motion.div>
@@ -100,7 +104,7 @@ export default function SmileCta() {
             href="#contact"
             whileHover={{ scale: 1.03, boxShadow: '0 8px 24px rgba(184, 152, 48, 0.3)' }}
             whileTap={{ scale: 0.97 }}
-            className="inline-flex items-center gap-2 rounded-full bg-champagne-gold px-8 py-4 font-jost text-sm font-semibold uppercase tracking-widest text-espresso transition-colors duration-300 hover:bg-champagne-gold-light"
+            className="btn-gold-3d gold-shimmer-btn inline-flex items-center gap-2 rounded-full px-8 py-4 font-jost text-sm font-semibold uppercase tracking-widest text-espresso transition-all duration-300"
           >
             Book Free Consultation
             <ArrowRight className="h-4 w-4" />
