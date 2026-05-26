@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion'
 import { Heart, Shield, Users, Award, Sparkles, Clock } from 'lucide-react'
+import SectionBackground from '@/components/refresh-dental/section-background'
 
 const values = [
   { icon: Heart, title: 'Patient Comfort', category: 'Experience', description: 'From the moment you walk through our doors, every detail — from the calming ambience to the gentle touch — is designed to put you at ease, because exceptional dentistry begins with how you feel.', accent: 'bg-warm-blush/15 text-warm-blush' },
@@ -24,8 +25,9 @@ const itemVariants = {
 
 export default function ValuesSection() {
   return (
-    <section className="bg-sand py-20 md:py-28">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <section className="relative bg-sand py-20 md:py-28 overflow-hidden">
+      <SectionBackground variant="subtle" dots orbs sparkles ring />
+      <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="mb-16 text-center animate-fade-in-up">
           <span className="mb-4 inline-block text-xs font-semibold uppercase tracking-[0.2em] text-champagne-gold">
@@ -55,7 +57,7 @@ Six pillars that set us apart — the very reasons families across Centurion ent
                 y: -4,
                 transition: { duration: 0.3 },
               }}
-              className="group relative rounded-2xl border border-soft-border bg-white p-6 overflow-hidden transition-all duration-300 hover:border-champagne-gold/30 shadow-premium hover-lift shadow-inner-gold hover:shadow-gold"
+              className="group relative rounded-2xl border border-soft-border bg-white/90 backdrop-blur-sm p-6 overflow-hidden transition-all duration-300 hover:border-champagne-gold/50 shadow-premium hover-lift shadow-inner-gold hover:shadow-gold border-gold-glow"
             >
               {/* Gold accent line at top */}
               <div className="absolute top-0 left-0 right-0 h-[2px] z-20 overflow-hidden">

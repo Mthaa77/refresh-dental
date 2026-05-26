@@ -148,27 +148,66 @@ export default function Hero() {
         variants={lineExpand}
         initial="hidden"
         animate="visible"
-        className="absolute left-8 lg:left-16 top-[18%] bottom-[22%] w-[1px] bg-gradient-to-b from-transparent via-champagne-gold/40 to-transparent z-10 origin-top hidden lg:block"
+        className="absolute left-8 lg:left-16 top-[18%] bottom-[22%] w-[1px] bg-gradient-to-b from-transparent via-champagne-gold/50 to-transparent z-10 origin-top hidden lg:block"
       />
 
-      {/* Animated corner bracket — top-left */}
+      {/* Animated corner bracket — top-left (thicker + glowing) */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1.8, duration: 1.0 }}
         className="absolute top-12 left-8 lg:left-16 z-10 hidden lg:block"
       >
-        <div className="w-16 h-16 border-t border-l border-champagne-gold/25" />
+        <div className="w-16 h-16 border-t-2 border-l-2 border-champagne-gold/50" style={{ boxShadow: '0 0 12px rgba(184,152,48,0.3), inset 0 0 8px rgba(184,152,48,0.1)' }} />
       </motion.div>
 
-      {/* Animated corner bracket — bottom-right */}
+      {/* Animated corner bracket — bottom-right (thicker + glowing) */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1.8, duration: 1.0 }}
         className="absolute bottom-12 right-8 lg:right-16 z-10 hidden lg:block"
       >
-        <div className="w-16 h-16 border-b border-r border-champagne-gold/25" />
+        <div className="w-16 h-16 border-b-2 border-r-2 border-champagne-gold/50" style={{ boxShadow: '0 0 12px rgba(184,152,48,0.3), inset 0 0 8px rgba(184,152,48,0.1)' }} />
+      </motion.div>
+
+      {/* Twinkling gold sparkles — scattered across hero (aria-hidden) */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 2.2, duration: 1.2 }}
+        aria-hidden="true"
+        className="absolute inset-0 z-10 pointer-events-none hidden lg:block"
+      >
+        {/* Top-right sparkle cluster */}
+        <div className="absolute top-[15%] right-[12%] sparkle-pop" style={{ opacity: 0 }}>
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M9,0.5 C9.4,3.8 5.2,5.2 0.5,9 C5.2,12.8 9.4,14.2 9,17.5 C8.6,14.2 12.8,12.8 17.5,9 C12.8,5.2 8.6,3.8 9,0.5Z" fill="url(#hg1)"/><defs><radialGradient id="hg1" cx="50%" cy="50%" r="50%"><stop offset="0%" stopColor="#FFFFFF" stopOpacity="0.95"/><stop offset="100%" stopColor="#B89830" stopOpacity="0.4"/></radialGradient></defs></svg>
+        </div>
+        <div className="absolute top-[22%] right-[20%] sparkle-pop-delay-2" style={{ opacity: 0 }}>
+          <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M5,0.3 C5.2,2.1 2.9,2.9 0.3,5 C2.9,7.1 5.2,7.9 5,9.7 C4.8,7.9 7.1,7.1 9.7,5 C7.1,2.9 4.8,2.1 5,0.3Z" fill="#E8D9A8" opacity="0.9"/></svg>
+        </div>
+        {/* Bottom-left sparkle */}
+        <div className="absolute bottom-[25%] left-[22%] sparkle-pop-delay-3" style={{ opacity: 0 }}>
+          <svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M6.5,0.4 C6.8,2.9 3.9,3.9 0.4,6.5 C3.9,9.1 6.8,10.1 6.5,12.6 C6.2,10.1 9.1,9.1 12.6,6.5 C9.1,3.9 6.2,2.9 6.5,0.4Z" fill="url(#hg2)"/><defs><radialGradient id="hg2" cx="50%" cy="50%" r="50%"><stop offset="0%" stopColor="#FFFFFF" stopOpacity="0.9"/><stop offset="100%" stopColor="#B89830" stopOpacity="0.35"/></radialGradient></defs></svg>
+        </div>
+        {/* Mid-right sparkle */}
+        <div className="absolute top-[50%] right-[8%] sparkle-pop-delay-4" style={{ opacity: 0 }}>
+          <svg width="8" height="8" viewBox="0 0 8 8" fill="none"><path d="M4,0.3 C4.2,1.7 2.3,2.3 0.3,4 C2.3,5.7 4.2,6.3 4,7.7 C3.8,6.3 5.7,5.7 7.7,4 C5.7,2.3 3.8,1.7 4,0.3Z" fill="#D4C08A" opacity="0.85"/></svg>
+        </div>
+      </motion.div>
+
+      {/* 3D decorative orbit ring — top right, subtle */}
+      <motion.div
+        initial={{ opacity: 0, rotate: 0 }}
+        animate={{ opacity: 0.18, rotate: 360 }}
+        transition={{ opacity: { delay: 2.5, duration: 1 }, rotate: { duration: 40, repeat: Infinity, ease: 'linear' } }}
+        className="absolute -top-24 -right-24 z-10 pointer-events-none hidden xl:block"
+      >
+        <svg width="320" height="320" viewBox="0 0 320 320" fill="none">
+          <circle cx="160" cy="160" r="148" stroke="rgba(184,152,48,0.6)" strokeWidth="1" strokeDasharray="8 14" />
+          <circle cx="160" cy="160" r="110" stroke="rgba(184,152,48,0.3)" strokeWidth="0.5" />
+          <circle cx="160" cy="160" r="72" stroke="rgba(212,192,138,0.35)" strokeWidth="1" strokeDasharray="3 22" />
+        </svg>
       </motion.div>
 
       {/* ============ MAIN CONTENT ============ */}
@@ -263,9 +302,9 @@ export default function Hero() {
                 {/* Primary CTA */}
                 <motion.a
                   href="#contact"
-                  whileHover={{ scale: 1.04, boxShadow: '0 0 50px rgba(184,152,48,0.4)' }}
+                  whileHover={{ scale: 1.04, boxShadow: '0 0 50px rgba(184,152,48,0.55)' }}
                   whileTap={{ scale: 0.97 }}
-                  className="relative inline-flex items-center justify-center gap-2 bg-gradient-to-r from-champagne-gold to-gold-light text-espresso font-jost font-semibold text-sm tracking-[0.12em] uppercase rounded-full px-8 py-4 shadow-gold overflow-hidden group"
+                  className="btn-gold-3d gold-shimmer-btn relative inline-flex items-center justify-center gap-2 text-espresso font-jost font-semibold text-sm tracking-[0.12em] uppercase rounded-full px-8 py-4 overflow-hidden group"
                 >
                   <motion.span
                     className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent pointer-events-none"

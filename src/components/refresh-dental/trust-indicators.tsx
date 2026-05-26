@@ -2,6 +2,7 @@
 
 import { useRef, useState, useEffect, useCallback } from 'react'
 import { Star, Users, Award, Shield } from 'lucide-react'
+import SectionBackground from '@/components/refresh-dental/section-background'
 
 const indicators = [
   { icon: Star, number: '5.0', numberSuffix: '★', title: '5.0 Star Rating', description: 'Rated 5.0/5 on Google Reviews — perfect scores across the board from our valued patients', accentColor: '#B89830', glowColor: 'rgba(184, 152, 48, 0.12)', ringProgress: 100, stars: true },
@@ -220,10 +221,11 @@ function TiltTrustCard({ item, index }: { item: (typeof indicators)[number]; ind
 export default function TrustIndicators() {
   return (
     <section className="bg-white border-t border-b border-soft-border py-16 md:py-20 relative overflow-hidden">
-      {/* Background radial glow */}
+      <SectionBackground variant="gold" dots sparkles />
+      {/* Background radial glow — strengthened */}
       <div className="pointer-events-none absolute inset-0">
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] rounded-full"
-          style={{ background: 'radial-gradient(ellipse, rgba(184, 152, 48, 0.04) 0%, transparent 70%)' }}
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[500px] rounded-full"
+          style={{ background: 'radial-gradient(ellipse, rgba(184, 152, 48, 0.10) 0%, transparent 70%)' }}
         />
       </div>
 

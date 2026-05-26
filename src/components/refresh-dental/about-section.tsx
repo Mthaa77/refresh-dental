@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { Linkedin, ArrowRight, ChevronDown, Phone, MessageCircle, Calendar } from 'lucide-react';
+import SectionBackground from '@/components/refresh-dental/section-background';
 
 const credentials = [
   { label: 'BDS', desc: 'Bachelor of Dental Surgery' },
@@ -16,7 +17,8 @@ export default function AboutSection() {
       id="about"
       className="relative bg-ivory py-24 overflow-hidden"
     >
-      <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-16 xl:px-24 overflow-hidden">
+      <SectionBackground variant="gold" dots orbs sparkles ring />
+      <div className="relative z-10 max-w-7xl mx-auto px-6 sm:px-10 lg:px-16 xl:px-24 overflow-hidden">
         <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-20">
           {/* Left — Portrait Image with gold glow */}
           <div className="relative w-full lg:w-[45%] flex-shrink-0 lg:-ml-12 xl:-ml-20 overflow-hidden">
@@ -203,7 +205,7 @@ export default function AboutSection() {
           </a>
           <a
             href="#contact"
-            className="inline-flex items-center gap-2 bg-champagne-gold text-espresso font-jost text-sm font-semibold tracking-wider uppercase rounded-full px-6 py-3 transition-all duration-300 hover:bg-champagne-gold/90 hover:shadow-gold"
+            className="btn-gold-3d gold-shimmer-btn inline-flex items-center gap-2 text-espresso font-jost text-sm font-semibold tracking-wider uppercase rounded-full px-6 py-3 transition-all duration-300"
           >
             <Calendar className="w-4 w-4" />
             Book Now
