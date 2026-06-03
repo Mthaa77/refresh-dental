@@ -88,7 +88,7 @@ export default function PaymentSection() {
               {medicalAids.map((aid) => (
                 <span
                   key={aid}
-                  className="bg-sapphire-light/10 text-sapphire-light rounded-full px-3 py-1 text-sm font-medium cursor-default hover-lift hover:-translate-y-0.5 hover:scale-105 transition-transform duration-200"
+                  className="bg-sage-teal/10 text-sage-teal rounded-full px-3 py-1 text-sm font-medium cursor-default hover-lift hover:-translate-y-0.5 hover:scale-105 transition-transform duration-200"
                 >
                   {aid}
                 </span>

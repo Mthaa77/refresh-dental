@@ -23,7 +23,7 @@ const certifications: Certification[] = [
     description:
       'Member of the South African Dental Association',
     icon: Award,
-    borderColor: 'border-sapphire-light',
+    borderColor: 'border-sage-teal',
   },
   {
     title: '10+ Years Experience',
@@ -36,7 +36,7 @@ const certifications: Certification[] = [
     description:
       'Regular advanced training in latest dental techniques',
     icon: BookOpen,
-    borderColor: 'border-sapphire-light',
+    borderColor: 'border-sage-teal',
   },
   {
     title: 'Community Excellence',
@@ -49,7 +49,7 @@ const certifications: Certification[] = [
     title: 'Infection Control Certified',
     description: 'Hospital-grade sterilization protocols',
     icon: ShieldCheck,
-    borderColor: 'border-sapphire-light',
+    borderColor: 'border-sage-teal',
   },
 ]
 

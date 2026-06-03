@@ -13,8 +13,6 @@ import {
   ChevronDown,
   Clock,
   Sparkles,
-  Smile,
-  Zap,
 } from 'lucide-react';
 
 /* ========================================
@@ -97,10 +95,10 @@ const scrollFadeIn = {
    ======================================== */
 
 const trustBadges = [
-  { icon: Smile, label: '5.0 Google Rating', accent: 'text-champagne-gold' },
-  { icon: Shield, label: 'All Medical Aids', accent: 'text-sapphire-light' },
+  { icon: Star, label: '5.0 Google Rating', accent: 'text-champagne-gold' },
+  { icon: Shield, label: 'All Medical Aids', accent: 'text-sage-teal' },
   { icon: Award, label: 'HPCSA Registered', accent: 'text-champagne-gold' },
-  { icon: CheckCircle, label: 'Interest-Free Plans', accent: 'text-sapphire-light' },
+  { icon: CheckCircle, label: 'Interest-Free Plans', accent: 'text-sage-teal' },
 ];
 
 /* ========================================
@@ -136,12 +134,12 @@ export default function Hero() {
           loading="eager"
           decoding="async"
         />
-        {/* Multi-layer overlay for depth — premium blue gradient */}
-        <div className="absolute inset-0 bg-gradient-to-br from-royal-navy via-accent-blue to-sapphire/80" />
-        <div className="absolute inset-0 bg-gradient-to-r from-royal-navy/95 via-sapphire/60 to-accent-blue/40" />
-        <div className="absolute inset-0 bg-gradient-to-t from-sapphire/70 via-accent-blue/30 to-royal-navy/50" />
-        {/* Subtle gold tint at bottom-right for warmth */}
-        <div className="absolute inset-0 bg-gradient-to-bl from-champagne-gold/8 via-transparent to-transparent" />
+        {/* Multi-layer overlay for depth */}
+        <div className="absolute inset-0 bg-espresso/70" />
+        <div className="absolute inset-0 bg-gradient-to-r from-espresso/90 via-espresso/50 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-espresso/80 via-espresso/20 to-espresso/40" />
+        {/* Subtle gold tint at bottom-right */}
+        <div className="absolute inset-0 bg-gradient-to-bl from-champagne-gold/10 via-transparent to-transparent" />
       </motion.div>
 
       {/* ============ DECORATIVE ELEMENTS ============ */}
@@ -229,11 +227,11 @@ export default function Hero() {
             >
               {/* --- AVAILABILITY BADGE --- */}
               <motion.div variants={fadeSlideUp} className="mb-8" role="status">
-                <span className="inline-flex items-center gap-2.5 bg-sapphire/15 border border-sapphire-light/30 backdrop-blur-md rounded-full pl-3 pr-4 py-1.5">
+                <span className="inline-flex items-center gap-2.5 bg-sage-teal/15 border border-sage-teal/30 backdrop-blur-md rounded-full pl-3 pr-4 py-1.5">
                   <span className="relative flex h-2.5 w-2.5">
-                    <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-sapphire-light" />
+                    <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-sage-teal" />
                   </span>
-                  <span className="font-jost text-xs font-semibold tracking-[0.18em] text-sapphire-light uppercase">
+                  <span className="font-jost text-xs font-semibold tracking-[0.18em] text-teal-light uppercase">
                     Now Accepting New Patients
                   </span>
                 </span>
@@ -321,9 +319,9 @@ export default function Hero() {
                 {/* Secondary CTA */}
                 <motion.a
                   href="#services"
-                  whileHover={{ scale: 1.03, borderColor: 'rgba(96,165,250,0.6)' }}
+                  whileHover={{ scale: 1.03, borderColor: 'rgba(127,181,168,0.6)' }}
                   whileTap={{ scale: 0.97 }}
-                  className="inline-flex items-center justify-center gap-2 border-2 border-sapphire-light/50 text-sapphire-light font-jost font-medium text-sm tracking-[0.1em] uppercase rounded-full px-8 py-4 backdrop-blur-sm transition-all duration-300 hover:bg-sapphire-light/10"
+                  className="inline-flex items-center justify-center gap-2 border-2 border-teal-light/40 text-teal-light font-jost font-medium text-sm tracking-[0.1em] uppercase rounded-full px-8 py-4 backdrop-blur-sm transition-all duration-300 hover:bg-teal-light/10"
                 >
                   Explore Services
                   <ArrowRight className="w-4 h-4" />
