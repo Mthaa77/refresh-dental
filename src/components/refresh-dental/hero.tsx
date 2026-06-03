@@ -96,9 +96,9 @@ const scrollFadeIn = {
 
 const trustBadges = [
   { icon: Star, label: '5.0 Google Rating', accent: 'text-champagne-gold' },
-  { icon: Shield, label: 'All Medical Aids', accent: 'text-sage-teal' },
-  { icon: Award, label: 'HPCSA Registered', accent: 'text-champagne-gold' },
-  { icon: CheckCircle, label: 'Interest-Free Plans', accent: 'text-sage-teal' },
+  { icon: Shield, label: 'All Medical Aids', accent: 'text-sapphire-light' },
+  { icon: Award, label: 'HPCSA Registered', accent: 'text-gold-light' },
+  { icon: CheckCircle, label: 'Interest-Free Plans', accent: 'text-sapphire-light' },
 ];
 
 /* ========================================
@@ -134,12 +134,12 @@ export default function Hero() {
           loading="eager"
           decoding="async"
         />
-        {/* Multi-layer overlay for depth */}
-        <div className="absolute inset-0 bg-espresso/70" />
-        <div className="absolute inset-0 bg-gradient-to-r from-espresso/90 via-espresso/50 to-transparent" />
-        <div className="absolute inset-0 bg-gradient-to-t from-espresso/80 via-espresso/20 to-espresso/40" />
-        {/* Subtle gold tint at bottom-right */}
-        <div className="absolute inset-0 bg-gradient-to-bl from-champagne-gold/10 via-transparent to-transparent" />
+        {/* Multi-layer overlay for depth — premium with blue undertones */}
+        <div className="absolute inset-0 bg-gradient-to-br from-espresso/75 via-espresso/70 to-royal-navy/60" />
+        <div className="absolute inset-0 bg-gradient-to-r from-espresso/92 via-espresso/55 to-sapphire-dark/30" />
+        <div className="absolute inset-0 bg-gradient-to-t from-espresso/82 via-espresso/25 to-espresso/45" />
+        {/* Premium gold tint at bottom-right with subtle blue */}
+        <div className="absolute inset-0 bg-gradient-to-bl from-champagne-gold/12 via-sapphire/5 to-transparent" />
       </motion.div>
 
       {/* ============ DECORATIVE ELEMENTS ============ */}
@@ -227,37 +227,37 @@ export default function Hero() {
             >
               {/* --- AVAILABILITY BADGE --- */}
               <motion.div variants={fadeSlideUp} className="mb-8" role="status">
-                <span className="inline-flex items-center gap-2.5 bg-sage-teal/15 border border-sage-teal/30 backdrop-blur-md rounded-full pl-3 pr-4 py-1.5">
+                <span className="inline-flex items-center gap-2.5 bg-sapphire/20 border border-sapphire-light/40 backdrop-blur-md rounded-full pl-3 pr-4 py-2">
                   <span className="relative flex h-2.5 w-2.5">
-                    <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-sage-teal" />
+                    <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-sapphire-light animate-pulse" />
                   </span>
-                  <span className="font-jost text-xs font-semibold tracking-[0.18em] text-teal-light uppercase">
+                  <span className="font-jost text-xs font-semibold tracking-[0.2em] text-sapphire-light uppercase">
                     Now Accepting New Patients
                   </span>
                 </span>
               </motion.div>
 
               {/* --- EYEBROW --- */}
-              <motion.div variants={fadeSlideUp} className="mb-5">
-                <span className="font-jost text-xs sm:text-sm tracking-[0.25em] text-champagne-gold uppercase font-medium">
+              <motion.div variants={fadeSlideUp} className="mb-6">
+                <span className="font-jost text-xs sm:text-sm tracking-[0.3em] text-gold-rich uppercase font-semibold letter-spacing-wide">
                   Centurion's Premier Dental Experience
                 </span>
                 <motion.div
                   variants={lineExpand}
-                  className="mt-3 h-[1.5px] w-28 origin-left bg-gradient-to-r from-champagne-gold via-gold-light to-champagne-gold/0"
+                  className="mt-4 h-[2px] w-32 origin-left bg-gradient-to-r from-champagne-gold via-gold-light to-champagne-gold/0"
                 />
               </motion.div>
 
               {/* --- MEGA HEADING --- */}
               <motion.h1
                 variants={fadeSlideUp}
-                className="font-cormorant font-light text-ivory leading-[0.92] mb-4"
+                className="font-cormorant font-light text-ivory leading-[0.88] mb-6"
                 itemProp="name"
               >
-                <span className="block text-[clamp(2.4rem,6.5vw,6.5rem)] tracking-tight">
+                <span className="block text-[clamp(3.2rem,8vw,8.5rem)] tracking-tighter font-light">
                   Confidence
                 </span>
-                <span className="block text-[clamp(2.4rem,6.5vw,6.5rem)] tracking-tight">
+                <span className="block text-[clamp(3.2rem,8vw,8.5rem)] tracking-tighter font-light">
                   <span className="shimmer-text text-shadow-gold-strong">Starts Here.</span>
                 </span>
               </motion.h1>
@@ -265,10 +265,10 @@ export default function Hero() {
               {/* --- DENTIST NAME — Hero Gradient Heading --- */}
               <motion.h2
                 variants={fadeSlideUp}
-                className="mb-8"
+                className="mb-10"
                 itemProp="founder"
               >
-                <span className="block text-[clamp(2.6rem,7.5vw,7.5rem)] font-cormorant font-semibold tracking-tight leading-[0.95] gold-gradient-text text-shadow-gold-strong">
+                <span className="block text-[clamp(3rem,8.5vw,8.5rem)] font-cormorant font-semibold tracking-tight leading-[0.92] gold-gradient-text text-shadow-gold-strong">
                   Dr. Lebogang Malunga
                 </span>
               </motion.h2>
@@ -276,13 +276,13 @@ export default function Hero() {
               {/* --- DESCRIPTION --- */}
               <motion.p
                 variants={fadeSlideUp}
-                className="font-jost font-normal text-ivory/80 text-lg sm:text-xl max-w-[540px] leading-relaxed mb-3"
+                className="font-jost font-light text-ivory/85 text-lg sm:text-xl max-w-[580px] leading-[1.7] mb-5 tracking-wide"
               >
                 Premium dental care designed around you. From routine check-ups to complete smile transformations, Dr. Malunga and her team deliver results that go beyond expectations — in a space where comfort meets clinical excellence.
               </motion.p>
               <motion.p
                 variants={fadeSlideUp}
-                className="font-jost font-normal text-ivory/60 text-base sm:text-lg max-w-[520px] leading-relaxed mb-4"
+                className="font-jost font-light text-ivory/65 text-base sm:text-lg max-w-[550px] leading-[1.7] mb-6 tracking-wide"
               >
                 Your journey to a healthier, more radiant smile begins with a single conversation. Let us show you what personalised, patient-first dentistry truly feels like.
               </motion.p>
@@ -319,9 +319,9 @@ export default function Hero() {
                 {/* Secondary CTA */}
                 <motion.a
                   href="#services"
-                  whileHover={{ scale: 1.03, borderColor: 'rgba(127,181,168,0.6)' }}
+                  whileHover={{ scale: 1.03, borderColor: 'rgba(96,165,250,0.8)' }}
                   whileTap={{ scale: 0.97 }}
-                  className="inline-flex items-center justify-center gap-2 border-2 border-teal-light/40 text-teal-light font-jost font-medium text-sm tracking-[0.1em] uppercase rounded-full px-8 py-4 backdrop-blur-sm transition-all duration-300 hover:bg-teal-light/10"
+                  className="inline-flex items-center justify-center gap-2 border-2 border-sapphire-light/50 text-sapphire-light font-jost font-semibold text-sm tracking-[0.12em] uppercase rounded-full px-8 py-4 backdrop-blur-sm transition-all duration-300 hover:bg-sapphire-light/15 hover:border-sapphire-light/70"
                 >
                   Explore Services
                   <ArrowRight className="w-4 h-4" />
