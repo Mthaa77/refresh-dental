@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { Linkedin, ArrowRight, ChevronDown, Phone, MessageCircle, Calendar } from 'lucide-react';
 import SectionBackground from '@/components/refresh-dental/section-background';
+import { SmileAccent, ShieldAccent } from '@/components/refresh-dental/dental-icon-accents';
 
 const credentials = [
   { label: 'BDS', desc: 'Bachelor of Dental Surgery' },
