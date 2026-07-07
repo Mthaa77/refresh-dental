@@ -1,347 +1,156 @@
 'use client';
 
-import { useState, useEffect, useCallback, useRef } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
-import { Menu, X, Phone, Instagram, Facebook, Linkedin, Music } from 'lucide-react';
+import { ArrowRight, Menu, Phone, X } from 'lucide-react';
 
 const LOGO_URL = '/images/refresh-dental-logo.jpg';
 
 const NAV_LINKS = [
   { label: 'Home', href: '#home' },
-  { label: 'About', href: '#about' },
-  { label: 'Services', href: '#services' },
-  { label: 'Testimonials', href: '#testimonials' },
-  { label: 'Team', href: '#team' },
+  { label: 'The Practice', href: '#about' },
+  { label: 'Care', href: '#services' },
+  { label: 'Your Visit', href: '#process' },
+  { label: 'Reviews', href: '#testimonials' },
   { label: 'Contact', href: '#contact' },
 ] as const;
 
 export default function Navigation() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const [activeSection, setActiveSection] = useState('home');
-  const observerRef = useRef<IntersectionObserver | null>(null);
 
   useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 40);
-    };
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
+    const onScroll = () => setScrolled(window.scrollY > 28);
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
   useEffect(() => {
-    const sectionIds = NAV_LINKS.map((l) => l.href.replace('#', ''));
-
-    observerRef.current = new IntersectionObserver(
-      (entries) => {
-        const visible = entries.filter((e) => e.isIntersecting);
-        if (visible.length > 0) {
-          visible.sort((a, b) => b.intersectionRatio - a.intersectionRatio);
-          setActiveSection(visible[0].target.id);
-        }
-      },
-      { rootMargin: '-20% 0px -60% 0px', threshold: [0, 0.25, 0.5, 0.75, 1] },
-    );
-
-    sectionIds.forEach((id) => {
-      const el = document.getElementById(id);
-      if (el) observerRef.current?.observe(el);
-    });
-
-    return () => observerRef.current?.disconnect();
-  }, []);
-
-  useEffect(() => {
-    if (mobileOpen) {
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = '';
-    }
+    document.body.style.overflow = mobileOpen ? 'hidden' : '';
     return () => {
       document.body.style.overflow = '';
     };
   }, [mobileOpen]);
 
-  const handleNavClick = useCallback(
-    (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
-      e.preventDefault();
-      setMobileOpen(false);
-      const target = document.querySelector(href);
-      if (target) {
-        target.scrollIntoView({ behavior: 'smooth' });
-      }
-    },
-    [],
-  );
+  const scrollTo = useCallback((event: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    event.preventDefault();
+    setMobileOpen(false);
+    document.querySelector(href)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }, []);
 
-  const handleBookAppointment = useCallback(
-    (e: React.MouseEvent<HTMLAnchorElement>) => {
-      e.preventDefault();
-      setMobileOpen(false);
-      const target = document.querySelector('#contact');
-      if (target) {
-        target.scrollIntoView({ behavior: 'smooth' });
-      }
-    },
-    [],
-  );
-
-  const socialLinks = [
-    { label: 'Instagram', href: 'https://www.instagram.com/refresh_dental_', icon: Instagram },
-    { label: 'Facebook', href: 'https://www.facebook.com/share/17deYWeBn9', icon: Facebook },
-    { label: 'TikTok', href: 'https://www.tiktok.com/@refresh_dental', icon: Music },
-    { label: 'LinkedIn', href: 'https://www.linkedin.com/in/drlebogangmalunga', icon: Linkedin },
-  ];
+  const navTextClass = scrolled ? 'text-espresso/75 hover:text-espresso' : 'text-ivory/75 hover:text-ivory';
 
   return (
     <>
-      {/* ========== NAVBAR ========== */}
       <header
         role="banner"
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-          scrolled ? 'border-b border-champagne-gold/10' : ''
+        className={`fixed inset-x-0 top-0 z-50 transition-all duration-500 ${
+          scrolled ? 'border-b border-champagne-gold/15 bg-ivory/90 shadow-[0_12px_30px_rgba(15,13,10,0.08)] backdrop-blur-xl' : 'bg-transparent'
         }`}
-        style={{
-          backgroundColor: scrolled ? '#F0EBE1' : 'rgba(15, 13, 10, 0)',
-          boxShadow: scrolled
-            ? '0 1px 20px rgba(15, 13, 10, 0.08)'
-            : '0 0px 0px rgba(15, 13, 10, 0)',
-        }}
       >
-        {/* Thin gold accent line at top of navbar */}
-        <div className="h-[2px] bg-gradient-to-r from-transparent via-champagne-gold/60 to-transparent" aria-hidden="true" />
-
-        <nav aria-label="Main navigation" className="mx-auto flex max-w-7xl items-center justify-between px-6 py-3.5 lg:px-8">
-          {/* Logo + Brand + Dentist Name */}
-          <a href="#home" onClick={(e) => handleNavClick(e, '#home')} className="flex items-center gap-3.5">
-            <img
-              src={LOGO_URL}
-              alt="Dr. Lebogang Malunga — Refresh Dental"
-              width={48}
-              height={48}
-              className="h-12 w-12 rounded-full object-cover ring-2 ring-champagne-gold/25 shadow-gold transition-transform duration-200 hover:scale-105 active:scale-95"
-            />
-            {/* Brand + Dentist Name — hidden on mobile */}
-            <div className="hidden md:flex flex-col">
-              <span className="gold-gradient-text font-cormorant text-[22px] font-semibold tracking-wide leading-none">
-                Dr. Lebogang Malunga
+        <div className={`h-px bg-gradient-to-r from-transparent via-champagne-gold/70 to-transparent transition-opacity duration-500 ${scrolled ? 'opacity-100' : 'opacity-0'}`} />
+        <nav aria-label="Main navigation" className="mx-auto flex h-[76px] max-w-[1540px] items-center justify-between px-5 sm:px-8 lg:px-12 xl:px-16">
+          <a href="#home" onClick={(event) => scrollTo(event, '#home')} className="group flex items-center gap-3">
+            <span className={`relative flex h-11 w-11 items-center justify-center overflow-hidden rounded-full ring-1 transition-all duration-300 ${scrolled ? 'ring-champagne-gold/35' : 'ring-ivory/25'}`}>
+              <img src={LOGO_URL} alt="Refresh Dental" width={44} height={44} className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110" />
+            </span>
+            <span className="hidden flex-col sm:flex">
+              <span className={`font-cormorant text-[23px] font-semibold leading-none tracking-[-0.02em] ${scrolled ? 'text-espresso' : 'text-ivory'}`}>
+                Refresh Dental
               </span>
-              <span
-                className="font-jost text-[11px] font-medium tracking-[0.2em] uppercase transition-colors duration-500"
-                style={{ color: scrolled ? '#B89830' : 'rgba(240, 235, 225, 0.6)' }}
-              >
-                Refresh Dental — Centurion
+              <span className={`mt-1 font-jost text-[9px] font-semibold uppercase tracking-[0.22em] ${scrolled ? 'text-gold-rich' : 'text-gold-pale/75'}`}>
+                Centurion · Dr. Malunga
               </span>
-            </div>
+            </span>
           </a>
 
-          {/* Desktop Nav Links */}
-          <ul role="menubar" className="hidden items-center gap-5 xl:flex xl:gap-7">
-            {NAV_LINKS.map((link) => {
-              const sectionId = link.href.replace('#', '');
-              const isActive = activeSection === sectionId;
-              return (
-                <li key={link.href} className="relative" role="none">
-                  <a
-                    href={link.href}
-                    role="menuitem"
-                    onClick={(e) => handleNavClick(e, link.href)}
-                    className="relative font-jost text-[13px] font-medium tracking-[0.08em] uppercase transition-colors duration-300 hover:text-[#A07D1A]"
-                    style={{ color: isActive ? '#B89830' : scrolled ? '#0F0D0A' : '#F0EBE1' }}
-                  >
-                    {link.label}
-                    {/* Active gold underline */}
-                    <span
-                      className="absolute -bottom-1 left-0 h-[2px] bg-gradient-to-r from-champagne-gold to-gold-light transition-all duration-350"
-                      style={{ width: isActive ? '100%' : '0%' }}
-                    />
-                  </a>
-                </li>
-              );
-            })}
-          </ul>
-
-          {/* Desktop CTA + Mobile Hamburger */}
-          <div className="flex items-center gap-4">
-            {/* Phone + Book CTA — hidden on mobile */}
-            <div className="hidden md:flex items-center gap-3">
+          <div className="hidden items-center gap-7 xl:flex">
+            {NAV_LINKS.map((link) => (
               <a
-                href="tel:+27614164649"
-                className="flex items-center gap-1.5 font-jost text-[12px] font-medium tracking-wide transition-colors duration-300 hover:text-champagne-gold"
-                style={{ color: scrolled ? '#5A5045' : 'rgba(240, 235, 225, 0.7)' }}
+                key={link.href}
+                href={link.href}
+                onClick={(event) => scrollTo(event, link.href)}
+                className={`relative font-jost text-[11px] font-semibold uppercase tracking-[0.13em] transition-colors duration-300 ${navTextClass} after:absolute after:-bottom-2 after:left-0 after:h-px after:w-0 after:bg-champagne-gold after:transition-all after:duration-300 hover:after:w-full`}
               >
-                <Phone className="h-3.5 w-3.5" />
-                061 416 4649
+                {link.label}
               </a>
-              <a
-                href="#contact"
-                onClick={handleBookAppointment}
-                className="btn-gold-3d gold-shimmer-btn inline-flex items-center gap-2 rounded-full px-5 py-2.5 font-jost text-[13px] font-semibold tracking-wide text-espresso transition-all duration-300 hover:scale-[1.03] active:scale-[0.97]"
-              >
-                Book Now
-              </a>
-            </div>
+            ))}
+          </div>
 
-            {/* Hamburger — visible on mobile */}
-            <button
-              className="relative z-[60] flex h-11 w-11 items-center justify-center md:hidden"
-              onClick={() => setMobileOpen(!mobileOpen)}
-              aria-label={mobileOpen ? 'Close menu' : 'Open menu'}
+          <div className="flex items-center gap-3">
+            <a href="tel:+27614164649" className={`hidden items-center gap-2 font-jost text-[11px] font-semibold tracking-wide transition-colors lg:inline-flex ${navTextClass}`}>
+              <Phone className="h-3.5 w-3.5 text-champagne-gold" aria-hidden="true" />
+              061 416 4649
+            </a>
+            <a
+              href="#contact"
+              onClick={(event) => scrollTo(event, '#contact')}
+              className="btn-gold-3d hidden items-center gap-2 rounded-full px-5 py-2.5 font-jost text-[10px] font-bold uppercase tracking-[0.15em] text-espresso transition-transform duration-300 hover:-translate-y-0.5 md:inline-flex"
             >
-              <AnimatePresence mode="wait">
-                {mobileOpen ? (
-                  <motion.div
-                    key="close"
-                    initial={{ opacity: 0, rotate: -90 }}
-                    animate={{ opacity: 1, rotate: 0 }}
-                    exit={{ opacity: 0, rotate: 90 }}
-                    transition={{ duration: 0.2 }}
-                  >
-                    <X className="h-6 w-6 text-champagne-gold" />
-                  </motion.div>
-                ) : (
-                  <motion.div
-                    key="menu"
-                    initial={{ opacity: 0, rotate: 90 }}
-                    animate={{ opacity: 1, rotate: 0 }}
-                    exit={{ opacity: 0, rotate: -90 }}
-                    transition={{ duration: 0.2 }}
-                  >
-                    <Menu
-                      className="h-6 w-6"
-                      style={{ color: scrolled ? '#0F0D0A' : '#F0EBE1' }}
-                    />
-                  </motion.div>
-                )}
-              </AnimatePresence>
+              Book now
+              <ArrowRight className="h-3.5 w-3.5" aria-hidden="true" />
+            </a>
+            <button
+              onClick={() => setMobileOpen((open) => !open)}
+              className={`inline-flex h-11 w-11 items-center justify-center rounded-full border transition-colors md:hidden ${scrolled ? 'border-champagne-gold/25 text-espresso' : 'border-ivory/20 text-ivory'}`}
+              aria-label={mobileOpen ? 'Close navigation menu' : 'Open navigation menu'}
+              aria-expanded={mobileOpen}
+            >
+              {mobileOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
             </button>
           </div>
         </nav>
       </header>
 
-      {/* ========== MOBILE FULL-SCREEN OVERLAY ========== */}
       <AnimatePresence>
         {mobileOpen && (
           <motion.div
             role="dialog"
             aria-modal="true"
-            aria-label="Mobile navigation menu"
-            className="fixed inset-0 z-50 flex flex-col items-center bg-gradient-to-b from-espresso via-[#0a0d18] to-espresso md:hidden"
+            aria-label="Mobile navigation"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 0.35 }}
+            className="fixed inset-0 z-40 flex min-h-screen flex-col bg-[radial-gradient(circle_at_75%_15%,rgba(184,152,48,0.2),transparent_28%),linear-gradient(145deg,#0F0D0A_0%,#19150f_58%,#173c35_140%)] px-7 pb-10 pt-28 md:hidden"
           >
-            {/* Close button */}
-            <button
-              onClick={() => setMobileOpen(false)}
-              className="absolute top-5 right-5 z-[60] flex h-12 w-12 items-center justify-center rounded-full border border-champagne-gold/30 bg-champagne-gold/15 backdrop-blur-sm transition-colors duration-300 hover:bg-champagne-gold/25"
-              aria-label="Close menu"
-            >
-              <X className="h-6 w-6 text-gold-light" />
-            </button>
+            <div aria-hidden="true" className="absolute inset-0 opacity-25 [background-image:linear-gradient(rgba(240,235,225,0.1)_1px,transparent_1px),linear-gradient(90deg,rgba(240,235,225,0.1)_1px,transparent_1px)] [background-size:56px_56px]" />
+            <div className="relative mx-auto flex w-full max-w-sm flex-1 flex-col">
+              <p className="font-jost text-[10px] font-semibold uppercase tracking-[0.25em] text-gold-pale/70">Refresh Dental</p>
+              <p className="mt-3 max-w-[260px] font-cormorant text-4xl font-light leading-[0.92] text-ivory">Care that begins with listening.</p>
 
-            {/* Logo + Dentist Name */}
-            <div className="flex flex-col items-center pt-16 pb-4">
-              <motion.img
-                src={LOGO_URL}
-                alt="Dr. Lebogang Malunga"
-                width={80}
-                height={80}
-                className="h-20 w-20 rounded-full object-cover ring-2 ring-champagne-gold/30 ring-offset-2 ring-offset-espresso"
-                initial={{ opacity: 0, scale: 0.8 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.5, delay: 0.1 }}
-              />
-              <motion.h2
-                className="mt-3 font-cormorant text-2xl font-semibold gold-gradient-text"
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.4, delay: 0.2 }}
-              >
-                Dr. Lebogang Malunga
-              </motion.h2>
-              <motion.p
-                className="mt-1 font-jost text-sm text-ivory/55 tracking-wide"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ duration: 0.4, delay: 0.3 }}
-              >
-                Refresh Dental — Centurion
-              </motion.p>
-            </div>
-
-            {/* Phone badge */}
-            <motion.a
-              href="tel:+27614164649"
-              className="mb-5 flex min-h-[44px] items-center gap-2 rounded-full border border-champagne-gold/20 bg-champagne-gold/10 px-5 py-2.5 font-jost text-sm text-champagne-gold"
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.4, delay: 0.35 }}
-            >
-              <Phone className="h-3.5 w-3.5" />
-              061 416 4649
-            </motion.a>
-
-            {/* Divider */}
-            <div className="mb-5 h-px w-32 bg-gradient-to-r from-transparent via-champagne-gold/30 to-transparent" />
-
-            {/* Nav Links */}
-            <ul className="flex flex-col items-center gap-5">
-              {NAV_LINKS.map((link, i) => {
-                const sectionId = link.href.replace('#', '');
-                const isActive = activeSection === sectionId;
-                return (
-                  <motion.li
+              <div className="my-10 h-px w-full bg-gradient-to-r from-champagne-gold/45 via-ivory/10 to-transparent" />
+              <nav aria-label="Mobile navigation" className="flex flex-col gap-4">
+                {NAV_LINKS.map((link, index) => (
+                  <motion.a
                     key={link.href}
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.4, delay: 0.4 + i * 0.06 }}
+                    href={link.href}
+                    onClick={(event) => scrollTo(event, link.href)}
+                    initial={{ opacity: 0, x: -16 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: 0.1 + index * 0.06, duration: 0.4 }}
+                    className="group flex items-center justify-between border-b border-ivory/10 py-3 font-cormorant text-3xl font-light text-ivory transition-colors hover:text-gold-pale"
                   >
-                    <a
-                      href={link.href}
-                      onClick={(e) => handleNavClick(e, link.href)}
-                      className={`relative block min-h-[44px] cursor-pointer pl-4 font-cormorant text-4xl font-light leading-[44px] tracking-wide transition-colors duration-300 hover:text-gold-light ${
-                        isActive ? 'text-gold-light' : 'text-champagne-gold'
-                      }`}
-                    >
-                      {link.label}
-                    </a>
-                  </motion.li>
-                );
-              })}
-            </ul>
+                    {link.label}
+                    <ArrowRight className="h-4 w-4 text-champagne-gold transition-transform duration-300 group-hover:translate-x-1" aria-hidden="true" />
+                  </motion.a>
+                ))}
+              </nav>
 
-            {/* Divider */}
-            <div className="mt-6 mb-6 h-px w-32 bg-gradient-to-r from-transparent via-champagne-gold/30 to-transparent" />
-
-            {/* Book CTA */}
-            <motion.a
-              href="#contact"
-              onClick={handleBookAppointment}
-              className="btn-gold-3d gold-shimmer-btn mb-8 inline-flex items-center gap-2 rounded-full px-8 py-3 font-jost text-base font-semibold tracking-wide text-espresso transition-all duration-300 hover:scale-[1.03]"
-              initial={{ opacity: 0, y: 15 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.4, delay: 0.8 }}
-            >
-              <Phone className="h-4 w-4" />
-              Book Appointment
-            </motion.a>
-
-            {/* Social Icons */}
-            <div className="flex items-center gap-5">
-              {socialLinks.map((social) => (
-                <a
-                  key={social.label}
-                  href={social.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label={social.label}
-                  className="flex h-11 w-11 items-center justify-center rounded-full border border-ivory/20 text-ivory/55 transition-all duration-200 hover:scale-[1.15] hover:border-champagne-gold/30 hover:text-champagne-gold"
-                >
-                  <social.icon className="h-4 w-4" />
+              <div className="mt-auto pt-10">
+                <a href="tel:+27614164649" className="inline-flex items-center gap-2 font-jost text-sm text-ivory/75">
+                  <Phone className="h-4 w-4 text-champagne-gold" aria-hidden="true" />
+                  061 416 4649
                 </a>
-              ))}
+                <a
+                  href="#contact"
+                  onClick={(event) => scrollTo(event, '#contact')}
+                  className="btn-gold-3d mt-5 flex min-h-14 w-full items-center justify-center gap-2 rounded-full font-jost text-xs font-bold uppercase tracking-[0.16em] text-espresso"
+                >
+                  Book a consultation
+                  <ArrowRight className="h-4 w-4" aria-hidden="true" />
+                </a>
+              </div>
             </div>
           </motion.div>
         )}
