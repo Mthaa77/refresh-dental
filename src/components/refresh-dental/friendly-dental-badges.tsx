@@ -7,8 +7,8 @@ import {
   ShieldCheck,
   Sparkles,
   Star,
-  Tooth,
 } from 'lucide-react';
+import DentalToothMark from './dental-tooth-mark';
 
 const badges = [
   {
@@ -62,7 +62,7 @@ export default function FriendlyDentalBadges() {
                 transition={{ duration: 4.8, ease: 'easeInOut', repeat: Infinity }}
                 className="relative z-10 flex h-32 w-32 items-center justify-center rounded-[2.1rem] border border-white/80 bg-white/90 shadow-[0_22px_48px_rgba(92,72,39,0.18)] sm:h-36 sm:w-36"
               >
-                <Tooth className="h-16 w-16 text-teal-500 drop-shadow-[0_8px_12px_rgba(13,148,136,0.28)] sm:h-[4.5rem] sm:w-[4.5rem]" strokeWidth={1.5} aria-hidden="true" />
+                <DentalToothMark className="h-16 w-16 text-teal-500 drop-shadow-[0_8px_12px_rgba(13,148,136,0.28)] sm:h-[4.5rem] sm:w-[4.5rem]" aria-hidden="true" />
               </motion.div>
               <motion.span
                 animate={prefersReducedMotion ? undefined : { y: [0, -6, 0], rotate: [0, -9, 0] }}
