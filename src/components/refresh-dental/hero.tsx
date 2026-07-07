@@ -1,479 +1,272 @@
 'use client';
 
-import { motion, useScroll, useTransform } from 'framer-motion';
+import Image from 'next/image';
+import { motion, useReducedMotion, useScroll, useTransform } from 'framer-motion';
 import { useRef } from 'react';
 import {
-  Star,
-  Shield,
-  Award,
-  CheckCircle,
   ArrowRight,
-  Phone,
-  MapPin,
+  CalendarDays,
+  Check,
   ChevronDown,
-  Clock,
+  Clock3,
+  MapPin,
+  Phone,
+  ShieldCheck,
   Sparkles,
+  Star,
 } from 'lucide-react';
 
-/* ========================================
-   ANIMATION VARIANTS
-   ======================================== */
-
-const staggerContainer = {
-  hidden: {},
-  visible: {
-    transition: {
-      staggerChildren: 0.12,
-      delayChildren: 0.3,
-    },
-  },
-};
-
-const fadeSlideUp = {
-  hidden: { opacity: 0, y: 32 },
+const reveal = {
+  hidden: { opacity: 0, y: 28 },
   visible: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.9, ease: [0.22, 1, 0.36, 1] },
+    transition: { duration: 0.78, ease: [0.22, 1, 0.36, 1] },
   },
 };
 
-const fadeSlideRight = {
-  hidden: { opacity: 0, x: -40 },
-  visible: {
-    opacity: 1,
-    x: 0,
-    transition: { duration: 0.8, ease: [0.22, 1, 0.36, 1] },
-  },
-};
-
-const scaleReveal = {
-  hidden: { opacity: 0, scale: 0.92 },
-  visible: {
-    opacity: 1,
-    scale: 1,
-    transition: { duration: 1.0, ease: [0.22, 1, 0.36, 1] },
-  },
-};
-
-const lineExpand = {
-  hidden: { scaleX: 0 },
-  visible: {
-    scaleX: 1,
-    transition: { duration: 1.2, delay: 0.6, ease: [0.22, 1, 0.36, 1] },
-  },
-};
-
-const badgePop = {
-  hidden: { opacity: 0, scale: 0.8 },
-  visible: {
-    opacity: 1,
-    scale: 1,
-    transition: {
-      duration: 0.5,
-      ease: [0.22, 1, 0.36, 1],
-    },
-  },
-};
-
-const badgeSection = {
+const container = {
   hidden: {},
   visible: {
     transition: {
-      staggerChildren: 0.08,
+      staggerChildren: 0.11,
+      delayChildren: 0.12,
     },
   },
 };
 
-const scrollFadeIn = {
-  hidden: { opacity: 0 },
-  visible: { opacity: 1, transition: { delay: 2.0, duration: 1.0 } },
-};
-
-/* ========================================
-   TRUST DATA
-   ======================================== */
-
-const trustBadges = [
-  { icon: Star, label: '5.0 Google Rating', accent: 'text-champagne-gold' },
-  { icon: Shield, label: 'All Medical Aids', accent: 'text-sapphire-light' },
-  { icon: Award, label: 'HPCSA Registered', accent: 'text-gold-light' },
-  { icon: CheckCircle, label: 'Interest-Free Plans', accent: 'text-sapphire-light' },
+const trustPoints = [
+  { icon: Star, label: '5.0 Google rating', accent: 'text-champagne-gold' },
+  { icon: ShieldCheck, label: 'HPCSA registered', accent: 'text-teal-light' },
+  { icon: Sparkles, label: 'Interest-free plans', accent: 'text-gold-light' },
 ];
 
-/* ========================================
-   HERO COMPONENT
-   ======================================== */
+const firstVisitDetails = [
+  { icon: Clock3, label: '30-minute consultation' },
+  { icon: Check, label: 'All medical aids accepted' },
+  { icon: MapPin, label: '153 River Road, Centurion' },
+];
 
 export default function Hero() {
   const sectionRef = useRef<HTMLElement>(null);
+  const prefersReducedMotion = useReducedMotion();
   const { scrollYProgress } = useScroll({
     target: sectionRef,
     offset: ['start start', 'end start'],
   });
 
-  const bgScale = useTransform(scrollYProgress, [0, 1], [1, 1.12]);
-  const contentOpacity = useTransform(scrollYProgress, [0, 0.35], [1, 0]);
+  const backgroundScale = useTransform(scrollYProgress, [0, 1], [1, 1.075]);
+  const contentOpacity = useTransform(scrollYProgress, [0, 0.45], [1, 0]);
 
   return (
     <section
       ref={sectionRef}
       id="home"
-      aria-label="Welcome to Refresh Dental — Premium Dental Care in Centurion by Dr. Lebogang Malunga"
-      className="relative min-h-screen flex items-center overflow-hidden"
+      aria-label="Welcome to Refresh Dental — premium dental care in Centurion"
+      className="relative isolate flex min-h-[760px] items-center overflow-hidden bg-espresso sm:min-h-[820px] lg:min-h-screen"
     >
-      {/* ============ BACKGROUND IMAGE + OVERLAY ============ */}
+      {/* Cinematic image treatment: calm, clinical and deliberately dark enough for text. */}
       <motion.div
-        style={{ scale: bgScale }}
-        className="absolute inset-0 z-0"
+        style={{ scale: prefersReducedMotion ? 1 : backgroundScale }}
+        className="absolute inset-0 -z-20"
       >
-        <img
+        <Image
           src="/images/clinic/real/dr-malunga-procedure.jpg"
-          alt="Dr. Lebogang Malunga performing a dental procedure at Refresh Dental, Centurion"
-          className="w-full h-full object-cover"
-          loading="eager"
-          decoding="async"
+          alt="Dr. Lebogang Malunga performing a dental procedure at Refresh Dental in Centurion"
+          fill
+          priority
+          quality={92}
+          sizes="100vw"
+          className="object-cover object-[62%_center]"
         />
-        {/* Multi-layer overlay for depth — premium with blue undertones */}
-        <div className="absolute inset-0 bg-gradient-to-br from-espresso/75 via-espresso/70 to-royal-navy/60" />
-        <div className="absolute inset-0 bg-gradient-to-r from-espresso/92 via-espresso/55 to-sapphire-dark/30" />
-        <div className="absolute inset-0 bg-gradient-to-t from-espresso/82 via-espresso/25 to-espresso/45" />
-        {/* Premium gold tint at bottom-right with subtle blue */}
-        <div className="absolute inset-0 bg-gradient-to-bl from-champagne-gold/12 via-sapphire/5 to-transparent" />
+        <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(15,13,10,0.96)_0%,rgba(15,13,10,0.86)_38%,rgba(15,13,10,0.42)_66%,rgba(15,13,10,0.64)_100%)]" />
+        <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(15,13,10,0.10)_0%,rgba(15,13,10,0.02)_42%,rgba(15,13,10,0.84)_100%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_74%_22%,rgba(184,152,48,0.18),transparent_28%),radial-gradient(circle_at_30%_76%,rgba(45,107,92,0.18),transparent_31%)]" />
       </motion.div>
 
-      {/* ============ DECORATIVE ELEMENTS ============ */}
-      {/* Thin gold vertical accent line */}
-      <motion.div
-        variants={lineExpand}
-        initial="hidden"
-        animate="visible"
-        className="absolute left-8 lg:left-16 top-[18%] bottom-[22%] w-[1px] bg-gradient-to-b from-transparent via-champagne-gold/50 to-transparent z-10 origin-top hidden lg:block"
+      {/* Fine technical grid adds a modern clinical edge without competing with the photo. */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0 -z-10 opacity-[0.16] [background-image:linear-gradient(rgba(240,235,225,0.1)_1px,transparent_1px),linear-gradient(90deg,rgba(240,235,225,0.1)_1px,transparent_1px)] [background-size:56px_56px] [mask-image:linear-gradient(90deg,black,transparent_78%)]"
       />
 
-      {/* Animated corner bracket — top-left (thicker + glowing) */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 1.8, duration: 1.0 }}
-        className="absolute top-12 left-8 lg:left-16 z-10 hidden lg:block"
-      >
-        <div className="w-16 h-16 border-t-2 border-l-2 border-champagne-gold/50" style={{ boxShadow: '0 0 12px rgba(184,152,48,0.3), inset 0 0 8px rgba(184,152,48,0.1)' }} />
-      </motion.div>
+      <div aria-hidden="true" className="pointer-events-none absolute left-0 top-0 z-0 h-full w-px bg-gradient-to-b from-transparent via-champagne-gold/50 to-transparent lg:left-16" />
+      <div aria-hidden="true" className="pointer-events-none absolute left-6 top-24 z-0 h-16 w-16 border-l border-t border-champagne-gold/50 sm:left-10 lg:left-16 lg:top-16" />
+      <div aria-hidden="true" className="pointer-events-none absolute bottom-16 right-6 z-0 hidden h-20 w-20 border-b border-r border-champagne-gold/40 lg:block" />
 
-      {/* Animated corner bracket — bottom-right (thicker + glowing) */}
       <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 1.8, duration: 1.0 }}
-        className="absolute bottom-12 right-8 lg:right-16 z-10 hidden lg:block"
-      >
-        <div className="w-16 h-16 border-b-2 border-r-2 border-champagne-gold/50" style={{ boxShadow: '0 0 12px rgba(184,152,48,0.3), inset 0 0 8px rgba(184,152,48,0.1)' }} />
-      </motion.div>
-
-      {/* Twinkling gold sparkles — scattered across hero (aria-hidden) */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 2.2, duration: 1.2 }}
-        aria-hidden="true"
-        className="absolute inset-0 z-10 pointer-events-none hidden lg:block"
-      >
-        {/* Top-right sparkle cluster */}
-        <div className="absolute top-[15%] right-[12%] sparkle-pop" style={{ opacity: 0 }}>
-          <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M9,0.5 C9.4,3.8 5.2,5.2 0.5,9 C5.2,12.8 9.4,14.2 9,17.5 C8.6,14.2 12.8,12.8 17.5,9 C12.8,5.2 8.6,3.8 9,0.5Z" fill="url(#hg1)"/><defs><radialGradient id="hg1" cx="50%" cy="50%" r="50%"><stop offset="0%" stopColor="#FFFFFF" stopOpacity="0.95"/><stop offset="100%" stopColor="#B89830" stopOpacity="0.4"/></radialGradient></defs></svg>
-        </div>
-        <div className="absolute top-[22%] right-[20%] sparkle-pop-delay-2" style={{ opacity: 0 }}>
-          <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M5,0.3 C5.2,2.1 2.9,2.9 0.3,5 C2.9,7.1 5.2,7.9 5,9.7 C4.8,7.9 7.1,7.1 9.7,5 C7.1,2.9 4.8,2.1 5,0.3Z" fill="#E8D9A8" opacity="0.9"/></svg>
-        </div>
-        {/* Bottom-left sparkle */}
-        <div className="absolute bottom-[25%] left-[22%] sparkle-pop-delay-3" style={{ opacity: 0 }}>
-          <svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M6.5,0.4 C6.8,2.9 3.9,3.9 0.4,6.5 C3.9,9.1 6.8,10.1 6.5,12.6 C6.2,10.1 9.1,9.1 12.6,6.5 C9.1,3.9 6.2,2.9 6.5,0.4Z" fill="url(#hg2)"/><defs><radialGradient id="hg2" cx="50%" cy="50%" r="50%"><stop offset="0%" stopColor="#FFFFFF" stopOpacity="0.9"/><stop offset="100%" stopColor="#B89830" stopOpacity="0.35"/></radialGradient></defs></svg>
-        </div>
-        {/* Mid-right sparkle */}
-        <div className="absolute top-[50%] right-[8%] sparkle-pop-delay-4" style={{ opacity: 0 }}>
-          <svg width="8" height="8" viewBox="0 0 8 8" fill="none"><path d="M4,0.3 C4.2,1.7 2.3,2.3 0.3,4 C2.3,5.7 4.2,6.3 4,7.7 C3.8,6.3 5.7,5.7 7.7,4 C5.7,2.3 3.8,1.7 4,0.3Z" fill="#D4C08A" opacity="0.85"/></svg>
-        </div>
-      </motion.div>
-
-      {/* 3D decorative orbit ring — top right, subtle */}
-      <motion.div
-        initial={{ opacity: 0, rotate: 0 }}
-        animate={{ opacity: 0.18, rotate: 360 }}
-        transition={{ opacity: { delay: 2.5, duration: 1 }, rotate: { duration: 40, repeat: Infinity, ease: 'linear' } }}
-        className="absolute -top-24 -right-24 z-10 pointer-events-none hidden xl:block"
-      >
-        <svg width="320" height="320" viewBox="0 0 320 320" fill="none">
-          <circle cx="160" cy="160" r="148" stroke="rgba(184,152,48,0.6)" strokeWidth="1" strokeDasharray="8 14" />
-          <circle cx="160" cy="160" r="110" stroke="rgba(184,152,48,0.3)" strokeWidth="0.5" />
-          <circle cx="160" cy="160" r="72" stroke="rgba(212,192,138,0.35)" strokeWidth="1" strokeDasharray="3 22" />
-        </svg>
-      </motion.div>
-
-      {/* ============ MAIN CONTENT ============ */}
-      <motion.div
-        style={{ opacity: contentOpacity }}
-        className="relative z-10 w-full min-h-screen flex items-center"
+        style={{ opacity: prefersReducedMotion ? 1 : contentOpacity }}
+        className="relative z-10 w-full"
         itemScope
         itemType="https://schema.org/Dentist"
       >
-        <div className="w-full px-6 sm:px-10 lg:px-16 xl:px-24 py-32 lg:py-0">
-          <div className="max-w-3xl">
-            <motion.div
-              variants={staggerContainer}
-              initial="hidden"
-              animate="visible"
-              className="flex flex-col gap-0"
-            >
-              {/* --- AVAILABILITY BADGE --- */}
-              <motion.div variants={fadeSlideUp} className="mb-8" role="status">
-                <span className="inline-flex items-center gap-2.5 bg-sapphire/20 border border-sapphire-light/40 backdrop-blur-md rounded-full pl-3 pr-4 py-2">
-                  <span className="relative flex h-2.5 w-2.5">
-                    <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-sapphire-light animate-pulse" />
-                  </span>
-                  <span className="font-jost text-xs font-semibold tracking-[0.2em] text-sapphire-light uppercase">
-                    Now Accepting New Patients
-                  </span>
+        <div className="mx-auto grid w-full max-w-[1600px] items-end gap-12 px-6 pb-28 pt-36 sm:px-10 sm:pt-40 lg:grid-cols-[minmax(0,1fr)_340px] lg:items-center lg:gap-16 lg:px-16 lg:pb-24 lg:pt-32 xl:grid-cols-[minmax(0,1fr)_390px] xl:px-24">
+          <motion.div
+            variants={container}
+            initial="hidden"
+            animate="visible"
+            className="max-w-3xl"
+          >
+            <motion.div variants={reveal} className="mb-7 flex flex-wrap items-center gap-3">
+              <span className="inline-flex items-center gap-2 rounded-full border border-teal-light/35 bg-sage-teal/20 px-3.5 py-2 backdrop-blur-md">
+                <span className="relative flex h-2 w-2">
+                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-teal-light opacity-70" />
+                  <span className="relative inline-flex h-2 w-2 rounded-full bg-teal-light" />
                 </span>
-              </motion.div>
-
-              {/* --- EYEBROW --- */}
-              <motion.div variants={fadeSlideUp} className="mb-6">
-                <span className="font-jost text-xs sm:text-sm tracking-[0.3em] text-gold-rich uppercase font-semibold letter-spacing-wide">
-                  Centurion's Premier Dental Experience
+                <span className="font-jost text-[10px] font-semibold uppercase tracking-[0.2em] text-ivory sm:text-[11px]">
+                  Accepting new patients
                 </span>
-                <motion.div
-                  variants={lineExpand}
-                  className="mt-4 h-[2px] w-32 origin-left bg-gradient-to-r from-champagne-gold via-gold-light to-champagne-gold/0"
-                />
-              </motion.div>
-
-              {/* --- MEGA HEADING --- */}
-              <motion.h1
-                variants={fadeSlideUp}
-                className="font-cormorant font-light text-ivory leading-[0.88] mb-6"
-                itemProp="name"
-              >
-                <span className="block text-[clamp(3.2rem,8vw,8.5rem)] tracking-tighter font-light">
-                  Confidence
-                </span>
-                <span className="block text-[clamp(3.2rem,8vw,8.5rem)] tracking-tighter font-light">
-                  <span className="shimmer-text text-shadow-gold-strong">Starts Here.</span>
-                </span>
-              </motion.h1>
-
-              {/* --- DENTIST NAME — Hero Gradient Heading --- */}
-              <motion.h2
-                variants={fadeSlideUp}
-                className="mb-10"
-                itemProp="founder"
-              >
-                <span className="block text-[clamp(3rem,8.5vw,8.5rem)] font-cormorant font-semibold tracking-tight leading-[0.92] gold-gradient-text text-shadow-gold-strong">
-                  Dr. Lebogang Malunga
-                </span>
-              </motion.h2>
-
-              {/* --- DESCRIPTION --- */}
-              <motion.p
-                variants={fadeSlideUp}
-                className="font-jost font-light text-ivory/85 text-lg sm:text-xl max-w-[580px] leading-[1.7] mb-5 tracking-wide"
-              >
-                Premium dental care designed around you. From routine check-ups to complete smile transformations, Dr. Malunga and her team deliver results that go beyond expectations — in a space where comfort meets clinical excellence.
-              </motion.p>
-              <motion.p
-                variants={fadeSlideUp}
-                className="font-jost font-light text-ivory/65 text-base sm:text-lg max-w-[550px] leading-[1.7] mb-6 tracking-wide"
-              >
-                Your journey to a healthier, more radiant smile begins with a single conversation. Let us show you what personalised, patient-first dentistry truly feels like.
-              </motion.p>
-
-              {/* --- CREDENTIALS --- */}
-              <motion.div variants={fadeSlideUp} className="mb-10">
-                <p className="font-jost text-xs text-ivory/45 tracking-[0.15em] uppercase">
-                  BDS · PDD · Principal Dentist · HPCSA Registered
-                </p>
-              </motion.div>
-
-              {/* --- CTA BUTTONS --- */}
-              <motion.div
-                variants={fadeSlideUp}
-                className="flex flex-col sm:flex-row gap-4 mb-12"
-              >
-                {/* Primary CTA */}
-                <motion.a
-                  href="#contact"
-                  whileHover={{ scale: 1.04, boxShadow: '0 0 50px rgba(184,152,48,0.55)' }}
-                  whileTap={{ scale: 0.97 }}
-                  className="btn-gold-3d gold-shimmer-btn relative inline-flex items-center justify-center gap-2 text-espresso font-jost font-semibold text-sm tracking-[0.12em] uppercase rounded-full px-8 py-4 overflow-hidden group"
-                >
-                  <motion.span
-                    className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent pointer-events-none"
-                    initial={{ x: '-100%' }}
-                    whileHover={{ x: '100%' }}
-                    transition={{ duration: 0.6, ease: 'easeInOut' }}
-                  />
-                  <span className="relative z-10">Book Your Transformation</span>
-                  <ArrowRight className="relative z-10 w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
-                </motion.a>
-
-                {/* Secondary CTA */}
-                <motion.a
-                  href="#services"
-                  whileHover={{ scale: 1.03, borderColor: 'rgba(96,165,250,0.8)' }}
-                  whileTap={{ scale: 0.97 }}
-                  className="inline-flex items-center justify-center gap-2 border-2 border-sapphire-light/50 text-sapphire-light font-jost font-semibold text-sm tracking-[0.12em] uppercase rounded-full px-8 py-4 backdrop-blur-sm transition-all duration-300 hover:bg-sapphire-light/15 hover:border-sapphire-light/70"
-                >
-                  Explore Services
-                  <ArrowRight className="w-4 h-4" />
-                </motion.a>
-              </motion.div>
-
-              {/* --- TRUST BADGES --- */}
-              <motion.div variants={badgeSection} className="flex flex-wrap gap-3 mb-10" aria-label="Trust indicators">
-                {trustBadges.map((badge) => (
-                  <motion.span
-                    key={badge.label}
-                    variants={badgePop}
-                    className="inline-flex items-center gap-1.5 backdrop-blur-md bg-ivory/8 border border-ivory/12 rounded-full px-3.5 py-1.5"
-                  >
-                    <badge.icon className={`w-3.5 h-3.5 ${badge.accent}`} />
-                    <span className="font-jost text-[11px] font-medium text-ivory/75 tracking-wide">
-                      {badge.label}
-                    </span>
-                  </motion.span>
-                ))}
-              </motion.div>
-
-              {/* --- CONTACT QUICK LINKS --- */}
-              <motion.div variants={fadeSlideUp} className="flex flex-wrap items-center gap-5">
-                <a
-                  href="tel:+27614164649"
-                  className="inline-flex items-center gap-2 font-jost text-sm text-ivory/60 hover:text-champagne-gold transition-colors duration-300"
-                >
-                  <Phone className="w-3.5 h-3.5 text-champagne-gold" />
-                  +27 61 416 4649
-                </a>
-                <span className="w-px h-4 bg-ivory/20" />
-                <a
-                  href="#location"
-                  className="inline-flex items-center gap-2 font-jost text-sm text-ivory/60 hover:text-teal-light transition-colors duration-300"
-                >
-                  <MapPin className="w-3.5 h-3.5 text-teal-light" />
-                  153 River Road, Centurion
-                </a>
-              </motion.div>
+              </span>
+              <span className="font-jost text-[10px] font-medium uppercase tracking-[0.2em] text-gold-pale/75 sm:text-[11px]">
+                Centurion, South Africa
+              </span>
             </motion.div>
-          </div>
-        </div>
-      </motion.div>
 
-      {/* ============ RIGHT-SIDE FLOATING CARD ============ */}
-      <motion.div
-        initial={{ opacity: 0, x: 60, y: 40 }}
-        animate={{ opacity: 1, x: 0, y: 0 }}
-        transition={{
-          delay: 1.4,
-          duration: 1.2,
-          ease: [0.22, 1, 0.36, 1],
-        }}
-        className="absolute right-6 sm:right-10 lg:right-16 xl:right-24 bottom-32 lg:bottom-20 z-20 hidden sm:block"
-      >
-        <div
-          className="relative rounded-2xl p-5 w-[280px] glass-card-dark shadow-elevated"
-          style={{ border: '1px solid rgba(184,152,48,0.15)' }}
-        >
-          {/* Gold accent line */}
-          <div className="absolute top-0 left-8 right-8 h-[2px] bg-gradient-to-r from-transparent via-champagne-gold/60 to-transparent rounded-full" />
+            <motion.p
+              variants={reveal}
+              className="mb-5 font-jost text-[11px] font-semibold uppercase tracking-[0.28em] text-champagne-gold sm:text-xs"
+            >
+              Dentistry, thoughtfully elevated
+            </motion.p>
 
-          {/* Google rating */}
-          <div className="flex items-center justify-between mb-4">
-            <div className="flex items-center gap-1.5">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4" />
-                <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853" />
-                <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05" />
-                <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335" />
-              </svg>
-              <span className="font-jost text-sm font-semibold text-ivory">Google Reviews</span>
-            </div>
-            <span className="font-cormorant font-semibold text-2xl text-champagne-gold leading-none">5.0</span>
-          </div>
+            <motion.h1
+              variants={reveal}
+              itemProp="name"
+              className="font-cormorant text-[clamp(4.1rem,9.5vw,9.8rem)] font-light leading-[0.78] tracking-[-0.055em] text-ivory"
+            >
+              <span className="block">A brighter smile.</span>
+              <span className="block pl-[0.08em] text-transparent [-webkit-text-stroke:1px_rgba(232,217,168,0.78)] sm:[-webkit-text-stroke:1.5px_rgba(232,217,168,0.78)]">
+                Your way.
+              </span>
+            </motion.h1>
 
-          {/* Stars */}
-          <div className="flex items-center gap-1 mb-4">
-            {[0, 1, 2, 3, 4].map((star) => (
-              <motion.div
-                key={star}
-                initial={{ opacity: 0, scale: 0 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{
-                  delay: 1.8 + star * 0.08,
-                  duration: 0.4,
-                  ease: [0.22, 1, 0.36, 1],
-                }}
+            <motion.div variants={reveal} className="mt-8 flex items-center gap-4 sm:mt-10">
+              <div className="h-px w-10 bg-gradient-to-r from-champagne-gold to-gold-pale/15 sm:w-16" />
+              <p className="font-jost text-xs font-semibold uppercase tracking-[0.22em] text-gold-pale/85 sm:text-sm">
+                Dr. Lebogang Malunga
+              </p>
+            </motion.div>
+
+            <motion.p
+              variants={reveal}
+              className="mt-6 max-w-[640px] font-jost text-base font-light leading-8 text-ivory/78 sm:text-lg sm:leading-8"
+            >
+              Premium dental care that feels personal from the very first conversation. From preventive visits to complete smile transformations, every detail is designed around your comfort, confidence and long-term health.
+            </motion.p>
+
+            <motion.div variants={reveal} className="mt-8 flex flex-wrap gap-2.5" aria-label="Practice credentials">
+              {trustPoints.map((point) => (
+                <span
+                  key={point.label}
+                  className="inline-flex items-center gap-2 rounded-full border border-ivory/15 bg-ivory/[0.07] px-3.5 py-2 backdrop-blur-md"
+                >
+                  <point.icon className={`h-3.5 w-3.5 ${point.accent}`} aria-hidden="true" />
+                  <span className="font-jost text-[10px] font-medium uppercase tracking-[0.11em] text-ivory/80 sm:text-[11px]">
+                    {point.label}
+                  </span>
+                </span>
+              ))}
+            </motion.div>
+
+            <motion.div variants={reveal} className="mt-10 flex flex-col gap-3 sm:flex-row sm:items-center">
+              <motion.a
+                href="#contact"
+                whileHover={prefersReducedMotion ? undefined : { y: -3, scale: 1.015 }}
+                whileTap={prefersReducedMotion ? undefined : { scale: 0.98 }}
+                className="btn-gold-3d group inline-flex min-h-14 items-center justify-center gap-3 rounded-full px-7 font-jost text-xs font-bold uppercase tracking-[0.16em] text-espresso shadow-[0_14px_34px_rgba(184,152,48,0.24)] transition-shadow hover:shadow-[0_18px_44px_rgba(184,152,48,0.38)]"
               >
-                <Star className="w-4 h-4 fill-champagne-gold text-champagne-gold" />
-              </motion.div>
-            ))}
-            <span className="font-jost text-xs text-ivory/50 ml-1.5">(3 reviews)</span>
-          </div>
+                Book a consultation
+                <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" aria-hidden="true" />
+              </motion.a>
+              <motion.a
+                href="tel:+27614164649"
+                whileHover={prefersReducedMotion ? undefined : { y: -2 }}
+                whileTap={prefersReducedMotion ? undefined : { scale: 0.98 }}
+                className="group inline-flex min-h-14 items-center justify-center gap-3 rounded-full border border-ivory/20 bg-espresso/20 px-7 font-jost text-xs font-semibold uppercase tracking-[0.16em] text-ivory backdrop-blur-md transition-colors hover:border-gold-pale/60 hover:bg-ivory/10"
+              >
+                <Phone className="h-4 w-4 text-champagne-gold" aria-hidden="true" />
+                Call the practice
+              </motion.a>
+            </motion.div>
 
-          {/* Quick info */}
-          <ul className="space-y-2.5 pt-3 border-t border-ivory/10" aria-label="Practice highlights">
-            {[
-              { icon: Clock, label: '30-Min Consultations' },
-              { icon: Shield, label: 'All Medical Aids Accepted' },
-              { icon: Sparkles, label: 'Interest-Free Payment Plans' },
-            ].map((item) => (
-              <li key={item.label} className="flex items-center gap-2.5">
-                <div className="flex-shrink-0 w-8 h-8 rounded-full bg-sage-teal/15 flex items-center justify-center border border-sage-teal/20">
-                  <item.icon className="w-3.5 h-3.5 text-teal-light" aria-hidden="true" />
-                </div>
-                <span className="font-jost text-xs text-ivory/80">{item.label}</span>
-              </li>
-            ))}
-          </ul>
+            <motion.div variants={reveal} className="mt-9 flex flex-wrap items-center gap-x-5 gap-y-3 font-jost text-xs text-ivory/58 sm:text-sm">
+              <a href="tel:+27614164649" className="inline-flex items-center gap-2 transition-colors hover:text-gold-pale">
+                <Phone className="h-3.5 w-3.5 text-champagne-gold" aria-hidden="true" />
+                +27 61 416 4649
+              </a>
+              <span className="hidden h-4 w-px bg-ivory/20 sm:block" />
+              <a href="#location" className="inline-flex items-center gap-2 transition-colors hover:text-gold-pale">
+                <MapPin className="h-3.5 w-3.5 text-champagne-gold" aria-hidden="true" />
+                153 River Road, Centurion
+              </a>
+            </motion.div>
+          </motion.div>
+
+          <motion.aside
+            initial={{ opacity: 0, x: 24, y: 20 }}
+            animate={{ opacity: 1, x: 0, y: 0 }}
+            transition={{ delay: 0.52, duration: 0.82, ease: [0.22, 1, 0.36, 1] }}
+            className="relative hidden overflow-hidden rounded-[1.7rem] border border-champagne-gold/25 bg-espresso/55 p-6 shadow-[0_24px_70px_rgba(0,0,0,0.32)] backdrop-blur-xl lg:block"
+            aria-label="First visit information"
+          >
+            <div aria-hidden="true" className="absolute inset-x-8 top-0 h-px bg-gradient-to-r from-transparent via-champagne-gold/80 to-transparent" />
+            <div aria-hidden="true" className="absolute -right-16 -top-16 h-40 w-40 rounded-full bg-champagne-gold/15 blur-3xl" />
+
+            <div className="relative">
+              <div className="mb-8 flex items-center justify-between">
+                <span className="inline-flex h-11 w-11 items-center justify-center rounded-2xl border border-champagne-gold/25 bg-champagne-gold/10 text-champagne-gold">
+                  <CalendarDays className="h-5 w-5" aria-hidden="true" />
+                </span>
+                <span className="font-jost text-[10px] font-semibold uppercase tracking-[0.18em] text-gold-pale/75">
+                  First visit
+                </span>
+              </div>
+
+              <h2 className="max-w-[280px] font-cormorant text-4xl font-light leading-[0.92] tracking-[-0.03em] text-ivory">
+                Begin with a conversation.
+              </h2>
+              <p className="mt-4 font-jost text-sm leading-6 text-ivory/66">
+                A calm, clear introduction to your smile goals and the care that fits you best.
+              </p>
+
+              <ul className="mt-7 space-y-4 border-t border-ivory/12 pt-6">
+                {firstVisitDetails.map((detail) => (
+                  <li key={detail.label} className="flex items-center gap-3">
+                    <span className="inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-sage-teal/15 text-teal-light ring-1 ring-inset ring-teal-light/15">
+                      <detail.icon className="h-3.5 w-3.5" aria-hidden="true" />
+                    </span>
+                    <span className="font-jost text-xs leading-5 text-ivory/78">{detail.label}</span>
+                  </li>
+                ))}
+              </ul>
+
+              <a
+                href="#contact"
+                className="group mt-8 inline-flex items-center gap-2 font-jost text-[11px] font-bold uppercase tracking-[0.16em] text-champagne-gold transition-colors hover:text-gold-pale"
+              >
+                Check availability
+                <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" aria-hidden="true" />
+              </a>
+            </div>
+          </motion.aside>
         </div>
-
-          {/* Bottom gold accent */}
-          <div className="absolute bottom-0 left-8 right-8 h-[1.5px] bg-gradient-to-r from-transparent via-champagne-gold/30 to-transparent rounded-full" aria-hidden="true" />
       </motion.div>
 
-      {/* ============ SCROLL INDICATOR ============ */}
-      <motion.div
-        variants={scrollFadeIn}
-        initial="hidden"
-        animate="visible"
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center gap-2 hidden lg:flex"
+      <motion.a
+        href="#about"
+        initial={{ opacity: 0, y: -8 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 1.15, duration: 0.65 }}
+        className="absolute bottom-7 left-1/2 z-20 hidden -translate-x-1/2 flex-col items-center gap-2 lg:flex"
+        aria-label="Scroll to learn more about Refresh Dental"
       >
-        <span className="font-jost text-[10px] tracking-[0.25em] text-ivory/40 uppercase">
-          Scroll to Explore
+        <span className="font-jost text-[9px] font-medium uppercase tracking-[0.24em] text-ivory/40">Discover Refresh</span>
+        <span className="flex h-7 w-7 items-center justify-center rounded-full border border-ivory/15 bg-ivory/[0.05] text-champagne-gold/80">
+          <ChevronDown className="h-4 w-4 animate-bounce" strokeWidth={1.5} aria-hidden="true" />
         </span>
-        <div className="animate-bounce">
-          <ChevronDown className="w-5 h-5 text-champagne-gold/60" strokeWidth={1.5} />
-        </div>
-      </motion.div>
+      </motion.a>
 
-      {/* ============ BOTTOM TRANSITION ============ */}
-      <div className="absolute bottom-0 left-0 right-0 z-20 pointer-events-none">
-        <svg
-          viewBox="0 0 1440 100"
-          fill="none"
-          className="w-full"
-          preserveAspectRatio="none"
-          aria-hidden="true"
-        >
-          <path
-            d="M0,60 C320,100 640,10 960,50 C1120,70 1320,30 1440,45 L1440,100 L0,100 Z"
-            fill="#F0EBE1"
-            fillOpacity="0.7"
-          />
-          <path
-            d="M0,80 C480,100 960,55 1440,75 L1440,100 L0,100 Z"
-            fill="#F0EBE1"
-          />
-        </svg>
-      </div>
+      <div aria-hidden="true" className="pointer-events-none absolute inset-x-0 bottom-0 z-10 h-24 bg-gradient-to-t from-ivory via-ivory/45 to-transparent" />
     </section>
   );
 }
