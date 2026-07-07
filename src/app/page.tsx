@@ -78,10 +78,6 @@ const FAQSection = dynamic(
   () => import('@/components/refresh-dental/faq-section'),
   { ssr: false, loading: () => <SectionSkeleton height="h-[640px]" /> },
 )
-const LocationMapEnhanced = dynamic(
-  () => import('@/components/refresh-dental/location-map-enhanced'),
-  { ssr: false, loading: () => <SectionSkeleton height="h-[560px]" /> },
-)
 const ContactSection = dynamic(
   () => import('@/components/refresh-dental/contact-section'),
   { ssr: true, loading: () => <SectionSkeleton height="h-[720px]" /> },
@@ -119,8 +115,7 @@ export default function Home() {
         <PaymentSection />
         <FAQSection />
 
-        {/* One composed final conversion path — finding the practice and booking. */}
-        <LocationMapEnhanced />
+        {/* One composed final conversion path. */}
         <ContactSection />
       </main>
 
