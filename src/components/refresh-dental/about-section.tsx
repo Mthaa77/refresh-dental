@@ -1,216 +1,104 @@
 'use client';
 
-import { useState } from 'react';
-import { Linkedin, ArrowRight, ChevronDown, Phone, MessageCircle, Calendar } from 'lucide-react';
-import SectionBackground from '@/components/refresh-dental/section-background';
+import Image from 'next/image';
+import { motion, useReducedMotion } from 'framer-motion';
+import { ArrowRight, Award, Heart, ShieldCheck } from 'lucide-react';
 
-const credentials = [
-  { label: 'BDS', desc: 'Bachelor of Dental Surgery' },
-  { label: 'PDD', desc: 'Postgraduate Diploma in Dentistry' },
+const principles = [
+  { icon: Heart, label: 'Care that listens', description: 'Your concerns and goals shape every recommendation.' },
+  { icon: ShieldCheck, label: 'Clinical confidence', description: 'Evidence-led treatment with clarity at every stage.' },
+  { icon: Award, label: 'Made for longevity', description: 'Thoughtful decisions that protect your future smile.' },
 ];
 
 export default function AboutSection() {
-  const [showMore, setShowMore] = useState(false);
+  const prefersReducedMotion = useReducedMotion();
 
   return (
-    <section
-      id="about"
-      className="relative bg-ivory py-24 overflow-hidden"
-    >
-      <SectionBackground variant="gold" dots orbs sparkles ring />
-      <div className="relative z-10 max-w-7xl mx-auto px-6 sm:px-10 lg:px-16 xl:px-24 overflow-hidden">
-        <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-20">
-          {/* Left — Portrait Image with gold glow */}
-          <div className="relative w-full lg:w-[45%] flex-shrink-0 lg:-ml-12 xl:-ml-20 overflow-hidden">
-            {/* Static gold glow behind portrait */}
-            <div
-              className="absolute -inset-4 rounded-3xl bg-champagne-gold/10 blur-2xl pointer-events-none"
+    <section id="about" className="relative overflow-hidden bg-ivory py-24 sm:py-32">
+      <div aria-hidden="true" className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_8%_20%,rgba(184,152,48,0.16),transparent_23%),radial-gradient(circle_at_92%_70%,rgba(45,107,92,0.11),transparent_24%)]" />
+      <div aria-hidden="true" className="pointer-events-none absolute left-[7%] top-0 h-full w-px bg-gradient-to-b from-transparent via-champagne-gold/35 to-transparent" />
+
+      <div className="relative mx-auto grid max-w-[1440px] gap-14 px-6 sm:px-10 lg:grid-cols-[0.92fr_1.08fr] lg:items-center lg:gap-20 lg:px-16 xl:px-20">
+        <motion.div
+          initial={{ opacity: 0, x: prefersReducedMotion ? 0 : -28 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true, margin: '-100px' }}
+          transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+          className="relative mx-auto w-full max-w-[540px] lg:mx-0"
+        >
+          <div aria-hidden="true" className="absolute -left-7 -top-7 h-28 w-28 border-l border-t border-champagne-gold/45" />
+          <div className="relative aspect-[4/5] overflow-hidden rounded-[2rem] bg-espresso shadow-[0_32px_75px_rgba(15,13,10,0.2)]">
+            <Image
+              src="/images/clinic/real/dr-malunga-graduation.jpg"
+              alt="Dr. Lebogang Malunga, principal dentist at Refresh Dental"
+              fill
+              sizes="(min-width: 1024px) 42vw, 100vw"
+              className="object-cover object-center"
             />
-            <div
-              className="relative w-full aspect-[3/4] rounded-2xl overflow-hidden"
-            >
-              <img
-                src="/images/clinic/real/dr-malunga-graduation.jpg"
-                alt="Dr. Lebogang Malunga at Sefako Makgatho Health Sciences University graduation"
-                className="absolute inset-0 w-full h-full object-cover object-center"
-                loading="lazy"
-                decoding="async"
-              />
-              <div className="absolute inset-0 border-2 border-champagne-gold/20 rounded-2xl pointer-events-none" />
+            <div className="absolute inset-0 bg-gradient-to-t from-espresso/75 via-transparent to-transparent" />
+            <div className="absolute inset-x-6 bottom-6 rounded-2xl border border-ivory/20 bg-espresso/55 p-4 backdrop-blur-lg sm:inset-x-8 sm:bottom-8 sm:p-5">
+              <p className="font-jost text-[10px] font-semibold uppercase tracking-[0.2em] text-gold-pale/80">Principal Dentist</p>
+              <p className="mt-1 font-cormorant text-2xl font-light leading-none text-ivory sm:text-3xl">Dr. Lebogang Malunga</p>
             </div>
           </div>
-
-          {/* Right — Content */}
-          <div className="w-full lg:w-[55%] lg:py-8 shadow-elevated rounded-3xl bg-card border-soft-border p-6 md:p-10 animate-fade-in-up">
-            {/* Gold label with blue accent dot */}
-            <div className="flex items-center mb-6">
-              <span className="inline-block w-1.5 h-1.5 rounded-full bg-accent-blue mr-2" />
-              <span className="inline-block font-jost text-xs tracking-[0.15em] text-champagne-gold uppercase">
-                About Dr. Malunga
-              </span>
-            </div>
-
-            <p className="font-jost text-base text-brown-muted max-w-md leading-relaxed mb-6">
-              More than a dentist — a partner in your oral health journey.
-            </p>
-
-            {/* Static gold accent line */}
-            <div
-              className="h-[2px] bg-gradient-to-r from-champagne-gold to-champagne-gold/20 mb-6 origin-left w-full"
-            />
-
-            {/* H2 Name */}
-            <h2
-              className="font-cormorant font-light text-4xl md:text-5xl lg:text-6xl leading-tight mb-6 gold-gradient-text text-shadow-espresso animate-fade-in-up"
-              style={{ animationDelay: '0.1s' }}
-            >
-              Dr. Lebogang Malunga
-            </h2>
-
-            {/* Credential badges */}
-            <div className="flex flex-wrap gap-2 mb-6 animate-fade-in-up" style={{ animationDelay: '0.2s' }}>
-              {credentials.map((cred, i) => (
-                <span
-                  key={cred.label}
-                  title={cred.desc}
-                  className="inline-flex items-center gap-1.5 bg-champagne-gold/10 border border-champagne-gold/25 text-champagne-gold rounded-full px-3.5 py-1 font-jost text-xs tracking-wider uppercase cursor-default hover-lift"
-                  style={{ animationDelay: `${0.8 + i * 0.15}s` }}
-                >
-                  <span className="font-semibold">{cred.label}</span>
-                  <span className="hidden sm:inline text-champagne-gold/60 text-[10px]">{cred.desc}</span>
-                </span>
-              ))}
-            </div>
-
-            {/* Pull Quote */}
-            <blockquote
-              className="font-cormorant italic text-xl md:text-2xl text-sage-teal text-shadow-teal mb-8 leading-relaxed animate-fade-in-up"
-              style={{ animationDelay: '0.3s' }}
-            >
-              &ldquo;A revitalised smile doesn&rsquo;t just change your appearance
-              — it changes your life.&rdquo;
-            </blockquote>
-
-            {/* Subtitle */}
-            <p
-              className="text-lg md:text-xl section-subheading mb-6 animate-fade-in-up"
-              style={{ animationDelay: '0.35s' }}
-            >
-              BDS · PDD — Founder & Principal Dentist, Refresh Dental, Centurion
-            </p>
-
-            {/* Bio Paragraph */}
-            <div className="animate-fade-in-up" style={{ animationDelay: '0.4s' }}>
-              <p className="font-jost font-light text-brown-warm leading-relaxed mb-4 max-w-lg">
-                Dr. Lebogang Malunga founded Refresh Dental with a bold vision — to transform dental care from a clinical necessity into a life-changing experience that celebrates each patient&rsquo;s unique journey to confidence.
-              </p>
-
-              {/* Expandable read more section */}
-              <div
-                className="overflow-hidden transition-all duration-500 ease-out"
-                style={{
-                  maxHeight: showMore ? '600px' : '0px',
-                  opacity: showMore ? 1 : 0,
-                }}
-              >
-                <p className="font-jost font-light text-brown-warm leading-relaxed mb-4 max-w-lg">
-                  With over a decade of hands-on experience spanning cosmetic, restorative, and specialised dentistry, Dr. Malunga has built a reputation for delivering exceptional results. Her commitment to continuous professional development ensures patients always receive the most advanced, evidence-based treatments available.
-                </p>
-                <p className="font-jost font-light text-brown-warm leading-relaxed mb-4 max-w-lg">
-                  Beyond the clinic, Dr. Malunga is deeply invested in the Centurion
-                  community. Dr. Malunga leads corporate dental wellness programmes, participates
-                  in outreach initiatives, and mentors aspiring dental professionals. Her
-                  approach is rooted in the belief that everyone deserves access to
-                  compassionate, high-quality dental care.
-                </p>
-              </div>
-
-              {/* Gold "Read More" toggle */}
-              <button
-                onClick={() => setShowMore(!showMore)}
-                className="group inline-flex items-center gap-1.5 text-champagne-gold font-jost text-sm font-medium tracking-wider uppercase mb-8 hover:text-[#A07D1A] transition-colors duration-300"
-              >
-                {showMore ? 'Read Less' : 'Read More'}
-                <span
-                  className="transition-transform duration-300"
-                  style={{ transform: showMore ? 'rotate(180deg)' : 'rotate(0deg)' }}
-                >
-                  <ChevronDown className="w-4 h-4" />
-                </span>
-              </button>
-            </div>
-
-            {/* Contact Info */}
-            <div
-              className="font-jost text-sm text-brown-warm mb-8 space-y-1 animate-fade-in-up"
-              style={{ animationDelay: '0.45s' }}
-            >
-              <a
-                href="mailto:drlebo@refreshdental.co.za"
-                className="block hover:text-champagne-gold transition-colors duration-300"
-              >
-                drlebo@refreshdental.co.za
-              </a>
-              <a
-                href="tel:+27614164649"
-                className="block hover:text-champagne-gold transition-colors duration-300"
-              >
-                061 416 4649
-              </a>
-            </div>
-
-            {/* CTA Button */}
-            <div className="mb-8 animate-fade-in-up" style={{ animationDelay: '0.5s' }}>
-              <a
-                href="#contact"
-                className="inline-flex items-center gap-2 border-2 border-sage-teal text-sage-teal hover:bg-sage-teal hover:text-white font-jost font-medium text-sm tracking-wider uppercase rounded-full px-8 py-3 transition-all duration-300 shadow-gold"
-              >
-                Meet Dr. Malunga
-                <ArrowRight className="w-4 h-4" />
-              </a>
-            </div>
-
-            {/* Trust Row */}
-            <div
-              className="flex items-center gap-3 animate-fade-in-up"
-              style={{ animationDelay: '0.55s' }}
-            >
-              <div className="flex items-center justify-center w-9 h-9 rounded-full bg-sand border border-soft-border">
-                <Linkedin className="w-4 h-4 text-brown-warm" />
-              </div>
-              <span className="font-jost text-sm text-brown-warm">
-                HPCSA Registered
-              </span>
-            </div>
+          <div className="absolute -bottom-6 -right-3 max-w-[230px] rounded-2xl border border-champagne-gold/25 bg-card/95 p-4 shadow-[0_18px_40px_rgba(15,13,10,0.12)] backdrop-blur-xl sm:-right-8 sm:p-5">
+            <p className="font-cormorant text-2xl font-light leading-[0.95] text-espresso">A quieter, more personal standard of care.</p>
           </div>
-        </div>
+        </motion.div>
 
-        {/* Inline CTA Bar */}
-        <div className="mt-16 flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 animate-fade-in-up" style={{ animationDelay: '0.2s' }}>
-          <a
-            href="tel:+27614164649"
-            className="inline-flex items-center gap-2 bg-sage-teal text-white font-jost text-sm font-medium tracking-wider uppercase rounded-full px-6 py-3 transition-all duration-300 hover:bg-sage-teal/90 hover:shadow-teal"
-          >
-            <Phone className="w-4 w-4" />
-            Call Us
+        <motion.div
+          initial={{ opacity: 0, x: prefersReducedMotion ? 0 : 28 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true, margin: '-100px' }}
+          transition={{ delay: 0.08, duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+          className="pt-8 lg:pt-0"
+        >
+          <div className="flex items-center gap-3">
+            <span className="h-px w-10 bg-champagne-gold sm:w-16" />
+            <span className="font-jost text-[10px] font-semibold uppercase tracking-[0.26em] text-gold-rich sm:text-[11px]">The practice</span>
+          </div>
+
+          <h2 className="mt-7 max-w-3xl font-cormorant text-[clamp(3.35rem,6vw,6.6rem)] font-light leading-[0.86] tracking-[-0.055em] text-espresso">
+            Clinical clarity.<br />
+            <span className="text-gold-rich">Human warmth.</span>
+          </h2>
+
+          <div className="mt-8 max-w-2xl space-y-5 font-jost text-base font-light leading-8 text-brown-muted sm:text-lg">
+            <p>
+              Refresh Dental was created for people who want more than a rushed appointment. Every visit is built around thoughtful conversation, honest guidance and modern dentistry delivered with a gentle hand.
+            </p>
+            <p>
+              Dr. Malunga brings together cosmetic, restorative and preventive care in a space that feels calm, considered and focused on what matters to you.
+            </p>
+          </div>
+
+          <div className="mt-9 flex flex-wrap gap-2.5">
+            {['BDS', 'PDD', 'HPCSA Registered', 'Centurion, South Africa'].map((credential) => (
+              <span key={credential} className="rounded-full border border-champagne-gold/25 bg-champagne-gold/[0.06] px-3.5 py-2 font-jost text-[10px] font-semibold uppercase tracking-[0.13em] text-gold-rich">
+                {credential}
+              </span>
+            ))}
+          </div>
+
+          <div className="mt-10 grid gap-4 border-y border-soft-border/70 py-8 sm:grid-cols-3">
+            {principles.map((principle) => (
+              <div key={principle.label} className="group">
+                <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-sage-teal/[0.08] text-sage-teal transition-transform duration-300 group-hover:-translate-y-1">
+                  <principle.icon className="h-4 w-4" aria-hidden="true" />
+                </span>
+                <h3 className="mt-4 font-cormorant text-2xl font-medium text-espresso">{principle.label}</h3>
+                <p className="mt-1.5 font-jost text-xs leading-5 text-brown-muted">{principle.description}</p>
+              </div>
+            ))}
+          </div>
+
+          <a href="#contact" className="group mt-10 inline-flex items-center gap-3 font-jost text-[11px] font-bold uppercase tracking-[0.16em] text-gold-rich transition-colors hover:text-espresso">
+            Meet Dr. Malunga
+            <span className="flex h-9 w-9 items-center justify-center rounded-full border border-champagne-gold/35 transition-all duration-300 group-hover:translate-x-1 group-hover:bg-champagne-gold group-hover:text-espresso">
+              <ArrowRight className="h-4 w-4" aria-hidden="true" />
+            </span>
           </a>
-          <a
-            href="https://wa.me/27614164649"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 bg-green-600 text-white font-jost text-sm font-medium tracking-wider uppercase rounded-full px-6 py-3 transition-all duration-300 hover:bg-green-700 hover:shadow-lg"
-          >
-            <MessageCircle className="w-4 w-4" />
-            WhatsApp
-          </a>
-          <a
-            href="#contact"
-            className="btn-gold-3d gold-shimmer-btn inline-flex items-center gap-2 text-espresso font-jost text-sm font-semibold tracking-wider uppercase rounded-full px-6 py-3 transition-all duration-300"
-          >
-            <Calendar className="w-4 w-4" />
-            Book Now
-          </a>
-        </div>
+        </motion.div>
       </div>
     </section>
   );
