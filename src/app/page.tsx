@@ -12,11 +12,6 @@ function SectionSkeleton({ height = 'h-40' }: { height?: string }) {
   )
 }
 
-const LoadingScreen = dynamic(
-  () => import('@/components/refresh-dental/loading-screen'),
-  { ssr: false },
-)
-
 const PageSectionsNav = dynamic(
   () => import('@/components/refresh-dental/page-sections-nav'),
   { ssr: false },
@@ -90,7 +85,6 @@ const Footer = dynamic(
 export default function Home() {
   return (
     <>
-      <LoadingScreen />
       <PageSectionsNav />
       <ScrollProgress />
       <Navigation />
