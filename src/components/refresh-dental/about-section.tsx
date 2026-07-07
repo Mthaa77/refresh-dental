@@ -2,7 +2,8 @@
 
 import Image from 'next/image';
 import { motion, useReducedMotion } from 'framer-motion';
-import { ArrowRight, Award, Heart, ShieldCheck, Sparkles, Tooth } from 'lucide-react';
+import { ArrowRight, Award, Heart, ShieldCheck, Sparkles } from 'lucide-react';
+import DentalToothMark from './dental-tooth-mark';
 
 const principles = [
   { icon: Heart, label: 'Care that listens', description: 'Your concerns and goals shape every recommendation.', color: 'bg-rose-50 text-rose-500 ring-rose-200/70' },
@@ -46,7 +47,7 @@ export default function AboutSection() {
             transition={{ duration: 4.2, repeat: Infinity, ease: 'easeInOut' }}
             className="absolute -right-3 top-10 flex h-14 w-14 items-center justify-center rounded-2xl border border-sky-200 bg-sky-50 text-sky-500 shadow-[0_16px_34px_rgba(2,132,199,0.17)] sm:-right-6 sm:h-16 sm:w-16"
           >
-            <Tooth className="h-7 w-7 sm:h-8 sm:w-8" strokeWidth={1.6} aria-hidden="true" />
+            <DentalToothMark className="h-7 w-7 sm:h-8 sm:w-8" aria-hidden="true" />
           </motion.div>
           <motion.div
             animate={prefersReducedMotion ? undefined : { y: [0, 7, 0], rotate: [0, -5, 0] }}
