@@ -1,0 +1,158 @@
+name: Apply outreach readiness fixes
+
+on:
+  push:
+    paths:
+      - '.github/workflows/outreach-readiness-fixes.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  patch-and-verify:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Apply audited fixes
+        shell: bash
+        run: |
+          python <<'PY'
+          from pathlib import Path
+          import re
+
+          def exact(path: str, old: str, new: str, expected: int = 1) -> None:
+              p = Path(path)
+              text = p.read_text(encoding='utf-8')
+              count = text.count(old)
+              if count != expected:
+                  raise SystemExit(f'{path}: expected {expected} exact match(es), found {count}: {old[:100]!r}')
+              p.write_text(text.replace(old, new), encoding='utf-8')
+
+          def regex(path: str, pattern: str, replacement: str, expected: int = 1, flags: int = 0) -> None:
+              p = Path(path)
+              text = p.read_text(encoding='utf-8')
+              updated, count = re.subn(pattern, replacement, text, flags=flags)
+              if count != expected:
+                  raise SystemExit(f'{path}: expected {expected} regex match(es), found {count}: {pattern[:100]!r}')
+              p.write_text(updated, encoding='utf-8')
+
+          # Demo-safe metadata and crawl controls.
+          layout = 'src/app/layout.tsx'
+          exact(layout, "const SITE_URL = 'https://www.refreshdental.co.za';\nconst SITE_NAME = 'Refresh Dental';", "const SITE_URL = process.env.NEXT_PUBLIC_CANONICAL_URL || 'https://refresh-dental.vercel.app';\nconst SITE_NAME = 'Refresh Dental';\nconst IS_PUBLISH_APPROVED = process.env.NEXT_PUBLIC_PUBLISH_APPROVED === 'true';")
+          regex(layout, r"default: 'Refresh Dental — Premium Dentist in Centurion, Pretoria \| Dr\. Lebogang Malunga BDS, PDD',", "default: 'Refresh Dental Website Concept — Centurion, Pretoria',")
+          exact(layout, "template: '%s | Refresh Dental — Centurion Dentist',", "template: '%s | Refresh Dental Website Concept',")
+          regex(layout, r"  description:\n    'Refresh Dental is Centurion\\'s premier dental practice,.*?061 416 4649\.',", "  description:\n    'A premium website concept for Refresh Dental in Centurion, designed to present its services, patient experience and appointment journey. Practice details, offers and clinical claims remain subject to client confirmation.',")
+          exact(layout, "title: 'Refresh Dental — Premium Dental Care in Centurion, Pretoria',", "title: 'Refresh Dental Website Concept — Centurion, Pretoria',")
+          regex(layout, r"      'Your Smile, Refreshed\. Revived\. Premium dental care by Dr\. Lebogang Malunga \(BDS, PDD\) in Centurion\. HPCSA registered\. Dental implants, teeth whitening, veneers, clear aligners & more\. All medical aids accepted\.',", "      'A premium website concept presenting Refresh Dental’s patient journey, services and contact experience. Details remain subject to practice confirmation.',")
+          exact(layout, "title: 'Refresh Dental — Premium Dentist in Centurion | Dr. Lebogang Malunga',", "title: 'Refresh Dental Website Concept — Centurion',")
+          regex(layout, r"description: 'Premium dental care in Centurion\. Dental implants, teeth whitening, veneers & more\. HPCSA registered\. All medical aids accepted\. Book now: \+27 61 416 4649',", "description: 'A premium website concept for Refresh Dental in Centurion. Practice information and offers remain subject to confirmation.',")
+          regex(layout, r"  robots: \{.*?\n  \},", "  robots: {\n    index: IS_PUBLISH_APPROVED,\n    follow: IS_PUBLISH_APPROVED,\n    googleBot: {\n      index: IS_PUBLISH_APPROVED,\n      follow: IS_PUBLISH_APPROVED,\n      'max-video-preview': -1,\n      'max-image-preview': 'large',\n      'max-snippet': -1,\n    },\n  },", flags=re.S)
+          exact(layout, "  verification: {\n    google: 'your-google-verification-code',\n  },\n", '')
+          exact(layout, "__html: JSON.stringify(structuredData),", "__html: JSON.stringify(IS_PUBLISH_APPROVED ? structuredData : { '@context': 'https://schema.org', '@type': 'WebSite', name: SITE_NAME, url: SITE_URL, description: 'Concept preview. Business and clinical details are pending client approval.' }),")
+          exact(layout, "__html: JSON.stringify(howToSchema),", "__html: JSON.stringify(IS_PUBLISH_APPROVED ? howToSchema : {}),")
+          exact(layout, "        <div className=\"sr-only\" aria-hidden=\"true\">", "        {IS_PUBLISH_APPROVED && (\n        <div className=\"sr-only\" aria-hidden=\"true\">")
+          exact(layout, "        </div>\n\n        {children}", "        </div>\n        )}\n\n        {children}")
+
+          # Honest trust language on the active homepage.
+          exact('src/components/refresh-dental/trust-ticker.tsx', "  '★ 5.0 Google Rating',", "  'Patient-centred care',")
+          exact('src/components/refresh-dental/trust-ticker.tsx', "  'All Medical Aids Welcome',", "  'Medical Aid Guidance Available',")
+          exact('src/components/refresh-dental/trust-ticker.tsx', "  'Same-Day Emergencies',", "  'Urgent Dental Enquiries Welcome',")
+          exact('src/components/refresh-dental/trust-ticker.tsx', "  'Athena Payment Options Available',", "  'Flexible Payment Conversations',")
+          exact('src/components/refresh-dental/friendly-dental-badges.tsx', "    label: '5.0 Google rating',\n    detail: 'Trusted by happy patients in Centurion.',", "    label: 'Patient feedback',\n    detail: 'Public review excerpts presented with care.',")
+
+          # Patient-review presentation: no fake reviewer portraits or unverified rating badge.
+          testimonials = 'src/components/refresh-dental/testimonials-friendly.tsx'
+          exact(testimonials, "import Image from 'next/image';\n", '')
+          regex(testimonials, r"<div className=\"mt-8 inline-flex items-center gap-3.*?</div>", "<div className=\"mt-8 inline-flex items-center gap-3 rounded-full border border-amber-200 bg-white/85 px-5 py-2.5 shadow-[0_14px_30px_rgba(217,119,6,0.10)]\"><MessageCircle className=\"h-4 w-4 text-amber-500\" aria-hidden=\"true\" /><span className=\"font-jost text-[10px] font-bold uppercase tracking-[0.14em] text-espresso/60\">Public patient feedback</span></div>", flags=re.S)
+          regex(testimonials, r"<Image src=\{active\.image\} alt=\"\" width=\{52\} height=\{52\} className=\"h-13 w-13 rounded-2xl border border-ivory/15 object-cover\" />", "<span className=\"flex h-13 w-13 items-center justify-center rounded-2xl border border-ivory/15 bg-ivory/10 font-jost text-xs font-bold text-gold-pale\">{active.initials}</span>")
+          regex(testimonials, r"<Image src=\{story\.image\} alt=\"\" width=\{60\} height=\{60\} className=\"h-14 w-14 shrink-0 rounded-2xl object-cover shadow-sm\" />", "<span className=\"flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl border border-espresso/10 bg-white font-jost text-xs font-bold text-teal-700 shadow-sm\">{story.initials}</span>")
+          exact(testimonials, "<BadgeCheck className=\"h-3.5 w-3.5 text-teal-light\" aria-hidden=\"true\" /> Verified review", "<BadgeCheck className=\"h-3.5 w-3.5 text-teal-light\" aria-hidden=\"true\" /> Public review excerpt")
+
+          # South African timezone-safe trading hours and qualified urgent-care wording.
+          trading = 'src/components/refresh-dental/trading-hours.tsx'
+          regex(trading, r"function getTodayIndex\(\): number \{.*?\n\}\n\nfunction isCurrentlyOpen\(\): boolean \{.*?\n\}", "const DAY_ORDER = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'] as const\n\nfunction getSouthAfricaNow() {\n  const parts = new Intl.DateTimeFormat('en-ZA', {\n    timeZone: 'Africa/Johannesburg',\n    weekday: 'long',\n    day: 'numeric',\n    hour: '2-digit',\n    minute: '2-digit',\n    hourCycle: 'h23',\n  }).formatToParts(new Date())\n\n  const values = Object.fromEntries(parts.map((part) => [part.type, part.value]))\n  return {\n    weekday: values.weekday,\n    day: Number(values.day),\n    hour: Number(values.hour),\n    minute: Number(values.minute),\n  }\n}\n\nfunction getTodayIndex(): number {\n  return DAY_ORDER.indexOf(getSouthAfricaNow().weekday as (typeof DAY_ORDER)[number])\n}\n\nfunction isSecondSaturday(): boolean {\n  const now = getSouthAfricaNow()\n  return now.weekday === 'Saturday' && now.day >= 8 && now.day <= 14\n}\n\nfunction isOpenNow(schedule: DaySchedule): boolean {\n  if (!schedule.timeRange) return false\n  const now = getSouthAfricaNow()\n  const currentMinutes = now.hour * 60 + now.minute\n  return currentMinutes >= schedule.timeRange.open && currentMinutes < schedule.timeRange.close\n}\n\nfunction isCurrentlyOpen(): boolean {\n  const todayIdx = getTodayIndex()\n  const schedule = schedules[todayIdx]\n  if (!schedule) return false\n\n  if (todayIdx === 5 && !isSecondSaturday()) return false\n  return isOpenNow(schedule)\n}", flags=re.S)
+          exact(trading, "            Emergency Available", "            Need urgent dental help?")
+          exact(trading, "            24/7 — Call{' '}", "            Call the practice on{' '}")
+          exact(trading, "href=\"tel:0614164649\"", "href=\"tel:+27614164649\"")
+
+          # Footer: verified primary number, working privacy route, current year.
+          footer = 'src/components/refresh-dental/footer.tsx'
+          exact(footer, "export default function Footer() {\n  return (", "export default function Footer() {\n  const currentYear = new Intl.DateTimeFormat('en-ZA', { year: 'numeric', timeZone: 'Africa/Johannesburg' }).format(new Date())\n\n  return (")
+          exact(footer, "              <span className=\"text-ivory/40\"> / </span>\n              <a href=\"tel:+27128833636\" className=\"text-ivory/75 hover:text-champagne-gold transition-colors text-[15px]\">\n                012 883 3636\n              </a>\n", '')
+          exact(footer, "               © 2025 Refresh Dental. Built by Carter Digitals.", "               © {currentYear} Refresh Dental. Concept built by Carter Digitals.")
+          exact(footer, "href=\"#\"\n               className=\"text-ivory/55 hover:text-champagne-gold transition-colors text-xs\"", "href=\"/privacy\"\n               className=\"text-ivory/55 hover:text-champagne-gold transition-colors text-xs\"")
+
+          # Contact form now hands off honestly to WhatsApp and requires privacy consent.
+          form = 'src/components/refresh-dental/contact-form.tsx'
+          exact(form, "    message: '',\n  })", "    message: '',\n    consent: false,\n  })")
+          regex(form, r"  const handleChange = \(.*?\n  \}\n\n  const handleSubmit", "  const handleChange = (\n    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>\n  ) => {\n    const target = e.target\n    const value = target instanceof HTMLInputElement && target.type === 'checkbox'\n      ? target.checked\n      : target.value\n    setFormData({ ...formData, [target.name]: value })\n  }\n\n  const handleSubmit", flags=re.S)
+          regex(form, r"  const handleSubmit = async \(e: React\.FormEvent\) => \{.*?\n  \}\n\n  const containerVariants", "  const handleSubmit = (e: React.FormEvent) => {\n    e.preventDefault()\n    setLoading(true)\n\n    const message = [\n      'Hello Refresh Dental, I would like to request a consultation.',\n      `Name: ${formData.firstName} ${formData.lastName}`,\n      `Email: ${formData.email}`,\n      formData.phone ? `Phone: ${formData.phone}` : '',\n      `Service: ${formData.service}`,\n      formData.preferredDate ? `Preferred date: ${formData.preferredDate}` : '',\n      formData.message ? `Message: ${formData.message}` : '',\n    ].filter(Boolean).join('\\n')\n\n    window.open(`https://wa.me/27614164649?text=${encodeURIComponent(message)}`, '_blank', 'noopener,noreferrer')\n    setLoading(false)\n    setSubmitted(true)\n  }\n\n  const containerVariants", flags=re.S)
+          exact(form, "          Message Sent!", "          WhatsApp is ready")
+          regex(form, r"          Thank you, \{formData\.firstName\}! We&apos;ll get back to you within 24\n          hours\. For urgent matters, please call 061 416 4649\.", "          Your consultation request has been prepared for WhatsApp. Review it, then tap send to contact the practice directly.")
+          exact(form, "      {/* Submit Button */}", "      <motion.label variants={itemVariants} className=\"flex items-start gap-3 rounded-xl border border-soft-border bg-white/70 p-4 font-jost text-xs leading-5 text-espresso/70\">\n        <input\n          type=\"checkbox\"\n          name=\"consent\"\n          checked={formData.consent}\n          onChange={handleChange}\n          required\n          className=\"mt-0.5 h-4 w-4 rounded border-soft-border accent-[#B89830]\"\n        />\n        <span>I consent to Refresh Dental using my information to respond to this enquiry. Read the <a href=\"/privacy\" className=\"font-semibold text-[#A07D1A] underline underline-offset-2\">privacy notice</a>.</span>\n      </motion.label>\n\n      {/* Submit Button */}")
+          exact(form, "               Send Message", "               Continue on WhatsApp")
+
+          # Payment language remains useful without asserting an unconfirmed finance partnership.
+          payment = 'src/components/refresh-dental/payment-section.tsx'
+          exact(payment, "    label: 'Athena options',", "    label: 'Flexible options',")
+          exact(payment, "    copy: 'For qualifying treatments, ask our team about available Athena options. We will explain the process and practical details before you make a decision.',", "    copy: 'Ask the team which payment arrangements may be available for your treatment. The final options and terms will be confirmed directly by the practice.',")
+          exact(payment, "    points: ['Ask about qualifying treatments', 'Explore available arrangements', 'Decide with the full picture'],", "    points: ['Ask about available arrangements', 'Confirm terms with the practice', 'Decide with the full picture'],")
+          exact(payment, "src=\"/images/clinic/real/athenapay-installments.jpg\"", "src=\"/images/clinic/real/clinic-reception.jpg\"")
+          exact(payment, "alt=\"Athena payment options at Refresh Dental\"", "alt=\"Refresh Dental reception and patient support area\"")
+          exact(payment, "Athena, clearly in view", "Payment clarity, clearly in view")
+          exact(payment, "Ask the Refresh Dental team about Athena options for qualifying treatments. We will explain the available pathway and practical steps before you decide.", "Ask the Refresh Dental team which payment arrangements may be available. Final options, eligibility and terms will be confirmed directly by the practice.")
+          exact(payment, "Discuss Athena options", "Discuss payment options")
+
+          # Dormant components are also cleaned so old claims cannot reappear later.
+          emergency = 'src/components/refresh-dental/emergency-dental.tsx'
+          exact(emergency, "                 24/7 Emergency Care", "                 Urgent Dental Enquiries")
+          exact(emergency, "              Pain doesn&rsquo;t wait, and neither should you. Our dedicated emergency team is available around the clock to provide swift, compassionate relief and expert care precisely when you need it most.", "              Dental pain deserves prompt attention. Call the practice for guidance and the earliest available appointment.")
+          exact(emergency, 'href="tel:0123456789"', 'href="tel:+27614164649"', expected=3)
+          exact(emergency, "                 012 345 6789", "                 061 416 4649")
+          exact(emergency, 'href="https://wa.me/27123456789"', 'href="https://wa.me/27614164649"')
+          exact(emergency, "           Same-day emergency appointments available · Walk-ins always welcome · No referral required", "           Appointment availability is confirmed by the practice · Call before travelling")
+
+          guarantee = 'src/components/refresh-dental/guarantee-section.tsx'
+          exact(guarantee, "    title: '100% Satisfaction Promise',\n    description:\n      \"If you're not completely satisfied with your treatment, we'll make it right — no questions asked.\",", "    title: 'Clear Care Commitment',\n    description:\n      'Expect transparent guidance, respectful communication and space to ask questions throughout your care.',")
+          exact(guarantee, "    title: 'Same-Day Emergency Care',\n    description:\n      \"Dental emergencies don't wait — and neither do we. Call us and we'll see you today.\",", "    title: 'Urgent-Care Guidance',\n    description:\n      'Call the practice for guidance and the earliest appointment the team can confirm.',")
+          exact(guarantee, "           Our Smile Satisfaction Guarantee", "           Our Patient Care Commitment")
+          exact(guarantee, "           We stand behind every treatment we perform with absolute confidence. Your satisfaction\n           isn&apos;t just our goal — it&apos;s our promise.", "           Clear communication, compassionate treatment and transparent guidance should shape every stage of your care.")
+
+          awards = 'src/components/refresh-dental/awards-certifications.tsx'
+          exact(awards, "    title: 'SADJ Member',\n    description:\n      'Member of the South African Dental Association',", "    title: 'Professional Memberships',\n    description:\n      'Current memberships and credentials available from the practice',")
+          exact(awards, "    title: '10+ Years Experience',\n    description: 'A decade of dedicated dental excellence',", "    title: 'Ongoing Development',\n    description: 'A commitment to continuing professional learning',")
+          exact(awards, "    title: 'Community Excellence',\n    description:\n      'Recognized for community dental health initiatives',", "    title: 'Community-Focused Care',\n    description:\n      'Patient education and community wellness are part of the practice story',")
+          exact(awards, "    title: 'Infection Control Certified',\n    description: 'Hospital-grade sterilization protocols',", "    title: 'Clinical Hygiene',\n    description: 'Practice protocols and safeguards confirmed during onboarding',")
+          exact(awards, "             Awards &amp; Recognition", "             Professional Standards")
+          exact(awards, "             Excellence recognized by industry leaders", "             Credentials and practice details are confirmed before publication")
+
+          # Add a tasteful concept-preview notice and privacy page.
+          Path('src/components/refresh-dental/demo-notice.tsx').write_text("""export default function DemoNotice() {\n  return (\n    <aside className=\"border-y border-amber-300/40 bg-amber-50 px-4 py-2.5 text-center font-jost text-[11px] leading-5 text-amber-950\">\n      <strong className=\"font-semibold\">Concept preview:</strong> Practice details, offers, credentials and clinical claims remain subject to Refresh Dental&apos;s written approval before publication.\n    </aside>\n  )\n}\n""", encoding='utf-8')
+          exact('src/app/page.tsx', "import Navigation from '@/components/refresh-dental/navigation'", "import Navigation from '@/components/refresh-dental/navigation'\nimport DemoNotice from '@/components/refresh-dental/demo-notice'")
+          exact('src/app/page.tsx', "       <Navigation />\n       <main", "       <Navigation />\n       <DemoNotice />\n       <main")
+
+          Path('src/app/robots.ts').write_text("""import type { MetadataRoute } from 'next'\n\nexport default function robots(): MetadataRoute.Robots {\n  const approved = process.env.NEXT_PUBLIC_PUBLISH_APPROVED === 'true'\n  const siteUrl = process.env.NEXT_PUBLIC_CANONICAL_URL || 'https://refresh-dental.vercel.app'\n\n  if (!approved) {\n    return { rules: { userAgent: '*', disallow: '/' } }\n  }\n\n  return {\n    rules: { userAgent: '*', allow: '/' },\n    sitemap: `${siteUrl}/sitemap.xml`,\n  }\n}\n""", encoding='utf-8')
+
+          Path('src/app/privacy').mkdir(parents=True, exist_ok=True)
+          Path('src/app/privacy/page.tsx').write_text("""import Link from 'next/link'\n\nexport default function PrivacyPage() {\n  return (\n    <main className=\"min-h-screen bg-[#f7f1e6] px-6 py-20 text-[#2d2118]\">\n      <article className=\"mx-auto max-w-3xl rounded-[2rem] border border-[#b89830]/25 bg-white p-8 shadow-[0_28px_80px_rgba(45,33,24,0.12)] sm:p-12\">\n        <p className=\"font-jost text-xs font-semibold uppercase tracking-[0.2em] text-[#8b6f1f]\">Concept privacy notice</p>\n        <h1 className=\"mt-4 font-cormorant text-5xl font-light leading-none\">Your information should be handled with care.</h1>\n        <p className=\"mt-7 font-jost leading-7 text-[#2d2118]/70\">This website is a concept preview. The consultation form prepares a WhatsApp message on your device and does not store your enquiry in this demo website.</p>\n        <p className=\"mt-5 font-jost leading-7 text-[#2d2118]/70\">When the website is approved for production, Refresh Dental must confirm its responsible party, processing purposes, retention periods, service providers, security safeguards and contact process for privacy requests before this notice is replaced with the final POPIA-aligned policy.</p>\n        <p className=\"mt-5 font-jost leading-7 text-[#2d2118]/70\">Do not include detailed diagnoses, identity numbers, medical-aid numbers or other highly sensitive information in a general website enquiry.</p>\n        <Link href=\"/#contact\" className=\"mt-9 inline-flex rounded-full bg-[#b89830] px-6 py-3 font-jost text-sm font-semibold text-white transition hover:bg-[#9f7f24]\">Return to the website</Link>\n      </article>\n    </main>\n  )\n}\n""", encoding='utf-8')
+          PY
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build website
+        run: npm run build
+
+      - name: Commit verified fixes
+        shell: bash
+        run: |
+          rm .github/workflows/outreach-readiness-fixes.yml
+          git config user.name "Carter Digitals Automation"
+          git config user.email "actions@users.noreply.github.com"
+          git add -A
+          git commit -m "fix: prepare Refresh Dental concept for client outreach"
+          git push origin HEAD:main
