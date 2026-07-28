@@ -8,6 +8,7 @@ import Hero from '@/components/refresh-dental/hero'
 import CareJourneys from '@/components/refresh-dental/care-journeys'
 import PracticeShowcase from '@/components/refresh-dental/practice-showcase'
 import FirstVisitFAQ from '@/components/refresh-dental/first-visit-faq'
+import styles from './premium-typography.module.css'
 
 function SectionSkeleton({ height = 'h-40' }: { height?: string }) {
   return <div className={`${height} bg-ivory/50 animate-pulse`} aria-hidden="true" />
@@ -28,7 +29,7 @@ const Footer = dynamic(() => import('@/components/refresh-dental/footer'), { ssr
 
 export default function Home() {
   return (
-    <>
+    <div className={styles.editorialPage}>
       <PageSectionsNav />
       <ScrollProgress />
       <Navigation />
@@ -48,6 +49,6 @@ export default function Home() {
       <ScrollToTop />
       <AccessibilityPanel />
       <CookieConsent />
-    </>
+    </div>
   )
 }
