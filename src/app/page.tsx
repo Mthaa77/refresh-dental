@@ -8,6 +8,7 @@ import Hero from '@/components/refresh-dental/hero'
 import CareJourneys from '@/components/refresh-dental/care-journeys'
 import PracticeShowcase from '@/components/refresh-dental/practice-showcase'
 import FirstVisitFAQ from '@/components/refresh-dental/first-visit-faq'
+import ColourRibbon from '@/components/refresh-dental/colour-ribbon'
 import styles from './premium-typography.module.css'
 
 function SectionSkeleton({ height = 'h-40' }: { height?: string }) {
@@ -37,9 +38,12 @@ export default function Home() {
         <Hero />
         <TrustTicker />
         <AboutSection />
+        <ColourRibbon variant="warm" />
         <CareJourneys />
+        <ColourRibbon variant="prism" />
         <PracticeShowcase />
         <Testimonials />
+        <ColourRibbon variant="cool" />
         <PaymentSection />
         <FirstVisitFAQ />
         <ContactSection />
