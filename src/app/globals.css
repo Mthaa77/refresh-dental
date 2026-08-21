@@ -6,10 +6,9 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-jost);
-  --font-serif: var(--font-cormorant);
-  --font-display: var(--font-dm-serif);
-  --font-elegant: var(--font-playfair);
+  --font-sans: var(--font-body);
+  --font-serif: var(--font-display);
+  --font-elegant: var(--font-display);
   --font-mono: var(--font-geist-mono);
 
   /* ── Brand Colors ── */
@@ -119,6 +118,26 @@
 }
 
 :root {
+  --font-cormorant: var(--font-display);
+  --font-dm-serif: var(--font-display);
+  --font-jost: var(--font-body);
+  --font-playfair: var(--font-display);
+
+  --text-hero: clamp(4rem, 9.25vw, 9.25rem);
+  --text-section: clamp(3rem, 5.7vw, 6.4rem);
+  --text-subsection: clamp(2rem, 3.4vw, 3.75rem);
+  --text-card-title: clamp(1.45rem, 2vw, 2.15rem);
+  --text-body-lg: clamp(1.0625rem, 1.25vw, 1.25rem);
+  --text-body: 1rem;
+  --text-small: 0.875rem;
+  --leading-display: 0.9;
+  --leading-heading: 1.04;
+  --leading-body: 1.68;
+  --tracking-display: -0.045em;
+  --tracking-heading: -0.028em;
+  --tracking-label: 0.14em;
+  --measure-body: 68ch;
+
   --radius: 0.625rem;
   --background: #F0EBE1;
   --foreground: #0F0D0A;
@@ -163,7 +182,10 @@
   }
   body {
     @apply bg-ivory text-espresso;
+    font-family: var(--font-body), "Segoe UI", Arial, sans-serif;
     font-weight: 400;
+    font-size: var(--text-body);
+    line-height: var(--leading-body);
     overflow-x: hidden;
     position: relative;
     -webkit-font-smoothing: antialiased;
@@ -177,8 +199,78 @@
     overflow-x: hidden;
     max-width: 100vw;
   }
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-display), Georgia, "Times New Roman", serif;
+    font-kerning: normal;
+    font-optical-sizing: auto;
+    text-wrap: balance;
+  }
+  h1 {
+    letter-spacing: var(--tracking-display);
+  }
+  h2,
+  h3 {
+    letter-spacing: var(--tracking-heading);
+  }
+  p {
+    text-wrap: pretty;
+  }
+  button,
+  input,
+  select,
+  textarea,
+  nav,
+  table {
+    font-family: var(--font-body), "Segoe UI", Arial, sans-serif;
+  }
   * {
     -webkit-tap-highlight-color: transparent;
+  }
+}
+
+@layer utilities {
+  .font-signature {
+    font-family: var(--font-signature), "Segoe Script", cursive;
+    font-weight: 400;
+    letter-spacing: -0.015em;
+  }
+
+  .type-hero {
+    font-family: var(--font-display), Georgia, serif;
+    font-size: var(--text-hero);
+    font-weight: 500;
+    line-height: var(--leading-display);
+    letter-spacing: var(--tracking-display);
+    text-wrap: balance;
+  }
+
+  .type-section-title {
+    font-family: var(--font-display), Georgia, serif;
+    font-size: var(--text-section);
+    font-weight: 500;
+    line-height: var(--leading-display);
+    letter-spacing: var(--tracking-display);
+    text-wrap: balance;
+  }
+
+  .type-body-lead {
+    max-width: var(--measure-body);
+    font-family: var(--font-body), "Segoe UI", Arial, sans-serif;
+    font-size: var(--text-body-lg);
+    line-height: var(--leading-body);
+    text-wrap: pretty;
+  }
+
+  .type-label {
+    font-family: var(--font-body), "Segoe UI", Arial, sans-serif;
+    font-size: 0.6875rem;
+    font-weight: 700;
+    letter-spacing: var(--tracking-label);
+    line-height: 1.25;
+    text-transform: uppercase;
   }
 }
 
