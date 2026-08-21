@@ -124,7 +124,7 @@ export default function Hero() {
 
             <motion.p
               variants={reveal}
-              className="mb-5 font-jost text-[11px] font-semibold uppercase tracking-[0.28em] text-champagne-gold sm:text-xs"
+              className="mb-3 font-signature text-[clamp(2rem,4vw,3.6rem)] leading-none text-gold-pale"
             >
               Dentistry, thoughtfully elevated
             </motion.p>
@@ -132,7 +132,7 @@ export default function Hero() {
             <motion.h1
               variants={reveal}
               itemProp="name"
-              className="font-cormorant text-[clamp(4.1rem,9.5vw,9.8rem)] font-light leading-[0.78] tracking-[-0.055em] text-ivory"
+              className="type-hero max-w-[11ch] text-ivory"
             >
               <span className="block">A brighter smile.</span>
               <span className="block pl-[0.08em] text-transparent [-webkit-text-stroke:1px_rgba(232,217,168,0.78)] sm:[-webkit-text-stroke:1.5px_rgba(232,217,168,0.78)]">
