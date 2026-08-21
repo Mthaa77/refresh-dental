@@ -1,33 +1,27 @@
 import type { Metadata } from "next";
-import { Cormorant_Garamond, DM_Serif_Display, Jost, Playfair_Display } from "next/font/google";
+import { Great_Vibes, Playfair_Display, Source_Sans_3 } from "next/font/google";
 import "./globals.css";
 import { Toaster } from "@/components/ui/toaster";
 
-const cormorant = Cormorant_Garamond({
-  variable: "--font-cormorant",
+const signature = Great_Vibes({
+  variable: "--font-signature",
   subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700"],
+  weight: "400",
   display: "swap",
 });
 
-const dmSerif = DM_Serif_Display({
-  variable: "--font-dm-serif",
+const display = Playfair_Display({
+  variable: "--font-display",
   subsets: ["latin"],
-  weight: ["400"],
+  weight: ["400", "500", "600", "700"],
+  style: ["normal", "italic"],
   display: "swap",
 });
 
-const jost = Jost({
-  variable: "--font-jost",
+const body = Source_Sans_3({
+  variable: "--font-body",
   subsets: ["latin"],
-  weight: ["300", "400", "500", "600"],
-  display: "swap",
-});
-
-const playfair = Playfair_Display({
-  variable: "--font-playfair",
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700", "800", "900"],
+  weight: ["400", "500", "600", "700"],
   display: "swap",
 });
 
@@ -947,7 +941,7 @@ export default function RootLayout({
         <meta name="ICBM" content="-25.8600, 28.1800" />
       </head>
       <body
-        className={`${cormorant.variable} ${dmSerif.variable} ${jost.variable} ${playfair.variable} antialiased bg-ivory text-espresso`}
+        className={`${signature.variable} ${display.variable} ${body.variable} antialiased bg-ivory text-espresso`}
       >
         {/* ═══════════════════════════════════════════════════════
             ACCESSIBLE HIDDEN CONTENT — SEO + GEO Optimization
