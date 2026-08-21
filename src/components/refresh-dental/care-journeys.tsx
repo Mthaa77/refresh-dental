@@ -252,6 +252,7 @@ export default function CareJourneys() {
   const selectedTreatment = treatments.find((treatment) => treatment.id === selectedId) ?? visibleTreatments[0] ?? treatments[0]
   const SelectedIcon = selectedTreatment.icon
   const selectedTone = toneClasses[selectedTreatment.tone]
+  const selectedIndex = treatments.findIndex((treatment) => treatment.id === selectedTreatment.id)
 
   const selectCategory = (category: CategoryId) => {
     setActiveCategory(category)
@@ -276,39 +277,59 @@ export default function CareJourneys() {
           </motion.div>
         </div>
 
-        <div className="mt-10 flex gap-2 overflow-x-auto pb-3 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden" role="tablist" aria-label="Treatment categories">
+        <div className="mt-8 grid gap-3 sm:grid-cols-3">
+          {[
+            { value: '12', label: 'care pathways', tone: 'text-amber-200' },
+            { value: '03', label: 'ways to begin', tone: 'text-teal-200' },
+            { value: '01', label: 'calm next step', tone: 'text-sky-200' },
+          ].map((stat) => (
+            <div key={stat.label} className="rounded-2xl border border-white/10 bg-white/[0.045] px-4 py-3 backdrop-blur-md sm:px-5">
+              <p className={`font-elegant text-3xl leading-none ${stat.tone}`}>{stat.value}</p>
+              <p className="mt-1.5 font-jost text-[9px] font-bold uppercase tracking-[0.18em] text-white/45">{stat.label}</p>
+            </div>
+          ))}
+        </div>
+
+        <div className="mt-8 flex gap-2 overflow-x-auto pb-3 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden" role="tablist" aria-label="Treatment categories">
           {categories.map((category) => {
             const Icon = category.icon
             const selected = category.id === activeCategory
             return (
-              <button key={category.id} type="button" role="tab" aria-selected={selected} onClick={() => selectCategory(category.id)} className={`inline-flex min-h-12 shrink-0 items-center gap-2 rounded-full border px-5 font-jost text-[10px] font-bold uppercase tracking-[0.14em] transition-all duration-300 ${selected ? 'border-white bg-white text-[#17121c] shadow-[0_14px_34px_rgba(255,255,255,0.16)]' : 'border-white/14 bg-white/[0.055] text-white/68 hover:border-white/30 hover:bg-white/[0.10] hover:text-white'}`}>
+              <button key={category.id} id={`treatment-tab-${category.id}`} type="button" role="tab" aria-selected={selected} aria-controls={`treatment-panel-${category.id}`} onClick={() => selectCategory(category.id)} className={`group inline-flex min-h-12 shrink-0 items-center gap-2 rounded-full border px-5 font-jost text-[10px] font-bold uppercase tracking-[0.14em] transition-all duration-300 ${selected ? 'border-white bg-white text-[#17121c] shadow-[0_14px_34px_rgba(255,255,255,0.16)]' : 'border-white/14 bg-white/[0.055] text-white/68 hover:border-white/30 hover:bg-white/[0.10] hover:text-white'}`}>
                 <Icon className="h-4 w-4" aria-hidden="true" />
                 {category.label}
+                {selected && <span className="ml-1 h-1.5 w-1.5 rounded-full bg-teal-500" aria-hidden="true" />}
               </button>
             )
           })}
         </div>
 
-        <div className="mt-8 grid gap-7 xl:grid-cols-[0.72fr_1.28fr] xl:items-stretch">
-          <div className="rounded-[2rem] border border-white/12 bg-white/[0.055] p-3 backdrop-blur-xl sm:p-4">
+        <div className="mt-6 flex items-center justify-between gap-4 px-1 font-jost text-[10px] font-bold uppercase tracking-[0.17em] text-white/40">
+          <span>{visibleTreatments.length} {visibleTreatments.length === 1 ? 'pathway' : 'pathways'} in this view</span>
+          <span className="hidden items-center gap-2 sm:inline-flex"><span className="h-1.5 w-1.5 rounded-full bg-teal-300" /> Select a card to preview</span>
+        </div>
+
+        <div className="mt-3 grid gap-7 xl:grid-cols-[0.72fr_1.28fr] xl:items-stretch">
+          <div id={`treatment-panel-${activeCategory}`} role="tabpanel" aria-labelledby={`treatment-tab-${activeCategory}`} className="rounded-[2rem] border border-white/12 bg-white/[0.055] p-3 backdrop-blur-xl sm:p-4">
             <div className="grid max-h-[760px] gap-2 overflow-y-auto pr-1 [scrollbar-color:rgba(255,255,255,0.18)_transparent] sm:grid-cols-2 xl:grid-cols-1">
               {visibleTreatments.map((treatment, index) => {
                 const Icon = treatment.icon
                 const tone = toneClasses[treatment.tone]
                 const selected = treatment.id === selectedTreatment.id
                 return (
-                  <button key={treatment.id} type="button" onClick={() => setSelectedId(treatment.id)} className={`group relative flex items-center gap-4 overflow-hidden rounded-[1.35rem] border p-4 text-left transition-all duration-300 sm:p-5 ${selected ? tone.selected : 'border-white/8 bg-white/[0.035] hover:-translate-y-0.5 hover:border-white/20 hover:bg-white/[0.08]'}`}>
+                  <motion.button key={treatment.id} type="button" aria-label={`Preview ${treatment.title}`} aria-pressed={selected} onClick={() => setSelectedId(treatment.id)} whileHover={prefersReducedMotion ? undefined : { y: -3 }} whileTap={prefersReducedMotion ? undefined : { scale: 0.985 }} className={`group relative flex items-center gap-4 overflow-hidden rounded-[1.35rem] border p-4 text-left transition-all duration-300 sm:p-5 ${selected ? tone.selected : 'border-white/8 bg-white/[0.035] hover:border-white/20 hover:bg-white/[0.08]'}`}>
                     <span className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border ${tone.badge}`}><Icon className="h-4.5 w-4.5" aria-hidden="true" /></span>
-                    <span className="min-w-0 flex-1"><span className={`block font-jost text-[9px] font-bold uppercase tracking-[0.16em] ${selected ? 'text-[#17121c]/55' : 'text-white/40'}`}>{String(index + 1).padStart(2, '0')} · {treatment.eyebrow}</span><span className={`mt-1.5 block font-elegant text-xl font-semibold leading-tight sm:text-2xl ${selected ? 'text-[#17121c]' : 'text-white'}`}>{treatment.title}</span></span>
+                    <span className="min-w-0 flex-1"><span className={`block font-jost text-[9px] font-bold uppercase tracking-[0.16em] ${selected ? 'text-[#17121c]/55' : 'text-white/40'}`}>{String(index + 1).padStart(2, '0')} · {treatment.eyebrow}</span><span className={`mt-1.5 block font-elegant text-xl font-semibold leading-tight sm:text-2xl ${selected ? 'text-[#17121c]' : 'text-white'}`}>{treatment.title}</span><span className={`mt-2 block font-jost text-[10px] leading-4 ${selected ? 'text-[#17121c]/56' : 'text-white/42'}`}>{treatment.duration}</span></span>
                     <ChevronRight className={`h-4 w-4 shrink-0 transition-transform duration-300 group-hover:translate-x-1 ${selected ? 'text-[#17121c]/55' : 'text-white/35'}`} aria-hidden="true" />
-                  </button>
+                    {selected && <span className="absolute inset-y-3 left-0 w-0.5 rounded-full bg-teal-500" aria-hidden="true" />}
+                  </motion.button>
                 )
               })}
             </div>
           </div>
 
           <AnimatePresence mode="wait">
-            <motion.article key={selectedTreatment.id} initial={{ opacity: 0, x: prefersReducedMotion ? 0 : 18 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: prefersReducedMotion ? 0 : -14 }} transition={{ duration: 0.35 }} className="relative overflow-hidden rounded-[2.2rem] border border-white/14 bg-[#fdf8f0] text-[#211a20] shadow-[0_34px_100px_rgba(0,0,0,0.32)]">
+            <motion.article key={selectedTreatment.id} id="treatment-preview" aria-live="polite" initial={{ opacity: 0, x: prefersReducedMotion ? 0 : 18 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: prefersReducedMotion ? 0 : -14 }} transition={{ duration: 0.35 }} className="relative overflow-hidden rounded-[2.2rem] border border-white/14 bg-[#fdf8f0] text-[#211a20] shadow-[0_34px_100px_rgba(0,0,0,0.32)]">
               <div className={`absolute inset-x-0 top-0 h-1.5 bg-gradient-to-r ${selectedTone.accent}`} />
               <div className="grid h-full lg:grid-cols-[0.94fr_1.06fr]">
                 <div className="relative min-h-[340px] overflow-hidden lg:min-h-full">
@@ -325,7 +346,7 @@ export default function CareJourneys() {
                 <div className="relative flex flex-col p-7 sm:p-10 lg:p-12">
                   <div className="flex items-start justify-between gap-5">
                     <span className={`flex h-14 w-14 items-center justify-center rounded-2xl border shadow-sm ${selectedTone.badge}`}><SelectedIcon className="h-6 w-6" aria-hidden="true" /></span>
-                    <span className="rounded-full border border-[#211a20]/10 bg-white px-3 py-1.5 font-jost text-[9px] font-bold uppercase tracking-[0.14em] text-[#211a20]/54">{selectedTreatment.category}</span>
+                    <span className="rounded-full border border-[#211a20]/10 bg-white px-3 py-1.5 font-jost text-[9px] font-bold uppercase tracking-[0.14em] text-[#211a20]/54">{String(selectedIndex + 1).padStart(2, '0')} / 12 · {selectedTreatment.category}</span>
                   </div>
                   <p className="mt-8 font-jost text-[10px] font-bold uppercase tracking-[0.2em] text-teal-700">{selectedTreatment.eyebrow}</p>
                   <h3 className="mt-3 font-elegant text-[clamp(3rem,5vw,5.8rem)] font-semibold leading-[0.86] tracking-[-0.05em] text-[#211a20]">{selectedTreatment.title}</h3>
