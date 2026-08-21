@@ -6,6 +6,7 @@ import ScrollProgress from '@/components/refresh-dental/scroll-progress'
 import Navigation from '@/components/refresh-dental/navigation'
 import Hero from '@/components/refresh-dental/hero'
 import CareJourneys from '@/components/refresh-dental/care-journeys'
+import PatientConfidence from '@/components/refresh-dental/patient-confidence'
 import PracticeShowcase from '@/components/refresh-dental/practice-showcase'
 import FirstVisitFAQ from '@/components/refresh-dental/first-visit-faq'
 import styles from './premium-typography.module.css'
@@ -23,6 +24,7 @@ const CookieConsent = dynamic(() => import('@/components/refresh-dental/cookie-c
 const TrustTicker = dynamic(() => import('@/components/refresh-dental/trust-ticker'), { ssr: false, loading: () => <div className="h-10 bg-espresso" /> })
 const AboutSection = dynamic(() => import('@/components/refresh-dental/about-section'), { ssr: true, loading: () => <SectionSkeleton height="h-[720px]" /> })
 const Testimonials = dynamic(() => import('@/components/refresh-dental/testimonials'), { ssr: false, loading: () => <SectionSkeleton height="h-[640px]" /> })
+const InsurancePartners = dynamic(() => import('@/components/refresh-dental/insurance-partners'), { ssr: true, loading: () => <SectionSkeleton height="h-[700px]" /> })
 const PaymentSection = dynamic(() => import('@/components/refresh-dental/payment-section'), { ssr: true, loading: () => <SectionSkeleton height="h-[560px]" /> })
 const ContactSection = dynamic(() => import('@/components/refresh-dental/contact-section'), { ssr: true, loading: () => <SectionSkeleton height="h-[720px]" /> })
 const Footer = dynamic(() => import('@/components/refresh-dental/footer'), { ssr: true, loading: () => <SectionSkeleton height="h-64" /> })
@@ -38,7 +40,9 @@ export default function Home() {
         <TrustTicker />
         <AboutSection />
         <CareJourneys />
+        <PatientConfidence />
         <PracticeShowcase />
+        <InsurancePartners />
         <Testimonials />
         <PaymentSection />
         <FirstVisitFAQ />
